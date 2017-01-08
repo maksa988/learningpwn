@@ -214,7 +214,7 @@
 			<member name="C:carscolor" value="808">
 			</member>
 		</member>
-		<member name="T:player" value="114">
+		<member name="T:player" value="115">
 			<tagname value="player"/>
 			<member name="C:ID" value="0">
 			</member>
@@ -294,6 +294,8 @@
 			</member>
 			<member name="C:BANKMONEY" value="113">
 			</member>
+			<member name="C:SALARY" value="114">
+			</member>
 		</member>
 		<member name="T:schet" value="22">
 			<tagname value="schet"/>
@@ -354,6 +356,7 @@
 			<referrer name="Itter_OnGameModeInit"/>
 			<referrer name="Itter_OnPlayerConnect"/>
 			<referrer name="OnPlayerExitVehicle"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="OnPlayerKeyStateChange"/>
 			<referrer name="OnDialogResponse"/>
@@ -647,12 +650,14 @@
 			<referrer name="CheckOffBan"/>
 			<referrer name="CheckWarn"/>
 			<referrer name="mutetime"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="check_adm"/>
 			<referrer name="CheckBan"/>
 			<referrer name="CheckReferal"/>
 			<referrer name="CheckEMail"/>
 			<referrer name="CheckReferals"/>
 			<referrer name="minuteupdate"/>
+			<referrer name="add_to_salary"/>
 			<referrer name="payday"/>
 			<referrer name="player_connect"/>
 			<referrer name="player_login"/>
@@ -825,6 +830,10 @@
 			<referrer name="cmd_makestore"/>
 			<referrer name="cmd_pass"/>
 			<referrer name="cmd_sellhome"/>
+		</member>
+		<member name="F:jobdriver">
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="OnDialogResponse"/>
 		</member>
 		<member name="F:lift">
 			<referrer name="Itter_OnGameModeInit"/>
@@ -1007,6 +1016,7 @@
 			<referrer name="CheckWarn"/>
 			<referrer name="mutetime"/>
 			<referrer name="guest_list"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="check_adm"/>
 			<referrer name="CheckBan"/>
@@ -1014,6 +1024,7 @@
 			<referrer name="CheckEMail"/>
 			<referrer name="CheckReferals"/>
 			<referrer name="minuteupdate"/>
+			<referrer name="add_to_salary"/>
 			<referrer name="payday"/>
 			<referrer name="player_connect"/>
 			<referrer name="player_login"/>
@@ -1065,6 +1076,7 @@
 			<referrer name="cmd_skip"/>
 			<referrer name="cmd_unwarn"/>
 			<referrer name="cmd_warninfo"/>
+			<referrer name="cmd_payday"/>
 			<referrer name="cmd_veh"/>
 			<referrer name="cmd_ahelp"/>
 			<referrer name="cmd_a"/>
@@ -1291,13 +1303,23 @@
 		<member name="F:taxicars">
 			<referrer name="Itter_OnGameModeInit"/>
 			<referrer name="OnVehicleSpawn"/>
-			<referrer name="OnPlayerEnterVehicle"/>
 			<referrer name="OnPlayerExitVehicle"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerKeyStateChange"/>
 		</member>
+		<member name="F:taxicounter_timer">
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="get_fare_money_taxi"/>
+		</member>
 		<member name="F:taxiname">
 			<referrer name="OnDialogResponse"/>
+		</member>
+		<member name="F:taxipickup">
+			<referrer name="Itter_OnPlayerDisconnect"/>
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="OnPlayerEnterCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="taxiworkend"/>
 		</member>
 		<member name="F:taxitext">
 			<tagname value="Text3D"/>
@@ -1566,6 +1588,7 @@
 			<referrer name="Itter_OnPlayerConnect"/>
 			<referrer name="Itter_OnPlayerDisconnect"/>
 			<referrer name="OnPlayerText"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="OnPlayerPickUpPickup"/>
 			<referrer name="OnDialogResponse"/>
@@ -2018,6 +2041,7 @@
 		</member>
 		<member name="M:ChangeVehicleColor" syntax="ChangeVehicleColor(vehicleid, color1, color2)">
 			<attribute name="native"/>
+			<referrer name="OnDialogResponse"/>
 			<referrer name="cmd_veh"/>
 			<param name="vehicleid">
 			</param>
@@ -2285,6 +2309,7 @@
 		<member name="M:CreateDynamicCP" syntax="CreateDynamicCP(x, y, z, size, worldid, interiorid, playerid, streamdistance)">
 			<attribute name="native"/>
 			<referrer name="Itter_OnGameModeInit"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="OnPlayerKeyStateChange"/>
 			<referrer name="animfactory"/>
@@ -2535,6 +2560,19 @@
 				<paraminfo>Text3D </paraminfo>
 			</param>
 		</member>
+		<member name="M:DeletePVar" syntax="DeletePVar(playerid, varname[])">
+			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerDisconnect"/>
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="OnPlayerEnterCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="taxiworkend"/>
+			<param name="playerid">
+			</param>
+			<param name="varname">
+				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
 		<member name="M:DestroyDynamic3DTextLabel" syntax="DestroyDynamic3DTextLabel(id)">
 			<attribute name="native"/>
 			<referrer name="OnDialogResponse"/>
@@ -2544,7 +2582,11 @@
 		</member>
 		<member name="M:DestroyDynamicCP" syntax="DestroyDynamicCP(checkpointid)">
 			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerDisconnect"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="taxiworkend"/>
 			<param name="checkpointid">
 			</param>
 		</member>
@@ -2649,6 +2691,7 @@
 			<referrer name="OnPlayerKeyStateChange"/>
 			<referrer name="OnPlayerUpdate"/>
 			<referrer name="OnDialogResponse"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="animfactory"/>
 			<referrer name="cmd_lift"/>
 			<referrer name="cmd_buym"/>
@@ -2714,6 +2757,7 @@
 			<referrer name="CheckSchetPin"/>
 			<referrer name="CheckOffWarn"/>
 			<referrer name="awarninfo"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
@@ -2883,7 +2927,6 @@
 		</member>
 		<member name="M:GetPlayerVehicleID" syntax="GetPlayerVehicleID(playerid)">
 			<attribute name="native"/>
-			<referrer name="OnPlayerEnterVehicle"/>
 			<referrer name="OnPlayerExitVehicle"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
@@ -3401,6 +3444,8 @@
 			<stacksize value="6"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="Delete3DTextLabel"/>
+			<dependency name="DeletePVar"/>
+			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DestroyDynamicObject"/>
 			<dependency name="DestroyVehicle"/>
 			<dependency name="GetPVarInt"/>
@@ -3423,6 +3468,7 @@
 			<dependency name="player_info"/>
 			<dependency name="speed1info"/>
 			<dependency name="speed2info"/>
+			<dependency name="taxipickup"/>
 			<dependency name="vehtext"/>
 			<param name="playerid">
 			</param>
@@ -3493,6 +3539,7 @@
 			<referrer name="Itter_OnPlayerDisconnect"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="mutetime"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="cmd_unmute"/>
 			<param name="timerid">
 			</param>
@@ -3589,6 +3636,7 @@
 			<dependency name="BANKMONEY"/>
 			<dependency name="BuyHouse"/>
 			<dependency name="CHATS"/>
+			<dependency name="ChangeVehicleColor"/>
 			<dependency name="Create3DTextLabel"/>
 			<dependency name="CreateDynamic3DTextLabel"/>
 			<dependency name="CreateDynamicPickup"/>
@@ -3596,7 +3644,9 @@
 			<dependency name="DMONEY"/>
 			<dependency name="DRUGS"/>
 			<dependency name="Delete3DTextLabel"/>
+			<dependency name="DeletePVar"/>
 			<dependency name="DestroyDynamic3DTextLabel"/>
+			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DestroyDynamicObject"/>
 			<dependency name="DestroyDynamicPickup"/>
 			<dependency name="DisablePlayerCheckpoint"/>
@@ -3724,6 +3774,7 @@
 			<dependency name="hpay"/>
 			<dependency name="htype"/>
 			<dependency name="hupgrade"/>
+			<dependency name="jobdriver"/>
 			<dependency name="metalveh"/>
 			<dependency name="mychets"/>
 			<dependency name="mysql_escape_string"/>
@@ -3767,6 +3818,7 @@
 			<dependency name="subfracname"/>
 			<dependency name="taxiname"/>
 			<dependency name="taxiname"/>
+			<dependency name="taxipickup"/>
 			<dependency name="taxitext"/>
 			<dependency name="taxiveh"/>
 			<dependency name="true"/>
@@ -4065,6 +4117,7 @@
 			<dependency name="ApplyAnimation"/>
 			<dependency name="CreateDynamicCP"/>
 			<dependency name="CreateDynamicObject"/>
+			<dependency name="DeletePVar"/>
 			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DisablePlayerCheckpoint"/>
 			<dependency name="FACTORYFUEL"/>
@@ -4086,6 +4139,7 @@
 			<dependency name="SetPlayerSpecialAction"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="ShowPlayerDialog"/>
+			<dependency name="add_to_salary"/>
 			<dependency name="cityhallwork"/>
 			<dependency name="factoryobject"/>
 			<dependency name="factorystorage"/>
@@ -4118,6 +4172,7 @@
 			<dependency name="table7"/>
 			<dependency name="table8"/>
 			<dependency name="table9"/>
+			<dependency name="taxipickup"/>
 			<dependency name="vehiclelic"/>
 			<param name="playerid">
 			</param>
@@ -4178,10 +4233,7 @@
 		</member>
 		<member name="M:OnPlayerEnterVehicle" syntax="OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)">
 			<attribute name="public"/>
-			<stacksize value="5"/>
-			<dependency name="GetPlayerVehicleID"/>
-			<dependency name="SendClientMessage"/>
-			<dependency name="taxicars"/>
+			<stacksize value="1"/>
 			<param name="playerid">
 			</param>
 			<param name="vehicleid">
@@ -4651,15 +4703,21 @@
 		</member>
 		<member name="M:OnPlayerStateChange" syntax="OnPlayerStateChange(playerid, newstate, oldstate)">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="114"/>
+			<dependency name="Float:operator=(_:)"/>
 			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="Create3DTextLabel"/>
+			<dependency name="CreateDynamicCP"/>
 			<dependency name="DLIC"/>
+			<dependency name="DeletePVar"/>
+			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DisablePlayerCheckpoint"/>
 			<dependency name="DisablePlayerRaceCheckpoint"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="KillTimer"/>
+			<dependency name="LEVEL"/>
+			<dependency name="NAME"/>
 			<dependency name="RemovePlayerFromVehicle"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPVarInt"/>
@@ -4672,17 +4730,24 @@
 			<dependency name="ascar"/>
 			<dependency name="ascheck"/>
 			<dependency name="factorytimer"/>
+			<dependency name="false"/>
+			<dependency name="format"/>
 			<dependency name="fuelcar"/>
 			<dependency name="fuelveh"/>
+			<dependency name="get_fare_money_taxi"/>
 			<dependency name="gruzcar"/>
+			<dependency name="jobdriver"/>
 			<dependency name="metalcar"/>
 			<dependency name="metalveh"/>
+			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="speed1info"/>
 			<dependency name="speed2info"/>
 			<dependency name="speedbox"/>
 			<dependency name="speedupdate"/>
 			<dependency name="taxicars"/>
+			<dependency name="taxicounter_timer"/>
+			<dependency name="taxipickup"/>
 			<dependency name="taxitimer"/>
 			<dependency name="timespeed"/>
 			<dependency name="true"/>
@@ -5167,6 +5232,7 @@
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerUpdate"/>
 			<referrer name="OnDialogResponse"/>
+			<referrer name="get_fare_money_taxi"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -5405,7 +5471,6 @@
 			<attribute name="native"/>
 			<referrer name="OnPlayerSpawn"/>
 			<referrer name="OnPlayerText"/>
-			<referrer name="OnPlayerEnterVehicle"/>
 			<referrer name="OnPlayerExitVehicle"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
@@ -5426,6 +5491,7 @@
 			<referrer name="CheckOffBan"/>
 			<referrer name="CheckWarn"/>
 			<referrer name="mutetime"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
@@ -5655,6 +5721,7 @@
 			<referrer name="CheckTransfer"/>
 			<referrer name="CheckOffWarn"/>
 			<referrer name="fail"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
@@ -6646,6 +6713,23 @@
 			<dependency name="FRAC"/>
 			<dependency name="player_info"/>
 			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:add_to_salary" syntax="add_to_salary(playerid, money)">
+			<attribute name="public"/>
+			<stacksize value="76"/>
+			<referrer name="OnPlayerEnterCheckpoint"/>
+			<referrer name="get_fare_money_taxi"/>
+			<dependency name="ID"/>
+			<dependency name="SALARY"/>
+			<dependency name="dbHandle"/>
+			<dependency name="format"/>
+			<dependency name="mysql_query"/>
+			<dependency name="player_info"/>
+			<dependency name="player_info"/>
+			<param name="playerid">
+			</param>
+			<param name="money">
 			</param>
 		</member>
 		<member name="M:alt_mn" syntax="alt_mn()">
@@ -7875,6 +7959,15 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
+		<member name="M:cmd_payday" syntax="cmd_payday(playerid)">
+			<attribute name="public"/>
+			<stacksize value="3"/>
+			<dependency name="ADMIN"/>
+			<dependency name="payday"/>
+			<dependency name="player_info"/>
+			<param name="playerid">
+			</param>
+		</member>
 		<member name="M:cmd_pick" syntax="cmd_pick(playerid)">
 			<attribute name="public"/>
 			<stacksize value="18"/>
@@ -8902,6 +8995,7 @@
 			<attribute name="native"/>
 			<referrer name="date"/>
 			<referrer name="OnPlayerText"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnPlayerEditAttachedObject"/>
@@ -8930,6 +9024,7 @@
 			<referrer name="guest_list"/>
 			<referrer name="load_houses"/>
 			<referrer name="speedupdate"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
@@ -8940,6 +9035,7 @@
 			<referrer name="CheckReferals"/>
 			<referrer name="minuteupdate"/>
 			<referrer name="secondupdate"/>
+			<referrer name="add_to_salary"/>
 			<referrer name="payday"/>
 			<referrer name="player_connect"/>
 			<referrer name="player_login"/>
@@ -9047,6 +9143,31 @@
 			<referrer name="SSCANF_OnGameModeInit"/>
 			<param name="name">
 				<paraminfo> [] </paraminfo>
+			</param>
+		</member>
+		<member name="M:get_fare_money_taxi" syntax="get_fare_money_taxi(playerid, driverid)">
+			<attribute name="public"/>
+			<stacksize value="117"/>
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="taxicounter"/>
+			<dependency name="GameTextForPlayer"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="ID"/>
+			<dependency name="KillTimer"/>
+			<dependency name="MONEY"/>
+			<dependency name="RemovePlayerFromVehicle"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="add_to_salary"/>
+			<dependency name="dbHandle"/>
+			<dependency name="format"/>
+			<dependency name="mysql_query"/>
+			<dependency name="player_info"/>
+			<dependency name="player_info"/>
+			<dependency name="taxicounter_timer"/>
+			<param name="playerid">
+			</param>
+			<param name="driverid">
 			</param>
 		</member>
 		<member name="M:getdate" syntax="getdate(&amp;year, &amp;month, &amp;day)">
@@ -9455,12 +9576,14 @@
 			<referrer name="CheckOffBan"/>
 			<referrer name="CheckWarn"/>
 			<referrer name="mutetime"/>
+			<referrer name="get_fare_money_taxi"/>
 			<referrer name="check_adm"/>
 			<referrer name="CheckBan"/>
 			<referrer name="CheckReferal"/>
 			<referrer name="CheckEMail"/>
 			<referrer name="CheckReferals"/>
 			<referrer name="minuteupdate"/>
+			<referrer name="add_to_salary"/>
 			<referrer name="payday"/>
 			<referrer name="player_login"/>
 			<referrer name="SellGovHouse"/>
@@ -9551,6 +9674,7 @@
 			<attribute name="public"/>
 			<stacksize value="163"/>
 			<referrer name="minuteupdate"/>
+			<referrer name="cmd_payday"/>
 			<dependency name="EXP"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="ID"/>
@@ -9641,6 +9765,7 @@
 			<dependency name="PATR"/>
 			<dependency name="RANG"/>
 			<dependency name="REFERAL"/>
+			<dependency name="SALARY"/>
 			<dependency name="SEX"/>
 			<dependency name="SKIN"/>
 			<dependency name="SPAWN"/>
@@ -10085,15 +10210,27 @@
 				<paraminfo> [] </paraminfo>
 			</param>
 		</member>
+		<member name="M:taxicounter" syntax="taxicounter(playerid, driverid)">
+			<attribute name="public"/>
+			<stacksize value="5"/>
+			<dependency name="get_fare_money_taxi"/>
+			<param name="playerid">
+			</param>
+			<param name="driverid">
+			</param>
+		</member>
 		<member name="M:taxiworkend" syntax="taxiworkend(playerid)">
 			<attribute name="public"/>
 			<stacksize value="75"/>
 			<dependency name="Delete3DTextLabel"/>
+			<dependency name="DeletePVar"/>
+			<dependency name="DestroyDynamicCP"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPVarInt"/>
 			<dependency name="SetVehicleToRespawn"/>
 			<dependency name="format"/>
+			<dependency name="taxipickup"/>
 			<dependency name="taxitext"/>
 			<dependency name="taxiveh"/>
 			<param name="playerid">

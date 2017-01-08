@@ -2379,3 +2379,1207 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [17:23:30] [connection] 127.0.0.1:64812 requests connection cookie.
 [17:23:31] [connection] incoming connection: 127.0.0.1:64812 id: 0
 [17:23:31] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:49:00] filterscripts = ""  (string)
+[18:49:00] 
+[18:49:00] Server Plugins
+[18:49:00] --------------
+[18:49:00]  Loading plugin: mysql
+[18:49:00]  >> plugin.mysql: R41-2 successfully loaded.
+[18:49:00]   Loaded.
+[18:49:00]  Loading plugin: sscanf
+[18:49:00] 
+
+[18:49:00]  ===============================
+
+[18:49:00]       sscanf plugin loaded.     
+
+[18:49:00]          Version:  2.8.1        
+
+[18:49:00]    (c) 2012 Alex "Y_Less" Cole  
+
+[18:49:00]  ===============================
+
+[18:49:00]   Loaded.
+[18:49:00]  Loading plugin: dc_cmd
+[18:49:00]   Daniel's CMD plugin v2.8
+[18:49:00]     (c) 2014 Daniel_Cortez
+[18:49:00] 	www.pro-pawn.ru
+[18:49:00]   Loaded.
+[18:49:00]  Loading plugin: streamer
+[18:49:00] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[18:49:00]   Loaded.
+[18:49:00]  Loaded 4 plugins.
+
+[18:49:00] 
+[18:49:00] Ban list
+[18:49:00] --------
+[18:49:00]  Loaded: samp.ban
+[18:49:00] 
+[18:49:00] 
+[18:49:00] Filterscripts
+[18:49:00] ---------------
+[18:49:00]   Loaded 0 filterscripts.
+
+[18:49:00] Подключение к базе данных MYSQL успешно
+[18:49:00] 
+----------------------------------
+[18:49:00] --------Advance RP by Leon--------
+[18:49:00] ----------------------------------
+
+[18:49:00] Number of vehicle models: 6
+[18:49:00] Склады загружены успешно
+[18:49:00] Дома (15 шт) загружены успешно
+[18:49:21] [connection] 127.0.0.1:62114 requests connection cookie.
+[18:49:22] [connection] incoming connection: 127.0.0.1:62114 id: 0
+[18:49:22] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[18:56:31] filterscripts = ""  (string)
+[18:56:31] 
+[18:56:31] Server Plugins
+[18:56:31] --------------
+[18:56:31]  Loading plugin: mysql
+[18:56:31]  >> plugin.mysql: R41-2 successfully loaded.
+[18:56:31]   Loaded.
+[18:56:31]  Loading plugin: sscanf
+[18:56:31] 
+
+[18:56:31]  ===============================
+
+[18:56:31]       sscanf plugin loaded.     
+
+[18:56:31]          Version:  2.8.1        
+
+[18:56:31]    (c) 2012 Alex "Y_Less" Cole  
+
+[18:56:31]  ===============================
+
+[18:56:31]   Loaded.
+[18:56:31]  Loading plugin: dc_cmd
+[18:56:31]   Daniel's CMD plugin v2.8
+[18:56:31]     (c) 2014 Daniel_Cortez
+[18:56:31] 	www.pro-pawn.ru
+[18:56:31]   Loaded.
+[18:56:31]  Loading plugin: streamer
+[18:56:31] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[18:56:31]   Loaded.
+[18:56:31]  Loaded 4 plugins.
+
+[18:56:31] 
+[18:56:31] Ban list
+[18:56:31] --------
+[18:56:31]  Loaded: samp.ban
+[18:56:31] 
+[18:56:31] 
+[18:56:31] Filterscripts
+[18:56:31] ---------------
+[18:56:31]   Loaded 0 filterscripts.
+
+[18:56:31] Подключение к базе данных MYSQL успешно
+[18:56:31] 
+----------------------------------
+[18:56:31] --------Advance RP by Leon--------
+[18:56:31] ----------------------------------
+
+[18:56:31] Number of vehicle models: 6
+[18:56:31] Склады загружены успешно
+[18:56:31] Дома (15 шт) загружены успешно
+[18:56:44] [connection] 127.0.0.1:55428 requests connection cookie.
+[18:56:45] [connection] incoming connection: 127.0.0.1:55428 id: 0
+[18:56:45] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[18:56:54] [connection] 127.0.0.1:55430 requests connection cookie.
+[18:56:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:56:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:56:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:56:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:56:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:14] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[18:57:16] [connection] incoming connection: 127.0.0.1:55434 id: 1
+[18:57:16] [join] Elon_Musk has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:09:48] filterscripts = ""  (string)
+[19:09:48] 
+[19:09:48] Server Plugins
+[19:09:48] --------------
+[19:09:48]  Loading plugin: mysql
+[19:09:48]  >> plugin.mysql: R41-2 successfully loaded.
+[19:09:48]   Loaded.
+[19:09:48]  Loading plugin: sscanf
+[19:09:48] 
+
+[19:09:48]  ===============================
+
+[19:09:48]       sscanf plugin loaded.     
+
+[19:09:48]          Version:  2.8.1        
+
+[19:09:48]    (c) 2012 Alex "Y_Less" Cole  
+
+[19:09:48]  ===============================
+
+[19:09:48]   Loaded.
+[19:09:48]  Loading plugin: dc_cmd
+[19:09:48]   Daniel's CMD plugin v2.8
+[19:09:48]     (c) 2014 Daniel_Cortez
+[19:09:48] 	www.pro-pawn.ru
+[19:09:48]   Loaded.
+[19:09:48]  Loading plugin: streamer
+[19:09:48] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[19:09:48]   Loaded.
+[19:09:48]  Loaded 4 plugins.
+
+[19:09:48] 
+[19:09:48] Ban list
+[19:09:48] --------
+[19:09:48]  Loaded: samp.ban
+[19:09:48] 
+[19:09:48] 
+[19:09:48] Filterscripts
+[19:09:48] ---------------
+[19:09:48]   Loaded 0 filterscripts.
+
+[19:09:48] Подключение к базе данных MYSQL успешно
+[19:09:48] 
+----------------------------------
+[19:09:48] --------Advance RP by Leon--------
+[19:09:48] ----------------------------------
+
+[19:09:48] Number of vehicle models: 6
+[19:09:48] Склады загружены успешно
+[19:09:48] Дома (15 шт) загружены успешно
+[19:09:59] [connection] 127.0.0.1:55730 requests connection cookie.
+[19:10:00] [connection] incoming connection: 127.0.0.1:55730 id: 0
+[19:10:00] [join] Elon_Musk has joined the server (0:127.0.0.1)
+[19:10:04] [connection] 127.0.0.1:55731 requests connection cookie.
+[19:10:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:14] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:21] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:22] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:23] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:24] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:25] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:26] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:27] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:28] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:29] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:10:30] [connection] incoming connection: 127.0.0.1:55737 id: 1
+[19:10:30] [join] Axel_Foli has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:23:55] filterscripts = ""  (string)
+[19:23:55] 
+[19:23:55] Server Plugins
+[19:23:55] --------------
+[19:23:55]  Loading plugin: mysql
+[19:23:55]  >> plugin.mysql: R41-2 successfully loaded.
+[19:23:55]   Loaded.
+[19:23:55]  Loading plugin: sscanf
+[19:23:55] 
+
+[19:23:55]  ===============================
+
+[19:23:55]       sscanf plugin loaded.     
+
+[19:23:55]          Version:  2.8.1        
+
+[19:23:55]    (c) 2012 Alex "Y_Less" Cole  
+
+[19:23:55]  ===============================
+
+[19:23:55]   Loaded.
+[19:23:55]  Loading plugin: dc_cmd
+[19:23:55]   Daniel's CMD plugin v2.8
+[19:23:55]     (c) 2014 Daniel_Cortez
+[19:23:55] 	www.pro-pawn.ru
+[19:23:55]   Loaded.
+[19:23:55]  Loading plugin: streamer
+[19:23:55] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[19:23:55]   Loaded.
+[19:23:55]  Loaded 4 plugins.
+
+[19:23:55] 
+[19:23:55] Ban list
+[19:23:55] --------
+[19:23:55]  Loaded: samp.ban
+[19:23:55] 
+[19:23:55] 
+[19:23:55] Filterscripts
+[19:23:55] ---------------
+[19:23:55]   Loaded 0 filterscripts.
+
+[19:23:55] Подключение к базе данных MYSQL успешно
+[19:23:55] 
+----------------------------------
+[19:23:55] --------Advance RP by Leon--------
+[19:23:55] ----------------------------------
+
+[19:23:55] Number of vehicle models: 6
+[19:23:55] Склады загружены успешно
+[19:23:55] Дома (15 шт) загружены успешно
+[19:24:03] [connection] 127.0.0.1:52549 requests connection cookie.
+[19:24:04] [connection] incoming connection: 127.0.0.1:52549 id: 0
+[19:24:04] [join] Elon_Musk has joined the server (0:127.0.0.1)
+[19:24:08] [connection] 127.0.0.1:52553 requests connection cookie.
+[19:24:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:21] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:22] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:23] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:24] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:25] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:26] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:27] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:28] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:29] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:30] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:31] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:32] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:33] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:34] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:35] [connection] incoming connection: 127.0.0.1:52558 id: 1
+[19:24:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:24:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:25:05] [connection] incoming connection: 127.0.0.1:52563 id: 1
+[19:25:05] [join] Axel_Foli has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[19:59:39] filterscripts = ""  (string)
+[19:59:39] 
+[19:59:39] Server Plugins
+[19:59:39] --------------
+[19:59:39]  Loading plugin: mysql
+[19:59:39]  >> plugin.mysql: R41-2 successfully loaded.
+[19:59:39]   Loaded.
+[19:59:39]  Loading plugin: sscanf
+[19:59:39] 
+
+[19:59:39]  ===============================
+
+[19:59:39]       sscanf plugin loaded.     
+
+[19:59:39]          Version:  2.8.1        
+
+[19:59:39]    (c) 2012 Alex "Y_Less" Cole  
+
+[19:59:39]  ===============================
+
+[19:59:39]   Loaded.
+[19:59:39]  Loading plugin: dc_cmd
+[19:59:39]   Daniel's CMD plugin v2.8
+[19:59:39]     (c) 2014 Daniel_Cortez
+[19:59:39] 	www.pro-pawn.ru
+[19:59:39]   Loaded.
+[19:59:39]  Loading plugin: streamer
+[19:59:39] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[19:59:39]   Loaded.
+[19:59:39]  Loaded 4 plugins.
+
+[19:59:39] 
+[19:59:39] Ban list
+[19:59:39] --------
+[19:59:39]  Loaded: samp.ban
+[19:59:39] 
+[19:59:39] 
+[19:59:39] Filterscripts
+[19:59:39] ---------------
+[19:59:39]   Loaded 0 filterscripts.
+
+[19:59:39] Подключение к базе данных MYSQL успешно
+[19:59:39] 
+----------------------------------
+[19:59:39] --------Advance RP by Leon--------
+[19:59:39] ----------------------------------
+
+[19:59:39] Number of vehicle models: 6
+[19:59:40] Склады загружены успешно
+[19:59:40] Дома (15 шт) загружены успешно
+[19:59:50] [connection] 127.0.0.1:63797 requests connection cookie.
+[19:59:51] [connection] incoming connection: 127.0.0.1:63797 id: 0
+[19:59:52] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[19:59:53] [connection] 127.0.0.1:63800 requests connection cookie.
+[19:59:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:59:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:59:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:59:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:59:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[19:59:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:14] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:21] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:00:22] [connection] incoming connection: 127.0.0.1:65259 id: 1
+[20:00:22] [join] Elon_Musk has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:05:16] filterscripts = ""  (string)
+[20:05:16] 
+[20:05:16] Server Plugins
+[20:05:16] --------------
+[20:05:16]  Loading plugin: mysql
+[20:05:16]  >> plugin.mysql: R41-2 successfully loaded.
+[20:05:16]   Loaded.
+[20:05:16]  Loading plugin: sscanf
+[20:05:16] 
+
+[20:05:16]  ===============================
+
+[20:05:16]       sscanf plugin loaded.     
+
+[20:05:16]          Version:  2.8.1        
+
+[20:05:16]    (c) 2012 Alex "Y_Less" Cole  
+
+[20:05:16]  ===============================
+
+[20:05:16]   Loaded.
+[20:05:16]  Loading plugin: dc_cmd
+[20:05:16]   Daniel's CMD plugin v2.8
+[20:05:16]     (c) 2014 Daniel_Cortez
+[20:05:16] 	www.pro-pawn.ru
+[20:05:16]   Loaded.
+[20:05:16]  Loading plugin: streamer
+[20:05:16] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[20:05:16]   Loaded.
+[20:05:16]  Loaded 4 plugins.
+
+[20:05:16] 
+[20:05:16] Ban list
+[20:05:16] --------
+[20:05:16]  Loaded: samp.ban
+[20:05:16] 
+[20:05:16] 
+[20:05:16] Filterscripts
+[20:05:16] ---------------
+[20:05:16]   Loaded 0 filterscripts.
+
+[20:05:16] Подключение к базе данных MYSQL успешно
+[20:05:16] 
+----------------------------------
+[20:05:16] --------Advance RP by Leon--------
+[20:05:16] ----------------------------------
+
+[20:05:16] Number of vehicle models: 6
+[20:05:16] Склады загружены успешно
+[20:05:16] Дома (15 шт) загружены успешно
+[20:05:27] [connection] 127.0.0.1:58150 requests connection cookie.
+[20:05:28] [connection] incoming connection: 127.0.0.1:58150 id: 0
+[20:05:28] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[20:05:34] [connection] 127.0.0.1:58155 requests connection cookie.
+[20:05:35] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:36] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:37] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:38] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:39] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:40] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:05:58] [connection] incoming connection: 127.0.0.1:51559 id: 1
+[20:06:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:14] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:21] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:22] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:23] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:24] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:25] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:26] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:27] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:28] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:29] [connection] incoming connection: 127.0.0.1:59488 id: 1
+[20:06:39] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:40] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:06:59] [connection] incoming connection: 127.0.0.1:53519 id: 1
+[20:07:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:14] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:22] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:23] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:24] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:25] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:26] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:27] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:28] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:29] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:30] [connection] incoming connection: 127.0.0.1:58397 id: 1
+[20:07:40] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:07:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:08:00] [connection] incoming connection: 127.0.0.1:63300 id: 1
+[20:08:01] [join] Elon_Musk has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:17:14] filterscripts = ""  (string)
+[20:17:14] 
+[20:17:14] Server Plugins
+[20:17:14] --------------
+[20:17:14]  Loading plugin: mysql
+[20:17:14]  >> plugin.mysql: R41-2 successfully loaded.
+[20:17:14]   Loaded.
+[20:17:14]  Loading plugin: sscanf
+[20:17:14] 
+
+[20:17:14]  ===============================
+
+[20:17:14]       sscanf plugin loaded.     
+
+[20:17:14]          Version:  2.8.1        
+
+[20:17:14]    (c) 2012 Alex "Y_Less" Cole  
+
+[20:17:14]  ===============================
+
+[20:17:14]   Loaded.
+[20:17:14]  Loading plugin: dc_cmd
+[20:17:14]   Daniel's CMD plugin v2.8
+[20:17:14]     (c) 2014 Daniel_Cortez
+[20:17:14] 	www.pro-pawn.ru
+[20:17:14]   Loaded.
+[20:17:14]  Loading plugin: streamer
+[20:17:14] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[20:17:14]   Loaded.
+[20:17:14]  Loaded 4 plugins.
+
+[20:17:14] 
+[20:17:14] Ban list
+[20:17:14] --------
+[20:17:14]  Loaded: samp.ban
+[20:17:14] 
+[20:17:14] 
+[20:17:14] Filterscripts
+[20:17:14] ---------------
+[20:17:14]   Loaded 0 filterscripts.
+
+[20:17:14] Подключение к базе данных MYSQL успешно
+[20:17:15] 
+----------------------------------
+[20:17:15] --------Advance RP by Leon--------
+[20:17:15] ----------------------------------
+
+[20:17:15] Number of vehicle models: 6
+[20:17:15] Склады загружены успешно
+[20:17:15] Дома (15 шт) загружены успешно
+[20:17:27] [connection] 127.0.0.1:62566 requests connection cookie.
+[20:17:28] [connection] incoming connection: 127.0.0.1:62566 id: 0
+[20:17:29] [join] Elon_Musk has joined the server (0:127.0.0.1)
+[20:17:31] [connection] 127.0.0.1:62567 requests connection cookie.
+[20:17:32] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:33] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:34] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:35] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:36] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:37] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:38] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:39] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:40] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:17:59] [connection] incoming connection: 127.0.0.1:59600 id: 1
+[20:18:00] [join] Axel_Foli has joined the server (1:127.0.0.1)
+[20:18:38] 1
+[20:18:38] 0
+[20:19:02] 1
+[20:19:02] 0
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[20:55:26] filterscripts = ""  (string)
+[20:55:26] 
+[20:55:26] Server Plugins
+[20:55:26] --------------
+[20:55:26]  Loading plugin: mysql
+[20:55:26]  >> plugin.mysql: R41-2 successfully loaded.
+[20:55:26]   Loaded.
+[20:55:26]  Loading plugin: sscanf
+[20:55:26] 
+
+[20:55:26]  ===============================
+
+[20:55:26]       sscanf plugin loaded.     
+
+[20:55:26]          Version:  2.8.1        
+
+[20:55:26]    (c) 2012 Alex "Y_Less" Cole  
+
+[20:55:26]  ===============================
+
+[20:55:26]   Loaded.
+[20:55:26]  Loading plugin: dc_cmd
+[20:55:26]   Daniel's CMD plugin v2.8
+[20:55:26]     (c) 2014 Daniel_Cortez
+[20:55:26] 	www.pro-pawn.ru
+[20:55:26]   Loaded.
+[20:55:26]  Loading plugin: streamer
+[20:55:26] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[20:55:26]   Loaded.
+[20:55:26]  Loaded 4 plugins.
+
+[20:55:26] 
+[20:55:26] Ban list
+[20:55:26] --------
+[20:55:26]  Loaded: samp.ban
+[20:55:26] 
+[20:55:26] 
+[20:55:26] Filterscripts
+[20:55:26] ---------------
+[20:55:26]   Loaded 0 filterscripts.
+
+[20:55:26] Подключение к базе данных MYSQL успешно
+[20:55:26] 
+----------------------------------
+[20:55:26] --------Advance RP by Leon--------
+[20:55:26] ----------------------------------
+
+[20:55:26] Number of vehicle models: 6
+[20:55:26] Склады загружены успешно
+[20:55:26] Дома (15 шт) загружены успешно
+[20:55:40] [connection] 127.0.0.1:59714 requests connection cookie.
+[20:55:41] [connection] incoming connection: 127.0.0.1:59714 id: 0
+[20:55:41] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[20:55:46] [connection] 127.0.0.1:59716 requests connection cookie.
+[20:55:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:55:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[20:56:12] [connection] incoming connection: 127.0.0.1:59721 id: 1
+[20:56:12] [join] Elon_Musk has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:07:18] filterscripts = ""  (string)
+[21:07:18] 
+[21:07:18] Server Plugins
+[21:07:18] --------------
+[21:07:18]  Loading plugin: mysql
+[21:07:18]  >> plugin.mysql: R41-2 successfully loaded.
+[21:07:18]   Loaded.
+[21:07:18]  Loading plugin: sscanf
+[21:07:18] 
+
+[21:07:18]  ===============================
+
+[21:07:18]       sscanf plugin loaded.     
+
+[21:07:18]          Version:  2.8.1        
+
+[21:07:18]    (c) 2012 Alex "Y_Less" Cole  
+
+[21:07:18]  ===============================
+
+[21:07:18]   Loaded.
+[21:07:18]  Loading plugin: dc_cmd
+[21:07:18]   Daniel's CMD plugin v2.8
+[21:07:18]     (c) 2014 Daniel_Cortez
+[21:07:18] 	www.pro-pawn.ru
+[21:07:18]   Loaded.
+[21:07:18]  Loading plugin: streamer
+[21:07:18] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[21:07:18]   Loaded.
+[21:07:18]  Loaded 4 plugins.
+
+[21:07:18] 
+[21:07:18] Ban list
+[21:07:18] --------
+[21:07:18]  Loaded: samp.ban
+[21:07:18] 
+[21:07:18] 
+[21:07:18] Filterscripts
+[21:07:18] ---------------
+[21:07:18]   Loaded 0 filterscripts.
+
+[21:07:18] Подключение к базе данных MYSQL успешно
+[21:07:18] 
+----------------------------------
+[21:07:18] --------Advance RP by Leon--------
+[21:07:18] ----------------------------------
+
+[21:07:18] Number of vehicle models: 6
+[21:07:18] Склады загружены успешно
+[21:07:18] Дома (15 шт) загружены успешно
+[21:07:29] [connection] 127.0.0.1:57078 requests connection cookie.
+[21:07:30] [connection] incoming connection: 127.0.0.1:57078 id: 0
+[21:07:30] [join] Elon_Musk has joined the server (0:127.0.0.1)
+[21:07:34] [connection] 127.0.0.1:57080 requests connection cookie.
+[21:07:35] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:36] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:37] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:38] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:39] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:40] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:07:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:08:00] [connection] incoming connection: 127.0.0.1:57087 id: 1
+[21:08:00] [join] Axel_Foli has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:16:48] filterscripts = ""  (string)
+[21:16:48] 
+[21:16:48] Server Plugins
+[21:16:48] --------------
+[21:16:48]  Loading plugin: mysql
+[21:16:48]  >> plugin.mysql: R41-2 successfully loaded.
+[21:16:48]   Loaded.
+[21:16:48]  Loading plugin: sscanf
+[21:16:48] 
+
+[21:16:48]  ===============================
+
+[21:16:48]       sscanf plugin loaded.     
+
+[21:16:48]          Version:  2.8.1        
+
+[21:16:48]    (c) 2012 Alex "Y_Less" Cole  
+
+[21:16:48]  ===============================
+
+[21:16:48]   Loaded.
+[21:16:48]  Loading plugin: dc_cmd
+[21:16:48]   Daniel's CMD plugin v2.8
+[21:16:48]     (c) 2014 Daniel_Cortez
+[21:16:48] 	www.pro-pawn.ru
+[21:16:48]   Loaded.
+[21:16:48]  Loading plugin: streamer
+[21:16:48] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[21:16:48]   Loaded.
+[21:16:48]  Loaded 4 plugins.
+
+[21:16:48] 
+[21:16:48] Ban list
+[21:16:48] --------
+[21:16:48]  Loaded: samp.ban
+[21:16:48] 
+[21:16:48] 
+[21:16:48] Filterscripts
+[21:16:48] ---------------
+[21:16:48]   Loaded 0 filterscripts.
+
+[21:16:48] Подключение к базе данных MYSQL успешно
+[21:16:48] 
+----------------------------------
+[21:16:48] --------Advance RP by Leon--------
+[21:16:48] ----------------------------------
+
+[21:16:48] Number of vehicle models: 6
+[21:16:48] Склады загружены успешно
+[21:16:48] Дома (15 шт) загружены успешно
+[21:17:01] [connection] 127.0.0.1:56224 requests connection cookie.
+[21:17:02] [connection] incoming connection: 127.0.0.1:56224 id: 0
+[21:17:02] [join] Elon_Musk has joined the server (0:127.0.0.1)
+[21:17:02] [connection] 127.0.0.1:56225 requests connection cookie.
+[21:17:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:12] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:13] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:15] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:16] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:17] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:18] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:19] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:20] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:21] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:22] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:23] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:24] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:25] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:26] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:27] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:28] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:29] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:30] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:31] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:17:32] [connection] incoming connection: 127.0.0.1:49829 id: 1
+[21:17:32] [join] Axel_Foli has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:22:22] filterscripts = ""  (string)
+[21:22:22] 
+[21:22:22] Server Plugins
+[21:22:22] --------------
+[21:22:22]  Loading plugin: mysql
+[21:22:22]  >> plugin.mysql: R41-2 successfully loaded.
+[21:22:22]   Loaded.
+[21:22:22]  Loading plugin: sscanf
+[21:22:22] 
+
+[21:22:22]  ===============================
+
+[21:22:22]       sscanf plugin loaded.     
+
+[21:22:22]          Version:  2.8.1        
+
+[21:22:22]    (c) 2012 Alex "Y_Less" Cole  
+
+[21:22:22]  ===============================
+
+[21:22:22]   Loaded.
+[21:22:22]  Loading plugin: dc_cmd
+[21:22:22]   Daniel's CMD plugin v2.8
+[21:22:22]     (c) 2014 Daniel_Cortez
+[21:22:22] 	www.pro-pawn.ru
+[21:22:22]   Loaded.
+[21:22:22]  Loading plugin: streamer
+[21:22:22] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[21:22:22]   Loaded.
+[21:22:22]  Loaded 4 plugins.
+
+[21:22:22] 
+[21:22:22] Ban list
+[21:22:22] --------
+[21:22:22]  Loaded: samp.ban
+[21:22:22] 
+[21:22:22] 
+[21:22:22] Filterscripts
+[21:22:22] ---------------
+[21:22:22]   Loaded 0 filterscripts.
+
+[21:22:22] Подключение к базе данных MYSQL успешно
+[21:22:22] 
+----------------------------------
+[21:22:22] --------Advance RP by Leon--------
+[21:22:22] ----------------------------------
+
+[21:22:22] Number of vehicle models: 6
+[21:22:22] Склады загружены успешно
+[21:22:22] Дома (15 шт) загружены успешно
+[21:22:40] [connection] 127.0.0.1:64717 requests connection cookie.
+[21:22:40] [connection] 127.0.0.1:64718 requests connection cookie.
+[21:22:41] [connection] incoming connection: 127.0.0.1:64717 id: 0
+[21:22:41] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:42] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[21:22:42] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:43] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:22:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:10] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:11] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:23:12] [connection] incoming connection: 127.0.0.1:63353 id: 1
+[21:23:12] [join] Elon_Musk has joined the server (1:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[21:25:26] filterscripts = ""  (string)
+[21:25:26] 
+[21:25:26] Server Plugins
+[21:25:26] --------------
+[21:25:26]  Loading plugin: mysql
+[21:25:26]  >> plugin.mysql: R41-2 successfully loaded.
+[21:25:26]   Loaded.
+[21:25:26]  Loading plugin: sscanf
+[21:25:26] 
+
+[21:25:26]  ===============================
+
+[21:25:26]       sscanf plugin loaded.     
+
+[21:25:26]          Version:  2.8.1        
+
+[21:25:26]    (c) 2012 Alex "Y_Less" Cole  
+
+[21:25:26]  ===============================
+
+[21:25:26]   Loaded.
+[21:25:26]  Loading plugin: dc_cmd
+[21:25:26]   Daniel's CMD plugin v2.8
+[21:25:26]     (c) 2014 Daniel_Cortez
+[21:25:26] 	www.pro-pawn.ru
+[21:25:26]   Loaded.
+[21:25:26]  Loading plugin: streamer
+[21:25:26] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[21:25:26]   Loaded.
+[21:25:26]  Loaded 4 plugins.
+
+[21:25:26] 
+[21:25:26] Ban list
+[21:25:26] --------
+[21:25:26]  Loaded: samp.ban
+[21:25:26] 
+[21:25:26] 
+[21:25:26] Filterscripts
+[21:25:26] ---------------
+[21:25:26]   Loaded 0 filterscripts.
+
+[21:25:26] Подключение к базе данных MYSQL успешно
+[21:25:26] 
+----------------------------------
+[21:25:26] --------Advance RP by Leon--------
+[21:25:26] ----------------------------------
+
+[21:25:26] Number of vehicle models: 6
+[21:25:26] Склады загружены успешно
+[21:25:26] Дома (15 шт) загружены успешно
+[21:25:39] [connection] 127.0.0.1:64235 requests connection cookie.
+[21:25:40] [connection] incoming connection: 127.0.0.1:64235 id: 0
+[21:25:40] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[21:25:43] [connection] 127.0.0.1:64237 requests connection cookie.
+[21:25:44] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:45] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:46] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:47] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:48] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:49] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:50] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:51] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:52] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:53] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:54] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:55] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:56] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:57] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:58] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:25:59] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:00] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:01] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:02] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:03] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:04] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:05] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:06] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:07] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:08] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:09] Blocking 127.0.0.1 due to a 'server full' attack (2)
+[21:26:10] [connection] incoming connection: 127.0.0.1:64243 id: 1
+[21:26:11] [join] Elon_Musk has joined the server (1:127.0.0.1)
+[21:26:47] [part] Axel_Foli has left the server (0:1)
+[21:26:50] [part] Elon_Musk has left the server (1:1)

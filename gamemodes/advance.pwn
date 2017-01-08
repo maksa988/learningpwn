@@ -88,6 +88,7 @@ new metalincar[MAX_PLAYERS]; //металл в тачке на заводе
 new metalveh[MAX_PLAYERS]; //сохранённая машина для развозки металла
 new factorytimer[MAX_PLAYERS]; //таймер 15 секунд на возвращение в авто
 new taxitimer[MAX_PLAYERS]; //таймер 15 секунд на возвращение в авто
+new taxicounter_timer[MAX_PLAYERS]; //таймер 30 секунд на тариф
 new taxiveh[MAX_PLAYERS]; //сохранённая машина такси
 new fuelveh[MAX_PLAYERS]; //сохранённая машина для развозки топлива
 new fuelincar[MAX_PLAYERS]; //металл в тачке на заводе
@@ -105,6 +106,8 @@ new sppi[MAX_PLAYERS];//ид интерьера игрока при начале наблюдения
 new Float:spx[MAX_PLAYERS], Float:spy[MAX_PLAYERS], Float:spz[MAX_PLAYERS], Float:sprot[MAX_PLAYERS]; //координаты игрока при начале наблюдения
 new login_timer[MAX_PLAYERS];//время на логин игрока
 new taxiname[MAX_PLAYERS][15];
+new jobdriver[MAX_VEHICLES]; //ID водителя такси или автобуса
+new taxipickup[MAX_PLAYERS];
 
 //------------------Переменные текстдравов----------------
 new Text:logo_td, //логотип сервера
@@ -274,6 +277,7 @@ enum player
 	WORK,//работа персонажа (которая в мерии)
 	LAW,//законопослушность
 	BANKMONEY,//денег в банке
+	SALARY, //Зарплата которая должна быть выдана на PayDay
 }
 new player_info[MAX_PLAYERS][player];
 
@@ -2476,8 +2480,15 @@ public OnPlayerDisconnect(playerid, reason)
 	SetPVarFloat(playerid, "gpsy", 0);
 	SetPVarFloat(playerid, "gpsz", 0);
 
-    SetPVarInt(playerid, "skip", 0); //Убираем пропуск
-    SetPVarInt(playerid, "taxi_work", 0); //Убираем работу таксиста
+    DeletePVar(playerid, "skip"); //Убираем пропуск
+    DeletePVar(playerid, "taxi_work"); //Убираем работу таксиста
+    DeletePVar(playerid, "taxi_type");
+    DeletePVar(playerid, "taxi_route");
+    DeletePVar(playerid, "taxi_fare");
+	DeletePVar(playerid, "salary_taxi");
+	DeletePVar(playerid, "passangers_taxi");
+	DestroyDynamicCP(taxipickup[playerid]);
+	DeletePVar(playerid, "taxi_passenger");
 	return 1;
 }
 
@@ -2896,13 +2907,6 @@ public OnPlayerCommandText(playerid, cmdtext[])
 
 public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
-    if(GetPlayerVehicleID(playerid) >= taxicars[0] && GetPlayerVehicleID(playerid) <= taxicars[MAX_TAXI_CARS])
-	{
-	    if(ispassenger)
-	 	{
-      		SCM(playerid, COLOR_ORANGE, "Вы сели в такси");
-		}
-	}
 	return 1;
 }
 
@@ -3087,6 +3091,82 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             SCM(playerid, COLOR_RED, "Экзамен провален!");
         }
 	}
+	if(newstate == PLAYER_STATE_PASSENGER) {
+	    if(GetPlayerVehicleID(playerid) >= taxicars[0] && GetPlayerVehicleID(playerid) <= taxicars[MAX_TAXI_CARS])
+	    {
+			if(GetPVarInt(playerid, "taxi_work") == 1) return RemovePlayerFromVehicle(playerid);
+            if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_type") == 0) return 1;
+
+			switch(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_type")) { //По типу определяем текст вывода и тариф
+			    case 1:
+			    {
+					if(player_info[playerid][LEVEL] != 1) {
+					    SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_ORANGE, "Пассажир не смог воспользоваться вашими улугами т.к. не является игроком 1 уровня");
+					    SCM(playerid, COLOR_ORANGE, "Вы не можете воспользоваться улугами бесплатного такси т.к. не являетесь игроком 1 уровня");
+                        RemovePlayerFromVehicle(playerid);
+					}
+					
+					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 1) {
+					    new string[104];
+						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}шахту {038FDA}и получите {FFDF0F}500$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+
+						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
+						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
+                        taxipickup[jobdriver[GetPlayerVehicleID(playerid)]] = CreateDynamicCP(-1916.0322, -1776.1627, 30.0145, 4, 0, 0, jobdriver[GetPlayerVehicleID(playerid)], 10000);
+					}
+					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 2) {
+					    new string[104];
+						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}завод {038FDA}и получите {FFDF0F}470$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+
+						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
+						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
+                        taxipickup[jobdriver[GetPlayerVehicleID(playerid)]] = CreateDynamicCP(-136.7464,-394.4768,1.1378, 4, 0, 0, jobdriver[GetPlayerVehicleID(playerid)], 10000);
+					}
+					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 3) {
+					    new string[104];
+						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}склад {038FDA}и получите {FFDF0F}250$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+
+						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
+						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
+                        taxipickup[jobdriver[GetPlayerVehicleID(playerid)]] = CreateDynamicCP(2247.3242,-2221.1079,13.2881, 4, 0, 0, jobdriver[GetPlayerVehicleID(playerid)], 10000);
+					}
+				}
+			    case 2:
+   				{
+   				    new string[58];
+					format(string, sizeof(string), "%s сел в ваше такси. Счетчик включен", player_info[playerid][NAME]);
+					SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+					SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
+					get_fare_money_taxi(playerid, jobdriver[GetPlayerVehicleID(playerid)]);
+                    taxicounter_timer[playerid] = SetTimerEx("taxicounter", 30000, false, "ii", playerid, jobdriver[GetPlayerVehicleID(playerid)]);
+				}
+   				case 3:
+   				{
+   				    new string[42];
+                    format(string, sizeof(string), "%s сел в ваше такси.", player_info[playerid][NAME]);
+                    SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
+                    SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+				}
+			}
+	    }
+	}
+	if(oldstate == PLAYER_STATE_PASSENGER) {
+		if(GetPVarInt(playerid, "passenger_taxi") != 0)
+		{
+			if(GetPVarInt(GetPVarInt(playerid, "passenger_taxi"), "taxi_type") == 2) {
+			    KillTimer(taxicounter_timer[playerid]);
+			}
+
+			if(GetPVarInt(GetPVarInt(playerid, "passenger_taxi"), "taxi_type") == 1) {
+				DestroyDynamicCP(taxipickup[playerid]);
+			}
+	        DeletePVar(GetPVarInt(playerid, "passenger_taxi"), "taxi_passenger");
+			DeletePVar(playerid, "passenger_taxi");
+		}
+    }
 	return 1;
 }
 
@@ -3103,6 +3183,38 @@ public OnPlayerCommandPerformed(playerid, cmdtext[], success)
 
 public OnPlayerEnterCheckpoint(playerid)
 {
+	if(IsPlayerInDynamicCP(playerid, taxipickup[playerid])) {
+        if(GetPVarInt(playerid, "taxi_passenger") != 0)
+        {
+			switch(GetPVarInt(playerid, "taxi_route")){
+			    case 1:
+			    {
+                    add_to_salary(playerid, 500);
+					SetPVarInt(playerid, "salary_taxi", GetPVarInt(playerid, "salary_taxi") + 500);
+					SetPVarInt(playerid, "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
+				    SCM(playerid, COLOR_LIGHTBLUE, "Вы получили {FFDF0F}500$ {038FDA}за то что доставили пассажира на шахту");
+				}
+				case 2:
+				{
+                    add_to_salary(playerid, 470);
+					SetPVarInt(playerid, "salary_taxi", GetPVarInt(playerid, "salary_taxi") + 470);
+					SetPVarInt(playerid, "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
+				    SCM(playerid, COLOR_LIGHTBLUE, "Вы получили {FFDF0F}470$ {038FDA}за то что доставили пассажира на завод");
+				}
+				case 3:
+				{
+                    add_to_salary(playerid, 250);
+					SetPVarInt(playerid, "salary_taxi", GetPVarInt(playerid, "salary_taxi") + 250);
+					SetPVarInt(playerid, "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
+				    SCM(playerid, COLOR_LIGHTBLUE, "Вы получили {FFDF0F}250$ {038FDA}за то что доставили пассажира на склад");
+				}
+			}
+		    DestroyDynamicCP(taxipickup[playerid]);
+		    
+		    DeletePVar(GetPVarInt(playerid, "passenger_taxi"), "taxi_passenger");
+			DeletePVar(playerid, "passenger_taxi");
+	    }
+	}
 	if(IsPlayerInDynamicCP(playerid, help_cp[playerid]))
 	{
 	    SPD(playerid, 12, DIALOG_STYLE_LIST, "{59FF5F}Помощь по игре", "1. О проекте\n2. Безопасность\n3. Основы игры\n4. RolePlay\n5. Первые шаги\n6. Общение\n7. Транспорт\n8. Государственная система\n9. Жилье\n10. Бизнес и АЗС\n11. Банки, хранение средств\n12. Организации\n13. Работы\n14. Развлечения", "Выбрать", "Закрыть");
@@ -3670,7 +3782,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_enter)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return 1;
+        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
  	    SetPlayerPos(playerid, 246.783996, 63.900199, 1003.640625);
  	    SetPlayerVirtualWorld(playerid, 2);
  	    SetPlayerInterior(playerid, 6);
@@ -3679,7 +3791,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_exit)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return 1;
+        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 1553.0095,-1675.6373,16.1953);
  	    SetPlayerVirtualWorld(playerid, 0);
  	    SetPlayerInterior(playerid, 0);
@@ -3688,7 +3800,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
     if(pickupid == lspd_gar_enter)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return 1;
+        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 243.1628,66.3403,1003.6406);
  	    SetPlayerVirtualWorld(playerid, 2);
  	    SetPlayerInterior(playerid, 6);
@@ -3697,7 +3809,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_gar_exit)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return 1;
+        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 1568.6841,-1690.4283,5.8906);
  	    SetPlayerVirtualWorld(playerid, 0);
  	    SetPlayerInterior(playerid, 0);
@@ -8649,6 +8761,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(query, sizeof(query), fmt_query, player_info[playerid][MONEY], player_info[playerid][ID]);
 				mysql_query(dbHandle, query);
 				SetPVarInt(playerid, "taxi_work", 1);
+                jobdriver[GetPlayerVehicleID(playerid)] = playerid;
 		        SCM(playerid, COLOR_LIGHTGREEN, "Для того что бы начать работу таксиста {FFDF0F}нажмите 2");
 		    } else {
 		        RemovePlayerFromVehicle(playerid);
@@ -8674,7 +8787,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        case 0: //Социальный
 			        {
 			            SPD(playerid, 150, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Куда вы хотите возить людей?", "Пункт назначения\tЦена за поездку\n{ffffff}1. На шахту\t{5EFF36}500$\n{ffffff}2. На завод\t{5EFF36}470$\n{ffffff}3. На склад\t{5EFF36}250$", "Выбрать", "Отмена");
-			        }
+					}
 			        case 1: //По счётчику
 			        {
 						SPD(playerid, 149, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
@@ -8690,6 +8803,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new string[46];
 						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
 						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						ChangeVehicleColor(GetPlayerVehicleID(playerid), 18, 18);
 			        }
 			    }
 			}
@@ -8718,11 +8832,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
 				}
 			}
-            SetPVarInt(playerid, "taxi_type", 0);
-            SetPVarInt(playerid, "taxi_route", 0);
-            SetPVarInt(playerid, "taxi_fare", 0);
-			SetPVarInt(playerid, "salary_taxi", 0);
-			SetPVarInt(playerid, "passangers_taxi", 0);
+            DeletePVar(playerid, "taxi_type");
+            DeletePVar(playerid, "taxi_route");
+            DeletePVar(playerid, "taxi_fare");
+			DeletePVar(playerid, "salary_taxi");
+			DeletePVar(playerid, "passangers_taxi");
+			DestroyDynamicCP(taxipickup[playerid]);
+	        DeletePVar(playerid, "taxi_passenger");
 	    	Delete3DTextLabel(taxitext[playerid]);
 	 		if(taxiveh[playerid] != -1)
 			{
@@ -8761,10 +8877,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPVarInt(playerid, "passangers_taxi", 0);
                         SetPVarInt(playerid, "taxi_route", 1);
 						SetPVarInt(playerid, "taxi_type", 1);
-						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}500$ {5bdd02} за каждую поездку до шахты");
+						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}500$ {5bdd02}за каждую поездку до шахты");
                         new string[46];
 						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
 						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			        case 1:
 			        {
@@ -8775,10 +8892,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPVarInt(playerid, "passangers_taxi", 0);
                         SetPVarInt(playerid, "taxi_route", 2);
 						SetPVarInt(playerid, "taxi_type", 1);
-						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}475$ {5bdd02} за каждую поездку до завода");
+						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}475$ {5bdd02}за каждую поездку до завода");
                         new string[46];
 						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
 						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			        case 2:
 			        {
@@ -8789,10 +8907,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPVarInt(playerid, "passangers_taxi", 0);
                         SetPVarInt(playerid, "taxi_route", 3);
 						SetPVarInt(playerid, "taxi_type", 1);
-						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}250$ {5bdd02} за каждую поездку до склада");
+						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}250$ {5bdd02}за каждую поездку до склада");
                         new string[46];
 						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
 						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			    }
 			}
@@ -9528,6 +9647,42 @@ public speedupdate(playerid)
 	TextDrawSetString(speed2info[playerid], string);
 }
 
+forward get_fare_money_taxi(playerid, driverid);
+public get_fare_money_taxi(playerid, driverid)
+{
+    if(player_info[playerid][MONEY] < GetPVarInt(driverid, "taxi_fare")) {
+	    RemovePlayerFromVehicle(playerid);
+	    KillTimer(taxicounter_timer[playerid]);
+	    SCM(driverid, COLOR_RED, "У игрока недостаточного денег для проезда.");
+		SCM(playerid, COLOR_LIGHTGREY, "У вас недостаточного денег для проезда.");
+		return 1;
+	}
+	player_info[playerid][MONEY]-= GetPVarInt(driverid, "taxi_fare");
+	add_to_salary(driverid, GetPVarInt(driverid, "taxi_fare"));
+
+	SetPVarInt(driverid, "salary_taxi", GetPVarInt(driverid, "salary_taxi") + GetPVarInt(driverid, "taxi_fare"));
+
+	new stringOne[21];
+	format(stringOne, sizeof(stringOne), "~g~+%d$~n~~b~+30 sec", GetPVarInt(driverid, "taxi_fare"));
+	GameTextForPlayer(driverid, stringOne, 3000, 1);
+
+	new stringTwo[21];
+	format(stringTwo, sizeof(stringTwo), "~r~-%d$~n~~b~+30 sec", GetPVarInt(driverid, "taxi_fare"));
+	GameTextForPlayer(playerid, stringTwo, 3000, 1);
+	static const fmt_query[] = "UPDATE `accounts` SET `money` = '%d' WHERE `id` = '%d'";
+	new query[sizeof(fmt_query)+(-2+9)+(-2+8)];
+	format(query, sizeof(query), fmt_query, player_info[playerid][MONEY], player_info[playerid][ID]);
+	mysql_query(dbHandle, query);
+
+	return 1;
+}
+
+forward taxicounter(playerid, driverid);
+public taxicounter(playerid, driverid)
+{
+	get_fare_money_taxi(playerid, driverid);
+}
+
 forward taxiworkend(playerid);
 public taxiworkend(playerid)
 {
@@ -9554,11 +9709,14 @@ public taxiworkend(playerid)
 				SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
 			}
 		}
-  		SetPVarInt(playerid, "taxi_type", 0);
-		SetPVarInt(playerid, "taxi_route", 1);
-		SetPVarInt(playerid, "taxi_fare", 0);
-		SetPVarInt(playerid, "salary_taxi", 0);
-		SetPVarInt(playerid, "passangers_taxi", 0);
+  		DeletePVar(playerid, "taxi_type");
+    	DeletePVar(playerid, "taxi_route");
+     	DeletePVar(playerid, "taxi_fare");
+		DeletePVar(playerid, "salary_taxi");
+		DeletePVar(playerid, "passangers_taxi");
+		DestroyDynamicCP(taxipickup[playerid]);
+  		DeletePVar(playerid, "taxi_passenger");
+ 		Delete3DTextLabel(taxitext[playerid]);
     	Delete3DTextLabel(taxitext[playerid]);
  		if(taxiveh[playerid] != -1)
 		{
@@ -10104,6 +10262,16 @@ public thirtysecondupdate()
 	return 1;
 }
 
+forward add_to_salary(playerid, money);
+public add_to_salary(playerid, money)
+{
+    player_info[playerid][SALARY] += money;
+    static const fmt_query[] = "UPDATE `accounts` SET `salary` = '%d' WHERE `id` = '%d'";
+	new query[sizeof(fmt_query)+(-2+9)+(-2+8)];
+	format(query, sizeof(query), fmt_query, player_info[playerid][SALARY], player_info[playerid][ID]);
+	mysql_query(dbHandle, query);
+}
+
 forward payday();
 public payday()
 {
@@ -10280,6 +10448,7 @@ public player_login(playerid)
 	    cache_get_value_name_int(0, "work", player_info[playerid][WORK]);
 	    cache_get_value_name_int(0, "law", player_info[playerid][LAW]);
 	    cache_get_value_name_int(0, "bmoney", player_info[playerid][BANKMONEY]);
+	    cache_get_value_name_int(0, "salary", player_info[playerid][SALARY]);
 	    SetSpawnInfo(playerid, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
         new query[80], newip[16];
         GetPlayerIp(playerid, newip, 16);
@@ -12008,6 +12177,10 @@ CMD:warninfo(playerid, params[])
 
 
 //====================================Команды администратора======================================
+CMD:payday(playerid) {
+	if(player_info[playerid][ADMIN] < 5) return 1;
+	return payday();
+}
 CMD:veh(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 3) return 1;
