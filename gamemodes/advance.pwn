@@ -2585,6 +2585,13 @@ public OnPlayerDisconnect(playerid, reason)
 	DeletePVar(playerid, "passangers_taxi");
 	DestroyDynamicCP(taxipickup[playerid]);
 	DeletePVar(playerid, "taxi_passenger");
+	
+	DeletePVar(playerid, "bus_route");
+ 	DeletePVar(playerid, "bus_fare");
+	DeletePVar(playerid, "bus_salary");
+	DeletePVar(playerid, "bus_passengers");
+	DisablePlayerRaceCheckpoint(playerid);
+	Delete3DTextLabel(bustext[playerid]);
 	return 1;
 }
 
@@ -3216,7 +3223,37 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         }
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) {
-	    if(GetPlayerVehicleID(playerid) >= taxicars[0] && GetPlayerVehicleID(playerid) <= taxicars[MAX_TAXI_CARS])
+        if(GetPlayerVehicleID(playerid) >= buscars[0] && GetPlayerVehicleID(playerid) <= buscars[MAX_BUS_CARS])
+	    {
+			if(GetPVarInt(playerid, "bus_work") == 1) return RemovePlayerFromVehicle(playerid);
+            if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_route") == 0) return 1;
+            
+            if(player_info[playerid][MONEY] < GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare")) {
+			    RemovePlayerFromVehicle(playerid);
+				SCM(playerid, COLOR_LIGHTGREY, "У вас недостаточного денег для проезда.");
+				return 1;
+			}
+			player_info[playerid][MONEY]-= GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare");
+			add_to_salary(jobdriver[GetPlayerVehicleID(playerid)], GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare"));
+
+			SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_salary", GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_salary") + GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare"));
+
+			new stringOne[8];
+			format(stringOne, sizeof(stringOne), "~g~+%d$", GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare"));
+			GameTextForPlayer(jobdriver[GetPlayerVehicleID(playerid)], stringOne, 3000, 1);
+
+			new stringTwo[8];
+			format(stringTwo, sizeof(stringTwo), "~r~-%d$", GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_fare"));
+			GameTextForPlayer(playerid, stringTwo, 3000, 1);
+			static const fmt_query[] = "UPDATE `accounts` SET `money` = '%d' WHERE `id` = '%d'";
+			new query[sizeof(fmt_query)+(-2+9)+(-2+8)];
+			format(query, sizeof(query), fmt_query, player_info[playerid][MONEY], player_info[playerid][ID]);
+			mysql_query(dbHandle, query);
+			
+			SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_passengers", GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "bus_passengers") + 1);
+   		}
+
+		if(GetPlayerVehicleID(playerid) >= taxicars[0] && GetPlayerVehicleID(playerid) <= taxicars[MAX_TAXI_CARS])
 	    {
 			if(GetPVarInt(playerid, "taxi_work") == 1) return RemovePlayerFromVehicle(playerid);
             if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_type") == 0) return 1;
@@ -3685,24 +3722,33 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	              		case 0, 6, 9, 13, 17, 23, 27, 30, 34, 38, 41:
 	              		{
 	                        busstop(playerid);
+	                        SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
+	                        add_to_salary(playerid, 23);
 						}
 						case 1..4, 7, 10..11, 14..15, 18..21, 24..25, 28, 31..32, 35..36, 39, 42..44:
 	  					{
                             DisablePlayerRaceCheckpoint(playerid);
                             nowcheck[playerid]++;
 						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-				  		}
-				  		case 5, 8, 12, 16, 22, 26, 29, 33, 37, 40, 45:
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
+	                        add_to_salary(playerid, 23);
+						}
+				  		case 5, 8, 12, 16, 22, 26, 29, 33, 37, 40:
 				  		{
                             DisablePlayerRaceCheckpoint(playerid);
 							nowcheck[playerid]++;
 						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-				  		}
-				  		case 46:
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
+	                        add_to_salary(playerid, 23);
+			  			}
+			  			case 45:
 				  		{
-				  		    nowcheck[playerid] = 0;
-				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], buscheckOne[1][0], buscheckOne[1][1], buscheckOne[1][2], 4.0);
-				  		}
+				  		    DisablePlayerRaceCheckpoint(playerid);
+				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[45][0], buscheckOne[45][1], buscheckOne[45][2], buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], 4.0);
+                            nowcheck[playerid] = 0;
+							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
+	                        add_to_salary(playerid, 23);
+					  	}
 					}
 				}
 			}
@@ -8991,41 +9037,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		case DIALOG_TAXI + 3: //Завершить рабочий день такси
 		{
-		    RemovePlayerFromVehicle(playerid);
-            SetPVarInt(playerid, "taxi_work", 0);
-			SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
+			if(response) {
+				RemovePlayerFromVehicle(playerid);
+	            SetPVarInt(playerid, "taxi_work", 0);
+				SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
 
-			switch(GetPVarInt(playerid, "taxi_type"))
-			{
-			    case 3:
-			    {
-			        new string[39];
-					format(string, sizeof(string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-	                SCM(playerid, COLOR_WHITE, string);
-			    }
-				default:
-			    {
-			        new stringOne[29], stringTwo[39];
-					format(stringOne, sizeof(stringOne), "Заработано: {5EFF36}%d$", GetPVarInt(playerid, "salary_taxi"));
-                    format(stringTwo, sizeof(stringTwo), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-					SCM(playerid, COLOR_WHITE, stringOne);
-					SCM(playerid, COLOR_WHITE, stringTwo);
-					SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
+				switch(GetPVarInt(playerid, "taxi_type"))
+				{
+				    case 3:
+				    {
+				        new string[39];
+						format(string, sizeof(string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
+		                SCM(playerid, COLOR_WHITE, string);
+				    }
+					default:
+				    {
+				        new stringOne[29], stringTwo[39];
+						format(stringOne, sizeof(stringOne), "Заработано: {5EFF36}%d$", GetPVarInt(playerid, "salary_taxi"));
+	                    format(stringTwo, sizeof(stringTwo), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
+						SCM(playerid, COLOR_WHITE, stringOne);
+						SCM(playerid, COLOR_WHITE, stringTwo);
+						SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
+					}
 				}
-			}
-            DeletePVar(playerid, "taxi_type");
-            DeletePVar(playerid, "taxi_route");
-            DeletePVar(playerid, "taxi_fare");
-			DeletePVar(playerid, "salary_taxi");
-			DeletePVar(playerid, "passangers_taxi");
-			DestroyDynamicCP(taxipickup[playerid]);
-	        DeletePVar(playerid, "taxi_passenger");
-	    	Delete3DTextLabel(taxitext[playerid]);
-	 		if(taxiveh[playerid] != -1)
-			{
-		   		SetVehicleToRespawn(taxiveh[playerid]);
-			}
-		   	taxiveh[playerid] = -1;
+	            DeletePVar(playerid, "taxi_type");
+	            DeletePVar(playerid, "taxi_route");
+	            DeletePVar(playerid, "taxi_fare");
+				DeletePVar(playerid, "salary_taxi");
+				DeletePVar(playerid, "passangers_taxi");
+				DestroyDynamicCP(taxipickup[playerid]);
+		        DeletePVar(playerid, "taxi_passenger");
+		    	Delete3DTextLabel(taxitext[playerid]);
+		 		if(taxiveh[playerid] != -1)
+				{
+			   		SetVehicleToRespawn(taxiveh[playerid]);
+				}
+			   	taxiveh[playerid] = -1;
+		   	}
 		}
 		case DIALOG_TAXI + 4: //Счётчик
 		{
@@ -9141,13 +9189,42 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        new string[81];
 						format(string, sizeof(string), "%s начал работу водителя автобуса на маршруте Городской Лос-Сантос №1", player_info[playerid][NAME]);
 						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
-
+						SetPVarInt(playerid, "bus_salary", 0);
                         SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], buscheckOne[1][0], buscheckOne[1][1], buscheckOne[1][2], 4.0);
 					}
 				}
 		    } else {
 				DeletePVar(playerid, "bus_fare");
 			}
+		}
+		case DIALOG_BUS + 3:
+		{
+		    if(response) {
+		        RemovePlayerFromVehicle(playerid);
+                SetPVarInt(playerid, "bus_work", 0);
+				SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
+
+		        new stringOne[29], stringTwo[80], stringThree[33];
+				format(stringOne, sizeof(stringOne), "Заработано: {5EFF36}%d$", GetPVarInt(playerid, "bus_salary"));
+		        format(stringTwo, sizeof(stringTwo), "Количество пассажиров: {5EFF36}%d{ffffff}. Куплено билетов на {5EFF36}%d$.", GetPVarInt(playerid, "bus_passengers"), GetPVarInt(playerid, "bus_passengers") * GetPVarInt(playerid, "bus_fare"));
+		        format(stringThree, sizeof(stringThree), "За ремонт автобуса: {FFDF0F}-%d$", 34);
+				SCM(playerid, COLOR_WHITE, stringOne);
+				SCM(playerid, COLOR_WHITE, stringTwo);
+				SCM(playerid, COLOR_WHITE, stringThree);
+				SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
+
+		    	DeletePVar(playerid, "bus_route");
+		     	DeletePVar(playerid, "bus_fare");
+				DeletePVar(playerid, "bus_salary");
+				DeletePVar(playerid, "bus_passengers");
+				DisablePlayerRaceCheckpoint(playerid);
+		 		Delete3DTextLabel(bustext[playerid]);
+		 		if(busveh[playerid] != -1)
+				{
+			   		SetVehicleToRespawn(busveh[playerid]);
+				}
+			   	busveh[playerid] = -1;
+		    }
 		}
  	}
 	return 1;
@@ -9949,8 +10026,7 @@ public taxiworkend(playerid)
 		DeletePVar(playerid, "passangers_taxi");
 		DestroyDynamicCP(taxipickup[playerid]);
   		DeletePVar(playerid, "taxi_passenger");
- 		Delete3DTextLabel(taxitext[playerid]);
-    	Delete3DTextLabel(taxitext[playerid]);
+ 		Delete3DTextLabel(taxitext[playerid]);\
  		if(taxiveh[playerid] != -1)
 		{
 	   		SetVehicleToRespawn(taxiveh[playerid]);
@@ -9983,45 +10059,32 @@ public busstop(playerid)
 forward busworkend(playerid);
 public busworkend(playerid)
 {
-/*
 	if(GetPVarInt(playerid, "bus_work") ==  1)
     {
         SetPVarInt(playerid, "bus_work", 0);
 		SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
 
-		switch(GetPVarInt(playerid, "taxi_type"))
+        new stringOne[29], stringTwo[80], stringThree[33];
+		format(stringOne, sizeof(stringOne), "Заработано: {5EFF36}%d$", GetPVarInt(playerid, "bus_salary"));
+        format(stringTwo, sizeof(stringTwo), "Количество пассажиров: {5EFF36}%d{ffffff}. Куплено билетов на {5EFF36}%d$.", GetPVarInt(playerid, "bus_passengers"), GetPVarInt(playerid, "bus_passengers") * GetPVarInt(playerid, "bus_fare"));
+        format(stringThree, sizeof(stringThree), "За ремонт автобуса: {FFDF0F}-%d$", 34);
+		SCM(playerid, COLOR_WHITE, stringOne);
+		SCM(playerid, COLOR_WHITE, stringTwo);
+		SCM(playerid, COLOR_WHITE, stringThree);
+		SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
+
+    	DeletePVar(playerid, "bus_route");
+     	DeletePVar(playerid, "bus_fare");
+		DeletePVar(playerid, "bus_salary");
+		DeletePVar(playerid, "bus_passengers");
+		DisablePlayerRaceCheckpoint(playerid);
+ 		Delete3DTextLabel(bustext[playerid]);
+ 		if(busveh[playerid] != -1)
 		{
-		    case 3:
-		    {
-		        new string[39];
-				format(string, sizeof(string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-                SCM(playerid, COLOR_WHITE, string);
-		    }
-			default:
-		    {
-		        new stringOne[29], stringTwo[39];
-				format(stringOne, sizeof(stringOne), "Заработано: {5EFF36}%d$", GetPVarInt(playerid, "salary_taxi"));
-                format(stringTwo, sizeof(stringTwo), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-				SCM(playerid, COLOR_WHITE, stringOne);
-				SCM(playerid, COLOR_WHITE, stringTwo);
-				SCM(playerid, COLOR_LIGHTGREEN, "Деньги будут перечислены на Ваш счет во время зарплаты");
-			}
+	   		SetVehicleToRespawn(busveh[playerid]);
 		}
-  		DeletePVar(playerid, "taxi_type");
-    	DeletePVar(playerid, "taxi_route");
-     	DeletePVar(playerid, "taxi_fare");
-		DeletePVar(playerid, "salary_taxi");
-		DeletePVar(playerid, "passangers_taxi");
-		DestroyDynamicCP(taxipickup[playerid]);
-  		DeletePVar(playerid, "taxi_passenger");
- 		Delete3DTextLabel(taxitext[playerid]);
-    	Delete3DTextLabel(taxitext[playerid]);
- 		if(taxiveh[playerid] != -1)
-		{
-	   		SetVehicleToRespawn(taxiveh[playerid]);
-		}
-	   	taxiveh[playerid] = -1;
-    }*/
+	   	busveh[playerid] = -1;
+    }
 	return 1;
 }
 

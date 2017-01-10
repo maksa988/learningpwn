@@ -621,8 +621,10 @@
 		</member>
 		<member name="F:bustext">
 			<tagname value="Text3D"/>
+			<referrer name="Itter_OnPlayerDisconnect"/>
 			<referrer name="OnVehicleSpawn"/>
 			<referrer name="OnDialogResponse"/>
+			<referrer name="busworkend"/>
 		</member>
 		<member name="F:bustimer">
 			<referrer name="OnPlayerExitVehicle"/>
@@ -630,6 +632,8 @@
 		</member>
 		<member name="F:busveh">
 			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="busworkend"/>
 		</member>
 		<member name="F:buymetal">
 			<referrer name="Itter_OnGameModeInit"/>
@@ -668,6 +672,7 @@
 		<member name="F:dbHandle">
 			<tagname value="MySQL"/>
 			<referrer name="Itter_OnGameModeInit"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnPlayerClickTextDraw"/>
 			<referrer name="OnPlayerKeyStateChange"/>
@@ -2588,6 +2593,7 @@
 			<referrer name="OnVehicleSpawn"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="cmd_pick"/>
 			<param name="id">
@@ -2601,6 +2607,7 @@
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busworkend"/>
 			<param name="playerid">
 			</param>
 			<param name="varname">
@@ -2679,10 +2686,13 @@
 		</member>
 		<member name="M:DisablePlayerRaceCheckpoint" syntax="DisablePlayerRaceCheckpoint(playerid)">
 			<attribute name="native"/>
+			<referrer name="Itter_OnPlayerDisconnect"/>
 			<referrer name="OnPlayerExitVehicle"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
 			<referrer name="busstop"/>
+			<referrer name="busworkend"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -2721,6 +2731,7 @@
 		<member name="M:GameTextForPlayer" syntax="GameTextForPlayer(playerid, string[], time, style)">
 			<attribute name="native"/>
 			<referrer name="OnPlayerSpawn"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerPickUpDynamicPickup"/>
 			<referrer name="OnPlayerPickUpPickup"/>
 			<referrer name="OnPlayerKeyStateChange"/>
@@ -2796,6 +2807,7 @@
 			<referrer name="taxiworkend"/>
 			<referrer name="nextcheckbus"/>
 			<referrer name="busstop"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="animeat"/>
@@ -3486,6 +3498,7 @@
 			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DestroyDynamicObject"/>
 			<dependency name="DestroyVehicle"/>
+			<dependency name="DisablePlayerRaceCheckpoint"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="HOUSE"/>
 			<dependency name="IsValidObject"/>
@@ -3494,6 +3507,7 @@
 			<dependency name="SetPVarInt"/>
 			<dependency name="SetVehicleToRespawn"/>
 			<dependency name="TextDrawDestroy"/>
+			<dependency name="bustext"/>
 			<dependency name="car"/>
 			<dependency name="carmodel"/>
 			<dependency name="fuelveh"/>
@@ -3688,6 +3702,7 @@
 			<dependency name="DestroyDynamicObject"/>
 			<dependency name="DestroyDynamicPickup"/>
 			<dependency name="DisablePlayerCheckpoint"/>
+			<dependency name="DisablePlayerRaceCheckpoint"/>
 			<dependency name="FACTORYMETAL"/>
 			<dependency name="FRAC"/>
 			<dependency name="FSKIN"/>
@@ -3754,6 +3769,7 @@
 			<dependency name="WORK"/>
 			<dependency name="buscheckOne"/>
 			<dependency name="bustext"/>
+			<dependency name="busveh"/>
 			<dependency name="cmd_mn"/>
 			<dependency name="date"/>
 			<dependency name="date"/>
@@ -4259,6 +4275,7 @@
 			<dependency name="SetPlayerRaceCheckpoint"/>
 			<dependency name="SetVehicleToRespawn"/>
 			<dependency name="ShowPlayerDialog"/>
+			<dependency name="add_to_salary"/>
 			<dependency name="ascar"/>
 			<dependency name="ascheck"/>
 			<dependency name="buscars"/>
@@ -4761,10 +4778,13 @@
 			<dependency name="DestroyDynamicCP"/>
 			<dependency name="DisablePlayerCheckpoint"/>
 			<dependency name="DisablePlayerRaceCheckpoint"/>
+			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="GetPlayerVehicleID"/>
+			<dependency name="ID"/>
 			<dependency name="KillTimer"/>
 			<dependency name="LEVEL"/>
+			<dependency name="MONEY"/>
 			<dependency name="NAME"/>
 			<dependency name="RemovePlayerFromVehicle"/>
 			<dependency name="SendClientMessage"/>
@@ -4775,10 +4795,12 @@
 			<dependency name="TextDrawHideForPlayer"/>
 			<dependency name="TextDrawShowForPlayer"/>
 			<dependency name="WORK"/>
+			<dependency name="add_to_salary"/>
 			<dependency name="ascar"/>
 			<dependency name="ascheck"/>
 			<dependency name="buscars"/>
 			<dependency name="bustimer"/>
+			<dependency name="dbHandle"/>
 			<dependency name="factorytimer"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
@@ -4789,6 +4811,7 @@
 			<dependency name="jobdriver"/>
 			<dependency name="metalcar"/>
 			<dependency name="metalveh"/>
+			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="speed1info"/>
@@ -5547,6 +5570,7 @@
 			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
 			<referrer name="busstop"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="check_adm"/>
@@ -5777,6 +5801,7 @@
 			<referrer name="fail"/>
 			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="minegot"/>
@@ -6309,6 +6334,7 @@
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<param name="vehicleid">
 			</param>
@@ -6775,7 +6801,9 @@
 		<member name="M:add_to_salary" syntax="add_to_salary(playerid, money)">
 			<attribute name="public"/>
 			<stacksize value="76"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="get_fare_money_taxi"/>
 			<dependency name="ID"/>
 			<dependency name="SALARY"/>
@@ -6879,7 +6907,17 @@
 		</member>
 		<member name="M:busworkend" syntax="busworkend(playerid)">
 			<attribute name="public"/>
-			<stacksize value="1"/>
+			<stacksize value="151"/>
+			<dependency name="Delete3DTextLabel"/>
+			<dependency name="DeletePVar"/>
+			<dependency name="DisablePlayerRaceCheckpoint"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetPVarInt"/>
+			<dependency name="SetVehicleToRespawn"/>
+			<dependency name="bustext"/>
+			<dependency name="busveh"/>
+			<dependency name="format"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -9105,6 +9143,7 @@
 			<referrer name="speedupdate"/>
 			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busworkend"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="check_adm"/>
@@ -9643,6 +9682,7 @@
 		<member name="M:mysql_query" syntax="mysql_query(handle, query[], use_cache)">
 			<tagname value="Cache"/>
 			<attribute name="native"/>
+			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnPlayerClickTextDraw"/>
 			<referrer name="OnPlayerKeyStateChange"/>
