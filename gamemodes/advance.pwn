@@ -67,6 +67,16 @@
 //---------Дефайны каров----------------
 #define MAX_TAXI_CARS       17
 
+//---------Дефайны диалогов-------------
+#define DIALOG_GPS          700
+#define DIALOG_BANK         800
+#define DIALOG_LSPD         900
+#define DIALOG_TAXI         1000
+#define DIALOG_BUS          1100
+
+//---------Цена за чекпоинт-------------
+#define BUS_PRICE_ONE       23          //Городской ЛС №1
+
 //======================================
 
 main()
@@ -3066,7 +3076,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				if(GetPVarInt(playerid, "taxi_work") == 1) {
 					KillTimer(taxitimer[playerid]);
 				} else {
-					SPD(playerid, 145, DIALOG_STYLE_MSGBOX, "{ffcd00}Таксопарк", "{ffffff}Что бы взять машину, необходимо заплатить городскому таксопарку 200$\nВы действительно хотите заключить договор аренды?", "Да", "Нет");
+					SPD(playerid, DIALOG_TAXI, DIALOG_STYLE_MSGBOX, "{ffcd00}Таксопарк", "{ffffff}Что бы взять машину, необходимо заплатить городскому таксопарку 200$\nВы действительно хотите заключить договор аренды?", "Да", "Нет");
 				}
 			}
 	        else
@@ -3102,7 +3112,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			    {
 					if(player_info[playerid][LEVEL] != 1) {
 					    SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_ORANGE, "Пассажир не смог воспользоваться вашими улугами т.к. не является игроком 1 уровня");
-					    SCM(playerid, COLOR_ORANGE, "Вы не можете воспользоваться улугами бесплатного такси т.к. не являетесь игроком 1 уровня");
+					    SCM(playerid, COLOR_ORANGE, "Пользоваться бесплатным социальным такси могут только игроки с 1 уровнем");
                         RemovePlayerFromVehicle(playerid);
 					}
 					
@@ -3782,7 +3792,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_enter)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
+        if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 24 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
  	    SetPlayerPos(playerid, 246.783996, 63.900199, 1003.640625);
  	    SetPlayerVirtualWorld(playerid, 2);
  	    SetPlayerInterior(playerid, 6);
@@ -3791,7 +3801,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_exit)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
+        if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 24 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 1553.0095,-1675.6373,16.1953);
  	    SetPlayerVirtualWorld(playerid, 0);
  	    SetPlayerInterior(playerid, 0);
@@ -3800,7 +3810,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
     if(pickupid == lspd_gar_enter)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
+        if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 24 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 243.1628,66.3403,1003.6406);
  	    SetPlayerVirtualWorld(playerid, 2);
  	    SetPlayerInterior(playerid, 6);
@@ -3809,7 +3819,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
  	if(pickupid == lspd_gar_exit)
  	{
-        if(player_info[playerid][FRAC] != 20 && player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 22 && player_info[playerid][FRAC] != 23 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
+        if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 24 && GetPVarInt(playerid, "skip") != 1) return SCM(playerid, COLOR_ORANGE, "У Вас нет пропуска");
 		SetPlayerPos(playerid, 1568.6841,-1690.4283,5.8906);
  	    SetPlayerVirtualWorld(playerid, 0);
  	    SetPlayerInterior(playerid, 0);
@@ -4244,7 +4254,7 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	if(pickupid == bankpickup)
 	{
 	    if(player_info[playerid][LEVEL] < 4) return SCM(playerid, COLOR_GREY, "Пользоваться государственными банками можно с 4 уровня");
-		SPD(playerid, 113, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
+		SPD(playerid, DIALOG_BANK, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
 	}
 	if(pickupid == paybankpickup)
 	{
@@ -4264,8 +4274,8 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	}
 	if(pickupid == lspd_weapon) //оружие
 	{
-		if(player_info[playerid][FRAC] != 21 && player_info[playerid][FRAC] != 20) return 1;
-		SPD(playerid, 144, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Управление полиции Лос-Сантоса", "Оружие\tКол-во\tОграничение\n1. Щит\t1 шт.\tс 1 ранга\n2. Дубинка\t1 шт.\tс 1 ранга\n3. Бронежилет\t1 шт.\tс 1 ранга\n4. Маска\t1 шт.\tсо 2 ранга\n5. Пистолет с глушителем 9 мм\t60 патр.\tсо 2 ранга\n6. Desert Eagle\t120 патр.\tс 3 ранга\n7. MP5\t180 патр.\tс 4 ранга\n8. Дробовик\t30 патр.\tс 5 ранга\n9. Дымовые шашки\t2 шт.\tс 6 ранга", "Взять", "Закрыть");
+		if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 21) return 1;
+		SPD(playerid, DIALOG_LSPD, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Управление полиции Лос-Сантоса", "Оружие\tКол-во\tОграничение\n1. Щит\t1 шт.\tс 1 ранга\n2. Дубинка\t1 шт.\tс 1 ранга\n3. Бронежилет\t1 шт.\tс 1 ранга\n4. Маска\t1 шт.\tсо 2 ранга\n5. Пистолет с глушителем 9 мм\t60 патр.\tсо 2 ранга\n6. Desert Eagle\t120 патр.\tс 3 ранга\n7. MP5\t180 патр.\tс 4 ранга\n8. Дробовик\t30 патр.\tс 5 ранга\n9. Дымовые шашки\t2 шт.\tс 6 ранга", "Взять", "Закрыть");
 	}
 	return 1;
 }
@@ -4967,10 +4977,10 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             if(GetPlayerVehicleID(playerid) >= taxicars[0] && GetPlayerVehicleID(playerid) <= taxicars[MAX_TAXI_CARS] && GetPVarInt(playerid, "taxi_work") == 1) //Такси
             {
 				if(GetPVarInt(playerid, "taxi_type") != 0) {
-					SPD(playerid, 148, DIALOG_STYLE_MSGBOX, "{FFEF0D}Таксопарк", "{ffffff}Вы уверены что хотите завершить рабочий день?", "Да", "Нет");
+					SPD(playerid, DIALOG_TAXI + 3, DIALOG_STYLE_MSGBOX, "{FFEF0D}Таксопарк", "{ffffff}Вы уверены что хотите завершить рабочий день?", "Да", "Нет");
 				} else {
 				    taxiveh[playerid] = GetPlayerVehicleID(playerid);
-					SPD(playerid, 146, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
+					SPD(playerid, DIALOG_TAXI + 1, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
 				}
 			}
         }
@@ -8185,7 +8195,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SellGovHouse(h);
  			}
 		}
-		case 113:
+		//===================Банк=================
+		case DIALOG_BANK: // 113
 		{
 		    if(response)//левая кнопка
  			{
@@ -8201,19 +8212,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 1:
 			        {
-			            SPD(playerid, 114, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
+			            SPD(playerid, DIALOG_BANK + 1, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
 			        }
 				}
  			}
 		}
-		case 114:
+		case DIALOG_BANK + 1:
 		{
 			if(response)//левая кнопка
 			{
-			    if(!strlen(inputtext)) return SPD(playerid, 114, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
-				if(strlen(inputtext) < 3 || strlen(inputtext) > 20) return SPD(playerid, 115, DIALOG_STYLE_MSGBOX, "{ff3300}Ошибка", "{FFFFFF}Длина названия счёта может быть от {ffcc15}от 3 до 20{FFFFFF} символов", "Закрыть", "");
+			    if(!strlen(inputtext)) return SPD(playerid, DIALOG_BANK + 1, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
+				if(strlen(inputtext) < 3 || strlen(inputtext) > 20) return SPD(playerid, DIALOG_BANK + 2, DIALOG_STYLE_MSGBOX, "{ff3300}Ошибка", "{FFFFFF}Длина названия счёта может быть от {ffcc15}от 3 до 20{FFFFFF} символов", "Закрыть", "");
                 new text[20];
-			    if(sscanf(inputtext, "s[20]", text)) return SPD(playerid, 114, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
+			    if(sscanf(inputtext, "s[20]", text)) return SPD(playerid, DIALOG_BANK + 1, DIALOG_STYLE_INPUT, "{ffcd00}Создание нового счёта", "{FFFFFF}Введите название для нового счёта.\nМаксимальная длина 20 символов:", "Ок", "Отмена");
 				new bool:check = false;
 				for(new i = 0; i < strlen(text); i++)
 				{
@@ -8222,14 +8233,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        case 'A'..'Z', 'a'..'z', 'А'..'Я', 'а'..'я', '0'..'9':{}
 						default:
 						{
-		    				SPD(playerid, 117, DIALOG_STYLE_MSGBOX, "{ff3300}Ошибка", "{FFFFFF}Операция запрещена. Недопустимые символы в названии счёта\nМожно использовать русские и английские буквы, а также цифры", "Закрыть", "");
+		    				SPD(playerid, DIALOG_BANK + 4, DIALOG_STYLE_MSGBOX, "{ff3300}Ошибка", "{FFFFFF}Операция запрещена. Недопустимые символы в названии счёта\nМожно использовать русские и английские буквы, а также цифры", "Закрыть", "");
 		    				check = true;
 						}
 				    }
 				}
 				if(check == false)
 				{
-					SPD(playerid, 118, DIALOG_STYLE_MSGBOX, "{ffcd00}Счёт создан", "{FFFFFF}Вы создали новый счёт в банке.\n\nДля доступа к нему используйте PIN-код {00ff66}0000{FFFFFF}. После входа\nнастоятельно рекомендуем изменить его на более сложный.\nЭто поможет защитить счёт от несанкционированного доступа.", "Готово", "");
+					SPD(playerid, DIALOG_BANK + 5, DIALOG_STYLE_MSGBOX, "{ffcd00}Счёт создан", "{FFFFFF}Вы создали новый счёт в банке.\n\nДля доступа к нему используйте PIN-код {00ff66}0000{FFFFFF}. После входа\nнастоятельно рекомендуем изменить его на более сложный.\nЭто поможет защитить счёт от несанкционированного доступа.", "Готово", "");
 					static const fmt_query[] = "INSERT INTO `bankchets` (`name`, `pid`, `pin`) VALUES ('%s', '%d', '0000')";
 					new query[sizeof(fmt_query)+(-2+20)+(-2+8)];
 					format(query, sizeof(query), fmt_query, text, player_info[playerid][ID]);
@@ -8237,7 +8248,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		case 119:
+		case DIALOG_BANK + 6:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8245,21 +8256,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        case 0:
 			        {
-			            SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			            SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			        }
 			        case 1..8:
 			        {
 			            SetPVarInt(playerid, "selectedschet", mychets[playerid][listitem-1]);
-			            SPD(playerid, 126, DIALOG_STYLE_INPUT, "{ffcd00}Авторизация", "{FFFFFF}Введите PIN-код счёта", "Ввести", "Отмена");
+			            SPD(playerid, DIALOG_BANK + 13, DIALOG_STYLE_INPUT, "{ffcd00}Авторизация", "{FFFFFF}Введите PIN-код счёта", "Ввести", "Отмена");
 			        }
 				}
 			}
 			else
 			{
-			    SPD(playerid, 113, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
+			    SPD(playerid, DIALOG_BANK, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
 			}
 		}
-		case 120:
+		case DIALOG_BANK + 7:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8270,27 +8281,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
 						new string[sizeof(fmt_str)+(-2+9)];
 						format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-					    SPD(playerid, 121, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+					    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 					}
 					case 1:
 					{
-					    SPD(playerid, 123, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
+					    SPD(playerid, DIALOG_BANK + 10, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
 					}
 					case 2:
 			        {
 			            static const fmt_str[] = "{FFFFFF}На Вашем банковском счету {00cc00}%d$";
 						new string[sizeof(fmt_str)+(-2+9)];
 						format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-						SPD(playerid, 125, DIALOG_STYLE_MSGBOX, "{ffcd00}Баланс счёта", string, "Назад", "Выйти");
+						SPD(playerid, DIALOG_BANK + 12, DIALOG_STYLE_MSGBOX, "{ffcd00}Баланс счёта", string, "Назад", "Выйти");
 			        }
 			        case 6:
 			        {
-			            SPD(playerid, 133, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
+			            SPD(playerid, DIALOG_BANK + 20, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
 			        }
 				}
 			}
 		}
-		case 121:
+		case DIALOG_BANK + 8:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8314,7 +8325,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
 							new string[sizeof(fmt_str)+(-2+9)];
 							format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-						    SPD(playerid, 121, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+						    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 						 	return SCM(playerid, COLOR_LIGHTGREY, "На Вашем банковском счету недостаточно средств");
 						}
 						player_info[playerid][BANKMONEY]-=money;
@@ -8326,31 +8337,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new query[sizeof(fmt_query)+(-2+9)+(-2+9)+(-2+8)];
 						format(query, sizeof(query), fmt_query, player_info[playerid][BANKMONEY], player_info[playerid][MONEY], player_info[playerid][ID]);
 						mysql_query(dbHandle, query);
-						SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+						SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
    					}
    					case 7:
 			        {
-			            SPD(playerid, 122, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
+			            SPD(playerid, DIALOG_BANK + 9, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
    					}
     			}
 			}
 			else
 			{
-			    SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			    SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			}
 		}
-		case 122:
+		case DIALOG_BANK + 9:
 		{
 		    if(response)//левая кнопка
 			{
 				new money;
-			    if(sscanf(inputtext, "d", money)) return SPD(playerid, 122, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
+			    if(sscanf(inputtext, "d", money)) return SPD(playerid, DIALOG_BANK + 9, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
 			    if(player_info[playerid][BANKMONEY] < money)
 			    {
-			        SPD(playerid, 122, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
+			        SPD(playerid, DIALOG_BANK + 9, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
 				 	return SCM(playerid, COLOR_LIGHTGREY, "На Вашем банковском счету недостаточно средств");
 			    }
-				if(money < 1) return SPD(playerid, 122, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
+				if(money < 1) return SPD(playerid, DIALOG_BANK + 9, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Снять", "Назад");
                 player_info[playerid][BANKMONEY]-=money;
                 player_info[playerid][MONEY]+=money;
                 new str[15];
@@ -8360,17 +8371,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new query[sizeof(fmt_query)+(-2+9)+(-2+9)+(-2+8)];
 				format(query, sizeof(query), fmt_query, player_info[playerid][BANKMONEY], player_info[playerid][MONEY], player_info[playerid][ID]);
 				mysql_query(dbHandle, query);
-			    SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			    SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			}
 			else
 			{
 			    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
 				new string[sizeof(fmt_str)+(-2+9)];
 				format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-			    SPD(playerid, 121, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+			    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 			}
 		}
-		case 123:
+		case DIALOG_BANK + 10:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8391,7 +8402,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 			            if(player_info[playerid][MONEY] < money)
 						{
-						    SPD(playerid, 123, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
+						    SPD(playerid, DIALOG_BANK + 10, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
 						    return SCM(playerid, COLOR_LIGHTGREY, "У Вас с собой нет столько денег");
 						}
 						player_info[playerid][BANKMONEY]+=money;
@@ -8403,31 +8414,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new query[sizeof(fmt_query)+(-2+9)+(-2+9)+(-2+8)];
 						format(query, sizeof(query), fmt_query, player_info[playerid][BANKMONEY], player_info[playerid][MONEY], player_info[playerid][ID]);
 						mysql_query(dbHandle, query);
-						SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+						SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
    					}
    					case 7:
 			        {
-			            SPD(playerid, 124, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
+			            SPD(playerid, DIALOG_BANK + 11, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
    					}
     			}
 			}
 			else
 			{
-			    SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			    SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			}
 		}
-		case 124:
+		case DIALOG_BANK + 11:
 		{
 		    if(response)//левая кнопка
 			{
 				new money;
-			    if(sscanf(inputtext, "d", money)) return SPD(playerid, 124, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
+			    if(sscanf(inputtext, "d", money)) return SPD(playerid, DIALOG_BANK + 11, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
 			    if(player_info[playerid][MONEY] < money)
 				{
-				    SPD(playerid, 123, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
+				    SPD(playerid, DIALOG_BANK + 10, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
 				    return SCM(playerid, COLOR_LIGHTGREY, "У Вас с собой нет столько денег");
 				}
-				if(money < 1) return SPD(playerid, 124, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
+				if(money < 1) return SPD(playerid, DIALOG_BANK + 11, DIALOG_STYLE_INPUT, "{ffcd00}Другая сумма", "{FFFFFF}Укажите сумму:", "Положить", "Назад");
                 player_info[playerid][BANKMONEY]+=money;
 				player_info[playerid][MONEY]-=money;
                 new str[15];
@@ -8437,32 +8448,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new query[sizeof(fmt_query)+(-2+9)+(-2+9)+(-2+8)];
 				format(query, sizeof(query), fmt_query, player_info[playerid][BANKMONEY], player_info[playerid][MONEY], player_info[playerid][ID]);
 				mysql_query(dbHandle, query);
-			    SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			    SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			}
 			else
 			{
-			    SPD(playerid, 123, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
+			    SPD(playerid, DIALOG_BANK + 10, DIALOG_STYLE_LIST, "{87cefa}Выберите сумму", "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Положить", "Назад");
 			}
 		}
-		case 125:
+		case DIALOG_BANK + 12:
 		{
 		    if(response)//левая кнопка
 			{
-			    SPD(playerid, 120, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
+			    SPD(playerid, DIALOG_BANK + 7, DIALOG_STYLE_LIST, "{ffcd00}Основной счёт", "1. Снять с банковского счёта\n2. Положить на банковский счёт\n3. Баланс банковского счёта\n4. Снять со счёта предприятия\n5. Положить на счёт предприятия\n6. Пополнить мобильный телефон\n7. Безналичный перевод\n8. Благотворительность", "Выбрать", "Выйти");
 			}
 		}
-		case 126:
+		case DIALOG_BANK + 13:
 		{
 		    if(response)//левая кнопка
 			{
-			    if(strlen(inputtext) < 1 || strlen(inputtext) > 8) return SPD(playerid, 126, DIALOG_STYLE_INPUT, "{ffcd00}Авторизация", "{FFFFFF}Введите PIN-код счёта", "Ввести", "Отмена");
+			    if(strlen(inputtext) < 1 || strlen(inputtext) > 8) return SPD(playerid, DIALOG_BANK + 13, DIALOG_STYLE_INPUT, "{ffcd00}Авторизация", "{FFFFFF}Введите PIN-код счёта", "Ввести", "Отмена");
 			    static const fmt_query[] = "SELECT * FROM `bankchets` WHERE `id` = '%d'";
 			    new query[sizeof(fmt_query)+(-2+8)];
 			    format(query, sizeof(query), fmt_query, GetPVarInt(playerid, "selectedschet"));
 				mysql_tquery(dbHandle, query, "CheckSchetPin", "ds", playerid, inputtext);
 			}
 		}
-		case 128:
+		case DIALOG_BANK + 15:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8472,47 +8483,47 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    new string[105];
 					    format(string, sizeof(string), "{FFFFFF}Номер счёта:\t\t%d\nНаименование:\t\"%s\"\nБаланс:\t\t{00cc66}%d$", nowschet[playerid][sid], nowschet[playerid][sname], nowschet[playerid][smoney]);
-					    SPD(playerid, 129, DIALOG_STYLE_MSGBOX, "{ffcd00}Информация", string, "Вернуться", "");
+					    SPD(playerid, DIALOG_BANK + 16, DIALOG_STYLE_MSGBOX, "{ffcd00}Информация", string, "Вернуться", "");
 					}
 					case 2:
 					{
-					    SPD(playerid, 130, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
+					    SPD(playerid, DIALOG_BANK + 17, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
 					}
 					case 3:
 					{
-                        SPD(playerid, 132, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
+                        SPD(playerid, DIALOG_BANK + 19, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
 					}
 				}
 			}
 			else
 			{
-			    SPD(playerid, 113, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
+			    SPD(playerid, DIALOG_BANK, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
 			}
 		}
-		case 129:
+		case DIALOG_BANK + 16:
 		{
 		    if(response)//левая кнопка
 			{
-			    SPD(playerid, 128, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
+			    SPD(playerid, DIALOG_BANK + 15, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
 			}
 		}
-		case 130:
+		case DIALOG_BANK + 17:
 		{
             if(response)//левая кнопка
 			{
 			    new money;
-			    if(sscanf(inputtext, "d", money)) return SPD(playerid, 130, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
+			    if(sscanf(inputtext, "d", money)) return SPD(playerid, DIALOG_BANK + 17, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
 				if(money < 1)
 				{
 				    SCM(playerid, COLOR_ORANGE, "Неверная сумма");
-				    return SPD(playerid, 130, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
+				    return SPD(playerid, DIALOG_BANK + 17, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
 				}
 				if(nowschet[playerid][smoney] < money)
 			    {
 					new string[72];
 					format(string, sizeof(string), "Недостаточно средств. Текущий баланс счёта №%d: {009966}%d$", nowschet[playerid][sid], nowschet[playerid][smoney]);
 					SCM(playerid, COLOR_WHITE, string);
-					return SPD(playerid, 130, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
+					return SPD(playerid, DIALOG_BANK + 17, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
 			    }
 			    nowschet[playerid][smoney]-=money;
 				player_info[playerid][MONEY]+=money;
@@ -8529,31 +8540,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GameTextForPlayer(playerid, str, 3000, 1);
 				new dlgtext[87];
 				format(dlgtext, sizeof(dlgtext), "{FFFFFF}Счёт:\t\t%d\nВы сняли:\t{ff9900}%d${FFFFFF}\nОстаток:\t%d$", nowschet[playerid][sid], money, nowschet[playerid][smoney]);
-				SPD(playerid, 131, DIALOG_STYLE_MSGBOX, "{3399ff}Операция завершена успешно", dlgtext, "Вернуться", "");
+				SPD(playerid, DIALOG_BANK + 18, DIALOG_STYLE_MSGBOX, "{3399ff}Операция завершена успешно", dlgtext, "Вернуться", "");
 			}
 		}
-		case 131:
+		case DIALOG_BANK + 18:
 		{
 		    if(response)//левая кнопка
 			{
-			    SPD(playerid, 128, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
+			    SPD(playerid, DIALOG_BANK + 15, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
 			}
 		}
-		case 132:
+		case DIALOG_BANK + 19:
 		{
 		    if(response)//левая кнопка
 			{
 			    new money;
-			    if(sscanf(inputtext, "d", money)) return SPD(playerid, 132, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
+			    if(sscanf(inputtext, "d", money)) return SPD(playerid, DIALOG_BANK + 19, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
 				if(money < 1)
 				{
 				    SCM(playerid, COLOR_ORANGE, "Неверная сумма");
-			    	return SPD(playerid, 132, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
+			    	return SPD(playerid, DIALOG_BANK + 19, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
 				}
 				if(player_info[playerid][MONEY] < money)
 				{
 				    SCM(playerid, COLOR_ORANGE, "У вас недостаточно средств");
-				    return SPD(playerid, 132, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
+				    return SPD(playerid, DIALOG_BANK + 19, DIALOG_STYLE_INPUT, "{ffcd00}Положить деньги", "{FFFFFF}Укажите сумму:", "Положить", "Отмена");
 				}
 			    nowschet[playerid][smoney]+=money;
 				player_info[playerid][MONEY]-=money;
@@ -8570,23 +8581,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				GameTextForPlayer(playerid, str, 3000, 1);
 				new dlgtext[99];
 				format(dlgtext, sizeof(dlgtext), "{FFFFFF}Счёт:\t\t%d\nВы положили:\t{00cc00}%d${FFFFFF}\nИтоговый баланс:\t%d$", nowschet[playerid][sid], money, nowschet[playerid][smoney]);
-				SPD(playerid, 131, DIALOG_STYLE_MSGBOX, "{3399ff}Операция завершена успешно", dlgtext, "Вернуться", "");
+				SPD(playerid, DIALOG_BANK + 18, DIALOG_STYLE_MSGBOX, "{3399ff}Операция завершена успешно", dlgtext, "Вернуться", "");
 			}
 		}
-		case 133:
+		case DIALOG_BANK + 20:
 		{
   			if(response)//левая кнопка
 			{
 			    new transfer;
-			    if(sscanf(inputtext, "d", transfer)) return SPD(playerid, 133, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
-			    if(transfer < 1 || transfer > 8) return SPD(playerid, 133, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
+			    if(sscanf(inputtext, "d", transfer)) return SPD(playerid, DIALOG_BANK + 20, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
+			    if(transfer < 1 || transfer > 8) return SPD(playerid, DIALOG_BANK + 20, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
 			    static const fmt_query[] = "SELECT * FROM `bankchets` WHERE `id` = '%d'";
 			    new query[sizeof(fmt_query)+(-2+8)];
 			    format(query, sizeof(query), fmt_query, transfer);
 				mysql_tquery(dbHandle, query, "CheckTransfer", "dd", playerid, transfer);
 			}
 		}
-		case 134:
+		case DIALOG_BANK + 21:
 		{
 		    if(response)//левая кнопка
 			{
@@ -8597,13 +8608,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        new string[63];
 				    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-				    return SPD(playerid, 134, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+				    return SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
 			    }
 			    if(money > player_info[playerid][BANKMONEY])
 			    {
        				new string[63];
 				    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-				    SPD(playerid, 134, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+				    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
 				    return SCM(playerid, COLOR_ORANGE, "На основном банковском счёте недостаточно денег");
 			    }
 			    player_info[playerid][BANKMONEY]-=money;
@@ -8617,27 +8628,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				mysql_query(dbHandle, query2);
 				new string[122];
 				format(string, sizeof(string), "{FFFFFF}Откуда:\t\t\tОсновной счёт\nКуда:\t\t\tСчёт №%d\nСумма:\t\t\t%d$\nОстаток на вашем счету:\t%d$", transfer, money, player_info[playerid][BANKMONEY]);
-				SPD(playerid, 135, DIALOG_STYLE_MSGBOX, "{99ff00}Перевод завершён", string, "Закрыть", "");
+				SPD(playerid, DIALOG_BANK + 22, DIALOG_STYLE_MSGBOX, "{99ff00}Перевод завершён", string, "Закрыть", "");
 				SetPVarInt(playerid, "defaulttransfer", 0);
 			}
 		}
-		case 135: // GPS
+		//================GPS================
+		case DIALOG_GPS: // GPS 135
  	    {
  	        if(response) {
 				switch(listitem) {
-					case 0: SPD(playerid, 136, DIALOG_STYLE_LIST, "{ffcd00}Общественные места", "1. Политический центр\n2. Мэрия Лос-Сантоса\n3. Мэрия Сан-Фиерро\n4. Мэрия Лас-Вентураса\n5. Администрация президента\n6. Автошкола\n7. Военкомат\n8. Авторынок эконом-класса (ЛС)\n9. Авторынок среднего класса (СФ)\n10. Авторынок среднего класса №2 (СФ)\n11. Авторынок премиум класса (ЛВ)\n12. Мото-Вело рынок (ЛС)\n13. Лодочная станция Сан-Фиерро\n14. Концертный зал\n15. Олимпийский стадион (Лос-Сантос)\n16. Стадион Сан-Фиерро\n17. Стадион Лас-Вентурас\n18. Церковь Сан-Фиерро\n19. Библиотека\n20. Салон связи", "Отметить", "Назад");
-					case 1: SPD(playerid, 137, DIALOG_STYLE_LIST, "{ffcd00}Транспортные узлы", "1. Ж/Д Вокзал Лос-Сантоса\n2. Центральная автостанция (Лос-Сантос)\n3. Ж/Д Вокзал и автостанция Сан-Фиерро\n4. Ж/Д Вокзал и автостанция Лас-Вентураса\n5. Ж/Д станция Лас-Вентурас-2\n6. Ж/Д станция Лос-Сантос-2\n7. Аэропорт Лос-Сантоса\n8. Аэропорт Сан-Фиерро\n9. Аэропорт Лас-Вентураса", "Отметить", "Назад");
-                    case 2: SPD(playerid, 138, DIALOG_STYLE_LIST, "{ffcd00}Государственные организации", "1. Министерство Внутренних дел\n2. Полиция Лос-Сантоса\n3. Полиция-Сан-Фиерро\n4. Полиция Лас-Вентураса\n5. База ФБР\n6. Министерство обороны\n7. База сухопутных войск\n8. База военно-воздушных сил\n9. База военно-морского флота\n10. Министерство здравохранения\n11. Больница Лос-Сантоса\n12. Больница Сан-Фиерро\n13. Больница Лас-Вентураса\n14. Радиоцентр Лос-Сантоса\n15. Радиоцентр Сан-Фиерро\n16. Радиоцентр Лас-Вентураса\n17. Телецентр", "Отметить", "Назад");
-                    case 3: SPD(playerid, 139, DIALOG_STYLE_LIST, "{ffcd00}Базы банд и мафий", "1. Groove Street\n2. The Ballas\n3. Los Santos Vagos\n4. The Rifa\n5. Varios Los Aztecas\n{cccc66}6. La Cosa Nostra\n{cccc66}7. Yakuza\n{cccc66}8. Русская мафия", "Отметить", "Назад");
-                    case 4: SPD(playerid, 140, DIALOG_STYLE_LIST, "{ffcd00}По работе", "1. Городской склад {cc9900}(работа грузчика)\n{ffffff}2. Шахта {cc9900}(работа шахтёра)\n{ffffff}3. Завод по производству продуктов\n4. Нефтезавод\n5. Автопарк для развозчиков продуктов\n6. Автопарк для развозчиков топлива\n7. Пожарная станция Лос-Сантоса\n8. Пожарная станция Сан-Фиерро\n9. Пожарная станция Лас-Вентураса\n10. Стоянка автомехаников ЛС\n11. Стоянка автомехаников СФ\n12. Стоянка автмехаников ЛВ\n13. Железнодорожное депо (стоянка поездов)\n14. Трамвайное депо", "Отметить", "Назад");
-                    case 5: SPD(playerid, 141, DIALOG_STYLE_LIST, "{ffcd00}Банки", "1. Банк Лос-Сантоса\n2. Банк Сан-Фиерро\n3. Банк Palomino Creek\n4. Частный банк Angel Pine\n5. Частный банк Las Barrancas\n6. Частный банк Fort Carson", "Отметить", "Назад");
-                    case 6: SPD(playerid, 142, DIALOG_STYLE_LIST, "{ffcd00}Развлечения", "1. Тир\n2. Канатная дорога (турбаза)\n3. Горнолыжный центр\n{66cc99}4. Старт гонки 'Центральный San Andreas'\n{66cc99}5. Старт гонки 'Подъём на гору Чилиад'\n{66cc99}6. Старт гонки 'Западный San Andreas'\n{66cc99}7. Старт гонки по пустыне\n{ffc065}8. Казаки-разбойники на заброшенном заводе\n{ffc065}9. Казаки-разбойники на испытательном полигоне\n{ffc065}10. Казаки-разбойники на ферме наркоманов\n{ffc065}11. Казаки-разбойники под водой\n{ffffff}12. Казино '4 дракона'\n13. Казино 'Калигула'\n14. Казино 'Лос-Сантос' (частное)\n15. Казино 'Лас-Вентурас' (частное)\n16. Восточное казино (частное)\n17. Южное казино (частное)", "Отметить", "Назад");
-                    case 7: SPD(playerid, 143, DIALOG_STYLE_LIST, "{ffcd00}Реклама бизнеса", "Бизнесов нет", "Отметить", "Назад");
+					case 0: SPD(playerid, DIALOG_GPS + 1, DIALOG_STYLE_LIST, "{ffcd00}Общественные места", "1. Политический центр\n2. Мэрия Лос-Сантоса\n3. Мэрия Сан-Фиерро\n4. Мэрия Лас-Вентураса\n5. Администрация президента\n6. Автошкола\n7. Военкомат\n8. Авторынок эконом-класса (ЛС)\n9. Авторынок среднего класса (СФ)\n10. Авторынок среднего класса №2 (СФ)\n11. Авторынок премиум класса (ЛВ)\n12. Мото-Вело рынок (ЛС)\n13. Лодочная станция Сан-Фиерро\n14. Концертный зал\n15. Олимпийский стадион (Лос-Сантос)\n16. Стадион Сан-Фиерро\n17. Стадион Лас-Вентурас\n18. Церковь Сан-Фиерро\n19. Библиотека\n20. Салон связи", "Отметить", "Назад");
+					case 1: SPD(playerid, DIALOG_GPS + 2, DIALOG_STYLE_LIST, "{ffcd00}Транспортные узлы", "1. Ж/Д Вокзал Лос-Сантоса\n2. Центральная автостанция (Лос-Сантос)\n3. Ж/Д Вокзал и автостанция Сан-Фиерро\n4. Ж/Д Вокзал и автостанция Лас-Вентураса\n5. Ж/Д станция Лас-Вентурас-2\n6. Ж/Д станция Лос-Сантос-2\n7. Аэропорт Лос-Сантоса\n8. Аэропорт Сан-Фиерро\n9. Аэропорт Лас-Вентураса", "Отметить", "Назад");
+                    case 2: SPD(playerid, DIALOG_GPS + 3, DIALOG_STYLE_LIST, "{ffcd00}Государственные организации", "1. Министерство Внутренних дел\n2. Полиция Лос-Сантоса\n3. Полиция-Сан-Фиерро\n4. Полиция Лас-Вентураса\n5. База ФБР\n6. Министерство обороны\n7. База сухопутных войск\n8. База военно-воздушных сил\n9. База военно-морского флота\n10. Министерство здравохранения\n11. Больница Лос-Сантоса\n12. Больница Сан-Фиерро\n13. Больница Лас-Вентураса\n14. Радиоцентр Лос-Сантоса\n15. Радиоцентр Сан-Фиерро\n16. Радиоцентр Лас-Вентураса\n17. Телецентр", "Отметить", "Назад");
+                    case 3: SPD(playerid, DIALOG_GPS + 4, DIALOG_STYLE_LIST, "{ffcd00}Базы банд и мафий", "1. Groove Street\n2. The Ballas\n3. Los Santos Vagos\n4. The Rifa\n5. Varios Los Aztecas\n{cccc66}6. La Cosa Nostra\n{cccc66}7. Yakuza\n{cccc66}8. Русская мафия", "Отметить", "Назад");
+                    case 4: SPD(playerid, DIALOG_GPS + 5, DIALOG_STYLE_LIST, "{ffcd00}По работе", "1. Городской склад {cc9900}(работа грузчика)\n{ffffff}2. Шахта {cc9900}(работа шахтёра)\n{ffffff}3. Завод по производству продуктов\n4. Нефтезавод\n5. Автопарк для развозчиков продуктов\n6. Автопарк для развозчиков топлива\n7. Пожарная станция Лос-Сантоса\n8. Пожарная станция Сан-Фиерро\n9. Пожарная станция Лас-Вентураса\n10. Стоянка автомехаников ЛС\n11. Стоянка автомехаников СФ\n12. Стоянка автмехаников ЛВ\n13. Железнодорожное депо (стоянка поездов)\n14. Трамвайное депо", "Отметить", "Назад");
+                    case 5: SPD(playerid, DIALOG_GPS + 6, DIALOG_STYLE_LIST, "{ffcd00}Банки", "1. Банк Лос-Сантоса\n2. Банк Сан-Фиерро\n3. Банк Palomino Creek\n4. Частный банк Angel Pine\n5. Частный банк Las Barrancas\n6. Частный банк Fort Carson", "Отметить", "Назад");
+                    case 6: SPD(playerid, DIALOG_GPS + 7, DIALOG_STYLE_LIST, "{ffcd00}Развлечения", "1. Тир\n2. Канатная дорога (турбаза)\n3. Горнолыжный центр\n{66cc99}4. Старт гонки 'Центральный San Andreas'\n{66cc99}5. Старт гонки 'Подъём на гору Чилиад'\n{66cc99}6. Старт гонки 'Западный San Andreas'\n{66cc99}7. Старт гонки по пустыне\n{ffc065}8. Казаки-разбойники на заброшенном заводе\n{ffc065}9. Казаки-разбойники на испытательном полигоне\n{ffc065}10. Казаки-разбойники на ферме наркоманов\n{ffc065}11. Казаки-разбойники под водой\n{ffffff}12. Казино '4 дракона'\n13. Казино 'Калигула'\n14. Казино 'Лос-Сантос' (частное)\n15. Казино 'Лас-Вентурас' (частное)\n16. Восточное казино (частное)\n17. Южное казино (частное)", "Отметить", "Назад");
+                    case 7: SPD(playerid, DIALOG_GPS + 8, DIALOG_STYLE_LIST, "{ffcd00}Реклама бизнеса", "Бизнесов нет", "Отметить", "Назад");
                     default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
  	        }
  	    }
-		case 136: //Общественные места
+		case DIALOG_GPS + 1: //Общественные места
 		{
 		    if(response) {
 		    	switch(listitem) {
@@ -8655,10 +8667,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 		    } else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 137: //Транспортные узлы
+		case DIALOG_GPS + 2: //Транспортные узлы
 		{
 			if(response) {
 				switch(listitem) {
@@ -8667,10 +8679,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
    			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 138: //Государственные организации
+		case DIALOG_GPS + 3: //Государственные организации
 		{
 			if(response) {
                 switch(listitem) {
@@ -8678,20 +8690,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 139: //Банды и Мафии
+		case DIALOG_GPS + 4: //Банды и Мафии
 		{
 			if(response) {
                 switch(listitem) {
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 140: //По работе
+		case DIALOG_GPS + 5: //По работе
 		{
 			if(response) {
                 switch(listitem) {
@@ -8699,10 +8711,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 141: //Банки
+		case DIALOG_GPS + 6: //Банки
 		{
 			if(response) {
                 switch(listitem) {
@@ -8710,30 +8722,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 142: //Развлечения
+		case DIALOG_GPS + 7: //Развлечения
 		{
 			if(response) {
                 switch(listitem) {
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 143: //Бизнес
+		case DIALOG_GPS + 8: //Бизнес
 		{
 			if(response) {
                 switch(listitem) {
 					case 0: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
-		        SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+		        SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 		    }
 		}
-		case 144: //Оружие LSPD
+		//=================МВД===============
+		//-------------LSDP---------------
+		case DIALOG_LSPD: //Оружие LSPD 144
 		{
 			if(response) {
 				switch(listitem) {
@@ -8747,7 +8761,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		case 145: //Аренда такси
+		//==================Работы================
+		//----------Система такси-----------
+		case DIALOG_TAXI: //Аренда такси 145
 		{
 		    if(response) {
 				if(player_info[playerid][MONEY] < 200) {
@@ -8767,30 +8783,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        RemovePlayerFromVehicle(playerid);
 		    }
 		}
-		case 146: //Название для такси
+		case DIALOG_TAXI + 1: //Название для такси
 		{
 		    if(response) {
-                if(strlen(inputtext) < 0 || strlen(inputtext) > 15) return SPD(playerid, 146, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
+                if(strlen(inputtext) < 0 || strlen(inputtext) > 15) return SPD(playerid, DIALOG_TAXI + 1, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
                 new text[15];
-			    if(sscanf(inputtext, "s[15]", text)) return SPD(playerid, 146, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
+			    if(sscanf(inputtext, "s[15]", text)) return SPD(playerid, DIALOG_TAXI + 1, DIALOG_STYLE_INPUT, "{ffcd00}Название такси", "{ffffff}Придумайте название для вашего такси\nМаксимальная длина 15 символов\n\nЕсли вы не хотите как-то называться\nнажмите кнопку \"Пропустить\"", "Далее", "Пропустить");
 				taxiname[playerid] = text;
 				
-				SPD(playerid, 147, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Выберте тип Вашего такси", "Тип\tОписание\n1. Социальное такси\tРазвозите малоимущих на места работ и получайте фиксированную оплату\n2. По счётчику\tУказанная Вами сумма будет сниматься со счёта клиента каждые 30 сек поездки\n3. По договору\tВы сами договариваетесь с каждым клиентом о сумме поездки", "Взять", "Закрыть");
+				SPD(playerid, DIALOG_TAXI + 2, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Выберте тип Вашего такси", "Тип\tОписание\n1. Социальное такси\tРазвозите малоимущих на места работ и получайте фиксированную оплату\n2. По счётчику\tУказанная Вами сумма будет сниматься со счёта клиента каждые 30 сек поездки\n3. По договору\tВы сами договариваетесь с каждым клиентом о сумме поездки", "Взять", "Закрыть");
 		    } else {
-		        SPD(playerid, 147, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Выберте тип Вашего такси", "Тип\tОписание\n1. Социальное такси\tРазвозите малоимущих на места работ и получайте фиксированную оплату\n2. По счётчику\tУказанная Вами сумма будет сниматься со счёта клиента каждые 30 сек поездки\n3. По договору\tВы сами договариваетесь с каждым клиентом о сумме поездки", "Выбрать", "Отмена");
+		        SPD(playerid, DIALOG_TAXI + 2, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Выберте тип Вашего такси", "Тип\tОписание\n1. Социальное такси\tРазвозите малоимущих на места работ и получайте фиксированную оплату\n2. По счётчику\tУказанная Вами сумма будет сниматься со счёта клиента каждые 30 сек поездки\n3. По договору\tВы сами договариваетесь с каждым клиентом о сумме поездки", "Выбрать", "Отмена");
 		    }
 		}
-		case 147: //Тип такси
+		case DIALOG_TAXI + 2: //Тип такси
 		{
 			if(response){
 			    switch(listitem) {
 			        case 0: //Социальный
 			        {
-			            SPD(playerid, 150, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Куда вы хотите возить людей?", "Пункт назначения\tЦена за поездку\n{ffffff}1. На шахту\t{5EFF36}500$\n{ffffff}2. На завод\t{5EFF36}470$\n{ffffff}3. На склад\t{5EFF36}250$", "Выбрать", "Отмена");
+			            SPD(playerid, DIALOG_TAXI + 5, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Куда вы хотите возить людей?", "Пункт назначения\tЦена за поездку\n{ffffff}1. На шахту\t{5EFF36}500$\n{ffffff}2. На завод\t{5EFF36}470$\n{ffffff}3. На склад\t{5EFF36}250$", "Выбрать", "Отмена");
 					}
 			        case 1: //По счётчику
 			        {
-						SPD(playerid, 149, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
+						SPD(playerid, DIALOG_TAXI + 4, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
 			        }
 			        case 2: //По договору
 			        {
@@ -8808,7 +8824,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			}
 		}
-		case 148: //Завершить рабочий день такси
+		case DIALOG_TAXI + 3: //Завершить рабочий день такси
 		{
 		    RemovePlayerFromVehicle(playerid);
             SetPVarInt(playerid, "taxi_work", 0);
@@ -8846,12 +8862,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		   	taxiveh[playerid] = -1;
 		}
-		case 149: //Счётчик
+		case DIALOG_TAXI + 4: //Счётчик
 		{
 			if(response) {
 		 	    new fare;
-			    if(sscanf(inputtext, "d", fare)) return SPD(playerid, 149, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
-			    if(fare < 1 || fare > 200) return SPD(playerid, 149, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
+			    if(sscanf(inputtext, "d", fare)) return SPD(playerid, DIALOG_TAXI + 4, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
+			    if(fare < 1 || fare > 200) return SPD(playerid, DIALOG_TAXI + 4, DIALOG_STYLE_INPUT, "{ffcd00}Настройка счётчика", "{ffffff}Укажите тариф по которому будет работать ваше такси\nЭта сумма будет сниматься с пассажира каждые 30 секунд поездки\nТарифная ставка может быть от 0$ до 200$", "Ок", "Отмена");
 			    SetPVarInt(playerid, "taxi_fare", fare);
 			    new tname[49];
 				format(tname, sizeof(tname), "{1966FF}%s\n{ffff00}Тариф: %d$", taxiname[playerid], fare);
@@ -8864,7 +8880,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
             }
 		}
-		case 150: //Социиальное
+		case DIALOG_TAXI + 5: //Социиальное
 		{
 		    if(response){
 			    switch(listitem) {
@@ -8945,13 +8961,13 @@ public CheckTransfer(playerid, transfer)
 	{
 	    new string[63];
 	    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-	    SPD(playerid, 134, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+	    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
 	    SetPVarInt(playerid, "defaulttransfer", transfer);
 	}
 	else
 	{
 	    SCM(playerid, COLOR_ORANGE, "Счёта с таким номером не существует");
-	    SPD(playerid, 133, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
+	    SPD(playerid, DIALOG_BANK + 20, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", "{FFFFFF}Укажите номер банковского счёта:", "Далее", "Отмена");
 	}
 	return 1;
 }
@@ -8973,11 +8989,11 @@ public CheckSchetPin(playerid, code[])
 		    cache_get_value_name(0, "name", nowschet[playerid][sname], 20);
 			nowschet[playerid][sid] = id;
 			nowschet[playerid][smoney] = money;
-			SPD(playerid, 128, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
+			SPD(playerid, DIALOG_BANK + 15, DIALOG_STYLE_LIST, "{0099ff}Список операций", "1. Информация о счёте\n2. История операций\n3. Снять деньги\n4. Положить деньги\n5. Перевести на другой счёт\n6. Переименовать счёт\n7. Изменить PIN-код", "Выбрать", "Назад");
 	    }
 	    else
 	    {
-	        SPD(playerid, 127, DIALOG_STYLE_MSGBOX, "{ff9900}Ошибка", "{FFFFFF}Вы допустили ошибку при вводе PIN-кода", "Закрыть", "");
+	        SPD(playerid, DIALOG_BANK + 14, DIALOG_STYLE_MSGBOX, "{ff9900}Ошибка", "{FFFFFF}Вы допустили ошибку при вводе PIN-кода", "Закрыть", "");
 	    }
 	}
 	GetPVarInt(playerid, "selectedschet");
@@ -9004,11 +9020,11 @@ public ShowBankChets(playerid)
 		    strcat(string, temp);
 			mychets[playerid][i] = id;
 		}
-		SPD(playerid, 119, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", string, "Операции", "Назад");
+		SPD(playerid, DIALOG_BANK + 6, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", string, "Операции", "Назад");
  	}
 	else
 	{
-		SPD(playerid, 119, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", "Номер\tНазвание\n_ _ _ _\t{99cc00}Основной счёт", "Операции", "Назад");
+		SPD(playerid, DIALOG_BANK + 6, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", "Номер\tНазвание\n_ _ _ _\t{99cc00}Основной счёт", "Операции", "Назад");
 	}
 }
 
@@ -12093,14 +12109,14 @@ CMD:bank(playerid)
     if(IsPlayerInRangeOfPoint(playerid, 5.0, -2158.9172,640.3580,1052.3817))
    	{
    	    if(player_info[playerid][LEVEL] < 4) return SCM(playerid, COLOR_GREY, "Пользоваться государственными банками можно с 4 уровня");
-   	    SPD(playerid, 113, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
+   	    SPD(playerid, DIALOG_BANK, DIALOG_STYLE_LIST, "{00cc00}Банк", "Мои счета\nОткрыть новый счёт", "Выбрать", "Отмена");
    	}
    	else SCM(playerid, COLOR_LIGHTGREY, "Вы не в банке");
    	return 1;
 }
 CMD:gps(playerid) {
 	turnOffGPS(playerid);
- 	SPD(playerid, 135, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
+ 	SPD(playerid, DIALOG_GPS, DIALOG_STYLE_LIST, "{ffcd00}GPS", "{ffffff}1. Общественные места\n2. Транспортные узлы\n3. Государственные организации\n4. Базы банд и мафий\n5. По работе\n6. Банки\n7. Развлечения\n8. Бизнес\n9. Найти ближайшую АЗС\n10. Найти ближайший банкомат", "Выбрать", "Закрыть");
 }
 //----------------------LSPD----------------------
 CMD:skip(playerid, params[]) {
