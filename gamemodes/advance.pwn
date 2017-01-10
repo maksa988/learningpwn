@@ -31,7 +31,7 @@
 //--------------------------------------
 
 #define 	SERVER_NAME		"Advance RolePlay 10 | vk.com/pawnouroki"//название сервера
-#define     SERVER_MODE		"Advance RP v2.24"//название мода
+#define     SERVER_MODE		"Advance RP v2.27"//название мода
 #define     MAX_TRAY    	100 //Максимальное количество подносов с едой на сервере
 #define     MAX_HOUSES  	1000 //Максимальное количество домов
 
@@ -87,7 +87,7 @@ main()
 }
 
 //==========================Переменные==========================
-
+new g_string[2024];
 new MySQL:dbHandle;//проверка коннекта к БД
 new exptonextlevel = 4; //умножение exp
 new healthtime = 0; //таймер хп
@@ -2858,40 +2858,39 @@ public OnPlayerText(playerid, text[])
 	    SCM(playerid, 0xDF5402FF, "Доступ в чат заблокирован. Время до разблокировки: {4fdb15}/time");
 		return 0;
 	}
-    new string[128];
 	if(!strcmp(text, ")", true))
 	{
-	    format(string, sizeof(string), "%s улыбается", player_info[playerid][NAME]);
-	    ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	    format(g_string, sizeof(g_string), "%s улыбается", player_info[playerid][NAME]);
+	    ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	    SetPlayerChatBubble(playerid, "улыбается", 0xde92ffFF, 15, 7000);
 	    return 0;
 	}
 	if(!strcmp(text, "))", true))
 	{
-	    format(string, sizeof(string), "%s смеётся", player_info[playerid][NAME]);
-	    ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	    format(g_string, sizeof(g_string), "%s смеётся", player_info[playerid][NAME]);
+	    ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	    SetPlayerChatBubble(playerid, "смеётся", 0xde92ffFF, 15, 7000);
 	    return 0;
 	}
 	if(!strcmp(text, "(", true))
 	{
-	    format(string, sizeof(string), "%s расстроился", player_info[playerid][NAME]);
-	    ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	    format(g_string, sizeof(g_string), "%s расстроился", player_info[playerid][NAME]);
+	    ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	    SetPlayerChatBubble(playerid, "расстроился", 0xde92ffFF, 15, 7000);
 	    return 0;
 	}
 	if(!strcmp(text, "((", true))
 	{
-	    format(string, sizeof(string), "%s сильно расстроился", player_info[playerid][NAME]);
-	    ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	    format(g_string, sizeof(g_string), "%s сильно расстроился", player_info[playerid][NAME]);
+	    ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	    ApplyAnimation(playerid,"GRAVEYARD","mrnF_loop",4.1,0,0,0,0,0,1);
 	    SetPlayerChatBubble(playerid, "сильно расстроился", 0xde92ffFF, 15, 7000);
 	    return 0;
 	}
 	if(!strcmp(text, "=0", true))
 	{
-	    format(string, sizeof(string), "%s удивился", player_info[playerid][NAME]);
-	    ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	    format(g_string, sizeof(g_string), "%s удивился", player_info[playerid][NAME]);
+	    ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	    SetPlayerChatBubble(playerid, "удивился", 0xde92ffFF, 15, 7000);
 	    return 0;
 	}
@@ -3117,27 +3116,24 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					}
 					
 					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 1) {
-					    new string[104];
-						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}шахту {038FDA}и получите {FFDF0F}500$", player_info[playerid][NAME]);
-						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+						format(g_string, sizeof(g_string), "%s сел в ваше такси. Отвезите его на {F0320C}шахту {038FDA}и получите {FFDF0F}500$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, g_string);
 
 						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
 						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
                         taxipickup[jobdriver[GetPlayerVehicleID(playerid)]] = CreateDynamicCP(-1916.0322, -1776.1627, 30.0145, 4, 0, 0, jobdriver[GetPlayerVehicleID(playerid)], 10000);
 					}
 					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 2) {
-					    new string[104];
-						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}завод {038FDA}и получите {FFDF0F}470$", player_info[playerid][NAME]);
-						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+						format(g_string, sizeof(g_string), "%s сел в ваше такси. Отвезите его на {F0320C}завод {038FDA}и получите {FFDF0F}470$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, g_string);
 
 						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
 						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
                         taxipickup[jobdriver[GetPlayerVehicleID(playerid)]] = CreateDynamicCP(-136.7464,-394.4768,1.1378, 4, 0, 0, jobdriver[GetPlayerVehicleID(playerid)], 10000);
 					}
 					if(GetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_route") == 3) {
-					    new string[104];
-						format(string, sizeof(string), "%s сел в ваше такси. Отвезите его на {F0320C}склад {038FDA}и получите {FFDF0F}250$", player_info[playerid][NAME]);
-						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+						format(g_string, sizeof(g_string), "%s сел в ваше такси. Отвезите его на {F0320C}склад {038FDA}и получите {FFDF0F}250$", player_info[playerid][NAME]);
+						SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, g_string);
 
 						SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "taxi_passenger", playerid);
 						SetPVarInt(playerid, "passenger_taxi", jobdriver[GetPlayerVehicleID(playerid)]);
@@ -3146,19 +3142,17 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			    case 2:
    				{
-   				    new string[58];
-					format(string, sizeof(string), "%s сел в ваше такси. Счетчик включен", player_info[playerid][NAME]);
-					SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+					format(g_string, sizeof(g_string), "%s сел в ваше такси. Счетчик включен", player_info[playerid][NAME]);
+					SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, g_string);
 					SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
 					get_fare_money_taxi(playerid, jobdriver[GetPlayerVehicleID(playerid)]);
                     taxicounter_timer[playerid] = SetTimerEx("taxicounter", 30000, false, "ii", playerid, jobdriver[GetPlayerVehicleID(playerid)]);
 				}
    				case 3:
    				{
-   				    new string[42];
-                    format(string, sizeof(string), "%s сел в ваше такси.", player_info[playerid][NAME]);
+                    format(g_string, sizeof(g_string), "%s сел в ваше такси.", player_info[playerid][NAME]);
                     SetPVarInt(jobdriver[GetPlayerVehicleID(playerid)], "passangers_taxi", GetPVarInt(playerid, "passangers_taxi") + 1);
-                    SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, string);
+                    SCM(jobdriver[GetPlayerVehicleID(playerid)], COLOR_LIGHTBLUE, g_string);
 				}
 			}
 	    }
@@ -3448,14 +3442,14 @@ public OnPlayerEnterCheckpoint(playerid)
 	}
 	if(IsPlayerInDynamicCP(playerid, vehiclelic[playerid]))
  	{
-		new string[431] = !"{FFFFFF}Здравствуйте!\n";
-		strcat(string, !"Вы готовы приступить к экзамену? Тогда начнём.\n");
-		strcat(string, !"Экзамен будет состоять из теоретической и практической части\n");
-		strcat(string, !"В теории вам нужно будет ответить на вопросы из вашего экзаменационного билета,\n");
-		strcat(string, !"а в практике применить полученные знания за рулём учебного автомобиля.\n");
-		strcat(string, !"{db9e02}Сдача на права стоит 600$ и в случае провала деньги не будут возвращены!\n");
-		strcat(string, !"Поэтому перед сдачей внимательно прочитайте обучающий раздел\n");
-		SPD(playerid, 55, DIALOG_STYLE_MSGBOX, "{e2d302}Экзамен по вождению", string, "Начать", "Отмена");
+		g_string = !"{FFFFFF}Здравствуйте!\n";
+		strcat(g_string, !"Вы готовы приступить к экзамену? Тогда начнём.\n");
+		strcat(g_string, !"Экзамен будет состоять из теоретической и практической части\n");
+		strcat(g_string, !"В теории вам нужно будет ответить на вопросы из вашего экзаменационного билета,\n");
+		strcat(g_string, !"а в практике применить полученные знания за рулём учебного автомобиля.\n");
+		strcat(g_string, !"{db9e02}Сдача на права стоит 600$ и в случае провала деньги не будут возвращены!\n");
+		strcat(g_string, !"Поэтому перед сдачей внимательно прочитайте обучающий раздел\n");
+		SPD(playerid, 55, DIALOG_STYLE_MSGBOX, "{e2d302}Экзамен по вождению", g_string, "Начать", "Отмена");
  	}
  	if(IsPlayerInDynamicCP(playerid, cityhallwork[playerid]))
  	{
@@ -3463,9 +3457,8 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 		    new idfrac = player_info[playerid][FRAC];
 			new idorg = floatround(idfrac/10, floatround_floor);
-		    new string[264];
-			format(string, sizeof(string), "{FFFFFF}Вы состоите в организации \"%s\",\nи если хотите устроиться на работу, то Вам придётся покинуть её.\nПри этом все Ваши достижения в организации, такие как ранг, не сохранятся.\n\nВы уверены что хотите уволиться из организации?", orgname[idorg]);
-			SPD(playerid, 107, DIALOG_STYLE_MSGBOX, "{e25802}Предупреждение", string, "Да", "Нет");
+			format(g_string, sizeof(g_string), "{FFFFFF}Вы состоите в организации \"%s\",\nи если хотите устроиться на работу, то Вам придётся покинуть её.\nПри этом все Ваши достижения в организации, такие как ранг, не сохранятся.\n\nВы уверены что хотите уволиться из организации?", orgname[idorg]);
+			SPD(playerid, 107, DIALOG_STYLE_MSGBOX, "{e25802}Предупреждение", g_string, "Да", "Нет");
 			return 1;
 		}
 		SPD(playerid, 93, DIALOG_STYLE_MSGBOX, "{e2d402}Приём на работу", "{FFFFFF}Вы хотите просмотреть список доступных работ?", "Да", "Нет");
@@ -3478,21 +3471,20 @@ public OnPlayerEnterCheckpoint(playerid)
 	        SetPVarInt(playerid, "minesuccess", 0);
 		    new gotmoney = 27 + random(33);
 		    new getmoney = GetPVarInt(playerid, "minemoney") + gotmoney;
-		    new string[128];
 		    ApplyAnimation(playerid, "CARRY", "PUTDWN", 4.0, 0, 0, 0, 0, 0);
 			SetPVarInt(playerid, "minemoney", getmoney);
-	    	format(string, sizeof(string), "{66CC00}+%d кг", gotmoney);
-	    	SetPlayerChatBubble(playerid, string, 0x66CC00FF, 60, 1200);
-			format(string, sizeof(string), "Вы доставили в кузницу {FF9900}%d кг {66CC00}руды", gotmoney);
-			SCM(playerid, 0x66CC00FF, string);
-			format(string, sizeof(string), "Общее количество добытого сырья: {FF9900}%d кг", getmoney);
+	    	format(g_string, sizeof(g_string), "{66CC00}+%d кг", gotmoney);
+	    	SetPlayerChatBubble(playerid, g_string, 0x66CC00FF, 60, 1200);
+			format(g_string, sizeof(g_string), "Вы доставили в кузницу {FF9900}%d кг {66CC00}руды", gotmoney);
+			SCM(playerid, 0x66CC00FF, g_string);
+			format(g_string, sizeof(g_string), "Общее количество добытого сырья: {FF9900}%d кг", getmoney);
 			if(GetPVarInt(playerid, "uniquemine2") == 1)
 			{
 			    SetPVarInt(playerid, "uniquemine", GetPVarInt(playerid, "uniquemine") + 1);
 			    SetPVarInt(playerid, "uniquemine2", 0);
 			}
 			storages[0][MINEORE] += gotmoney;
-			SCM(playerid, 0x038FDFFF, string);
+			SCM(playerid, 0x038FDFFF, g_string);
 			RemovePlayerAttachedObject(playerid, 2);
 			RemovePlayerAttachedObject(playerid, 3);
 			RemovePlayerAttachedObject(playerid, 6);
@@ -3519,9 +3511,8 @@ public OnPlayerEnterCheckpoint(playerid)
 		    SetPlayerSpecialAction(playerid, 0);
 		    ApplyAnimation(playerid, "CARRY", "PUTDWN", 4.0, 0, 0, 0, 0, 0);
 		    SetPVarInt(playerid, "gruzmoney", GetPVarInt(playerid, "gruzmoney") + 1);
-			new string[63];
-			format(string, sizeof(string), "Груз доставлен на склад! Всего перенесено грузов:{FF9900} %d", GetPVarInt(playerid, "gruzmoney"));
-			SCM(playerid, 0x8EFA0BFF, string);
+			format(g_string, sizeof(g_string), "Груз доставлен на склад! Всего перенесено грузов:{FF9900} %d", GetPVarInt(playerid, "gruzmoney"));
+			SCM(playerid, 0x8EFA0BFF, g_string);
 		    RemovePlayerAttachedObject(playerid, 5);
 		    if(IsPlayerAttachedObjectSlotUsed(playerid, 4))
 	        {
@@ -3546,9 +3537,8 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		if(angle > 20 && angle < 80)
 		{
 		    SetPVarInt(playerid, "gruzmoney2", GetPVarInt(playerid, "gruzmoney2") + 1);
-			new string[48];
-			format(string, sizeof(string), "Груз доставлен! Всего перевезено ящиков: %d", GetPVarInt(playerid, "gruzmoney2"));
-			SCM(playerid, COLOR_YELLOW, string);
+			format(g_string, sizeof(g_string), "Груз доставлен! Всего перевезено ящиков: %d", GetPVarInt(playerid, "gruzmoney2"));
+			SCM(playerid, COLOR_YELLOW, g_string);
 			DisablePlayerRaceCheckpoint(playerid);
 			SetPVarInt(playerid, "already", 0);
 			DestroyDynamicObject(gruzobject[playerid]);
@@ -3605,15 +3595,15 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 					    }
 						else
 						{
-							new string[416] = "!{FFFFFF}Вы успешно сдали практическую часть экзамена по вождению\n";
-							strcat(string, !"и получаете водительское удостоверение!\n");
-							strcat(string, !"{a19be1}На вашей машине не обнаружено никаких повреждений, либо\n");
-							strcat(string, !"они незначительны.{FFFFFF}\n");
-							strcat(string, !"Не забывайте клавиши управления транспортом, а также\n");
-							strcat(string, !"правила дорожного движения. Они будут постоянно нужны\n");
-							strcat(string, !"Вам на дороге. Обучающий раздел в автошколе будет всё\n");
-							strcat(string, !"время доступен если понадобиться какая-либо помощь.");
-						    SPD(playerid, 72, DIALOG_STYLE_MSGBOX, "{71aa1d}Экзамен пройден успешно", string, "Ок", "");
+							g_string = "!{FFFFFF}Вы успешно сдали практическую часть экзамена по вождению\n";
+							strcat(g_string, !"и получаете водительское удостоверение!\n");
+							strcat(g_string, !"{a19be1}На вашей машине не обнаружено никаких повреждений, либо\n");
+							strcat(g_string, !"они незначительны.{FFFFFF}\n");
+							strcat(g_string, !"Не забывайте клавиши управления транспортом, а также\n");
+							strcat(g_string, !"правила дорожного движения. Они будут постоянно нужны\n");
+							strcat(g_string, !"Вам на дороге. Обучающий раздел в автошколе будет всё\n");
+							strcat(g_string, !"время доступен если понадобиться какая-либо помощь.");
+						    SPD(playerid, 72, DIALOG_STYLE_MSGBOX, "{71aa1d}Экзамен пройден успешно", g_string, "Ок", "");
 						    player_info[playerid][DLIC] = 1;
 						    static const fmt_query[] = "UPDATE `accounts` SET `dlic` = '%d' WHERE `id` = '%d' LIMIT 1";
 						    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
@@ -3649,9 +3639,8 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 {
 	if(GetPVarInt(playerid, "editobject") == 1)
 	{
-	    new string[144];
-	    format(string, sizeof(string), "SPAO(playerid, %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f);", index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ);
-	    SCM(playerid, COLOR_YELLOW, string);
+	    format(g_string, sizeof(g_string), "SPAO(playerid, %d, %d, %d, %f, %f, %f, %f, %f, %f, %f, %f, %f);", index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ);
+	    SCM(playerid, COLOR_YELLOW, g_string);
 	}
 	return 1;
 }
@@ -3677,9 +3666,8 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 			if(house_info[h][howned] == 0)
 			{
 			    SetPVarInt(playerid, "house", h);
-			    new string[148];
-			    format(string, sizeof(string), "{FFFFFF}Тип:\t\t\t\t%s\nНомер дома:\t\t\t%d\n\nКоличество комнат:\t\t%d\nСтоимость:\t\t\t%d$\nЕжедневная квартплата:\t%d$", house_info[h][htype], house_info[h][hid]-1, house_info[h][hkomn], house_info[h][hcost], house_info[h][hkvar]);
-			    SPD(playerid, 75, DIALOG_STYLE_MSGBOX, "{0bdf02}Дом свободен", string, "Купить", "Отмена");
+			    format(g_string, sizeof(g_string), "{FFFFFF}Тип:\t\t\t\t%s\nНомер дома:\t\t\t%d\n\nКоличество комнат:\t\t%d\nСтоимость:\t\t\t%d$\nЕжедневная квартплата:\t%d$", house_info[h][htype], house_info[h][hid]-1, house_info[h][hkomn], house_info[h][hcost], house_info[h][hkvar]);
+			    SPD(playerid, 75, DIALOG_STYLE_MSGBOX, "{0bdf02}Дом свободен", g_string, "Купить", "Отмена");
 			}
 			if(house_info[h][howned] == 1)
 			{
@@ -3691,9 +3679,8 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 			        format(thirdupgrade, sizeof(thirdupgrade), "{02d59e}(%d$)", a);
 			    }
 			    SetPVarInt(playerid, "house", h);
-				new string[229];
-				format(string, sizeof(string), "{FFFFFF}Владелец:{01cbda}\t\t\t%s{FFFFFF}\n\nТип:\t\t\t\t%s\nНомер дома:\t\t\t%d\nКоличество комнат:\t\t%d\nСтоимость:\t\t\t%d$\nЕжедневная квартплата:\t%d$ %s", house_info[h][howner], house_info[h][htype], house_info[h][hid]-1, house_info[h][hkomn], house_info[h][hcost], house_info[h][hkvar], thirdupgrade);
-				SPD(playerid, 76, DIALOG_STYLE_MSGBOX, "{e09902}Дом занят", string, "Войти", "Отмена");
+				format(g_string, sizeof(g_string), "{FFFFFF}Владелец:{01cbda}\t\t\t%s{FFFFFF}\n\nТип:\t\t\t\t%s\nНомер дома:\t\t\t%d\nКоличество комнат:\t\t%d\nСтоимость:\t\t\t%d$\nЕжедневная квартплата:\t%d$ %s", house_info[h][howner], house_info[h][htype], house_info[h][hid]-1, house_info[h][hkomn], house_info[h][hcost], house_info[h][hkvar], thirdupgrade);
+				SPD(playerid, 76, DIALOG_STYLE_MSGBOX, "{e09902}Дом занят", g_string, "Войти", "Отмена");
 			}
 	    }
 		if(pickupid == house_info[h][hhealth])
@@ -3715,9 +3702,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		if(player_info[playerid][LEVEL] > 3) return SCM(playerid, 0xc6c7c6FF, "Это можно использовать только до 3 уровня");
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[56];
-		format(string, sizeof(string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3727,9 +3714,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		if(player_info[playerid][LEVEL] > 3) return SCM(playerid, 0xc6c7c6FF, "Это можно использовать только до 3 уровня");
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[56];
-		format(string, sizeof(string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3739,9 +3726,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		if(player_info[playerid][LEVEL] > 3) return SCM(playerid, 0xc6c7c6FF, "Это можно использовать только до 3 уровня");
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[56];
-		format(string, sizeof(string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3751,9 +3738,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		if(player_info[playerid][LEVEL] > 3) return SCM(playerid, 0xc6c7c6FF, "Это можно использовать только до 3 уровня");
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[56];
-		format(string, sizeof(string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3763,9 +3750,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	{
 		if(player_info[playerid][LEVEL] > 3) return SCM(playerid, 0xc6c7c6FF, "Это можно использовать только до 3 уровня");
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[56];
-		format(string, sizeof(string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) бесплатную еду для бедных", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3774,9 +3761,9 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	if(pickupid == eatpickup[5])
 	{
 		if(GetPVarInt(playerid, "eat") == 1) return SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
-		new string[46];
-		format(string, sizeof(string), "%s взял(а) пончик с кофе", player_info[playerid][NAME]);
-		ProxDetector(30.0, playerid, string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
+
+		format(g_string, sizeof(g_string), "%s взял(а) пончик с кофе", player_info[playerid][NAME]);
+		ProxDetector(30.0, playerid, g_string, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF, 0xe782FFFF);
 		SetPlayerAttachedObject(playerid, 5, 2355, 1, 0.096313, 0.334523, -0.267872, 109.200798, 122.924514, 313.923736, 1.025472, 1.000000, 1.000000 );
 		SCM(playerid, 0xc6c7c6FF, "Используйте {5292ff}/eat{c6c7c6} чтобы поесть или {5292ff}/put{c6c7c6} чтобы положить поднос с едой");
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
@@ -3900,46 +3887,46 @@ public OnPlayerPickUpPickup(playerid, pickupid)
  	}
 	if(pickupid == aboutmine)
 	{
-	    new string[419] = !"{FFFFFF}Тут Вы можете устроиться на работу шахтёром.\n";
-	 	strcat(string, !"Для этого найдите служебное помещение на заднем дворе шахты\n");
-	 	strcat(string, !"там Вам выдадут спецодежду и необходимый инструмент, а также\n");
-	 	strcat(string, !"расскажут что делать дальше.\n\n");
-	 	strcat(string, !"Шахта специализируется на добыче железной руды, из которой\n");
-	 	strcat(string, !"потом в кузнице получают металл. Он широко применятся на\n");
-	 	strcat(string, !"других предприятиях, поэтому регулярная добыча руды очень важна\n");
-	 	strcat(string, !"для экономики государства.");
-        SPD(playerid, 29, DIALOG_STYLE_MSGBOX, "{1472FF}Шахта", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Тут Вы можете устроиться на работу шахтёром.\n";
+	 	strcat(g_string, !"Для этого найдите служебное помещение на заднем дворе шахты\n");
+	 	strcat(g_string, !"там Вам выдадут спецодежду и необходимый инструмент, а также\n");
+	 	strcat(g_string, !"расскажут что делать дальше.\n\n");
+	 	strcat(g_string, !"Шахта специализируется на добыче железной руды, из которой\n");
+	 	strcat(g_string, !"потом в кузнице получают металл. Он широко применятся на\n");
+	 	strcat(g_string, !"других предприятиях, поэтому регулярная добыча руды очень важна\n");
+	 	strcat(g_string, !"для экономики государства.");
+        SPD(playerid, 29, DIALOG_STYLE_MSGBOX, "{1472FF}Шахта", g_string, "Закрыть", "");
 	}
 	if(pickupid == aboutloader)
 	{
-	    new string[380] = !"{FFFFFF}Тут Вы можете подработать грузчиком. Чтобы устроиться на работу\n";
-	    strcat(string, !"пройдите в конец здания на 2-й этаж. Там же можно получать зарплату.\n\n");
-	    strcat(string, !"Вы можете переносить товары вручную или перевозить на погрузчике.\n");
-	    strcat(string, !"Если у вас нет прав, то второй способ будет недоступен.\n\n");
-	    strcat(string, !"При ручном переносе грузов старайтесь не бежать и не делать резких\n");
-	    strcat(string, !"движений, иначе Вы рискуете уронить его.");
-	    SPD(playerid, 40, DIALOG_STYLE_MSGBOX, "{1472FF}Городской склад", string, "Ок", "");
+	    g_string = !"{FFFFFF}Тут Вы можете подработать грузчиком. Чтобы устроиться на работу\n";
+	    strcat(g_string, !"пройдите в конец здания на 2-й этаж. Там же можно получать зарплату.\n\n");
+	    strcat(g_string, !"Вы можете переносить товары вручную или перевозить на погрузчике.\n");
+	    strcat(g_string, !"Если у вас нет прав, то второй способ будет недоступен.\n\n");
+	    strcat(g_string, !"При ручном переносе грузов старайтесь не бежать и не делать резких\n");
+	    strcat(g_string, !"движений, иначе Вы рискуете уронить его.");
+	    SPD(playerid, 40, DIALOG_STYLE_MSGBOX, "{1472FF}Городской склад", g_string, "Ок", "");
 	}
 	if(pickupid == aboutmetaltransport)
 	{
-	    new string[416] = !"{FFFFFF}Полученный на шахте металл досточно широко применяется\n";
-	    strcat(string, !"различными оранизациями, однако основной потребитель -это\n");
-	    strcat(string, !"завод по производству продуктов. Более подробно о назначении\n");
-	    strcat(string, !"этого предприятия можно узнать, приехав туда (/gps)\n\n");
-	    strcat(string, !"Для нормальной работы заводу постоянно требуется металл,\n");
-	    strcat(string, !"транспортировкой которого занимается его служба доставки. На\n");
-	    strcat(string, !"этом складе развозчики закупают металл для предприятия.");
-	    SPD(playerid, 30, DIALOG_STYLE_MSGBOX, "{FFEF0D}О применении металла", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Полученный на шахте металл досточно широко применяется\n";
+	    strcat(g_string, !"различными оранизациями, однако основной потребитель -это\n");
+	    strcat(g_string, !"завод по производству продуктов. Более подробно о назначении\n");
+	    strcat(g_string, !"этого предприятия можно узнать, приехав туда (/gps)\n\n");
+	    strcat(g_string, !"Для нормальной работы заводу постоянно требуется металл,\n");
+	    strcat(g_string, !"транспортировкой которого занимается его служба доставки. На\n");
+	    strcat(g_string, !"этом складе развозчики закупают металл для предприятия.");
+	    SPD(playerid, 30, DIALOG_STYLE_MSGBOX, "{FFEF0D}О применении металла", g_string, "Закрыть", "");
 	}
 	if(pickupid == aboutunderearth)
 	{
-	    new string[346] = !"{FFFFFF}Учёные выяснили что руда, которая находится в подземных залежах\n";
-	    strcat(string, !"намного качественее той, которую добывают на поверхности.\n");
-	    strcat(string, !"Именно поэтому было принято решение построить шахтовый\n");
-	    strcat(string, !"подъемник для подземной добычи.\n\n");
-	    strcat(string, !"В связи со сложностью подземных работ шахтёрам полагается\n");
-	    strcat(string, !"премия за каждую партию руды, которая была добыта под землёй.\n");
-        SPD(playerid, 31, DIALOG_STYLE_MSGBOX, "{FFEF0D}О подземной добыче", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Учёные выяснили что руда, которая находится в подземных залежах\n";
+	    strcat(g_string, !"намного качественее той, которую добывают на поверхности.\n");
+	    strcat(g_string, !"Именно поэтому было принято решение построить шахтовый\n");
+	    strcat(g_string, !"подъемник для подземной добычи.\n\n");
+	    strcat(g_string, !"В связи со сложностью подземных работ шахтёрам полагается\n");
+	    strcat(g_string, !"премия за каждую партию руды, которая была добыта под землёй.\n");
+        SPD(playerid, 31, DIALOG_STYLE_MSGBOX, "{FFEF0D}О подземной добыче", g_string, "Закрыть", "");
 	}
 	if(pickupid == mineinvite[0])
 	{
@@ -4002,38 +3989,38 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	}
 	if(pickupid == aboutfactory)
 	{
-	    new string[363] = !"{FFFFFF}Здесь находится одно из важнейших предприятий в государстве - завод\n";
-	    strcat(string, !"по производству продуктов. От его регулярной работы зависит\n");
-	    strcat(string, !"деятельность всего частного бизнеса\n\n");
-	    strcat(string, !"В данный момент можно устроиться на одну из двух специальностей -\n");
-	    strcat(string, !"работник производственного цеха или службы доставки. На месте Вы\n");
-	    strcat(string, !"найдете более подробную информацию о каждой из них\n");
-        SPD(playerid, 40, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод по производству продуктов", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Здесь находится одно из важнейших предприятий в государстве - завод\n";
+	    strcat(g_string, !"по производству продуктов. От его регулярной работы зависит\n");
+	    strcat(g_string, !"деятельность всего частного бизнеса\n\n");
+	    strcat(g_string, !"В данный момент можно устроиться на одну из двух специальностей -\n");
+	    strcat(g_string, !"работник производственного цеха или службы доставки. На месте Вы\n");
+	    strcat(g_string, !"найдете более подробную информацию о каждой из них\n");
+        SPD(playerid, 40, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод по производству продуктов", g_string, "Закрыть", "");
 	}
 	if(pickupid == aboutfactorydelivery)
 	{
-	    new string[500] = !"{FFFFFF}Тут хранятся материалы, которые используются работниками цеха для\n";
-	    strcat(string, !"изготовления продуктов, а также готовые продукты. Исходные\n");
-	    strcat(string, !"материалы доставляются на завод его службой доставки. Чтобы\n");
-	    strcat(string, !"устроиться туда на работу, пройдите в раздевалку рядом, далее\n");
-	    strcat(string, !"поднимитесь на верхнюю стоянку и выберите транспорт в зависимости\n");
-	    strcat(string, !"от того, что именно Вы хотите привезти на завод.\n\n");
-	    strcat(string, !"Материалы покупаются за свой личный счёт, а Ваша выручка - это\n");
-	    strcat(string, !"разница, которая выходит при продаже материалов заводу.\n");
-        SPD(playerid, 42, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод - Склад исходных материалов", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Тут хранятся материалы, которые используются работниками цеха для\n";
+	    strcat(g_string, !"изготовления продуктов, а также готовые продукты. Исходные\n");
+	    strcat(g_string, !"материалы доставляются на завод его службой доставки. Чтобы\n");
+	    strcat(g_string, !"устроиться туда на работу, пройдите в раздевалку рядом, далее\n");
+	    strcat(g_string, !"поднимитесь на верхнюю стоянку и выберите транспорт в зависимости\n");
+	    strcat(g_string, !"от того, что именно Вы хотите привезти на завод.\n\n");
+	    strcat(g_string, !"Материалы покупаются за свой личный счёт, а Ваша выручка - это\n");
+	    strcat(g_string, !"разница, которая выходит при продаже материалов заводу.\n");
+        SPD(playerid, 42, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод - Склад исходных материалов", g_string, "Закрыть", "");
 	}
 	if(pickupid == aboutfactoryin)
 	{
-	    new string[572] = !"{FFFFFF}Чтобы начать рабочий день пройдите к любой раздевалке. Там же\n";
-	    strcat(string, !"можно закончить его и получить выручку. Далее пройдите к\n");
-	    strcat(string, !"раздаточному столу (отмечены жёлтыми маркерами), возьмите\n");
-	    strcat(string, !"металл, после чего отправляйтесь на любое свободное место в центре\n");
-	    strcat(string, !"цеха. Топливо, необходимое для изготовления продукта, автоматически\n");
-	    strcat(string, !"подаётся к каждому столу, и Вам не нужно брать его дополнительно.\n\n");
-	    strcat(string, !"Чем больше Вы работаете в цеху, тем выше ваши навыки производства,\n");
-	    strcat(string, !"и тем меньше шанс создать бракованный продукт. Навык будет\n");
-	    strcat(string, !"увеличиваться по мере создания новых продуктов.\n");
-	    SPD(playerid, 41, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод - Производственный цех", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}Чтобы начать рабочий день пройдите к любой раздевалке. Там же\n";
+	    strcat(g_string, !"можно закончить его и получить выручку. Далее пройдите к\n");
+	    strcat(g_string, !"раздаточному столу (отмечены жёлтыми маркерами), возьмите\n");
+	    strcat(g_string, !"металл, после чего отправляйтесь на любое свободное место в центре\n");
+	    strcat(g_string, !"цеха. Топливо, необходимое для изготовления продукта, автоматически\n");
+	    strcat(g_string, !"подаётся к каждому столу, и Вам не нужно брать его дополнительно.\n\n");
+	    strcat(g_string, !"Чем больше Вы работаете в цеху, тем выше ваши навыки производства,\n");
+	    strcat(g_string, !"и тем меньше шанс создать бракованный продукт. Навык будет\n");
+	    strcat(g_string, !"увеличиваться по мере создания новых продуктов.\n");
+	    SPD(playerid, 41, DIALOG_STYLE_MSGBOX, "{FFEF0D}Завод - Производственный цех", g_string, "Закрыть", "");
 	}
 	if(pickupid == metalfactorypickup[0])
 	{
@@ -4181,12 +4168,12 @@ public OnPlayerPickUpPickup(playerid, pickupid)
 	}
 	if(pickupid == neftpickup)
 	{
-	    new string[276] = !"{FFFFFF}На нефтезаводе можно приобрести топливо для завода по производству\n";
-	    strcat(string, !"продуктов или для развоза его по заправочным станциям. Работают 2\n");
-     	strcat(string, !"линии, выбрать нужную Вам помогут указатели.\n\n");
-     	strcat(string, !"Запасы хранилища нефтезавода постоянно пополняются по мере\n");
-     	strcat(string, !"добычи и очистки нефти\n");
-	    SPD(playerid, 41, DIALOG_STYLE_MSGBOX, "{FFEF0D}Нефтезавод", string, "Закрыть", "");
+	    g_string = !"{FFFFFF}На нефтезаводе можно приобрести топливо для завода по производству\n";
+	    strcat(g_string, !"продуктов или для развоза его по заправочным станциям. Работают 2\n");
+     	strcat(g_string, !"линии, выбрать нужную Вам помогут указатели.\n\n");
+     	strcat(g_string, !"Запасы хранилища нефтезавода постоянно пополняются по мере\n");
+     	strcat(g_string, !"добычи и очистки нефти\n");
+	    SPD(playerid, 41, DIALOG_STYLE_MSGBOX, "{FFEF0D}Нефтезавод", g_string, "Закрыть", "");
 	}
 	if(pickupid == factoryinvite)
 	{
@@ -4310,9 +4297,8 @@ public OnPlayerSelectedMenuRow(playerid, row)
 		 	}
 		 	case 2:
 	        {
-				new string[76];
-				format(string, sizeof(string), "[SP] %s[%d] пнул игрока %s[%d]", player_info[playerid][NAME], playerid, player_info[SpID[playerid]][NAME], SpID[playerid]);
-				SCMA(COLOR_GREY, string);
+				format(g_string, sizeof(g_string), "[SP] %s[%d] пнул игрока %s[%d]", player_info[playerid][NAME], playerid, player_info[SpID[playerid]][NAME], SpID[playerid]);
+				SCMA(COLOR_GREY, g_string);
 				new Float:slapx, Float:slapy, Float:slapz;
 				GetPlayerPos(SpID[playerid], slapx, slapy, slapz);
 				SetPlayerPos(SpID[playerid], slapx, slapy, slapz+5.0);
@@ -4348,9 +4334,8 @@ public OnPlayerSelectedMenuRow(playerid, row)
 	        {
 	            new spip[16];
 	            GetPlayerIp(SpID[playerid], spip, 16);
-				new string[78];
-				format(string, sizeof(string), "[SP] %s[%d]  |  PING %d  |  IP  %s", player_info[SpID[playerid]][NAME], SpID[playerid], GetPlayerPing(SpID[playerid]), spip);
-				SCM(playerid, 0x69D490FF, string);
+				format(g_string, sizeof(g_string), "[SP] %s[%d]  |  PING %d  |  IP  %s", player_info[SpID[playerid]][NAME], SpID[playerid], GetPlayerPing(SpID[playerid]), spip);
+				SCM(playerid, 0x69D490FF, g_string);
 				ShowMenuForPlayer(spmenu, playerid);
 		 	}
 		 	case 7:
@@ -4358,9 +4343,8 @@ public OnPlayerSelectedMenuRow(playerid, row)
 		 	}
 		 	case 8:
 	        {
-	            new string[4];
-	            format(string, sizeof(string), "%d", SpID[playerid]);
-	            cmd::sp(playerid, string);
+	            format(g_string, sizeof(g_string), "%d", SpID[playerid]);
+	            cmd::sp(playerid, g_string);
 	            ShowMenuForPlayer(spmenu, playerid);
 		 	}
 		 	case 9:
@@ -4762,13 +4746,12 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    {
 			new n = GetPVarInt(playerid, "offerhouse");
 			new h = n+=1;
-	        new string[49];
-	        format(string, sizeof(string), "%s поселил Вас в своём доме", player_info[GetPVarInt(playerid, "offerid")][NAME]);
-	        SCM(playerid, 0x6FD508FF, string);
+	        format(g_string, sizeof(g_string), "%s поселил Вас в своём доме", player_info[GetPVarInt(playerid, "offerid")][NAME]);
+	        SCM(playerid, 0x6FD508FF, g_string);
 	        GameTextForPlayer(playerid, "~b~~h~WELCOME!", 1000, 1);
 	        PlayerPlaySound(playerid, 1137, 0.0, 0.0, 0.0);
-	        format(string, sizeof(string), "Вы поселили %s в своём доме", player_info[playerid][NAME]);
-	        SCM(GetPVarInt(playerid, "offerid"), 0x6FD508FF, string);
+	        format(g_string, sizeof(g_string), "Вы поселили %s в своём доме", player_info[playerid][NAME]);
+	        SCM(GetPVarInt(playerid, "offerid"), 0x6FD508FF, g_string);
 	        player_info[playerid][GUEST] = h;
 	        static const fmt_query[] = "UPDATE `accounts` SET `guest` = '%d' WHERE `id` = '%d'";
 		    new query[sizeof(fmt_query)+(-2+3)+(-2+8)];
@@ -4796,9 +4779,8 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		    player_info[playerid][RANG] = 10;
 		    format(query, sizeof(query), fmt_query2, player_info[playerid][FRAC], player_info[playerid][ID]);
 			mysql_query(dbHandle, query);
-		    new string[119];
-		    format(string, sizeof(string), "%s принимает ваше предложение", player_info[playerid][NAME]);
-		    SCM(GetPVarInt(playerid, "offerid"), 0x8BCD2FFF, string);
+		    format(g_string, sizeof(g_string), "%s принимает ваше предложение", player_info[playerid][NAME]);
+		    SCM(GetPVarInt(playerid, "offerid"), 0x8BCD2FFF, g_string);
 		    SCM(GetPVarInt(playerid, "offerid"), COLOR_YELLOW, "Используйте /changeskin чтобы выбрать внешность для нового лидера");
 		    SCM(GetPVarInt(playerid, "offerid"), COLOR_WHITE, "Предыдущий лидер подразделения был уволён и смещён на 7-й ранг");
 		    new organizationname[29];
@@ -4836,31 +4818,30 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 					organizationname = "ТВ и радио";
 				}
 		    }
-		    format(string, sizeof(string), "Поздравляем! Вы стали лидером подразделения \"%s\" организации \"%s\"", subfracname[org-1][suborg], organizationname);
-		    SCM(playerid, 0x8BCD2FFF, string);
+		    format(g_string, sizeof(g_string), "Поздравляем! Вы стали лидером подразделения \"%s\" организации \"%s\"", subfracname[org-1][suborg], organizationname);
+		    SCM(playerid, 0x8BCD2FFF, g_string);
 		    SCM(playerid, COLOR_LIGHTBLUE, "Сейчас лидер выберет вашу внешность и даст первые инструкции");
 		    PlayerPlaySound(playerid, 1137, 0.0, 0.0, 0.0);
  	 		new Year, Month, Day, Hour, Minute, Second;
 			getdate(Year, Month, Day);
 			gettime(Hour, Minute, Second);
-			format(string, sizeof(string), "%s give leader %s orgname %s podraz %s\r\n", player_info[GetPVarInt(playerid, "offerid")][NAME], player_info[playerid][NAME], organizationname, subfracname[org-1][suborg]);
-            AdmLog("logs/newleaderlog.txt",string);
+			format(g_string, sizeof(g_string), "%s give leader %s orgname %s podraz %s\r\n", player_info[GetPVarInt(playerid, "offerid")][NAME], player_info[playerid][NAME], organizationname, subfracname[org-1][suborg]);
+            AdmLog("logs/newleaderlog.txt", g_string);
 		    SetPVarInt(playerid, "offer", 0);
   			SetPVarInt(playerid, "offerid", 9999);
   			SetPVarInt(playerid, "offerleader", 0);
 		}
 		if(GetPVarInt(playerid, "offerfrac") != 0)
 		{
-		    new string[119];
 			if(GetPVarInt(playerid, "offerfrac") > 10 && GetPVarInt(playerid, "offerfrac") < 60)
 			{
-		    	format(string, sizeof(string), "Поздравляем! Вы вступили в организацию \"%s\" и подразделение \"%s\"", orgname[GetPVarInt(playerid, "orgid")], subfracname[GetPVarInt(playerid, "orgid")-1][GetPVarInt(playerid, "suborgid")]);
+		    	format(g_string, sizeof(g_string), "Поздравляем! Вы вступили в организацию \"%s\" и подразделение \"%s\"", orgname[GetPVarInt(playerid, "orgid")], subfracname[GetPVarInt(playerid, "orgid")-1][GetPVarInt(playerid, "suborgid")]);
 		    }
 		    else
 		    {
-		        format(string, sizeof(string), "Поздравляем! Вы вступили в организацию \"%s\"", orgname[GetPVarInt(playerid, "orgid")]);
+		        format(g_string, sizeof(g_string), "Поздравляем! Вы вступили в организацию \"%s\"", orgname[GetPVarInt(playerid, "orgid")]);
 		    }
-		    SCM(playerid, 0x8BCD2FFF, string);
+		    SCM(playerid, 0x8BCD2FFF, g_string);
 		    SCM(playerid, COLOR_LIGHTBLUE, "Используйте {FFF000}/menu > Команды сервера{038FDA}, чтобы узнать о новых возможностях");
 		    PlayerPlaySound(playerid, 1137, 0.0, 0.0, 0.0);
 		    player_info[playerid][FRAC] = GetPVarInt(playerid, "offerfrac");
@@ -4871,8 +4852,8 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		    new query[sizeof(fmt_query)+(-2+3)+(-2+3)+(-2+8)];
 		    format(query, sizeof(query), fmt_query, player_info[playerid][FRAC], player_info[playerid][FSKIN], player_info[playerid][ID]);
 			mysql_query(dbHandle, query);
-			format(string, sizeof(string), "%s принимает Ваше предложение", player_info[playerid][NAME]);
-			SCM(GetPVarInt(playerid, "offerid"), 0x8BCD2FFF, string);
+			format(g_string, sizeof(g_string), "%s принимает Ваше предложение", player_info[playerid][NAME]);
+			SCM(GetPVarInt(playerid, "offerid"), 0x8BCD2FFF, g_string);
 			switch(player_info[playerid][FRAC])
 			{
 				case 10..13: SetPlayerColor(playerid, 0xCCFF00FF);
@@ -4892,8 +4873,8 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             new Year, Month, Day, Hour, Minute, Second;
 			getdate(Year, Month, Day);
 			gettime(Hour, Minute, Second);
-			format(string, sizeof(string), "%s invite %s in frac %d\r\n", player_info[GetPVarInt(playerid, "offerid")][NAME], player_info[playerid][NAME], player_info[playerid][FRAC]);
-            AdmLog("logs/invitelog.txt",string);
+			format(g_string, sizeof(g_string), "%s invite %s in frac %d\r\n", player_info[GetPVarInt(playerid, "offerid")][NAME], player_info[playerid][NAME], player_info[playerid][FRAC]);
+            AdmLog("logs/invitelog.txt", g_string);
 			SetPVarInt(playerid, "orgid", 0);
 			SetPVarInt(playerid, "suborgid", 0);
 			SetPVarInt(playerid, "offer", 0);
@@ -4907,11 +4888,10 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    if(GetPVarInt(playerid, "offer") != 1) return 1;
 	    if(GetPVarInt(playerid, "offerhouse") != 9999)
 	    {
-	        new string[60];
-	        format(string, sizeof(string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
-	        SCM(playerid, 0xff5900FF, string);
-	        format(string, sizeof(string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
-	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, string);
+	        format(g_string, sizeof(g_string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
+	        SCM(playerid, 0xff5900FF, g_string);
+	        format(g_string, sizeof(g_string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
+	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, g_string);
 	        GameTextForPlayer(GetPVarInt(playerid, "offerid"), "~r~NO", 1500, 1);
 	        SetPVarInt(playerid, "offer", 0);
 	        SetPVarInt(playerid, "offerhouse", 9999);
@@ -4919,22 +4899,20 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    }
 	    if(GetPVarInt(playerid, "offerleader") != 0)
 		{
-		    new string[60];
-	        format(string, sizeof(string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
-	        SCM(playerid, 0xff5900FF, string);
-	        format(string, sizeof(string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
-	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, string);
+	        format(g_string, sizeof(g_string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
+	        SCM(playerid, 0xff5900FF, g_string);
+	        format(g_string, sizeof(g_string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
+	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, g_string);
 	        GameTextForPlayer(GetPVarInt(playerid, "offerid"), "~r~NO", 1500, 1);
 	     	SetPVarInt(playerid, "offerid", 9999);
 	     	SetPVarInt(playerid, "offerleader", 0);
 		}
 		if(GetPVarInt(playerid, "offerfrac") != 0)
 		{
-		    new string[60];
-	        format(string, sizeof(string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
-	        SCM(playerid, 0xff5900FF, string);
-	        format(string, sizeof(string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
-	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, string);
+	        format(g_string, sizeof(g_string), "Вы отказались от предложения игрока %s", player_info[GetPVarInt(playerid, "offerid")][NAME]);
+	        SCM(playerid, 0xff5900FF, g_string);
+	        format(g_string, sizeof(g_string), "%s отказался от Вашего предложения", player_info[playerid][NAME]);
+	        SCM(GetPVarInt(playerid, "offerid"), 0xff5900FF, g_string);
 	        GameTextForPlayer(GetPVarInt(playerid, "offerid"), "~r~NO", 1500, 1);
 	        SetPVarInt(playerid, "orgid", 0);
 			SetPVarInt(playerid, "suborgid", 0);
@@ -5101,20 +5079,19 @@ public OnPlayerUpdate(playerid)
 	    ResetPlayerMoney(playerid);
 	    GivePlayerMoney(playerid, player_info[playerid][MONEY]);
 	}
-	new string[52];
 	switch(lift)
 	{
-	    case 0: format(string, sizeof(string), "{56F705}Свободно");
-	    case 1: format(string, sizeof(string), "{ff9a00}Спуск");
-	    case 2: format(string, sizeof(string), "{ff0000}Занято\n{ff9a00}Спуск");
-	    case 3: format(string, sizeof(string), "{009aff}Ожидание");
-	    case 4: format(string, sizeof(string), "{56F705}Свободно");
-	    case 5: format(string, sizeof(string), "{ff9a00}Подъём");
-	    case 6: format(string, sizeof(string), "{ff0000}Занято\n{ff9a00}Подъём");
-	    case 7: format(string, sizeof(string), "{009aff}Ожидание");
+	    case 0: format(g_string, sizeof(g_string), "{56F705}Свободно");
+	    case 1: format(g_string, sizeof(g_string), "{ff9a00}Спуск");
+	    case 2: format(g_string, sizeof(g_string), "{ff0000}Занято\n{ff9a00}Спуск");
+	    case 3: format(g_string, sizeof(g_string), "{009aff}Ожидание");
+	    case 4: format(g_string, sizeof(g_string), "{56F705}Свободно");
+	    case 5: format(g_string, sizeof(g_string), "{ff9a00}Подъём");
+	    case 6: format(g_string, sizeof(g_string), "{ff0000}Занято\n{ff9a00}Подъём");
+	    case 7: format(g_string, sizeof(g_string), "{009aff}Ожидание");
 	}
-	Update3DTextLabelText(liftstatus1, -1, string);
-	Update3DTextLabelText(liftstatus2, -1, string);
+	Update3DTextLabelText(liftstatus1, -1, g_string);
+	Update3DTextLabelText(liftstatus2, -1, g_string);
 	if(GetPVarInt(playerid, "loaderongoing") == 1)
  	{
   		if(!IsPlayerInRangeOfPoint(playerid, 180.0, 2195.0195,-2254.0647,13.5469))
@@ -5129,17 +5106,17 @@ public OnPlayerUpdate(playerid)
 			else
 			{
 			    give_money(playerid, GetPVarInt(playerid, "gruzmoney")*90);
-       			format(string, sizeof(string), "Рабочий день завершён. Заработано {FFFF00}%d$", GetPVarInt(playerid, "gruzmoney")*90);
-		        SCM(playerid, 0x038FDFFF, string);
+       			format(g_string, sizeof(g_string), "Рабочий день завершён. Заработано {FFFF00}%d$", GetPVarInt(playerid, "gruzmoney")*90);
+		        SCM(playerid, 0x038FDFFF, g_string);
 			}
 			if(GetPVarInt(playerid, "gruzmoney2") > 0)
 			{
 			    give_money(playerid, GetPVarInt(playerid, "gruzmoney2")*100);
-       			format(string, sizeof(string), "%d$ {3657FF}за работу на погрузчике", GetPVarInt(playerid, "gruzmoney2")*100);
-		        SCM(playerid, COLOR_YELLOW, string);
+       			format(g_string, sizeof(g_string), "%d$ {3657FF}за работу на погрузчике", GetPVarInt(playerid, "gruzmoney2")*100);
+		        SCM(playerid, COLOR_YELLOW, g_string);
 			}
-			format(string, sizeof(string), "~b~+%d$", GetPVarInt(playerid, "gruzmoney")*90 + GetPVarInt(playerid, "gruzmoney2")*100);
-   			GameTextForPlayer(playerid, string, 5000, 1);
+			format(g_string, sizeof(g_string), "~b~+%d$", GetPVarInt(playerid, "gruzmoney")*90 + GetPVarInt(playerid, "gruzmoney2")*100);
+   			GameTextForPlayer(playerid, g_string, 5000, 1);
 			SetPVarInt(playerid, "gruzmoney", 0);
 			SetPVarInt(playerid, "gruzmoney2", 0);
 	        DisablePlayerCheckpoint(playerid);
@@ -5176,18 +5153,18 @@ public OnPlayerUpdate(playerid)
 	        give_money(playerid, GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
 	        if(GetPVarInt(playerid, "minemoney") > 0)
 	        {
-				format(string, sizeof(string), "Рабочий день завершён. Вы добыли %d кг руды", GetPVarInt(playerid, "minemoney"));
-		        SCM(playerid, 0x038FDFFF, string);
-		        format(string, sizeof(string), "~b~+%d$", GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
-		        GameTextForPlayer(playerid, string, 5000, 1);
+				format(g_string, sizeof(g_string), "Рабочий день завершён. Вы добыли %d кг руды", GetPVarInt(playerid, "minemoney"));
+		        SCM(playerid, 0x038FDFFF, g_string);
+		        format(g_string, sizeof(g_string), "~b~+%d$", GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
+		        GameTextForPlayer(playerid, g_string, 5000, 1);
 		        if(GetPVarInt(playerid, "getmoneymine") > 0)
 				{
-				    format(string, sizeof(string), "Бонус за подземную добычу {C8FF14}%d$", GetPVarInt(playerid, "getmoneymine"));
-				    SCM(playerid, 0xDD90FFFF, string);
+				    format(g_string, sizeof(g_string), "Бонус за подземную добычу {C8FF14}%d$", GetPVarInt(playerid, "getmoneymine"));
+				    SCM(playerid, 0xDD90FFFF, g_string);
 				}
-		        format(string, sizeof(string), "Всего заработано %d$", GetPVarInt(playerid, "minemoney") * 3+GetPVarInt(playerid, "getmoneymine"));
+		        format(g_string, sizeof(g_string), "Всего заработано %d$", GetPVarInt(playerid, "minemoney") * 3+GetPVarInt(playerid, "getmoneymine"));
 		        SetPVarInt(playerid, "getmoneymine", 0);
-		        SCM(playerid, 0x038FDFFF, string);
+		        SCM(playerid, 0x038FDFFF, g_string);
 
 	        }
 	        else
@@ -5351,25 +5328,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
 		    format(query, sizeof(query), fmt_query, player_info[playerid][SEX], player_info[playerid][ID]);
 			mysql_query(dbHandle, query);
-			new string[1200] = !"{e7ae08}1. Основное{FFFFFF}\n";
-			strcat(string, !"-Запрещено использовать любые читы, трейнеры, моды или CLEO скрипты\n");
-			strcat(string, !"Запрещен DeathMatch (DM) - убийство и нанесение вреда игрокам без причины");
-			strcat(string, !"-Запрещено убивать игроков на спавне (на месте, где они появляются в игре)\n");
-			strcat(string, !"-Запрещены убийства путем наезда на него или стрельбы из авто\n");
-			strcat(string, !"-Запрещено уходить на паузу в целях спасения от нападающих\n");
-			strcat(string, !"-Запрещено использование возможностей сервера для создания неудобств другим игрокам\n");
-			strcat(string, !"{e7ae08}2. Процесс общения{FFFFFF}\n");
-			strcat(string, !"-Запрещен мат, оскорбление других игроков\n");
-			strcat(string, !"-Запрещены угрозы другим игрокам (не относящиеся к игровому процессу)\n");
-			strcat(string, !"-Запрещено писать транслитом (например \"ya zawel na server\")\n");
-			strcat(string, !"-Запрещена любая реклама сторонних ресурсов\n");
-			strcat(string, !"-Запрещено флудить (часто повторять одинаковые фразы, или фразы без смысловой нагрузки)\n");
-			strcat(string, !"{e7ae08}3. Администрация{FFFFFF}\n");
-			strcat(string, !"-Необходимо сообщать администрации сервера о любых случаях нарушения данных правил\n");
-			strcat(string, !"-Администрация самостоятельно выбирает штрафные санкции для каждого конкретного случая\n");
-			strcat(string, !"-Санкции могут применяться сразу после нарушения или через время (например, впослдествии поступления жалобы)\n");
-			strcat(string, !"-Если штрафная санкция была применена к вам ошибочно, свяжитесь с администрацией");
-		    SPD(playerid, 6, DIALOG_STYLE_MSGBOX, "{42b6ef}Правила сервера", string, "Принять", "Отмена");
+			g_string = !"{e7ae08}1. Основное{FFFFFF}\n";
+			strcat(g_string, !"-Запрещено использовать любые читы, трейнеры, моды или CLEO скрипты\n");
+			strcat(g_string, !"Запрещен DeathMatch (DM) - убийство и нанесение вреда игрокам без причины");
+			strcat(g_string, !"-Запрещено убивать игроков на спавне (на месте, где они появляются в игре)\n");
+			strcat(g_string, !"-Запрещены убийства путем наезда на него или стрельбы из авто\n");
+			strcat(g_string, !"-Запрещено уходить на паузу в целях спасения от нападающих\n");
+			strcat(g_string, !"-Запрещено использование возможностей сервера для создания неудобств другим игрокам\n");
+			strcat(g_string, !"{e7ae08}2. Процесс общения{FFFFFF}\n");
+			strcat(g_string, !"-Запрещен мат, оскорбление других игроков\n");
+			strcat(g_string, !"-Запрещены угрозы другим игрокам (не относящиеся к игровому процессу)\n");
+			strcat(g_string, !"-Запрещено писать транслитом (например \"ya zawel na server\")\n");
+			strcat(g_string, !"-Запрещена любая реклама сторонних ресурсов\n");
+			strcat(g_string, !"-Запрещено флудить (часто повторять одинаковые фразы, или фразы без смысловой нагрузки)\n");
+			strcat(g_string, !"{e7ae08}3. Администрация{FFFFFF}\n");
+			strcat(g_string, !"-Необходимо сообщать администрации сервера о любых случаях нарушения данных правил\n");
+			strcat(g_string, !"-Администрация самостоятельно выбирает штрафные санкции для каждого конкретного случая\n");
+			strcat(g_string, !"-Санкции могут применяться сразу после нарушения или через время (например, впослдествии поступления жалобы)\n");
+			strcat(g_string, !"-Если штрафная санкция была применена к вам ошибочно, свяжитесь с администрацией");
+		    SPD(playerid, 6, DIALOG_STYLE_MSGBOX, "{42b6ef}Правила сервера", g_string, "Принять", "Отмена");
 	  	}
 	  	case 6:
 	  	{
@@ -5429,7 +5406,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 1: SPD(playerid, 74, DIALOG_STYLE_LIST, "{dfd200}Список команд", "{9fd800}1. Получить описание\n2. Общие команды\n3. Общение\n4. Дома и отели\n5. Бизнес и АЗС\n6. Работы\n7. Банды и мафии\n8. Правительство\n9. Министерство внутренних дел\n10. Министерство обороны\n11. Мин. здравоохранения\n12. ТВ и радио\n13. Лидерам\n14. Прочее", "Выбрать", "Назад");
 				case 2:
 				{
-		            new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+		            new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 					switch(player_info[playerid][CHATS])
 					{
 					    case 1: chat = "{02d402}Стандарт";
@@ -5441,8 +5418,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 					ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
                     vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-					format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-					SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+					format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+					SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
 				}
 				case 4:
 				{
@@ -5485,10 +5462,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
 				{
-				    new string[502];
-				    format(string, sizeof(string), "{FFFFFF}В этом разделе вы можете использовать дополнительные\nвозможности сервера. Чтобы получить к ним доступ,\nнеобходимо пополнить свой игровой счёт. Описание всех\nдополнительных возможностей, а также о способах\nпополнения счёта вы можете узнать на нашем сайте:\n{02dc72}advance-rp.ru (раздел \"Донат\")\n\n");
-				    format(string, sizeof(string), "%s{3488df}Информация:{FFFFFF}\nНомер аккаунта:\t\t\t%d\nТекущее состояние счёта:\t\t%d.00 руб.\nПоследнее пополнение:\t\t0.00 руб.\nОбщая сумма пополнений:\t\t0.00 руб.\nПримечание:", string, player_info[playerid][ID], player_info[playerid][DMONEY]);
-				    SPD(playerid, 95, DIALOG_STYLE_MSGBOX, "{fbff9e}Дополнительные возможности (донат)", string, "Просмотр", "Назад");
+				    format(g_string, sizeof(g_string), "{FFFFFF}В этом разделе вы можете использовать дополнительные\nвозможности сервера. Чтобы получить к ним доступ,\nнеобходимо пополнить свой игровой счёт. Описание всех\nдополнительных возможностей, а также о способах\nпополнения счёта вы можете узнать на нашем сайте:\n{02dc72}advance-rp.ru (раздел \"Донат\")\n\n");
+				    format(g_string, sizeof(g_string), "%s{3488df}Информация:{FFFFFF}\nНомер аккаунта:\t\t\t%d\nТекущее состояние счёта:\t\t%d.00 руб.\nПоследнее пополнение:\t\t0.00 руб.\nОбщая сумма пополнений:\t\t0.00 руб.\nПримечание:", g_string, player_info[playerid][ID], player_info[playerid][DMONEY]);
+				    SPD(playerid, 95, DIALOG_STYLE_MSGBOX, "{fbff9e}Дополнительные возможности (донат)", g_string, "Просмотр", "Назад");
 				}
 		    }
 		}
@@ -5503,220 +5479,220 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 				case 0:
 				{
-				    new string[734] = !"Advance RolePlay - один из самых популярных проектов\n";
-				    strcat(string, !"многопользовательской GTA San Andreas Multiplayer. В настоящее\n");
-				    strcat(string, !"время у нас работают 9 серверов, а увлекательные особенности игрового\n");
-				    strcat(string, !"процесса привлекают все больше и больше новых игроков.\n");
-				    strcat(string, !"Мы постарались объединить лучшие элементы ролевой игры SA-MP с\n");
-				    strcat(string, !"новыми идеями и  возможностями. Вы сможете выбрать любимую\n");
-				    strcat(string, !"работу, или даже открыть свой собственный бизнес, зарабатывая\n");
-				    strcat(string, !"неплохие деньги. Может Вам захочется вступить в одну из организаций\n");
-				    strcat(string, !"и начать карьерный рост. Или же можно просто приятно провести\n");
-				    strcat(string, !"время, приняв участие в гонках, или сыграв с друзьями в морской бой\n");
-				    strcat(string, !"Мы уверены, что Advance RolePlay поможет вам приятно провести\n");
-				    strcat(string, !"пару свободных часов за онлайн-игрой!");
-					SPD(playerid, 13, DIALOG_STYLE_MSGBOX, "{FFDF0F}1. О проекте", string, "<< Меню", "Далее >>");
+				    g_string = !"Advance RolePlay - один из самых популярных проектов\n";
+				    strcat(g_string, !"многопользовательской GTA San Andreas Multiplayer. В настоящее\n");
+				    strcat(g_string, !"время у нас работают 9 серверов, а увлекательные особенности игрового\n");
+				    strcat(g_string, !"процесса привлекают все больше и больше новых игроков.\n");
+				    strcat(g_string, !"Мы постарались объединить лучшие элементы ролевой игры SA-MP с\n");
+				    strcat(g_string, !"новыми идеями и  возможностями. Вы сможете выбрать любимую\n");
+				    strcat(g_string, !"работу, или даже открыть свой собственный бизнес, зарабатывая\n");
+				    strcat(g_string, !"неплохие деньги. Может Вам захочется вступить в одну из организаций\n");
+				    strcat(g_string, !"и начать карьерный рост. Или же можно просто приятно провести\n");
+				    strcat(g_string, !"время, приняв участие в гонках, или сыграв с друзьями в морской бой\n");
+				    strcat(g_string, !"Мы уверены, что Advance RolePlay поможет вам приятно провести\n");
+				    strcat(g_string, !"пару свободных часов за онлайн-игрой!");
+					SPD(playerid, 13, DIALOG_STYLE_MSGBOX, "{FFDF0F}1. О проекте", g_string, "<< Меню", "Далее >>");
 				}
 				case 1:
 				{
-                    new string[461] = !"Ваш аккаунт - это ваша собственность. Никому не давайте свой пароль,\n";
-                    strcat(string, !"иначе Вы рискуете утратить все свои достижения. Не скачивайте\n");
-                    strcat(string, !"дополнительные программы - моды, читы, трейнеры. Все они\n");
-                    strcat(string, !"создаются злоумышленниками только с одной целью - заполучить\n");
-                    strcat(string, !"доступ к Вашему аккаунту\n");
-                    strcat(string, !"Игроки Advance RolePlay могут использовать расширенные настройки\n");
-                    strcat(string, !"безопасности, которые практически исключает возможность взлома.\n");
-                    strcat(string, !"Подробнее: команда /menu > Настройки безопасности.");
-					SPD(playerid, 14, DIALOG_STYLE_MSGBOX, "{FFDF0F}2. Безопасность", string, "<< Меню", "Далее >>");
+                    g_string = !"Ваш аккаунт - это ваша собственность. Никому не давайте свой пароль,\n";
+                    strcat(g_string, !"иначе Вы рискуете утратить все свои достижения. Не скачивайте\n");
+                    strcat(g_string, !"дополнительные программы - моды, читы, трейнеры. Все они\n");
+                    strcat(g_string, !"создаются злоумышленниками только с одной целью - заполучить\n");
+                    strcat(g_string, !"доступ к Вашему аккаунту\n");
+                    strcat(g_string, !"Игроки Advance RolePlay могут использовать расширенные настройки\n");
+                    strcat(g_string, !"безопасности, которые практически исключает возможность взлома.\n");
+                    strcat(g_string, !"Подробнее: команда /menu > Настройки безопасности.");
+					SPD(playerid, 14, DIALOG_STYLE_MSGBOX, "{FFDF0F}2. Безопасность", g_string, "<< Меню", "Далее >>");
 				}
 				case 2:
 				{
-				    new string[606] = !"Играя на сервере, Вы получаете очки опыта. При накоплении их\n";
-				    strcat(string, !"определённого количества происходит переход на следующий уровень.\n");
-				    strcat(string, !"С каждым новым уровнем открываются новые возможности и\n");
-				    strcat(string, !"становятся доступны более интересные функции.\n");
-				    strcat(string, !"Для просмотра статистики воспользуйтесь командой /menu. В игровом\n");
-				    strcat(string, !"Процессе постоянно нужно будет пользоваться подобными командами.\n");
-				    strcat(string, !"Они вводятся в игровой чат (F6) через косую черту, например /anim\n");
-				    strcat(string, !"/help и т. п. Введите /menu, далее выберите пункт \"Список команд\". Там\n");
-				    strcat(string, !"Расположен полный перечень команд, а также кнопка \"Описание команд\"\n");
-				    strcat(string, !"для пояснения каждой из них.");
-			 		SPD(playerid, 15, DIALOG_STYLE_MSGBOX, "{FFDF0F}3. Основы игры", string, "<< Меню", "Далее >>");
+				    g_string = !"Играя на сервере, Вы получаете очки опыта. При накоплении их\n";
+				    strcat(g_string, !"определённого количества происходит переход на следующий уровень.\n");
+				    strcat(g_string, !"С каждым новым уровнем открываются новые возможности и\n");
+				    strcat(g_string, !"становятся доступны более интересные функции.\n");
+				    strcat(g_string, !"Для просмотра статистики воспользуйтесь командой /menu. В игровом\n");
+				    strcat(g_string, !"Процессе постоянно нужно будет пользоваться подобными командами.\n");
+				    strcat(g_string, !"Они вводятся в игровой чат (F6) через косую черту, например /anim\n");
+				    strcat(g_string, !"/help и т. п. Введите /menu, далее выберите пункт \"Список команд\". Там\n");
+				    strcat(g_string, !"Расположен полный перечень команд, а также кнопка \"Описание команд\"\n");
+				    strcat(g_string, !"для пояснения каждой из них.");
+			 		SPD(playerid, 15, DIALOG_STYLE_MSGBOX, "{FFDF0F}3. Основы игры", g_string, "<< Меню", "Далее >>");
 				}
 				case 3:
 				{
-				    new string[456] = !"RolePlay - это такой вид игры, в котором у каждого есть своя роль. Будь\n";
-				    strcat(string, !"то таксист, водитель автобуса или шахтёр, полицейский или мафиози,\n");
-				    strcat(string, !"член банды или военный. Каждый игрок определяет, кем он хочет быть.\n");
-				    strcat(string, !"RolePlay (RP) режим подразумевает знание некоторых правил и\n");
-				    strcat(string, !"понятий, несоблюдение которых влечёт за собой наказания. С этой\n");
-				    strcat(string, !"информацией можно ознакомиться на нашем форуме, там же можно\n");
-				    strcat(string, !"задать все интересующие Вас вопросы по игровому процессу.");
-					SPD(playerid, 16, DIALOG_STYLE_MSGBOX, "{FFDF0F}4. RolePlay", string, "<< Меню", "Далее >>");
+				    g_string = !"RolePlay - это такой вид игры, в котором у каждого есть своя роль. Будь\n";
+				    strcat(g_string, !"то таксист, водитель автобуса или шахтёр, полицейский или мафиози,\n");
+				    strcat(g_string, !"член банды или военный. Каждый игрок определяет, кем он хочет быть.\n");
+				    strcat(g_string, !"RolePlay (RP) режим подразумевает знание некоторых правил и\n");
+				    strcat(g_string, !"понятий, несоблюдение которых влечёт за собой наказания. С этой\n");
+				    strcat(g_string, !"информацией можно ознакомиться на нашем форуме, там же можно\n");
+				    strcat(g_string, !"задать все интересующие Вас вопросы по игровому процессу.");
+					SPD(playerid, 16, DIALOG_STYLE_MSGBOX, "{FFDF0F}4. RolePlay", g_string, "<< Меню", "Далее >>");
 				}
 				case 4:
 				{
-				    new string[896] = !"Первым делом необходимо заработать деньги. В государстве есть\n";
-				    strcat(string, !"предприятия, куда Вы сможете устроиться на первое время. Это шахта,\n");
-				    strcat(string, !"завод и городской склад. Работая там, Вы не только получите прибыль,\n");
-				    strcat(string, !"но и поддержите экономическую цепочку государства. А ещё Вы\n");
-				    strcat(string, !"найдёте новых друзей и получите немало удовольствия.\n");
-				    strcat(string, !"Все эти места можно найти, используя команду /gps. Добраться до\n");
-				    strcat(string, !"нужного объекта Вам поможет автобусный транспорт. Прямо с ЖД\n");
-				    strcat(string, !"вокзала ходит автобус до шахты, а до склада может подбросить любой\n");
-				    strcat(string, !"городской маршрут. Чтобы узнать подробнее о автобусных схемах,\n");
-				    strcat(string, !"введите команду /bushelp\n");
-				    strcat(string, !"После того, как Вы заработаете деньги, отправляйтесь в автошколу и\n");
-				    strcat(string, !"сдавайте экзамен на права. Они позволят купить или арендовать\n");
-				    strcat(string, !"автомобиль, устроиться на более высокооплачиваемую и интересную\n");
-				    strcat(string, !"работу. Сдача на права стоит 600$, перед поездкой в автошколу\n");
-				    strcat(string, !"убедитесь, что имеете такую сумму.");
-					SPD(playerid, 17, DIALOG_STYLE_MSGBOX, "{FFDF0F}5. Первые шаги", string, "<< Меню", "Далее >>");
+				    g_string = !"Первым делом необходимо заработать деньги. В государстве есть\n";
+				    strcat(g_string, !"предприятия, куда Вы сможете устроиться на первое время. Это шахта,\n");
+				    strcat(g_string, !"завод и городской склад. Работая там, Вы не только получите прибыль,\n");
+				    strcat(g_string, !"но и поддержите экономическую цепочку государства. А ещё Вы\n");
+				    strcat(g_string, !"найдёте новых друзей и получите немало удовольствия.\n");
+				    strcat(g_string, !"Все эти места можно найти, используя команду /gps. Добраться до\n");
+				    strcat(g_string, !"нужного объекта Вам поможет автобусный транспорт. Прямо с ЖД\n");
+				    strcat(g_string, !"вокзала ходит автобус до шахты, а до склада может подбросить любой\n");
+				    strcat(g_string, !"городской маршрут. Чтобы узнать подробнее о автобусных схемах,\n");
+				    strcat(g_string, !"введите команду /bushelp\n");
+				    strcat(g_string, !"После того, как Вы заработаете деньги, отправляйтесь в автошколу и\n");
+				    strcat(g_string, !"сдавайте экзамен на права. Они позволят купить или арендовать\n");
+				    strcat(g_string, !"автомобиль, устроиться на более высокооплачиваемую и интересную\n");
+				    strcat(g_string, !"работу. Сдача на права стоит 600$, перед поездкой в автошколу\n");
+				    strcat(g_string, !"убедитесь, что имеете такую сумму.");
+					SPD(playerid, 17, DIALOG_STYLE_MSGBOX, "{FFDF0F}5. Первые шаги", g_string, "<< Меню", "Далее >>");
 				}
 				case 5:
 				{
-				    new string[723] = !"Во время игры вам постоянно придётся взаимодействовать с людьми. Существует 2\n";
-				    strcat(string, !"вида чатов:\n");
-				    strcat(string, !"\t1. IC (In Character) - общение внутри игры и только для внутренних игровых\n");
-				    strcat(string, !"\tситуаций. Чат вызывается клавишей F6.\n");
-				    strcat(string, !"\t2. OOC (Out Of Character) - всё, что касается реального, не игрового мира.\n");
-				    strcat(string, !"\tНажмите F6, далее введите команду /n и своё сообщение. Оно выделится в\n");
-				    strcat(string, !"\tдвойные скобки.\n");
-				    strcat(string, !"Помимо этого, существуют много других способов общения. Вы можете звонить по\n");
-				    strcat(string, !"телефону или отправлять SMS сообщения. Вступив в организацию, появится\n");
-				    strcat(string, !"возможность связываться с сотрудниками по рации, а также масса других\n");
-				    strcat(string, !"интересных функций.\n");
-				    strcat(string, !"Информацию о командах общения можете узнать в соответствующем разделе меню:\n");
-				    strcat(string, !"/menu > Список команд");
-					SPD(playerid, 18, DIALOG_STYLE_MSGBOX, "{FFDF0F}6. Общение", string, "<< Меню", "Далее >>");
+				    g_string = !"Во время игры вам постоянно придётся взаимодействовать с людьми. Существует 2\n";
+				    strcat(g_string, !"вида чатов:\n");
+				    strcat(g_string, !"\t1. IC (In Character) - общение внутри игры и только для внутренних игровых\n");
+				    strcat(g_string, !"\tситуаций. Чат вызывается клавишей F6.\n");
+				    strcat(g_string, !"\t2. OOC (Out Of Character) - всё, что касается реального, не игрового мира.\n");
+				    strcat(g_string, !"\tНажмите F6, далее введите команду /n и своё сообщение. Оно выделится в\n");
+				    strcat(g_string, !"\tдвойные скобки.\n");
+				    strcat(g_string, !"Помимо этого, существуют много других способов общения. Вы можете звонить по\n");
+				    strcat(g_string, !"телефону или отправлять SMS сообщения. Вступив в организацию, появится\n");
+				    strcat(g_string, !"возможность связываться с сотрудниками по рации, а также масса других\n");
+				    strcat(g_string, !"интересных функций.\n");
+				    strcat(g_string, !"Информацию о командах общения можете узнать в соответствующем разделе меню:\n");
+				    strcat(g_string, !"/menu > Список команд");
+					SPD(playerid, 18, DIALOG_STYLE_MSGBOX, "{FFDF0F}6. Общение", g_string, "<< Меню", "Далее >>");
 				}
 				case 6:
 				{
-				    new string[691] = !"Транспортная система - одна из важнейших в стране. С её помощью возможна\n";
-				    strcat(string, !"стабильная работа большинства предприятий и организаций.\n");
-				    strcat(string, !"Основной вид транспорта - это автобус. Маршруты проложены по всему\n");
-				    strcat(string, !"государству и связывают все населённые пункты и предприятия.\n");
-				    strcat(string, !"Такси - наиболее удобный вид транспорта. Вы сможете добраться до любого места,\n");
-				    strcat(string, !"однако такая поездка будет стоить значительно дороже, чем на автобусе.\n");
-				    strcat(string, !"Поезд - быстрый и недорогой вид транспорта. Вы за несколько минут сможете\n");
-				    strcat(string, !"добраться до любой станции, но составы курсируют не так часто.\n");
-				    strcat(string, !"Государственной транспортной компании всегда требуются новые работники. О\n");
-				    strcat(string, !"вакансиях и требованиях можно узнать в ближайшей мерии (/gps).");
-					SPD(playerid, 19, DIALOG_STYLE_MSGBOX, "{FFDF0F}7. Транспорт", string, "<< Меню", "Далее >>");
+				    g_string = !"Транспортная система - одна из важнейших в стране. С её помощью возможна\n";
+				    strcat(g_string, !"стабильная работа большинства предприятий и организаций.\n");
+				    strcat(g_string, !"Основной вид транспорта - это автобус. Маршруты проложены по всему\n");
+				    strcat(g_string, !"государству и связывают все населённые пункты и предприятия.\n");
+				    strcat(g_string, !"Такси - наиболее удобный вид транспорта. Вы сможете добраться до любого места,\n");
+				    strcat(g_string, !"однако такая поездка будет стоить значительно дороже, чем на автобусе.\n");
+				    strcat(g_string, !"Поезд - быстрый и недорогой вид транспорта. Вы за несколько минут сможете\n");
+				    strcat(g_string, !"добраться до любой станции, но составы курсируют не так часто.\n");
+				    strcat(g_string, !"Государственной транспортной компании всегда требуются новые работники. О\n");
+				    strcat(g_string, !"вакансиях и требованиях можно узнать в ближайшей мерии (/gps).");
+					SPD(playerid, 19, DIALOG_STYLE_MSGBOX, "{FFDF0F}7. Транспорт", g_string, "<< Меню", "Далее >>");
 				}
 				case 7:
 				{
-				    new string[578] = !"Вся игровая жизнь проходит под контролем правительства -\n";
-				    strcat(string, !"основной организации в государстве. В её состав входят мерии трёх\n");
-				    strcat(string, !"городов и администрация Президента. Раз в месяц проходят\n");
-				    strcat(string, !"выборы, где каждый имеет право голоса. А перед этим проводится не\n");
-				    strcat(string, !"менее интересная избирательная кампания, где кандидаты на пост\n");
-				    strcat(string, !"президента устраивают дебаты, концерты и митинги, завоёвывая\n");
-				    strcat(string, !"своих новых избирателей...\n");
-				    strcat(string, !"Государственную систему и её значение не опишешь несколькими\n");
-				    strcat(string, !"предложениями. Политическая жизнь необычайно насыщенная, и Вы\n");
-				    strcat(string, !"сами убедитесь в этом с первых дней жизни у нас!");
-					SPD(playerid, 20, DIALOG_STYLE_MSGBOX, "{FFDF0F}8. Государственная система", string, "<< Меню", "Далее >>");
+				    g_string = !"Вся игровая жизнь проходит под контролем правительства -\n";
+				    strcat(g_string, !"основной организации в государстве. В её состав входят мерии трёх\n");
+				    strcat(g_string, !"городов и администрация Президента. Раз в месяц проходят\n");
+				    strcat(g_string, !"выборы, где каждый имеет право голоса. А перед этим проводится не\n");
+				    strcat(g_string, !"менее интересная избирательная кампания, где кандидаты на пост\n");
+				    strcat(g_string, !"президента устраивают дебаты, концерты и митинги, завоёвывая\n");
+				    strcat(g_string, !"своих новых избирателей...\n");
+				    strcat(g_string, !"Государственную систему и её значение не опишешь несколькими\n");
+				    strcat(g_string, !"предложениями. Политическая жизнь необычайно насыщенная, и Вы\n");
+				    strcat(g_string, !"сами убедитесь в этом с первых дней жизни у нас!");
+					SPD(playerid, 20, DIALOG_STYLE_MSGBOX, "{FFDF0F}8. Государственная система", g_string, "<< Меню", "Далее >>");
 				}
 				case 8:
 				{
-				    new string[642] = !"По всему государству расположены жилые дома, которые можно купить.\n";
-				    strcat(string, !"Каждый дом имеет свою стоимость, которую определяют множество\n");
-				    strcat(string, !"факторов. Можно купить вагончик за небольшие деньги, или отдать\n");
-				    strcat(string, !"миллионы за роскошный особняк в элитном районе.\n");
-				    strcat(string, !"Если у вас есть дом, то вы сможете приобрести машину, или купить\n");
-				    strcat(string, !"дополнительные улучшения, такие как шкаф ждя хранения вещей или\n");
-				    strcat(string, !"автоматические двери. И это только некоторые возможности жилья.\n");
-				    strcat(string, !"В зависимости от престижности дома, с Вас будет взиматься ежедневная\n");
-				    strcat(string, !"квартплата. Если долгое время на счету будет сохраняться отрицательный\n");
-				    strcat(string, !"баланс, есть вероятность, что работники мэрии выселят вас.");
-					SPD(playerid, 21, DIALOG_STYLE_MSGBOX, "{FFDF0F}9. Жильё", string, "<< Меню", "Далее >>");
+				    g_string = !"По всему государству расположены жилые дома, которые можно купить.\n";
+				    strcat(g_string, !"Каждый дом имеет свою стоимость, которую определяют множество\n");
+				    strcat(g_string, !"факторов. Можно купить вагончик за небольшие деньги, или отдать\n");
+				    strcat(g_string, !"миллионы за роскошный особняк в элитном районе.\n");
+				    strcat(g_string, !"Если у вас есть дом, то вы сможете приобрести машину, или купить\n");
+				    strcat(g_string, !"дополнительные улучшения, такие как шкаф ждя хранения вещей или\n");
+				    strcat(g_string, !"автоматические двери. И это только некоторые возможности жилья.\n");
+				    strcat(g_string, !"В зависимости от престижности дома, с Вас будет взиматься ежедневная\n");
+				    strcat(g_string, !"квартплата. Если долгое время на счету будет сохраняться отрицательный\n");
+				    strcat(g_string, !"баланс, есть вероятность, что работники мэрии выселят вас.");
+					SPD(playerid, 21, DIALOG_STYLE_MSGBOX, "{FFDF0F}9. Жильё", g_string, "<< Меню", "Далее >>");
 				}
 				case 9:
 				{
-				    new string[908] = !"Вы можете открыть собственный бизнес, и заработать неплохие\n";
-				    strcat(string, !"деньги. Это может быть небольшая пекарня, магазин одежды или\n");
-				    strcat(string, !"развлекательный центр, столовая, парикмахерская, либо обычная\n");
-				    strcat(string, !"продуктовая лавка. Или вы захотите стать совладельцем крупной сети\n");
-				    strcat(string, !"супермаркетов, ресторанов или театров. В нашей стране существует\n");
-				    strcat(string, !"огромное количество разнообразных предприятий.\n");
-				    strcat(string, !"Имея бизнес, перед Вами открывается большие возможности для\n");
-				    strcat(string, !"привлечения новых клиентов, что будет постоянно повышать Ваши\n");
-				    strcat(string, !"доходы. Вы сможете регулировать цены, улучшать различные\n");
-				    strcat(string, !"характеристики своего предприятия, одновременно проводя борьбу с\n");
-				    strcat(string, !"конкурентами.\n");
-				    strcat(string, !"АЗС (автозаправочные станции) - особый тип бизнеса, доходы от\n");
-				    strcat(string, !"которого значительно выше, чем от обычных предприятий. Для\n");
-				    strcat(string, !"нормальной работы АЗС нужно постоянно заключать контракты со\n");
-				    strcat(string, !"cлужбой доставки топлива. Бизнесмен может владеть обычным\n");
-				    strcat(string, !"предприятием и АЗС одновременно.");
-					SPD(playerid, 22, DIALOG_STYLE_MSGBOX, "{FFDF0F}10. Бизнес и АЗС", string, "<< Меню", "Далее >>");
+				    g_string = !"Вы можете открыть собственный бизнес, и заработать неплохие\n";
+				    strcat(g_string, !"деньги. Это может быть небольшая пекарня, магазин одежды или\n");
+				    strcat(g_string, !"развлекательный центр, столовая, парикмахерская, либо обычная\n");
+				    strcat(g_string, !"продуктовая лавка. Или вы захотите стать совладельцем крупной сети\n");
+				    strcat(g_string, !"супермаркетов, ресторанов или театров. В нашей стране существует\n");
+				    strcat(g_string, !"огромное количество разнообразных предприятий.\n");
+				    strcat(g_string, !"Имея бизнес, перед Вами открывается большие возможности для\n");
+				    strcat(g_string, !"привлечения новых клиентов, что будет постоянно повышать Ваши\n");
+				    strcat(g_string, !"доходы. Вы сможете регулировать цены, улучшать различные\n");
+				    strcat(g_string, !"характеристики своего предприятия, одновременно проводя борьбу с\n");
+				    strcat(g_string, !"конкурентами.\n");
+				    strcat(g_string, !"АЗС (автозаправочные станции) - особый тип бизнеса, доходы от\n");
+				    strcat(g_string, !"которого значительно выше, чем от обычных предприятий. Для\n");
+				    strcat(g_string, !"нормальной работы АЗС нужно постоянно заключать контракты со\n");
+				    strcat(g_string, !"cлужбой доставки топлива. Бизнесмен может владеть обычным\n");
+				    strcat(g_string, !"предприятием и АЗС одновременно.");
+					SPD(playerid, 22, DIALOG_STYLE_MSGBOX, "{FFDF0F}10. Бизнес и АЗС", g_string, "<< Меню", "Далее >>");
 				}
 				case 10:
 				{
-				    new string[829] = !"Каждый игрок получает свой счёт в банке. На него перечисляется\n";
-				    strcat(string, !"зарплата и прочие доходы. Этот счёт называется основным, и доступен в\n");
-				    strcat(string, !"любом банкомате.\n");
-				    strcat(string, !"Помимо этого, Вы можете воспользоваться услугами профессиональных\n");
-				    strcat(string, !"банков, найти которые поможет GPS. Там можно открыть до 8\n");
-				    strcat(string, !"дополнительных счетов. Каждый из них имеет свой номер, который\n");
-				    strcat(string, !"выдаётся банком при создании счёта. Зная его, любой игрок может\n");
-				    strcat(string, !"перечислить вам деньги, даже если вы оффлайн. Например, можно");
-				    strcat(string, !"создать счёт с названием \"Благотворительность\", написать об открытии\n");
-				    strcat(string, !"благотворительной организации через СМИ, сообщить номер счёта, и\n");
-				    strcat(string, !"любой сможет перечислить на него деньги в отделении банка или через\n");
-				    strcat(string, !"банкомат.\n");
-				    strcat(string, !"Дополнительные счета можно настраивать, устанавливать защиту\n");
-				    strcat(string, !"PIN-кодом, изменять названия а также просматривать подробную\n");
-				    strcat(string, !"историю операций.");
-					SPD(playerid, 23, DIALOG_STYLE_MSGBOX, "{FFDF0F}11. Банки", string, "<< Меню", "Далее >>");
+				    g_string = !"Каждый игрок получает свой счёт в банке. На него перечисляется\n";
+				    strcat(g_string, !"зарплата и прочие доходы. Этот счёт называется основным, и доступен в\n");
+				    strcat(g_string, !"любом банкомате.\n");
+				    strcat(g_string, !"Помимо этого, Вы можете воспользоваться услугами профессиональных\n");
+				    strcat(g_string, !"банков, найти которые поможет GPS. Там можно открыть до 8\n");
+				    strcat(g_string, !"дополнительных счетов. Каждый из них имеет свой номер, который\n");
+				    strcat(g_string, !"выдаётся банком при создании счёта. Зная его, любой игрок может\n");
+				    strcat(g_string, !"перечислить вам деньги, даже если вы оффлайн. Например, можно");
+				    strcat(g_string, !"создать счёт с названием \"Благотворительность\", написать об открытии\n");
+				    strcat(g_string, !"благотворительной организации через СМИ, сообщить номер счёта, и\n");
+				    strcat(g_string, !"любой сможет перечислить на него деньги в отделении банка или через\n");
+				    strcat(g_string, !"банкомат.\n");
+				    strcat(g_string, !"Дополнительные счета можно настраивать, устанавливать защиту\n");
+				    strcat(g_string, !"PIN-кодом, изменять названия а также просматривать подробную\n");
+				    strcat(g_string, !"историю операций.");
+					SPD(playerid, 23, DIALOG_STYLE_MSGBOX, "{FFDF0F}11. Банки", g_string, "<< Меню", "Далее >>");
 				}
                 case 11:
 				{
-				    new string[987] = !"В нашей стране работает большое количество организаций. Они могут\n";
-				    strcat(string, !"быть как официальными (правительство, МВД, мин. Обороны, мин.\n");
-				    strcat(string, !"Здравоохранения, ТВ и радио), так и неофициальными (банды и мафии).\n");
-				    strcat(string, !"При достижении определённого уровня, Вы можете вступить в любую из\n");
-				    strcat(string, !"организаций. Руководство некоторых может выдвигать и дополнительные\n");
-				    strcat(string, !"требования для вступления. Например, если Вы хотите попасть в банду,\n");
-				    strcat(string, !"то Вам придётся продемонстрировать своё умение владеть оружием. А\n");
-				    strcat(string, !"если Вы видите себя в роли редактора объявлений, то нужно красиво и\n");
-				    strcat(string, !"грамотно писать. О дополнительных требованиях сообщит руководство\n");
-				    strcat(string, !"организации во время набора сотрудников.\n");
-				    strcat(string, !"После вступления, Вам будет доступно продвижение по карьерной\n");
-				    strcat(string, !"лестнице, постепенно откроются новые возможности. С каждым повышением\n");
-				    strcat(string, !"будет увеличиваться Ваша зарплата и статус в обществе. Вы найдете\n");
-				    strcat(string, !"новых друзей, а со временем сможете занять одну из руководящих\n");
-				    strcat(string, !"должностей. Жизнь в организации необычайно интересная и разнообразная!");
-					SPD(playerid, 24, DIALOG_STYLE_MSGBOX, "{FFDF0F}12. Организации", string, "<< Меню", "Далее >>");
+				    g_string = !"В нашей стране работает большое количество организаций. Они могут\n";
+				    strcat(g_string, !"быть как официальными (правительство, МВД, мин. Обороны, мин.\n");
+				    strcat(g_string, !"Здравоохранения, ТВ и радио), так и неофициальными (банды и мафии).\n");
+				    strcat(g_string, !"При достижении определённого уровня, Вы можете вступить в любую из\n");
+				    strcat(g_string, !"организаций. Руководство некоторых может выдвигать и дополнительные\n");
+				    strcat(g_string, !"требования для вступления. Например, если Вы хотите попасть в банду,\n");
+				    strcat(g_string, !"то Вам придётся продемонстрировать своё умение владеть оружием. А\n");
+				    strcat(g_string, !"если Вы видите себя в роли редактора объявлений, то нужно красиво и\n");
+				    strcat(g_string, !"грамотно писать. О дополнительных требованиях сообщит руководство\n");
+				    strcat(g_string, !"организации во время набора сотрудников.\n");
+				    strcat(g_string, !"После вступления, Вам будет доступно продвижение по карьерной\n");
+				    strcat(g_string, !"лестнице, постепенно откроются новые возможности. С каждым повышением\n");
+				    strcat(g_string, !"будет увеличиваться Ваша зарплата и статус в обществе. Вы найдете\n");
+				    strcat(g_string, !"новых друзей, а со временем сможете занять одну из руководящих\n");
+				    strcat(g_string, !"должностей. Жизнь в организации необычайно интересная и разнообразная!");
+					SPD(playerid, 24, DIALOG_STYLE_MSGBOX, "{FFDF0F}12. Организации", g_string, "<< Меню", "Далее >>");
 				}
                 case 12:
 				{
-				    new string[603] = !"В мэрии вашего города работает отдел занятости, где вы можете\n";
-				    strcat(string, !"устроиться на любую работу. Следует обратить внимание, что некоторые\n");
-				    strcat(string, !"работы доступны при достижении определённого уровня. Вы не можете\n");
-				    strcat(string, !"одновременно быть оформленным на работу в мэрии и состоять в\n");
-				    strcat(string, !"организации.\n");
-				    strcat(string, !"Помимо основных работ существуют и дополнительные. К ним относятся\n");
-				    strcat(string, !"работы на шахте, заводе и складе. Такие работы можно совмещать с\n");
-				    strcat(string, !"основными и зарабатывать больше денег. Используйте команду /gps для\n");
-				    strcat(string, !"того, чтобы найти места расположения различных работ. На месте вы\n");
-				    strcat(string, !"получите подробные инструкции, как и что следует делать.");
-					SPD(playerid, 25, DIALOG_STYLE_MSGBOX, "{FFDF0F}13. Работы", string, "<< Меню", "Далее >>");
+				    g_string = !"В мэрии вашего города работает отдел занятости, где вы можете\n";
+				    strcat(g_string, !"устроиться на любую работу. Следует обратить внимание, что некоторые\n");
+				    strcat(g_string, !"работы доступны при достижении определённого уровня. Вы не можете\n");
+				    strcat(g_string, !"одновременно быть оформленным на работу в мэрии и состоять в\n");
+				    strcat(g_string, !"организации.\n");
+				    strcat(g_string, !"Помимо основных работ существуют и дополнительные. К ним относятся\n");
+				    strcat(g_string, !"работы на шахте, заводе и складе. Такие работы можно совмещать с\n");
+				    strcat(g_string, !"основными и зарабатывать больше денег. Используйте команду /gps для\n");
+				    strcat(g_string, !"того, чтобы найти места расположения различных работ. На месте вы\n");
+				    strcat(g_string, !"получите подробные инструкции, как и что следует делать.");
+					SPD(playerid, 25, DIALOG_STYLE_MSGBOX, "{FFDF0F}13. Работы", g_string, "<< Меню", "Далее >>");
 				}
                 case 13:
 				{
-				    new string[592] = !"Если у вас появилось свободное время и желание, то рекомендуем вам\n";
-				    strcat(string, !"посетить одно из развлекательных мероприятий. Каждые 3 часа\n");
-				    strcat(string, !"проводятся гонки, поучаствовать в которых может любой желающий.\n");
-				    strcat(string, !"Сейчас команда разработчиков готовит и другие, не менее\n");
-				    strcat(string, !"интересные развлечения!\n");
-				    strcat(string, !"Помимо событий по расписанию, администраторы сервера очень часто\n");
-				    strcat(string, !"проводят разного рода мероприятия, участвовать в которых не только\n");
-				    strcat(string, !"интересно, но и выгодно - победители получают ценные подарки.\n");
-				    strcat(string, !"О проведении того или иного развлекательного мероприятия вы узнаете\n");
-				    strcat(string, !"заранее из информационных сообщений в общем чате.");
-					SPD(playerid, 26, DIALOG_STYLE_MSGBOX, "{FFDF0F}14. Развлечения", string, "<< Меню", "");
+				    g_string = !"Если у вас появилось свободное время и желание, то рекомендуем вам\n";
+				    strcat(g_string, !"посетить одно из развлекательных мероприятий. Каждые 3 часа\n");
+				    strcat(g_string, !"проводятся гонки, поучаствовать в которых может любой желающий.\n");
+				    strcat(g_string, !"Сейчас команда разработчиков готовит и другие, не менее\n");
+				    strcat(g_string, !"интересные развлечения!\n");
+				    strcat(g_string, !"Помимо событий по расписанию, администраторы сервера очень часто\n");
+				    strcat(g_string, !"проводят разного рода мероприятия, участвовать в которых не только\n");
+				    strcat(g_string, !"интересно, но и выгодно - победители получают ценные подарки.\n");
+				    strcat(g_string, !"О проведении того или иного развлекательного мероприятия вы узнаете\n");
+				    strcat(g_string, !"заранее из информационных сообщений в общем чате.");
+					SPD(playerid, 26, DIALOG_STYLE_MSGBOX, "{FFDF0F}14. Развлечения", g_string, "<< Меню", "");
 				}
 		    }
 		}
@@ -5728,15 +5704,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-          		new string[461] = !"Ваш аккаунт - это ваша собственность. Никому не давайте свой пароль,\n";
-                strcat(string, !"иначе Вы рискуете утратить все свои достижения. Не скачивайте\n");
-                strcat(string, !"дополнительные программы - моды, читы, трейнеры. Все они\n");
-                strcat(string, !"создаются злоумышленниками только с одной целью - заполучить\n");
-                strcat(string, !"доступ к Вашему аккаунту\n");
-                strcat(string, !"Игроки Advance RolePlay могут использовать расширенные настройки\n");
-                strcat(string, !"безопасности, которые практически исключает возможность взлома.\n");
-                strcat(string, !"Подробнее: команда /menu > Настройки безопасности.");
-				SPD(playerid, 14, DIALOG_STYLE_MSGBOX, "{FFDF0F}2. Безопасность", string, "<< Меню", "Далее >>");
+          		g_string = !"Ваш аккаунт - это ваша собственность. Никому не давайте свой пароль,\n";
+                strcat(g_string, !"иначе Вы рискуете утратить все свои достижения. Не скачивайте\n");
+                strcat(g_string, !"дополнительные программы - моды, читы, трейнеры. Все они\n");
+                strcat(g_string, !"создаются злоумышленниками только с одной целью - заполучить\n");
+                strcat(g_string, !"доступ к Вашему аккаунту\n");
+                strcat(g_string, !"Игроки Advance RolePlay могут использовать расширенные настройки\n");
+                strcat(g_string, !"безопасности, которые практически исключает возможность взлома.\n");
+                strcat(g_string, !"Подробнее: команда /menu > Настройки безопасности.");
+				SPD(playerid, 14, DIALOG_STYLE_MSGBOX, "{FFDF0F}2. Безопасность", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 14:
@@ -5747,17 +5723,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[606] = !"Играя на сервере, Вы получаете очки опыта. При накоплении их\n";
-			    strcat(string, !"определённого количества происходит переход на следующий уровень.\n");
-			    strcat(string, !"С каждым новым уровнем открываются новые возможности и\n");
-			    strcat(string, !"становятся доступны более интересные функции.\n");
-			    strcat(string, !"Для просмотра статистики воспользуйтесь командой /menu. В игровом\n");
-			    strcat(string, !"Процессе постоянно нужно будет пользоваться подобными командами.\n");
-			    strcat(string, !"Они вводятся в игровой чат (F6) через косую черту, например /anim\n");
-			    strcat(string, !"/help и т. п. Введите /menu, далее выберите пункт \"Список команд\". Там\n");
-			    strcat(string, !"Расположен полный перечень команд, а также кнопка \"Описание команд\"\n");
-			    strcat(string, !"для пояснения каждой из них.");
-		 		SPD(playerid, 15, DIALOG_STYLE_MSGBOX, "{FFDF0F}3. Основы игры", string, "<< Меню", "Далее >>");
+		        g_string = !"Играя на сервере, Вы получаете очки опыта. При накоплении их\n";
+			    strcat(g_string, !"определённого количества происходит переход на следующий уровень.\n");
+			    strcat(g_string, !"С каждым новым уровнем открываются новые возможности и\n");
+			    strcat(g_string, !"становятся доступны более интересные функции.\n");
+			    strcat(g_string, !"Для просмотра статистики воспользуйтесь командой /menu. В игровом\n");
+			    strcat(g_string, !"Процессе постоянно нужно будет пользоваться подобными командами.\n");
+			    strcat(g_string, !"Они вводятся в игровой чат (F6) через косую черту, например /anim\n");
+			    strcat(g_string, !"/help и т. п. Введите /menu, далее выберите пункт \"Список команд\". Там\n");
+			    strcat(g_string, !"Расположен полный перечень команд, а также кнопка \"Описание команд\"\n");
+			    strcat(g_string, !"для пояснения каждой из них.");
+		 		SPD(playerid, 15, DIALOG_STYLE_MSGBOX, "{FFDF0F}3. Основы игры", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 15:
@@ -5768,14 +5744,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[456] = !"RolePlay - это такой вид игры, в котором у каждого есть своя роль. Будь\n";
-			    strcat(string, !"то таксист, водитель автобуса или шахтёр, полицейский или мафиози,\n");
-			    strcat(string, !"член банды или военный. Каждый игрок определяет, кем он хочет быть.\n");
-			    strcat(string, !"RolePlay (RP) режим подразумевает знание некоторых правил и\n");
-			    strcat(string, !"понятий, несоблюдение которых влечёт за собой наказания. С этой\n");
-			    strcat(string, !"информацией можно ознакомиться на нашем форуме, там же можно\n");
-			    strcat(string, !"задать все интересующие Вас вопросы по игровому процессу.");
-				SPD(playerid, 16, DIALOG_STYLE_MSGBOX, "{FFDF0F}4. RolePlay", string, "<< Меню", "Далее >>");
+		        g_string = !"RolePlay - это такой вид игры, в котором у каждого есть своя роль. Будь\n";
+			    strcat(g_string, !"то таксист, водитель автобуса или шахтёр, полицейский или мафиози,\n");
+			    strcat(g_string, !"член банды или военный. Каждый игрок определяет, кем он хочет быть.\n");
+			    strcat(g_string, !"RolePlay (RP) режим подразумевает знание некоторых правил и\n");
+			    strcat(g_string, !"понятий, несоблюдение которых влечёт за собой наказания. С этой\n");
+			    strcat(g_string, !"информацией можно ознакомиться на нашем форуме, там же можно\n");
+			    strcat(g_string, !"задать все интересующие Вас вопросы по игровому процессу.");
+				SPD(playerid, 16, DIALOG_STYLE_MSGBOX, "{FFDF0F}4. RolePlay", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 16:
@@ -5786,22 +5762,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[896] = !"Первым делом необходимо заработать деньги. В государстве есть\n";
-			    strcat(string, !"предприятия, куда Вы сможете устроиться на первое время. Это шахта,\n");
-			    strcat(string, !"завод и городской склад. Работая там, Вы не только получите прибыль,\n");
-			    strcat(string, !"но и поддержите экономическую цепочку государства. А ещё Вы\n");
-			    strcat(string, !"найдёте новых друзей и получите немало удовольствия.\n");
-			    strcat(string, !"Все эти места можно найти, используя команду /gps. Добраться до\n");
-			    strcat(string, !"нужного объекта Вам поможет автобусный транспорт. Прямо с ЖД\n");
-			    strcat(string, !"вокзала ходит автобус до шахты, а до склада может подбросить любой\n");
-			    strcat(string, !"городской маршрут. Чтобы узнать подробнее о автобусных схемах,\n");
-			    strcat(string, !"введите команду /bushelp\n");
-			    strcat(string, !"После того, как Вы заработаете деньги, отправляйтесь в автошколу и\n");
-			    strcat(string, !"сдавайте экзамен на права. Они позволят купить или арендовать\n");
-			    strcat(string, !"автомобиль, устроиться на более высокооплачиваемую и интересную\n");
-			    strcat(string, !"работу. Сдача на права стоит 600$, перед поездкой в автошколу\n");
-			    strcat(string, !"убедитесь, что имеете такую сумму.");
-				SPD(playerid, 17, DIALOG_STYLE_MSGBOX, "{FFDF0F}5. Первые шаги", string, "<< Меню", "Далее >>");
+		        g_string = !"Первым делом необходимо заработать деньги. В государстве есть\n";
+			    strcat(g_string, !"предприятия, куда Вы сможете устроиться на первое время. Это шахта,\n");
+			    strcat(g_string, !"завод и городской склад. Работая там, Вы не только получите прибыль,\n");
+			    strcat(g_string, !"но и поддержите экономическую цепочку государства. А ещё Вы\n");
+			    strcat(g_string, !"найдёте новых друзей и получите немало удовольствия.\n");
+			    strcat(g_string, !"Все эти места можно найти, используя команду /gps. Добраться до\n");
+			    strcat(g_string, !"нужного объекта Вам поможет автобусный транспорт. Прямо с ЖД\n");
+			    strcat(g_string, !"вокзала ходит автобус до шахты, а до склада может подбросить любой\n");
+			    strcat(g_string, !"городской маршрут. Чтобы узнать подробнее о автобусных схемах,\n");
+			    strcat(g_string, !"введите команду /bushelp\n");
+			    strcat(g_string, !"После того, как Вы заработаете деньги, отправляйтесь в автошколу и\n");
+			    strcat(g_string, !"сдавайте экзамен на права. Они позволят купить или арендовать\n");
+			    strcat(g_string, !"автомобиль, устроиться на более высокооплачиваемую и интересную\n");
+			    strcat(g_string, !"работу. Сдача на права стоит 600$, перед поездкой в автошколу\n");
+			    strcat(g_string, !"убедитесь, что имеете такую сумму.");
+				SPD(playerid, 17, DIALOG_STYLE_MSGBOX, "{FFDF0F}5. Первые шаги", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 17:
@@ -5812,20 +5788,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[723] = !"Во время игры вам постоянно придётся взаимодействовать с людьми. Существует 2\n";
-			    strcat(string, !"вида чатов:\n");
-			    strcat(string, !"\t1. IC (In Character) - общение внутри игры и только для внутренних игровых\n");
-			    strcat(string, !"\tситуаций. Чат вызывается клавишей F6.\n");
-			    strcat(string, !"\t2. OOC (Out Of Character) - всё, что касается реального, не игрового мира.\n");
-			    strcat(string, !"\tНажмите F6, далее введите команду /n и своё сообщение. Оно выделится в\n");
-			    strcat(string, !"\tдвойные скобки.\n");
-			    strcat(string, !"Помимо этого, существуют много других способов общения. Вы можете звонить по\n");
-			    strcat(string, !"телефону или отправлять SMS сообщения. Вступив в организацию, появится\n");
-			    strcat(string, !"возможность связываться с сотрудниками по рации, а также масса других\n");
-			    strcat(string, !"интересных функций.\n");
-			    strcat(string, !"Информацию о командах общения можете узнать в соответствующем разделе меню:\n");
-			    strcat(string, !"/menu > Список команд");
-				SPD(playerid, 18, DIALOG_STYLE_MSGBOX, "{FFDF0F}6. Общение", string, "<< Меню", "Далее >>");
+		        g_string = !"Во время игры вам постоянно придётся взаимодействовать с людьми. Существует 2\n";
+			    strcat(g_string, !"вида чатов:\n");
+			    strcat(g_string, !"\t1. IC (In Character) - общение внутри игры и только для внутренних игровых\n");
+			    strcat(g_string, !"\tситуаций. Чат вызывается клавишей F6.\n");
+			    strcat(g_string, !"\t2. OOC (Out Of Character) - всё, что касается реального, не игрового мира.\n");
+			    strcat(g_string, !"\tНажмите F6, далее введите команду /n и своё сообщение. Оно выделится в\n");
+			    strcat(g_string, !"\tдвойные скобки.\n");
+			    strcat(g_string, !"Помимо этого, существуют много других способов общения. Вы можете звонить по\n");
+			    strcat(g_string, !"телефону или отправлять SMS сообщения. Вступив в организацию, появится\n");
+			    strcat(g_string, !"возможность связываться с сотрудниками по рации, а также масса других\n");
+			    strcat(g_string, !"интересных функций.\n");
+			    strcat(g_string, !"Информацию о командах общения можете узнать в соответствующем разделе меню:\n");
+			    strcat(g_string, !"/menu > Список команд");
+				SPD(playerid, 18, DIALOG_STYLE_MSGBOX, "{FFDF0F}6. Общение", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 18:
@@ -5836,17 +5812,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[691] = !"Транспортная система - одна из важнейших в стране. С её помощью возможна\n";
-			    strcat(string, !"стабильная работа большинства предприятий и организаций.\n");
-			    strcat(string, !"Основной вид транспорта - это автобус. Маршруты проложены по всему\n");
-			    strcat(string, !"государству и связывают все населённые пункты и предприятия.\n");
-			    strcat(string, !"Такси - наиболее удобный вид транспорта. Вы сможете добраться до любого места,\n");
-			    strcat(string, !"однако такая поездка будет стоить значительно дороже, чем на автобусе.\n");
-			    strcat(string, !"Поезд - быстрый и недорогой вид транспорта. Вы за несколько минут сможете\n");
-			    strcat(string, !"добраться до любой станции, но составы курсируют не так часто.\n");
-			    strcat(string, !"Государственной транспортной компании всегда требуются новые работники. О\n");
-			    strcat(string, !"вакансиях и требованиях можно узнать в ближайшей мерии (/gps).");
-				SPD(playerid, 19, DIALOG_STYLE_MSGBOX, "{FFDF0F}7. Транспорт", string, "<< Меню", "Далее >>");
+		        g_string = !"Транспортная система - одна из важнейших в стране. С её помощью возможна\n";
+			    strcat(g_string, !"стабильная работа большинства предприятий и организаций.\n");
+			    strcat(g_string, !"Основной вид транспорта - это автобус. Маршруты проложены по всему\n");
+			    strcat(g_string, !"государству и связывают все населённые пункты и предприятия.\n");
+			    strcat(g_string, !"Такси - наиболее удобный вид транспорта. Вы сможете добраться до любого места,\n");
+			    strcat(g_string, !"однако такая поездка будет стоить значительно дороже, чем на автобусе.\n");
+			    strcat(g_string, !"Поезд - быстрый и недорогой вид транспорта. Вы за несколько минут сможете\n");
+			    strcat(g_string, !"добраться до любой станции, но составы курсируют не так часто.\n");
+			    strcat(g_string, !"Государственной транспортной компании всегда требуются новые работники. О\n");
+			    strcat(g_string, !"вакансиях и требованиях можно узнать в ближайшей мерии (/gps).");
+				SPD(playerid, 19, DIALOG_STYLE_MSGBOX, "{FFDF0F}7. Транспорт", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 19:
@@ -5857,17 +5833,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[578] = !"Вся игровая жизнь проходит под контролем правительства -\n";
-			    strcat(string, !"основной организации в государстве. В её состав входят мерии трёх\n");
-			    strcat(string, !"городов и администрация Президента. Раз в месяц проходят\n");
-			    strcat(string, !"выборы, где каждый имеет право голоса. А перед этим проводится не\n");
-			    strcat(string, !"менее интересная избирательная кампания, где кандидаты на пост\n");
-			    strcat(string, !"президента устраивают дебаты, концерты и митинги, завоёвывая\n");
-			    strcat(string, !"своих новых избирателей...\n");
-			    strcat(string, !"Государственную систему и её значение не опишешь несколькими\n");
-			    strcat(string, !"предложениями. Политическая жизнь необычайно насыщенная, и Вы\n");
-			    strcat(string, !"сами убедитесь в этом с первых дней жизни у нас!");
-				SPD(playerid, 20, DIALOG_STYLE_MSGBOX, "{FFDF0F}8. Государственная система", string, "<< Меню", "Далее >>");
+		        g_string = !"Вся игровая жизнь проходит под контролем правительства -\n";
+			    strcat(g_string, !"основной организации в государстве. В её состав входят мерии трёх\n");
+			    strcat(g_string, !"городов и администрация Президента. Раз в месяц проходят\n");
+			    strcat(g_string, !"выборы, где каждый имеет право голоса. А перед этим проводится не\n");
+			    strcat(g_string, !"менее интересная избирательная кампания, где кандидаты на пост\n");
+			    strcat(g_string, !"президента устраивают дебаты, концерты и митинги, завоёвывая\n");
+			    strcat(g_string, !"своих новых избирателей...\n");
+			    strcat(g_string, !"Государственную систему и её значение не опишешь несколькими\n");
+			    strcat(g_string, !"предложениями. Политическая жизнь необычайно насыщенная, и Вы\n");
+			    strcat(g_string, !"сами убедитесь в этом с первых дней жизни у нас!");
+				SPD(playerid, 20, DIALOG_STYLE_MSGBOX, "{FFDF0F}8. Государственная система", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 20:
@@ -5878,17 +5854,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[642] = !"По всему государству расположены жилые дома, которые можно купить.\n";
-			    strcat(string, !"Каждый дом имеет свою стоимость, которую определяют множество\n");
-			    strcat(string, !"факторов. Можно купить вагончик за небольшие деньги, или отдать\n");
-			    strcat(string, !"миллионы за роскошный особняк в элитном районе.\n");
-			    strcat(string, !"Если у вас есть дом, то вы сможете приобрести машину, или купить\n");
-			    strcat(string, !"дополнительные улучшения, такие как шкаф ждя хранения вещей или\n");
-			    strcat(string, !"автоматические двери. И это только некоторые возможности жилья.\n");
-			    strcat(string, !"В зависимости от престижности дома, с Вас будет взиматься ежедневная\n");
-			    strcat(string, !"квартплата. Если долгое время на счету будет сохраняться отрицательный\n");
-			    strcat(string, !"баланс, есть вероятность, что работники мэрии выселят вас.");
-				SPD(playerid, 21, DIALOG_STYLE_MSGBOX, "{FFDF0F}9. Жильё", string, "<< Меню", "Далее >>");
+		        g_string = !"По всему государству расположены жилые дома, которые можно купить.\n";
+			    strcat(g_string, !"Каждый дом имеет свою стоимость, которую определяют множество\n");
+			    strcat(g_string, !"факторов. Можно купить вагончик за небольшие деньги, или отдать\n");
+			    strcat(g_string, !"миллионы за роскошный особняк в элитном районе.\n");
+			    strcat(g_string, !"Если у вас есть дом, то вы сможете приобрести машину, или купить\n");
+			    strcat(g_string, !"дополнительные улучшения, такие как шкаф ждя хранения вещей или\n");
+			    strcat(g_string, !"автоматические двери. И это только некоторые возможности жилья.\n");
+			    strcat(g_string, !"В зависимости от престижности дома, с Вас будет взиматься ежедневная\n");
+			    strcat(g_string, !"квартплата. Если долгое время на счету будет сохраняться отрицательный\n");
+			    strcat(g_string, !"баланс, есть вероятность, что работники мэрии выселят вас.");
+				SPD(playerid, 21, DIALOG_STYLE_MSGBOX, "{FFDF0F}9. Жильё", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 21:
@@ -5899,23 +5875,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[908] = !"Вы можете открыть собственный бизнес, и заработать неплохие\n";
-			    strcat(string, !"деньги. Это может быть небольшая пекарня, магазин одежды или\n");
-			    strcat(string, !"развлекательный центр, столовая, парикмахерская, либо обычная\n");
-			    strcat(string, !"продуктовая лавка. Или вы захотите стать совладельцем крупной сети\n");
-			    strcat(string, !"супермаркетов, ресторанов или театров. В нашей стране существует\n");
-			    strcat(string, !"огромное количество разнообразных предприятий.\n");
-			    strcat(string, !"Имея бизнес, перед Вами открывается большие возможности для\n");
-			    strcat(string, !"привлечения новых клиентов, что будет постоянно повышать Ваши\n");
-			    strcat(string, !"доходы. Вы сможете регулировать цены, улучшать различные\n");
-			    strcat(string, !"характеристики своего предприятия, одновременно проводя борьбу с\n");
-			    strcat(string, !"конкурентами.\n");
-			    strcat(string, !"АЗС (автозаправочные станции) - особый тип бизнеса, доходы от\n");
-			    strcat(string, !"которого значительно выше, чем от обычных предприятий. Для\n");
-			    strcat(string, !"нормальной работы АЗС нужно постоянно заключать контракты со\n");
-			    strcat(string, !"cлужбой доставки топлива. Бизнесмен может владеть обычным\n");
-			    strcat(string, !"предприятием и АЗС одновременно.");
-				SPD(playerid, 22, DIALOG_STYLE_MSGBOX, "{FFDF0F}10. Бизнес и АЗС", string, "<< Меню", "Далее >>");
+		        g_string = !"Вы можете открыть собственный бизнес, и заработать неплохие\n";
+			    strcat(g_string, !"деньги. Это может быть небольшая пекарня, магазин одежды или\n");
+			    strcat(g_string, !"развлекательный центр, столовая, парикмахерская, либо обычная\n");
+			    strcat(g_string, !"продуктовая лавка. Или вы захотите стать совладельцем крупной сети\n");
+			    strcat(g_string, !"супермаркетов, ресторанов или театров. В нашей стране существует\n");
+			    strcat(g_string, !"огромное количество разнообразных предприятий.\n");
+			    strcat(g_string, !"Имея бизнес, перед Вами открывается большие возможности для\n");
+			    strcat(g_string, !"привлечения новых клиентов, что будет постоянно повышать Ваши\n");
+			    strcat(g_string, !"доходы. Вы сможете регулировать цены, улучшать различные\n");
+			    strcat(g_string, !"характеристики своего предприятия, одновременно проводя борьбу с\n");
+			    strcat(g_string, !"конкурентами.\n");
+			    strcat(g_string, !"АЗС (автозаправочные станции) - особый тип бизнеса, доходы от\n");
+			    strcat(g_string, !"которого значительно выше, чем от обычных предприятий. Для\n");
+			    strcat(g_string, !"нормальной работы АЗС нужно постоянно заключать контракты со\n");
+			    strcat(g_string, !"cлужбой доставки топлива. Бизнесмен может владеть обычным\n");
+			    strcat(g_string, !"предприятием и АЗС одновременно.");
+				SPD(playerid, 22, DIALOG_STYLE_MSGBOX, "{FFDF0F}10. Бизнес и АЗС", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 22:
@@ -5926,22 +5902,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[829] = !"Каждый игрок получает свой счёт в банке. На него перечисляется\n";
-			    strcat(string, !"зарплата и прочие доходы. Этот счёт называется основным, и доступен в\n");
-			    strcat(string, !"любом банкомате.\n");
-			    strcat(string, !"Помимо этого, Вы можете воспользоваться услугами профессиональных\n");
-			    strcat(string, !"банков, найти которые поможет GPS. Там можно открыть до 8\n");
-			    strcat(string, !"дополнительных счетов. Каждый из них имеет свой номер, который\n");
-			    strcat(string, !"выдаётся банком при создании счёта. Зная его, любой игрок может\n");
-			    strcat(string, !"перечислить вам деньги, даже если вы оффлайн. Например, можно");
-			    strcat(string, !"создать счёт с названием \"Благотворительность\", написать об открытии\n");
-			    strcat(string, !"благотворительной организации через СМИ, сообщить номер счёта, и\n");
-			    strcat(string, !"любой сможет перечислить на него деньги в отделении банка или через\n");
-			    strcat(string, !"банкомат.\n");
-			    strcat(string, !"Дополнительные счета можно настраивать, устанавливать защиту\n");
-			    strcat(string, !"PIN-кодом, изменять названия а также просматривать подробную\n");
-			    strcat(string, !"историю операций.");
-				SPD(playerid, 23, DIALOG_STYLE_MSGBOX, "{FFDF0F}11. Банки", string, "<< Меню", "Далее >>");
+		        g_string = !"Каждый игрок получает свой счёт в банке. На него перечисляется\n";
+			    strcat(g_string, !"зарплата и прочие доходы. Этот счёт называется основным, и доступен в\n");
+			    strcat(g_string, !"любом банкомате.\n");
+			    strcat(g_string, !"Помимо этого, Вы можете воспользоваться услугами профессиональных\n");
+			    strcat(g_string, !"банков, найти которые поможет GPS. Там можно открыть до 8\n");
+			    strcat(g_string, !"дополнительных счетов. Каждый из них имеет свой номер, который\n");
+			    strcat(g_string, !"выдаётся банком при создании счёта. Зная его, любой игрок может\n");
+			    strcat(g_string, !"перечислить вам деньги, даже если вы оффлайн. Например, можно");
+			    strcat(g_string, !"создать счёт с названием \"Благотворительность\", написать об открытии\n");
+			    strcat(g_string, !"благотворительной организации через СМИ, сообщить номер счёта, и\n");
+			    strcat(g_string, !"любой сможет перечислить на него деньги в отделении банка или через\n");
+			    strcat(g_string, !"банкомат.\n");
+			    strcat(g_string, !"Дополнительные счета можно настраивать, устанавливать защиту\n");
+			    strcat(g_string, !"PIN-кодом, изменять названия а также просматривать подробную\n");
+			    strcat(g_string, !"историю операций.");
+				SPD(playerid, 23, DIALOG_STYLE_MSGBOX, "{FFDF0F}11. Банки", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 23:
@@ -5952,22 +5928,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[987] = !"В нашей стране работает большое количество организаций. Они могут\n";
-			    strcat(string, !"быть как официальными (правительство, МВД, мин. Обороны, мин.\n");
-			    strcat(string, !"Здравоохранения, ТВ и радио), так и неофициальными (банды и мафии).\n");
-			    strcat(string, !"При достижении определённого уровня, Вы можете вступить в любую из\n");
-			    strcat(string, !"организаций. Руководство некоторых может выдвигать и дополнительные\n");
-			    strcat(string, !"требования для вступления. Например, если Вы хотите попасть в банду,\n");
-			    strcat(string, !"то Вам придётся продемонстрировать своё умение владеть оружием. А\n");
-			    strcat(string, !"если Вы видите себя в роли редактора объявлений, то нужно красиво и\n");
-			    strcat(string, !"грамотно писать. О дополнительных требованиях сообщит руководство\n");
-			    strcat(string, !"организации во время набора сотрудников.\n");
-			    strcat(string, !"После вступления, Вам будет доступно продвижение по карьерной\n");
-			    strcat(string, !"лестнице, постепенно откроются новые возможности. С каждым повышением\n");
-			    strcat(string, !"будет увеличиваться Ваша зарплата и статус в обществе. Вы найдете\n");
-			    strcat(string, !"новых друзей, а со временем сможете занять одну из руководящих\n");
-			    strcat(string, !"должностей. Жизнь в организации необычайно интересная и разнообразная!");
-				SPD(playerid, 24, DIALOG_STYLE_MSGBOX, "{FFDF0F}12. Организации", string, "<< Меню", "Далее >>");
+		        g_string = !"В нашей стране работает большое количество организаций. Они могут\n";
+			    strcat(g_string, !"быть как официальными (правительство, МВД, мин. Обороны, мин.\n");
+			    strcat(g_string, !"Здравоохранения, ТВ и радио), так и неофициальными (банды и мафии).\n");
+			    strcat(g_string, !"При достижении определённого уровня, Вы можете вступить в любую из\n");
+			    strcat(g_string, !"организаций. Руководство некоторых может выдвигать и дополнительные\n");
+			    strcat(g_string, !"требования для вступления. Например, если Вы хотите попасть в банду,\n");
+			    strcat(g_string, !"то Вам придётся продемонстрировать своё умение владеть оружием. А\n");
+			    strcat(g_string, !"если Вы видите себя в роли редактора объявлений, то нужно красиво и\n");
+			    strcat(g_string, !"грамотно писать. О дополнительных требованиях сообщит руководство\n");
+			    strcat(g_string, !"организации во время набора сотрудников.\n");
+			    strcat(g_string, !"После вступления, Вам будет доступно продвижение по карьерной\n");
+			    strcat(g_string, !"лестнице, постепенно откроются новые возможности. С каждым повышением\n");
+			    strcat(g_string, !"будет увеличиваться Ваша зарплата и статус в обществе. Вы найдете\n");
+			    strcat(g_string, !"новых друзей, а со временем сможете занять одну из руководящих\n");
+			    strcat(g_string, !"должностей. Жизнь в организации необычайно интересная и разнообразная!");
+				SPD(playerid, 24, DIALOG_STYLE_MSGBOX, "{FFDF0F}12. Организации", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 24:
@@ -5978,17 +5954,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        new string[603] = !"В мэрии вашего города работает отдел занятости, где вы можете\n";
-			    strcat(string, !"устроиться на любую работу. Следует обратить внимание, что некоторые\n");
-			    strcat(string, !"работы доступны при достижении определённого уровня. Вы не можете\n");
-			    strcat(string, !"одновременно быть оформленным на работу в мэрии и состоять в\n");
-			    strcat(string, !"организации.\n");
-			    strcat(string, !"Помимо основных работ существуют и дополнительные. К ним относятся\n");
-			    strcat(string, !"работы на шахте, заводе и складе. Такие работы можно совмещать с\n");
-			    strcat(string, !"основными и зарабатывать больше денег. Используйте команду /gps для\n");
-			    strcat(string, !"того, чтобы найти места расположения различных работ. На месте вы\n");
-			    strcat(string, !"получите подробные инструкции, как и что следует делать.");
-				SPD(playerid, 25, DIALOG_STYLE_MSGBOX, "{FFDF0F}13. Работы", string, "<< Меню", "Далее >>");
+		        g_string = !"В мэрии вашего города работает отдел занятости, где вы можете\n";
+			    strcat(g_string, !"устроиться на любую работу. Следует обратить внимание, что некоторые\n");
+			    strcat(g_string, !"работы доступны при достижении определённого уровня. Вы не можете\n");
+			    strcat(g_string, !"одновременно быть оформленным на работу в мэрии и состоять в\n");
+			    strcat(g_string, !"организации.\n");
+			    strcat(g_string, !"Помимо основных работ существуют и дополнительные. К ним относятся\n");
+			    strcat(g_string, !"работы на шахте, заводе и складе. Такие работы можно совмещать с\n");
+			    strcat(g_string, !"основными и зарабатывать больше денег. Используйте команду /gps для\n");
+			    strcat(g_string, !"того, чтобы найти места расположения различных работ. На месте вы\n");
+			    strcat(g_string, !"получите подробные инструкции, как и что следует делать.");
+				SPD(playerid, 25, DIALOG_STYLE_MSGBOX, "{FFDF0F}13. Работы", g_string, "<< Меню", "Далее >>");
 		    }
 		}
 		case 25:
@@ -5999,17 +5975,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		    else
 		    {
-		        new string[592] = !"Если у вас появилось свободное время и желание, то рекомендуем вам\n";
-			    strcat(string, !"посетить одно из развлекательных мероприятий. Каждые 3 часа\n");
-			    strcat(string, !"проводятся гонки, поучаствовать в которых может любой желающий.\n");
-			    strcat(string, !"Сейчас команда разработчиков готовит и другие, не менее\n");
-			    strcat(string, !"интересные развлечения!\n");
-			    strcat(string, !"Помимо событий по расписанию, администраторы сервера очень часто\n");
-			    strcat(string, !"проводят разного рода мероприятия, участвовать в которых не только\n");
-			    strcat(string, !"интересно, но и выгодно - победители получают ценные подарки.\n");
-			    strcat(string, !"О проведении того или иного развлекательного мероприятия вы узнаете\n");
-			    strcat(string, !"заранее из информационных сообщений в общем чате.");
-				SPD(playerid, 26, DIALOG_STYLE_MSGBOX, "{FFDF0F}14. Развлечения", string, "<< Меню", "");
+		        g_string = !"Если у вас появилось свободное время и желание, то рекомендуем вам\n";
+			    strcat(g_string, !"посетить одно из развлекательных мероприятий. Каждые 3 часа\n");
+			    strcat(g_string, !"проводятся гонки, поучаствовать в которых может любой желающий.\n");
+			    strcat(g_string, !"Сейчас команда разработчиков готовит и другие, не менее\n");
+			    strcat(g_string, !"интересные развлечения!\n");
+			    strcat(g_string, !"Помимо событий по расписанию, администраторы сервера очень часто\n");
+			    strcat(g_string, !"проводят разного рода мероприятия, участвовать в которых не только\n");
+			    strcat(g_string, !"интересно, но и выгодно - победители получают ценные подарки.\n");
+			    strcat(g_string, !"О проведении того или иного развлекательного мероприятия вы узнаете\n");
+			    strcat(g_string, !"заранее из информационных сообщений в общем чате.");
+				SPD(playerid, 26, DIALOG_STYLE_MSGBOX, "{FFDF0F}14. Развлечения", g_string, "<< Меню", "");
 		    }
 		}
 		case 26:
@@ -6048,7 +6024,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)//левая кнопка
       		{
-				new string[50];
 	          	SetPVarInt(playerid, "mineongoind", 0);
 		        if(player_info[playerid][FSKIN] != 0)
 			    {
@@ -6066,18 +6041,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        give_money(playerid, GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
 		        if(GetPVarInt(playerid, "minemoney") > 0)
 		        {
-					format(string, sizeof(string), "Рабочий день завершён. Вы добыли %d кг руды", GetPVarInt(playerid, "minemoney"));
-			        SCM(playerid, 0x038FDFFF, string);
-			        format(string, sizeof(string), "~b~+%d$", GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
-			        GameTextForPlayer(playerid, string, 5000, 1);
+					format(g_string, sizeof(g_string), "Рабочий день завершён. Вы добыли %d кг руды", GetPVarInt(playerid, "minemoney"));
+			        SCM(playerid, 0x038FDFFF, g_string);
+			        format(g_string, sizeof(g_string), "~b~+%d$", GetPVarInt(playerid, "minemoney") * 3 + GetPVarInt(playerid, "getmoneymine"));
+			        GameTextForPlayer(playerid, g_string, 5000, 1);
 			        if(GetPVarInt(playerid, "getmoneymine") > 0)
 					{
-					    format(string, sizeof(string), "Бонус за подземную добычу {C8FF14}%d$", GetPVarInt(playerid, "getmoneymine"));
-					    SCM(playerid, 0xDD90FFFF, string);
+					    format(g_string, sizeof(g_string), "Бонус за подземную добычу {C8FF14}%d$", GetPVarInt(playerid, "getmoneymine"));
+					    SCM(playerid, 0xDD90FFFF, g_string);
 					}
-			        format(string, sizeof(string), "Всего заработано %d$", GetPVarInt(playerid, "minemoney") * 3+GetPVarInt(playerid, "getmoneymine"));
+			        format(g_string, sizeof(g_string), "Всего заработано %d$", GetPVarInt(playerid, "minemoney") * 3+GetPVarInt(playerid, "getmoneymine"));
 			        SetPVarInt(playerid, "getmoneymine", 0);
-			        SCM(playerid, 0x038FDFFF, string);
+			        SCM(playerid, 0x038FDFFF, g_string);
 
 		        }
 		        else
@@ -6142,11 +6117,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				storages[0][FACTORYMETAL] -= amount;
 				give_money(playerid, -money);
-				new string[24];
-             	format(string, sizeof(string), "Вы купили %d кг за %d$", amount, money);
-                SCM(playerid, 0x3399FFFF, string);
-				format(string, sizeof(string), "~r~-%d$", money);
-				GameTextForPlayer(playerid, string, 1500, 1);
+             	format(g_string, sizeof(g_string), "Вы купили %d кг за %d$", amount, money);
+                SCM(playerid, 0x3399FFFF, g_string);
+				format(g_string, sizeof(g_string), "~r~-%d$", money);
+				GameTextForPlayer(playerid, g_string, 1500, 1);
 				player_info[playerid][MET] += amount;
 				static const fmt_query[] = "UPDATE `accounts` SET `met` = '%d' WHERE `id` = '%d'";
 			    new query[sizeof(fmt_query)+(-2+2)+(-2+8)];
@@ -6185,7 +6159,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)//левая кнопка
       		{
-				new string[64];
 		        SetPVarInt(playerid, "loaderongoing", 0);
 		        if(player_info[playerid][FSKIN] != 0)
 			    {
@@ -6204,17 +6177,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else
 				{
 				    give_money(playerid, GetPVarInt(playerid, "gruzmoney")*90);
-	       			format(string, sizeof(string), "Рабочий день завершён. Заработано {FFFF00}%d$", GetPVarInt(playerid, "gruzmoney")*90);
-			        SCM(playerid, 0x038FDFFF, string);
+	       			format(g_string, sizeof(g_string), "Рабочий день завершён. Заработано {FFFF00}%d$", GetPVarInt(playerid, "gruzmoney")*90);
+			        SCM(playerid, 0x038FDFFF, g_string);
 				}
 				if(GetPVarInt(playerid, "gruzmoney2") > 0)
 				{
 				    give_money(playerid, GetPVarInt(playerid, "gruzmoney2")*100);
-	       			format(string, sizeof(string), "%d$ {3657FF}за работу на погрузчике", GetPVarInt(playerid, "gruzmoney2")*100);
-			        SCM(playerid, COLOR_YELLOW, string);
+	       			format(g_string, sizeof(g_string), "%d$ {3657FF}за работу на погрузчике", GetPVarInt(playerid, "gruzmoney2")*100);
+			        SCM(playerid, COLOR_YELLOW, g_string);
 				}
-				format(string, sizeof(string), "~b~+%d$", GetPVarInt(playerid, "gruzmoney")*90 + GetPVarInt(playerid, "gruzmoney2")*100);
-   				GameTextForPlayer(playerid, string, 5000, 1);
+				format(g_string, sizeof(g_string), "~b~+%d$", GetPVarInt(playerid, "gruzmoney")*90 + GetPVarInt(playerid, "gruzmoney2")*100);
+   				GameTextForPlayer(playerid, g_string, 5000, 1);
    				SetPVarInt(playerid, "gruzmoney2", 0);
 				SetPVarInt(playerid, "gruzmoney", 0);
 		        DisablePlayerCheckpoint(playerid);
@@ -6282,24 +6255,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        DestroyDynamicObject(factoryobject[playerid]);
 			    }
-                new string[92];
 	   			give_money(playerid, GetPVarInt(playerid, "factorymoney") - GetPVarInt(playerid, "factoryfail"));
-	   			format(string, sizeof(string), "~b~+%d$", GetPVarInt(playerid, "factorymoney") - GetPVarInt(playerid, "factoryfail"));
-   				GameTextForPlayer(playerid, string, 5000, 1);
+	   			format(g_string, sizeof(g_string), "~b~+%d$", GetPVarInt(playerid, "factorymoney") - GetPVarInt(playerid, "factoryfail"));
+   				GameTextForPlayer(playerid, g_string, 5000, 1);
 	   			if(GetPVarInt(playerid, "factoryquantity") >= 1)
 				{
-				   	format(string, sizeof(string), "Всего создано {FFFF00}%d{73CC37} продуктов, забракованных {FFFF00}%d шт.", GetPVarInt(playerid, "factoryquantity"), GetPVarInt(playerid, "failquantity"));
-					SCM(playerid, 0x73CC37FF, string);
+				   	format(g_string, sizeof(g_string), "Всего создано {FFFF00}%d{73CC37} продуктов, забракованных {FFFF00}%d шт.", GetPVarInt(playerid, "factoryquantity"), GetPVarInt(playerid, "failquantity"));
+					SCM(playerid, 0x73CC37FF, g_string);
 				}
 				if(GetPVarInt(playerid, "mychanse") >= 6)
 				{
-					format(string, sizeof(string), "Рабочий навык увеличился {96FFFC} на %d единиц(ы)", GetPVarInt(playerid, "mychanse") - 5);
-					SCM(playerid, 0x73CC37FF, string);
+					format(g_string, sizeof(g_string), "Рабочий навык увеличился {96FFFC} на %d единиц(ы)", GetPVarInt(playerid, "mychanse") - 5);
+					SCM(playerid, 0x73CC37FF, g_string);
 				}
 				if(GetPVarInt(playerid, "factoryquantity") >= 1)
 				{
-					format(string, sizeof(string), "Заработано {41C412}%d$,{FFFFFF} из них {FFAC05}%d${FFFFFF} - штраф за брак продуктов", GetPVarInt(playerid, "factorymoney"), GetPVarInt(playerid, "factoryfail"));
-					SCM(playerid, COLOR_WHITE, string);
+					format(g_string, sizeof(g_string), "Заработано {41C412}%d$,{FFFFFF} из них {FFAC05}%d${FFFFFF} - штраф за брак продуктов", GetPVarInt(playerid, "factorymoney"), GetPVarInt(playerid, "factoryfail"));
+					SCM(playerid, COLOR_WHITE, g_string);
 				}
 				SetPVarInt(playerid, "factorymoney", 0);
 				SetPVarInt(playerid, "factoryfail", 0);
@@ -6352,9 +6324,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 		        TogglePlayerControllable(playerid, 1);
 				SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
-				new string[55];
-				format(string, sizeof(string), "Ваша общая чистая прибыль составляет: {5EFF36}%d$", GetPVarInt(playerid, "prib"));
-				SCM(playerid, COLOR_WHITE, string);
+				format(g_string, sizeof(g_string), "Ваша общая чистая прибыль составляет: {5EFF36}%d$", GetPVarInt(playerid, "prib"));
+				SCM(playerid, COLOR_WHITE, g_string);
 				SetPVarInt(playerid, "prib", 0);
 				RemovePlayerAttachedObject(playerid, 9);
 			   	Delete3DTextLabel(vehtext[playerid]);
@@ -6384,10 +6355,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			{
  			    new text[81];
  			    if(sscanf(inputtext, "s[81]", text)) return SPD(playerid, 48, DIALOG_STYLE_INPUT, "{FFEF0D}Связь с администрацией", "{FFFFFF}Введите своё сообщение для администрации сервера\nОно должно быть кратким и ясным\n\n{6AF76A}Если вы хотите подать жалобу на игрока,\nобязательно укажите его ID и причину жалобы", "Отправить", "Назад");
- 			    new string[128];
- 			    format(string, sizeof(string), "{52b608}%s[%d] : {e7aa10}%s", player_info[playerid][NAME], playerid, text);
-				SCM(playerid, 0x52c708FF, string);
-				SCMA(0x52c708FF, string);
+ 			    format(g_string, sizeof(g_string), "{52b608}%s[%d] : {e7aa10}%s", player_info[playerid][NAME], playerid, text);
+				SCM(playerid, 0x52c708FF, g_string);
+				SCMA(0x52c708FF, g_string);
 				SCM(playerid, COLOR_WHITE, "Ваше сообщение отправлено");
  			}
  			else
@@ -6399,16 +6369,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)//левая кнопка
  			{
-				new string[649] = !"{349C1A}Ниже приведён перечь клавиш управления транспортом и их описание:\n\n";
-				strcat(string, !"{0099FF}Левый Ctrl{FFFFFF}\tзавести или заглушить двигатель\n");
-				strcat(string, !"{0099FF}Левый Alt{FFFFFF}\tвключить или выключить фары\n");
-				strcat(string, !"{0099FF}Правый Ctrl{FFFFFF}\tоткрыть или закрыть машину {A6328F}(только для домашней машины)\n");
-				strcat(string, !"{0099FF}Num 4{FFFFFF}\t\tвключить или выключить ограничитель скорости\n");
-				strcat(string, !"{0099FF}Num 8{FFFFFF}\t\tуправление капотом и багажником{A6328F}(если они имеются у данной модели)\n");
-				strcat(string, !"{0099FF}Num 2{FFFFFF}\t\tзаправить транспорт{A6328F}(подробнее в следующих разделах)\n\n");
-				strcat(string, !"{DDFF00}Постарайтесь запомнить назначения клавиш управления\n");
-				strcat(string, !"Когда будете готовы нажмите\"Далее\"\n");
- 			    SPD(playerid, 50, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 1: Управление системами автомобиля", string, "Далее", "Назад");
+				g_string = !"{349C1A}Ниже приведён перечь клавиш управления транспортом и их описание:\n\n";
+				strcat(g_string, !"{0099FF}Левый Ctrl{FFFFFF}\tзавести или заглушить двигатель\n");
+				strcat(g_string, !"{0099FF}Левый Alt{FFFFFF}\tвключить или выключить фары\n");
+				strcat(g_string, !"{0099FF}Правый Ctrl{FFFFFF}\tоткрыть или закрыть машину {A6328F}(только для домашней машины)\n");
+				strcat(g_string, !"{0099FF}Num 4{FFFFFF}\t\tвключить или выключить ограничитель скорости\n");
+				strcat(g_string, !"{0099FF}Num 8{FFFFFF}\t\tуправление капотом и багажником{A6328F}(если они имеются у данной модели)\n");
+				strcat(g_string, !"{0099FF}Num 2{FFFFFF}\t\tзаправить транспорт{A6328F}(подробнее в следующих разделах)\n\n");
+				strcat(g_string, !"{DDFF00}Постарайтесь запомнить назначения клавиш управления\n");
+				strcat(g_string, !"Когда будете готовы нажмите\"Далее\"\n");
+ 			    SPD(playerid, 50, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 1: Управление системами автомобиля", g_string, "Далее", "Назад");
  			}
  			else
  			{
@@ -6419,26 +6389,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)//левая кнопка
  			{
- 			    new string[1286] = !"{FFFFFF}Панель индикаторов появляется в правом нижнем углу экрана как только вы заходите в любой транспорт\n";
- 			    strcat(string, !"Она информирует водителя о его текущем состоянии. Итак, рассмотрим основные элементы этой панели:\n\n");
- 			    strcat(string, !"\t{474BC4}25 km/h {1EEEFC}Fuel: 45 {006699}1000\n");
- 			    strcat(string, !"\t{2FD645}Open {E85313}max {FFFFFF}E {43BF3F}S  M{FFFFFF} L B\n\n");
- 			    strcat(string, !"{DDFF00}На первой строчке панели находятся числовые индикаторы:\n");
- 			    strcat(string, !"{474BC4}25 km/h\t{FFFFFF}показывает текущую скорость транспорта\n");
- 			    strcat(string, !"{00ccff}Fuel: 45\t{FFFFFF}показывает количество бензина в баке\n");
- 			    strcat(string, !"{006699}1000{FFFFFF}\t\tпоказывает \"здоровье\" транспорта. Если у него нет повреждений, то оно будет равно 1000\n\n");
- 			    strcat(string, !"{DDFF00}На второй строчке находятся цветовые индикаторы:\n");
- 			    strcat(string, !"{00cc00}Open\t\t{FFFFFF}(или {d92b00}Close{FFFFFF}) показывают открыт или закрыт транспорт\n");
- 			    strcat(string, !"{d92b00}max{FFFFFF}\t\tзагорается красным при включённом ограничителе скорости\n");
- 			    strcat(string, !"E\t\tзагорается красным при низком уровне бензина в баке\n");
- 			    strcat(string, !"{cc99cc}S{FFFFFF}\t\tзагорается пурпурным при включённой сигнализации\n");
- 			    strcat(string, !"{009933}M{FFFFFF}\t\tиндикатор включённого двигателя\n");
- 			    strcat(string, !"L\t\tиндикатор включёного двигателя\n");
- 			    strcat(string, !"B\t\tзагорается красным при открытом багажнике или капоте\n");
- 			    strcat(string, !"{9966ff}Примечания:\n");
- 			    strcat(string, !"1. Панель индикаторов обновляется раз в секунду\n");
- 			    strcat(string, !"2. Выключенные индикаторы во втором ряду {FFFFFF}белого {9966ff}цвета\n");
- 			    SPD(playerid, 51, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 2: Панель индикаторов", string, "Далее", "Назад");
+ 			    g_string = !"{FFFFFF}Панель индикаторов появляется в правом нижнем углу экрана как только вы заходите в любой транспорт\n";
+ 			    strcat(g_string, !"Она информирует водителя о его текущем состоянии. Итак, рассмотрим основные элементы этой панели:\n\n");
+ 			    strcat(g_string, !"\t{474BC4}25 km/h {1EEEFC}Fuel: 45 {006699}1000\n");
+ 			    strcat(g_string, !"\t{2FD645}Open {E85313}max {FFFFFF}E {43BF3F}S  M{FFFFFF} L B\n\n");
+ 			    strcat(g_string, !"{DDFF00}На первой строчке панели находятся числовые индикаторы:\n");
+ 			    strcat(g_string, !"{474BC4}25 km/h\t{FFFFFF}показывает текущую скорость транспорта\n");
+ 			    strcat(g_string, !"{00ccff}Fuel: 45\t{FFFFFF}показывает количество бензина в баке\n");
+ 			    strcat(g_string, !"{006699}1000{FFFFFF}\t\tпоказывает \"здоровье\" транспорта. Если у него нет повреждений, то оно будет равно 1000\n\n");
+ 			    strcat(g_string, !"{DDFF00}На второй строчке находятся цветовые индикаторы:\n");
+ 			    strcat(g_string, !"{00cc00}Open\t\t{FFFFFF}(или {d92b00}Close{FFFFFF}) показывают открыт или закрыт транспорт\n");
+ 			    strcat(g_string, !"{d92b00}max{FFFFFF}\t\tзагорается красным при включённом ограничителе скорости\n");
+ 			    strcat(g_string, !"E\t\tзагорается красным при низком уровне бензина в баке\n");
+ 			    strcat(g_string, !"{cc99cc}S{FFFFFF}\t\tзагорается пурпурным при включённой сигнализации\n");
+ 			    strcat(g_string, !"{009933}M{FFFFFF}\t\tиндикатор включённого двигателя\n");
+ 			    strcat(g_string, !"L\t\tиндикатор включёного двигателя\n");
+ 			    strcat(g_string, !"B\t\tзагорается красным при открытом багажнике или капоте\n");
+ 			    strcat(g_string, !"{9966ff}Примечания:\n");
+ 			    strcat(g_string, !"1. Панель индикаторов обновляется раз в секунду\n");
+ 			    strcat(g_string, !"2. Выключенные индикаторы во втором ряду {FFFFFF}белого {9966ff}цвета\n");
+ 			    SPD(playerid, 51, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 2: Панель индикаторов", g_string, "Далее", "Назад");
  			}
  			else
  			{
@@ -6449,78 +6419,78 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
   			if(response)//левая кнопка
  			{
- 			    new string[1184] = !"{FFFFFF}Транспорт время от времени необходимо заправлять. Сделать это можно двумя способами:\n\n";
- 			    strcat(string, !"{DDFF00}1. На заправочной станции\n");
- 			    strcat(string, !"{FFFFFF}Для этого подъедьте к ней и нажмите {3366ff}Num 2{FFFFFF}. Каждое нажатие заправляет ваш транспорт на 10 литров\n\n");
- 			    strcat(string, !"{DDFF00}2. Заправка с канистры\n");
- 			    strcat(string, !"{FFFFFF}Такой способ подойдёт если автомобиль не может ездить из-за отсутствия бензина\n");
- 			    strcat(string, !"Найдите ближайшую заправку и напишите {3366ff}/buyfuel{FFFFFF}. Вы получите канистру ёмкостью 15 литров\n");
- 			    strcat(string, !"После этого просто подойдите к транспорту, который хотите заправить. 15 литров топлива вполне хватит чтобы доехать до ближайшей заправки\n\n");
- 			    strcat(string, !"{66cccc}Полезные советы:\n");
- 			    strcat(string, !"1. Бензобак может вместить максимум 150 литров бензина. Этого хватит на 50 минут беспрерывной работы двигателя\n");
- 			    strcat(string, !"2. Всегда выключайте двигатель когда выходите из машины или долго стоите на месте! Этим вы намного уменьшите расход бензина\n");
- 			    strcat(string, !"3. Чтобы не за канистрой бензина если бензобак опустел можно вызвать механика (/c)\n\n");
- 			    strcat(string, !"{99cc66}Починить траспорт можно в любом покрасочном салоне либо вызвав механика (/c)\n");
- 			    strcat(string, !"Обратите внимание, что если купленный или арендованный вами траспорт взорвётся, то придётся покупать или арендовать его заного!\n");
-        		SPD(playerid, 52, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 3: Заправка и ремонт", string, "Далее", "Назад");
+ 			    g_string = !"{FFFFFF}Транспорт время от времени необходимо заправлять. Сделать это можно двумя способами:\n\n";
+ 			    strcat(g_string, !"{DDFF00}1. На заправочной станции\n");
+ 			    strcat(g_string, !"{FFFFFF}Для этого подъедьте к ней и нажмите {3366ff}Num 2{FFFFFF}. Каждое нажатие заправляет ваш транспорт на 10 литров\n\n");
+ 			    strcat(g_string, !"{DDFF00}2. Заправка с канистры\n");
+ 			    strcat(g_string, !"{FFFFFF}Такой способ подойдёт если автомобиль не может ездить из-за отсутствия бензина\n");
+ 			    strcat(g_string, !"Найдите ближайшую заправку и напишите {3366ff}/buyfuel{FFFFFF}. Вы получите канистру ёмкостью 15 литров\n");
+ 			    strcat(g_string, !"После этого просто подойдите к транспорту, который хотите заправить. 15 литров топлива вполне хватит чтобы доехать до ближайшей заправки\n\n");
+ 			    strcat(g_string, !"{66cccc}Полезные советы:\n");
+ 			    strcat(g_string, !"1. Бензобак может вместить максимум 150 литров бензина. Этого хватит на 50 минут беспрерывной работы двигателя\n");
+ 			    strcat(g_string, !"2. Всегда выключайте двигатель когда выходите из машины или долго стоите на месте! Этим вы намного уменьшите расход бензина\n");
+ 			    strcat(g_string, !"3. Чтобы не за канистрой бензина если бензобак опустел можно вызвать механика (/c)\n\n");
+ 			    strcat(g_string, !"{99cc66}Починить траспорт можно в любом покрасочном салоне либо вызвав механика (/c)\n");
+ 			    strcat(g_string, !"Обратите внимание, что если купленный или арендованный вами траспорт взорвётся, то придётся покупать или арендовать его заного!\n");
+        		SPD(playerid, 52, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 3: Заправка и ремонт", g_string, "Далее", "Назад");
 
 			}
 			else
  			{
- 			    new string[649] = !"{349C1A}Ниже приведён перечь клавиш управления транспортом и их описание:\n\n";
-				strcat(string, !"{0099FF}Левый Ctrl{FFFFFF}\tзавести или заглушить двигатель\n");
-				strcat(string, !"{0099FF}Левый Alt{FFFFFF}\tвключить или выключить фары\n");
-				strcat(string, !"{0099FF}Правый Ctrl{FFFFFF}\tоткрыть или закрыть машину {A6328F}(только для домашней машины)\n");
-				strcat(string, !"{0099FF}Num 4{FFFFFF}\t\tвключить или выключить ограничитель скорости\n");
-				strcat(string, !"{0099FF}Num 8{FFFFFF}\t\tуправление капотом и багажником{A6328F}(если они имеются у данной модели)\n");
-				strcat(string, !"{0099FF}Num 2{FFFFFF}\t\tзаправить транспорт{A6328F}(подробнее в следующих разделах)\n\n");
-				strcat(string, !"{DDFF00}Постарайтесь запомнить назначения клавиш управления\n");
-				strcat(string, !"Когда будете готовы нажмите\"Далее\"\n");
- 			    SPD(playerid, 50, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 1: Управление системами автомобиля", string, "Далее", "Назад");
+ 			    g_string = !"{349C1A}Ниже приведён перечь клавиш управления транспортом и их описание:\n\n";
+				strcat(g_string, !"{0099FF}Левый Ctrl{FFFFFF}\tзавести или заглушить двигатель\n");
+				strcat(g_string, !"{0099FF}Левый Alt{FFFFFF}\tвключить или выключить фары\n");
+				strcat(g_string, !"{0099FF}Правый Ctrl{FFFFFF}\tоткрыть или закрыть машину {A6328F}(только для домашней машины)\n");
+				strcat(g_string, !"{0099FF}Num 4{FFFFFF}\t\tвключить или выключить ограничитель скорости\n");
+				strcat(g_string, !"{0099FF}Num 8{FFFFFF}\t\tуправление капотом и багажником{A6328F}(если они имеются у данной модели)\n");
+				strcat(g_string, !"{0099FF}Num 2{FFFFFF}\t\tзаправить транспорт{A6328F}(подробнее в следующих разделах)\n\n");
+				strcat(g_string, !"{DDFF00}Постарайтесь запомнить назначения клавиш управления\n");
+				strcat(g_string, !"Когда будете готовы нажмите\"Далее\"\n");
+ 			    SPD(playerid, 50, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 1: Управление системами автомобиля", g_string, "Далее", "Назад");
  			}
 		}
 		case 52:
 		{
 		    if(response)//левая кнопка
  			{
-                new string[1015] = !"{66cc00}1. Общие положения{FFFFFF}\n";
-               	strcat(string, !"Обгон транспортных средств разрешён только с левой стороны\n");
-               	strcat(string, !"При этом водитель должен убедиться что встречная полоса свободна на достаточном для обгона расстоянии\n");
-               	strcat(string, !"При ДТП водителям рекомендуется вызвать полицию (/c) и дождаться приезда ДПС\n");
-               	strcat(string, !"{66cc00}2. Скорость движения{FFFFFF}\n");
-               	strcat(string, !"Ограничение скорости движения в пределах городов и посёлков 50 км/ч\n");
-               	strcat(string, !"За пределами населённых пунктов ограничений скорости нет\n");
-               	strcat(string, !"Для соблюдения скоростного режима рекомендуется пользоваться ограничителем скорости, который включается клавишей {3366ff}Num 4{FFFFFF}\n");
-               	strcat(string, !"{66cc00}3. Остановка и стоянка{FFFFFF}\n");
-               	strcat(string, !"Остановка и стоянка транспортных средств разрешается только на обочине дороги или в специально отведённых для этого местах\n");
-               	strcat(string, !"За нарушение этого правила ваш автомобиль может быть отправлен на штрафстоянку\n");
-               	strcat(string, !"{66cc00}4. ДПС{FFFFFF}\n");
-               	strcat(string, !"При виде автомобиля с включённой сиреной водитель обязан снизить скорость и прижаться к обочине\n");
-               	strcat(string, !"Водитель обязан предъявить работнику ДПС документы, которые он просит\n");
-                SPD(playerid, 53, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 4: Правила дорожного движения", string, "Далее", "Назад");
+                g_string = !"{66cc00}1. Общие положения{FFFFFF}\n";
+               	strcat(g_string, !"Обгон транспортных средств разрешён только с левой стороны\n");
+               	strcat(g_string, !"При этом водитель должен убедиться что встречная полоса свободна на достаточном для обгона расстоянии\n");
+               	strcat(g_string, !"При ДТП водителям рекомендуется вызвать полицию (/c) и дождаться приезда ДПС\n");
+               	strcat(g_string, !"{66cc00}2. Скорость движения{FFFFFF}\n");
+               	strcat(g_string, !"Ограничение скорости движения в пределах городов и посёлков 50 км/ч\n");
+               	strcat(g_string, !"За пределами населённых пунктов ограничений скорости нет\n");
+               	strcat(g_string, !"Для соблюдения скоростного режима рекомендуется пользоваться ограничителем скорости, который включается клавишей {3366ff}Num 4{FFFFFF}\n");
+               	strcat(g_string, !"{66cc00}3. Остановка и стоянка{FFFFFF}\n");
+               	strcat(g_string, !"Остановка и стоянка транспортных средств разрешается только на обочине дороги или в специально отведённых для этого местах\n");
+               	strcat(g_string, !"За нарушение этого правила ваш автомобиль может быть отправлен на штрафстоянку\n");
+               	strcat(g_string, !"{66cc00}4. ДПС{FFFFFF}\n");
+               	strcat(g_string, !"При виде автомобиля с включённой сиреной водитель обязан снизить скорость и прижаться к обочине\n");
+               	strcat(g_string, !"Водитель обязан предъявить работнику ДПС документы, которые он просит\n");
+                SPD(playerid, 53, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 4: Правила дорожного движения", g_string, "Далее", "Назад");
  			}
  			else
  			{
- 			    new string[1286] = !"{FFFFFF}Панель индикаторов появляется в правом нижнем углу экрана как только вы заходите в любой транспорт\n";
- 			    strcat(string, !"Она информирует водителя о его текущем состоянии. Итак, рассмотрим основные элементы этой панели:\n\n");
- 			    strcat(string, !"\t{474BC4}25 km/h {1EEEFC}Fuel: 45 {006699}1000\n");
- 			    strcat(string, !"\t{2FD645}Open {E85313}max {FFFFFF}E {43BF3F}S  M{FFFFFF} L B\n\n");
- 			    strcat(string, !"{DDFF00}На первой строчке панели находятся числовые индикаторы:\n");
- 			    strcat(string, !"{474BC4}25 km/h\t{FFFFFF}показывает текущую скорость транспорта\n");
- 			    strcat(string, !"{00ccff}Fuel: 45\t{FFFFFF}показывает количество бензина в баке\n");
- 			    strcat(string, !"{006699}1000{FFFFFF}\t\tпоказывает \"здоровье\" транспорта. Если у него нет повреждений, то оно будет равно 1000\n\n");
- 			    strcat(string, !"{DDFF00}На второй строчке находятся цветовые индикаторы:\n");
- 			    strcat(string, !"{00cc00}Open\t\t{FFFFFF}(или {d92b00}Close{FFFFFF}) показывают открыт или закрыт транспорт\n");
- 			    strcat(string, !"{d92b00}max{FFFFFF}\t\tзагорается красным при включённом ограничителе скорости\n");
- 			    strcat(string, !"E\t\tзагорается красным при низком уровне бензина в баке\n");
- 			    strcat(string, !"{cc99cc}S{FFFFFF}\t\tзагорается пурпурным при включённой сигнализации\n");
- 			    strcat(string, !"{009933}M{FFFFFF}\t\tиндикатор включённого двигателя\n");
- 			    strcat(string, !"L\t\tиндикатор включёного двигателя\n");
- 			    strcat(string, !"B\t\tзагорается красным при открытом багажнике или капоте\n");
- 			    strcat(string, !"{9966ff}Примечания:\n");
- 			    strcat(string, !"1. Панель индикаторов обновляется раз в секунду\n");
- 			    strcat(string, !"2. Выключенные индикаторы во втором ряду {FFFFFF}белого {9966ff}цвета\n");
- 			    SPD(playerid, 51, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 2: Панель индикаторов", string, "Далее", "Назад");
+ 			    g_string = !"{FFFFFF}Панель индикаторов появляется в правом нижнем углу экрана как только вы заходите в любой транспорт\n";
+ 			    strcat(g_string, !"Она информирует водителя о его текущем состоянии. Итак, рассмотрим основные элементы этой панели:\n\n");
+ 			    strcat(g_string, !"\t{474BC4}25 km/h {1EEEFC}Fuel: 45 {006699}1000\n");
+ 			    strcat(g_string, !"\t{2FD645}Open {E85313}max {FFFFFF}E {43BF3F}S  M{FFFFFF} L B\n\n");
+ 			    strcat(g_string, !"{DDFF00}На первой строчке панели находятся числовые индикаторы:\n");
+ 			    strcat(g_string, !"{474BC4}25 km/h\t{FFFFFF}показывает текущую скорость транспорта\n");
+ 			    strcat(g_string, !"{00ccff}Fuel: 45\t{FFFFFF}показывает количество бензина в баке\n");
+ 			    strcat(g_string, !"{006699}1000{FFFFFF}\t\tпоказывает \"здоровье\" транспорта. Если у него нет повреждений, то оно будет равно 1000\n\n");
+ 			    strcat(g_string, !"{DDFF00}На второй строчке находятся цветовые индикаторы:\n");
+ 			    strcat(g_string, !"{00cc00}Open\t\t{FFFFFF}(или {d92b00}Close{FFFFFF}) показывают открыт или закрыт транспорт\n");
+ 			    strcat(g_string, !"{d92b00}max{FFFFFF}\t\tзагорается красным при включённом ограничителе скорости\n");
+ 			    strcat(g_string, !"E\t\tзагорается красным при низком уровне бензина в баке\n");
+ 			    strcat(g_string, !"{cc99cc}S{FFFFFF}\t\tзагорается пурпурным при включённой сигнализации\n");
+ 			    strcat(g_string, !"{009933}M{FFFFFF}\t\tиндикатор включённого двигателя\n");
+ 			    strcat(g_string, !"L\t\tиндикатор включёного двигателя\n");
+ 			    strcat(g_string, !"B\t\tзагорается красным при открытом багажнике или капоте\n");
+ 			    strcat(g_string, !"{9966ff}Примечания:\n");
+ 			    strcat(g_string, !"1. Панель индикаторов обновляется раз в секунду\n");
+ 			    strcat(g_string, !"2. Выключенные индикаторы во втором ряду {FFFFFF}белого {9966ff}цвета\n");
+ 			    SPD(playerid, 51, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 2: Панель индикаторов", g_string, "Далее", "Назад");
  			}
 		}
 		case 53:
@@ -6531,20 +6501,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			}
  			else
 			{
-			    new string[1184] = !"{FFFFFF}Транспорт время от времени необходимо заправлять. Сделать это можно двумя способами:\n\n";
- 			    strcat(string, !"{DDFF00}1. На заправочной станции\n");
- 			    strcat(string, !"{FFFFFF}Для этого подъедьте к ней и нажмите {3366ff}Num 2{FFFFFF}. Каждое нажатие заправляет ваш транспорт на 10 литров\n\n");
- 			    strcat(string, !"{DDFF00}2. Заправка с канистры\n");
- 			    strcat(string, !"{FFFFFF}Такой способ подойдёт если автомобиль не может ездить из-за отсутствия бензина\n");
- 			    strcat(string, !"Найдите ближайшую заправку и напишите {3366ff}/buyfuel{FFFFFF}. Вы получите канистру ёмкостью 15 литров\n");
- 			    strcat(string, !"После этого просто подойдите к транспорту, который хотите заправить. 15 литров топлива вполне хватит чтобы доехать до ближайшей заправки\n\n");
- 			    strcat(string, !"{66cccc}Полезные советы:\n");
- 			    strcat(string, !"1. Бензобак может вместить максимум 150 литров бензина. Этого хватит на 50 минут беспрерывной работы двигателя\n");
- 			    strcat(string, !"2. Всегда выключайте двигатель когда выходите из машины или долго стоите на месте! Этим вы намного уменьшите расход бензина\n");
- 			    strcat(string, !"3. Чтобы не за канистрой бензина если бензобак опустел можно вызвать механика (/c)\n\n");
- 			    strcat(string, !"{99cc66}Починить траспорт можно в любом покрасочном салоне либо вызвав механика (/c)\n");
- 			    strcat(string, !"Обратите внимание, что если купленный или арендованный вами траспорт взорвётся, то придётся покупать или арендовать его заного!\n");
- 			    SPD(playerid, 52, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 3: Заправка и ремонт", string, "Далее", "Назад");
+			    g_string = !"{FFFFFF}Транспорт время от времени необходимо заправлять. Сделать это можно двумя способами:\n\n";
+ 			    strcat(g_string, !"{DDFF00}1. На заправочной станции\n");
+ 			    strcat(g_string, !"{FFFFFF}Для этого подъедьте к ней и нажмите {3366ff}Num 2{FFFFFF}. Каждое нажатие заправляет ваш транспорт на 10 литров\n\n");
+ 			    strcat(g_string, !"{DDFF00}2. Заправка с канистры\n");
+ 			    strcat(g_string, !"{FFFFFF}Такой способ подойдёт если автомобиль не может ездить из-за отсутствия бензина\n");
+ 			    strcat(g_string, !"Найдите ближайшую заправку и напишите {3366ff}/buyfuel{FFFFFF}. Вы получите канистру ёмкостью 15 литров\n");
+ 			    strcat(g_string, !"После этого просто подойдите к транспорту, который хотите заправить. 15 литров топлива вполне хватит чтобы доехать до ближайшей заправки\n\n");
+ 			    strcat(g_string, !"{66cccc}Полезные советы:\n");
+ 			    strcat(g_string, !"1. Бензобак может вместить максимум 150 литров бензина. Этого хватит на 50 минут беспрерывной работы двигателя\n");
+ 			    strcat(g_string, !"2. Всегда выключайте двигатель когда выходите из машины или долго стоите на месте! Этим вы намного уменьшите расход бензина\n");
+ 			    strcat(g_string, !"3. Чтобы не за канистрой бензина если бензобак опустел можно вызвать механика (/c)\n\n");
+ 			    strcat(g_string, !"{99cc66}Починить траспорт можно в любом покрасочном салоне либо вызвав механика (/c)\n");
+ 			    strcat(g_string, !"Обратите внимание, что если купленный или арендованный вами траспорт взорвётся, то придётся покупать или арендовать его заного!\n");
+ 			    SPD(playerid, 52, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 3: Заправка и ремонт", g_string, "Далее", "Назад");
 			}
 		}
 		case 54:
@@ -6554,21 +6524,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			}
  			else
  			{
- 			    new string[1015] = !"{66cc00}1. Общие положения{FFFFFF}\n";
-               	strcat(string, !"Обгон транспортных средств разрешён только с левой стороны\n");
-               	strcat(string, !"При этом водитель должен убедиться что встречная полоса свободна на достаточном для обгона расстоянии\n");
-               	strcat(string, !"При ДТП водителям рекомендуется вызвать полицию (/c) и дождаться приезда ДПС\n");
-               	strcat(string, !"{66cc00}2. Скорость движения{FFFFFF}\n");
-               	strcat(string, !"Ограничение скорости движения в пределах городов и посёлков 50 км/ч\n");
-               	strcat(string, !"За пределами населённых пунктов ограничений скорости нет\n");
-               	strcat(string, !"Для соблюдения скоростного режима рекомендуется пользоваться ограничителем скорости, который включается клавишей {3366ff}Num 4{FFFFFF}\n");
-               	strcat(string, !"{66cc00}3. Остановка и стоянка{FFFFFF}\n");
-               	strcat(string, !"Остановка и стоянка транспортных средств разрешается только на обочине дороги или в специально отведённых для этого местах\n");
-               	strcat(string, !"За нарушение этого правила ваш автомобиль может быть отправлен на штрафстоянку\n");
-               	strcat(string, !"{66cc00}4. ДПС{FFFFFF}\n");
-               	strcat(string, !"При виде автомобиля с включённой сиреной водитель обязан снизить скорость и прижаться к обочине\n");
-               	strcat(string, !"Водитель обязан предъявить работнику ДПС документы, которые он просит\n");
-                SPD(playerid, 53, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 4: Правила дорожного движения", string, "Далее", "Назад");
+ 			    g_string = !"{66cc00}1. Общие положения{FFFFFF}\n";
+               	strcat(g_string, !"Обгон транспортных средств разрешён только с левой стороны\n");
+               	strcat(g_string, !"При этом водитель должен убедиться что встречная полоса свободна на достаточном для обгона расстоянии\n");
+               	strcat(g_string, !"При ДТП водителям рекомендуется вызвать полицию (/c) и дождаться приезда ДПС\n");
+               	strcat(g_string, !"{66cc00}2. Скорость движения{FFFFFF}\n");
+               	strcat(g_string, !"Ограничение скорости движения в пределах городов и посёлков 50 км/ч\n");
+               	strcat(g_string, !"За пределами населённых пунктов ограничений скорости нет\n");
+               	strcat(g_string, !"Для соблюдения скоростного режима рекомендуется пользоваться ограничителем скорости, который включается клавишей {3366ff}Num 4{FFFFFF}\n");
+               	strcat(g_string, !"{66cc00}3. Остановка и стоянка{FFFFFF}\n");
+               	strcat(g_string, !"Остановка и стоянка транспортных средств разрешается только на обочине дороги или в специально отведённых для этого местах\n");
+               	strcat(g_string, !"За нарушение этого правила ваш автомобиль может быть отправлен на штрафстоянку\n");
+               	strcat(g_string, !"{66cc00}4. ДПС{FFFFFF}\n");
+               	strcat(g_string, !"При виде автомобиля с включённой сиреной водитель обязан снизить скорость и прижаться к обочине\n");
+               	strcat(g_string, !"Водитель обязан предъявить работнику ДПС документы, которые он просит\n");
+                SPD(playerid, 53, DIALOG_STYLE_MSGBOX, "{CC9900}Раздел 4: Правила дорожного движения", g_string, "Далее", "Назад");
  			}
 		}
 		case 55:
@@ -6579,12 +6549,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			    if(player_info[playerid][DLIC] == 1) return SCM(playerid, COLOR_LIGHTGREY, "У вас уже есть права");
  			    give_money(playerid, -600);
    				GameTextForPlayer(playerid, "~r~-600$", 5000, 1);
- 			    new string[389] = !"{FFFFFF}Вам будет предложено 12 вопросов для проверки теоретических знаний\n";
- 			    strcat(string, !"Чтобы сдать эту часть экзамена необходимо ответить минимум на 9 из них\n");
- 			    strcat(string, !"Если правильных ответов будет меньше, то вы не будете допущены до практической части\n");
- 			    strcat(string, !"{02cbdf}На каждый вопрос будет несколько вариантов ответа, правильный из которых только один.\n");
- 			    strcat(string, !"О результате вы узнаете когда ответите на все 12 вопросов\n");
- 			    SPD(playerid, 56, DIALOG_STYLE_MSGBOX, "{d8d502}Теоретическая часть", string, "Далее", "Отмена");
+ 			    g_string = !"{FFFFFF}Вам будет предложено 12 вопросов для проверки теоретических знаний\n";
+ 			    strcat(g_string, !"Чтобы сдать эту часть экзамена необходимо ответить минимум на 9 из них\n");
+ 			    strcat(g_string, !"Если правильных ответов будет меньше, то вы не будете допущены до практической части\n");
+ 			    strcat(g_string, !"{02cbdf}На каждый вопрос будет несколько вариантов ответа, правильный из которых только один.\n");
+ 			    strcat(g_string, !"О результате вы узнаете когда ответите на все 12 вопросов\n");
+ 			    SPD(playerid, 56, DIALOG_STYLE_MSGBOX, "{d8d502}Теоретическая часть", g_string, "Далее", "Отмена");
  			}
 		}
 		case 56:
@@ -6747,33 +6717,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				default: {}
 		    }
-		    new string[194];
-		    format(string, sizeof(string), "{FFFFFF}Количество правильных ответов: {5bdc02}%d", GetPVarInt(playerid, "questions"));
+		    format(g_string, sizeof(g_string), "{FFFFFF}Количество правильных ответов: {5bdc02}%d", GetPVarInt(playerid, "questions"));
 			if(GetPVarInt(playerid, "questions") == 12)
 			{
 			    SetPVarInt(playerid, "asexam", 1);
-			    format(string, sizeof(string), "%s\n{3488df}Поздравляем!\nВы получаете золотую медаль за теоретическую часть экзамена!", string);
+			    format(g_string, sizeof(g_string), "%s\n{3488df}Поздравляем!\nВы получаете золотую медаль за теоретическую часть экзамена!", g_string);
 			}
 			else if(GetPVarInt(playerid, "questions") == 11)
 			{
 			    SetPVarInt(playerid, "asexam", 1);
-			    format(string, sizeof(string), "%s\n{3488df}Поздравляем!\nВы получаете серебрянную медаль за теоретическую часть экзамена!", string);
+			    format(g_string, sizeof(g_string), "%s\n{3488df}Поздравляем!\nВы получаете серебрянную медаль за теоретическую часть экзамена!", g_string);
 			}
 			else if(GetPVarInt(playerid, "questions") == 10)
 			{
 			    SetPVarInt(playerid, "asexam", 1);
-			    format(string, sizeof(string), "%s\n{3488df}Поздравляем!\nВы получаете бронзовую медаль за теоретическую часть экзамена!", string);
+			    format(g_string, sizeof(g_string), "%s\n{3488df}Поздравляем!\nВы получаете бронзовую медаль за теоретическую часть экзамена!", g_string);
 			}
 			else if(GetPVarInt(playerid, "questions") == 9)
 			{
 			    SetPVarInt(playerid, "asexam", 1);
-			    format(string, sizeof(string), "%s\n{3488df}Поздравляем!\nВы набрали минимальное количество баллов, чтобы приступить ко второй части экзамена!", string);
+			    format(g_string, sizeof(g_string), "%s\n{3488df}Поздравляем!\nВы набрали минимальное количество баллов, чтобы приступить ко второй части экзамена!", g_string);
 			}
 			else if(GetPVarInt(playerid, "questions") < 9)
 			{
-			    format(string, sizeof(string), "%s\n{e0692f}К сожалению Вы не набрали необходимого количества баллов\nВ следующий раз внимательно прочитайте обучающий раздел\nЖдём вас на пересдаче!", string);
+			    format(g_string, sizeof(g_string), "%s\n{e0692f}К сожалению Вы не набрали необходимого количества баллов\nВ следующий раз внимательно прочитайте обучающий раздел\nЖдём вас на пересдаче!", g_string);
 			}
-		    SPD(playerid, 69, DIALOG_STYLE_MSGBOX, "{e2df02}Результаты теоретической части", string, "Ок", "");
+		    SPD(playerid, 69, DIALOG_STYLE_MSGBOX, "{e2df02}Результаты теоретической части", g_string, "Ок", "");
 		    SetPVarInt(playerid, "questions", 0);
 		}
 		case 69:
@@ -6801,7 +6770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    case 2: player_info[playerid][CHATS]++;
 						    case 3: player_info[playerid][CHATS] = 1;
 						}
-			            new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+			            new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6813,8 +6782,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
                         static const fmt_query[] = "UPDATE `accounts` SET `chats` = '%d' WHERE `id` = '%d'";
 					    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
 					    format(query, sizeof(query), fmt_query, player_info[playerid][CHATS], player_info[playerid][ID]);
@@ -6823,7 +6792,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        case 1:
 			        {
 			        	player_info[playerid][OCHATS] = (player_info[playerid][OCHATS] == 1) ? 2 : 1;
-			            new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+			            new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6835,8 +6804,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
 
 
                         static const fmt_query[] = "UPDATE `accounts` SET `ochats` = '%d' WHERE `id` = '%d'";
@@ -6859,7 +6828,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								foreach(new i:Player) ShowPlayerNameTagForPlayer(playerid, i, true);
 							}
 					    }
-					    new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+					    new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6871,8 +6840,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
 
 						static const fmt_query[] = "UPDATE `accounts` SET `nicks` = '%d' WHERE `id` = '%d' LIMIT 1";
 					    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
@@ -6882,7 +6851,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 3:
 					{
 					    player_info[playerid][NICKCS] = (player_info[playerid][NICKCS] == 1) ? 2 : 1;
-					    new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+					    new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6894,8 +6863,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
                         static const fmt_query[] = "UPDATE `accounts` SET `nickcs` = '%d' WHERE `id` = '%d'";
 					    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
 					    format(query, sizeof(query), fmt_query, player_info[playerid][NICKCS], player_info[playerid][ID]);
@@ -6904,7 +6873,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 4:
 					{
 					    player_info[playerid][IDS] = (player_info[playerid][IDS] == 1) ? 2 : 1;
-					    new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+					    new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6916,8 +6885,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
                         static const fmt_query[] = "UPDATE `accounts` SET `ids` = '%d' WHERE `id` = '%d'";
 					    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
 					    format(query, sizeof(query), fmt_query, player_info[playerid][IDS], player_info[playerid][ID]);
@@ -6926,7 +6895,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 5:
 					{
 					    player_info[playerid][VEHS] = (player_info[playerid][VEHS] == 1) ? 2 : 1;
-					    new string[274], chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
+					    new chat[17], ochat[17], nicks[18], nickcs[18], ids[18], vehs[36];
 						switch(player_info[playerid][CHATS])
 						{
 						    case 1: chat = "{02d402}Стандарт";
@@ -6938,8 +6907,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						nickcs = (player_info[playerid][NICKCS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 						ids = (player_info[playerid][IDS] == 1) ? ("{02d402}Включены") : ("{ff0000}Отключены");
 	                    vehs = (player_info[playerid][VEHS] == 1) ? ("{02d402}Клавиши и команды") : ("{e29501}Только команды");
-						format(string, sizeof(string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
-						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", string, "Вкл|Выкл", "Назад");
+						format(g_string, sizeof(g_string), "Основной чат\t\t%s\nЧат организации\t%s\nНики над игроками\t%s\nНики в чате\t\t%s\nID игроков в чате\t%s\nУправл. транспортом\t%s\n{847f89}[Сохранить настройки]", chat, ochat, nicks, nickcs, ids, vehs);
+						SPD(playerid, 73, DIALOG_STYLE_LIST, "{e2d202}Личные настройки", g_string, "Вкл|Выкл", "Назад");
 						static const fmt_query[] = "UPDATE `accounts` SET `vehs` = '%d' WHERE `id` = '%d'";
 					    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
 					    format(query, sizeof(query), fmt_query, player_info[playerid][VEHS], player_info[playerid][ID]);
@@ -7055,9 +7024,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			    new n = GetPVarInt(playerid, "house");
  			    if(player_info[playerid][HOUSE] != 9999)
 				{
-					new string[75];
-					format(string, sizeof(string), "У вас уже есть дом (№%d). Необходимо продать его прежде чем покупать новый", player_info[playerid][HOUSE]-1);
-					return SCM(playerid, COLOR_LIGHTGREY, string);
+					format(g_string, sizeof(g_string), "У вас уже есть дом (№%d). Необходимо продать его прежде чем покупать новый", player_info[playerid][HOUSE]-1);
+					return SCM(playerid, COLOR_LIGHTGREY, g_string);
 				}
  			    if(player_info[playerid][MONEY] < house_info[n][hcost]) return SCM(playerid, COLOR_GREY, "У Вас недостаточно денег для покупки этого дома");
  			    player_info[playerid][HOUSE] = house_info[n][hid];
@@ -7445,9 +7413,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 						}
 						static const fmt_querynew[] = "Вы выселили %s из своего дома";
-					    new string[sizeof(fmt_querynew)+(-2+MAX_PLAYER_NAME)];
-					    format(string, sizeof(string), fmt_querynew, guest);
-						SCM(playerid, COLOR_LIGHTBLUE, string);
+					    format(g_string, sizeof(g_string), fmt_querynew, guest);
+						SCM(playerid, COLOR_LIGHTBLUE, g_string);
 			        }
 				}
  			}
@@ -7480,10 +7447,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new clothes[13];
 					clothes = (house_info[h][storeclothes] == 0) ? ("{e25802}Нет") : ("{16D406}Есть");
 	 				GetPlayerPos(playerid, house_info[h][storex], house_info[h][storey], house_info[h][storez]);
-	 				new string[220];
-					format(string, sizeof(string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s",\
+					format(g_string, sizeof(g_string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s",\
 						house_info[h][storemetal], house_info[h][storedrugs], gunname, house_info[h][storepatron], clothes);
-	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
+	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(g_string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
 	 			    SCM(playerid, 0x7AAF3BFF, "Шкаф установлен. Используйте {338ed4}/use{7AAF3B} чтобы открыть его");
 	 			    SaveStorage(h);
  				}
@@ -7506,10 +7472,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new clothes[13];
 					clothes = (house_info[h][storeclothes] == 0) ? ("{e25802}Нет") : ("{16D406}Есть");
 	 				GetPlayerPos(playerid, house_info[h][storex], house_info[h][storey], house_info[h][storez]);
-	 				new string[220];
-					format(string, sizeof(string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s",\
+					format(g_string, sizeof(g_string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s",\
 						house_info[h][storemetal], house_info[h][storedrugs], gunname, house_info[h][storepatron], clothes);
-	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
+	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(g_string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
 	 			    SCM(playerid, 0x7AAF3BFF, "Шкаф установлен. Используйте {338ed4}/use{7AAF3B} чтобы открыть его");
 	 			    SaveStorage(h);
 				}
@@ -7530,9 +7495,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            if(player_info[playerid][MET] == 0) return SCM(playerid, COLOR_GREY, "У вас нет с собой металла");
 						if(amount > 700) return SCM(playerid, COLOR_GREY, "В шкафу нехватает места для металла");
                         house_info[h][storemetal] += player_info[playerid][MET];
-                        new string[34];
-                        format(string, sizeof(string), "Вы положили в шкаф %d кг металла", player_info[playerid][MET]);
-                        SCM(playerid, 0x3399FFFF, string);
+                        format(g_string, sizeof(g_string), "Вы положили в шкаф %d кг металла", player_info[playerid][MET]);
+                        SCM(playerid, 0x3399FFFF, g_string);
 						player_info[playerid][MET] = 0;
 						static const fmt_query[] = "UPDATE `accounts` SET `met` = '%d' WHERE `id` = '%d'";
 					    new query[sizeof(fmt_query)+(-2+2)+(-2+8)];
@@ -7546,9 +7510,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            if(player_info[playerid][DRUGS] == 0) return SCM(playerid, COLOR_GREY, "У вас нет с собой наркотиков");
 						if(amount > 700) return SCM(playerid, COLOR_GREY, "В шкафу нехватает места для наркотиков");
                         house_info[h][storedrugs] += player_info[playerid][DRUGS];
-                        new string[34];
-                        format(string, sizeof(string), "Вы положили в шкаф %d г наркотиков", player_info[playerid][DRUGS]);
-                        SCM(playerid, 0x3399FFFF, string);
+                        format(g_string, sizeof(g_string), "Вы положили в шкаф %d г наркотиков", player_info[playerid][DRUGS]);
+                        SCM(playerid, 0x3399FFFF, g_string);
 						player_info[playerid][DRUGS] = 0;
 
 						static const fmt_query[] = "UPDATE `accounts` SET `drugs` = '%d' WHERE `id` = '%d'";
@@ -7613,9 +7576,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							house_info[h][storegun] = gun;
 							SetPlayerAmmo(playerid, gun, 0);
 							house_info[h][storepatron] += weaponinfo[1];
-							new string[35];
-							format(string, sizeof(string), "Вы положили %s в шкаф", gunname);
-                        	SCM(playerid, 0x018FDAFF, string);
+							format(g_string, sizeof(g_string), "Вы положили %s в шкаф", gunname);
+                        	SCM(playerid, 0x018FDAFF, g_string);
                         	SetStorage(h);
 						}
 						else
@@ -7684,9 +7646,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    new query[sizeof(fmt_query)+(-2+2)+(-2+8)];
 			    format(query, sizeof(query), fmt_query, player_info[playerid][MET], player_info[playerid][ID]);
 				mysql_query(dbHandle, query);
-	            new string[36];
-             	format(string, sizeof(string), "Вы достали из шкафа %d кг металла", amount);
-                SCM(playerid, 0x3399FFFF, string);
+             	format(g_string, sizeof(g_string), "Вы достали из шкафа %d кг металла", amount);
+                SCM(playerid, 0x3399FFFF, g_string);
 				SetStorage(h);
 		    }
 		}
@@ -7706,9 +7667,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    new query[sizeof(fmt_query)+(-2+4)+(-2+8)];
 			    format(query, sizeof(query), fmt_query, player_info[playerid][DRUGS], player_info[playerid][ID]);
 				mysql_query(dbHandle, query);
-	            new string[37];
-             	format(string, sizeof(string), "Вы достали из шкафа %d г наркотиков", amount);
-                SCM(playerid, 0x3399FFFF, string);
+             	format(g_string, sizeof(g_string), "Вы достали из шкафа %d г наркотиков", amount);
+                SCM(playerid, 0x3399FFFF, g_string);
 				SetStorage(h);
 		    }
 		}
@@ -7740,9 +7700,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    house_info[h][storegun] = 0;
 				}
 				house_info[h][storepatron] -= amount;
-				new string[50];
-				format(string, sizeof(string), "Вы достали из шкафа %s и %d патронов", gunname, amount);
-				SCM(playerid, 0x3399FFFF, string);
+				format(g_string, sizeof(g_string), "Вы достали из шкафа %s и %d патронов", gunname, amount);
+				SCM(playerid, 0x3399FFFF, g_string);
 				SetStorage(h);
 			}
 		}
@@ -7840,9 +7799,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)//левая кнопка
  			{
-				new string[433] = !"{9cd516}1. Просмотреть последние пополнения\n{9cd516}2. Конвертировать рубли в игровые деньги\n3. Изменить имя\t\t\t\t\t{3488da}8 руб.\n4. Снять все предупреждения\t\t\t{3488da}65 руб.\n5. Получить наркотик ЛСД (8 доз)\t\t\t{3488da}1 руб.\n";
-				strcat(string, !"6. Подделка документов (законопослушность +10)\t{3488da}4 руб.\n7. Покупка 4-х значного телефонного номера\t{3488da}70 руб.\n8. Прокачать силу или навыки владения оружием\t{3488da}1 руб./2 ед.");
- 			    SPD(playerid, 96, DIALOG_STYLE_LIST, "{e2d402}Меню дополнительных возможностей", string, "Выбрать", "Закрыть");
+				g_string = !"{9cd516}1. Просмотреть последние пополнения\n{9cd516}2. Конвертировать рубли в игровые деньги\n3. Изменить имя\t\t\t\t\t{3488da}8 руб.\n4. Снять все предупреждения\t\t\t{3488da}65 руб.\n5. Получить наркотик ЛСД (8 доз)\t\t\t{3488da}1 руб.\n";
+				strcat(g_string, !"6. Подделка документов (законопослушность +10)\t{3488da}4 руб.\n7. Покупка 4-х значного телефонного номера\t{3488da}70 руб.\n8. Прокачать силу или навыки владения оружием\t{3488da}1 руб./2 ед.");
+ 			    SPD(playerid, 96, DIALOG_STYLE_LIST, "{e2d402}Меню дополнительных возможностей", g_string, "Выбрать", "Закрыть");
  			}
  			else
  			{
@@ -7855,20 +7814,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			{
  			    new frac = GetPVarInt(playerid, "invitefracid");
  			    new id = GetPVarInt(playerid, "inviteid");
- 			    new string[128];
  			    new fraction = floatround(frac / 10, floatround_floor);
  			    new subfrac = frac - 10*fraction;
-                format(string, sizeof(string), "Вы предложили %s вступить в организацию \"%s\"", player_info[id][NAME], orgname[fraction]);
-                SCM(playerid, COLOR_LIGHTBLUE, string);
+                format(g_string, sizeof(g_string), "Вы предложили %s вступить в организацию \"%s\"", player_info[id][NAME], orgname[fraction]);
+                SCM(playerid, COLOR_LIGHTBLUE, g_string);
                 if(frac > 59)
                 {
-                    format(string, sizeof(string), "%s предлагает Вам вступить в организацию \"%s\"", player_info[playerid][NAME], orgname[9]);
+                    format(g_string, sizeof(g_string), "%s предлагает Вам вступить в организацию \"%s\"", player_info[playerid][NAME], orgname[9]);
                 }
                 else
                 {
-                	format(string, sizeof(string), "%s предлагает Вам вступить в организацию \"%s\", подразделение \"%s\"", player_info[playerid][NAME], orgname[fraction], subfracname[fraction-1][subfrac]);
+                	format(g_string, sizeof(g_string), "%s предлагает Вам вступить в организацию \"%s\", подразделение \"%s\"", player_info[playerid][NAME], orgname[fraction], subfracname[fraction-1][subfrac]);
 				}
-				SCM(id, COLOR_LIGHTBLUE, string);
+				SCM(id, COLOR_LIGHTBLUE, g_string);
                 SetPVarInt(id, "offerfskin", 17);
 				SetPVarInt(id, "orgid", fraction);
 				SetPVarInt(id, "suborgid", subfrac);
@@ -7893,13 +7851,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new changeskin;
 		    new frac = player_info[playerid][FRAC];
 		    new fraction = floatround(frac / 10, floatround_floor);
-		    new string[80];
 		    if(frac == 24) fraction = 14;
 		    changeskin = offerskin[fraction-1][listitem];
-		    format(string, sizeof(string), "Ваша внешность была изменена лидером организации %s[%d]", player_info[playerid][NAME], playerid);
-		    SCM(GetPVarInt(playerid, "changeskinid"), COLOR_LIGHTBLUE, string);
-		    format(string, sizeof(string), "Вы изменили внешность игрока %s[%d]", player_info[GetPVarInt(playerid, "changeskinid")][NAME], GetPVarInt(playerid, "changeskinid"));
-		    SCM(playerid, COLOR_LIGHTBLUE, string);
+		    format(g_string, sizeof(g_string), "Ваша внешность была изменена лидером организации %s[%d]", player_info[playerid][NAME], playerid);
+		    SCM(GetPVarInt(playerid, "changeskinid"), COLOR_LIGHTBLUE, g_string);
+		    format(g_string, sizeof(g_string), "Вы изменили внешность игрока %s[%d]", player_info[GetPVarInt(playerid, "changeskinid")][NAME], GetPVarInt(playerid, "changeskinid"));
+		    SCM(playerid, COLOR_LIGHTBLUE, g_string);
 		    SetPlayerSkin(GetPVarInt(playerid, "changeskinid"), changeskin);
 		    static const fmt_query[] = "UPDATE `accounts` SET `fskin` = '%d' WHERE `id` = '%d'";
 		    new query[sizeof(fmt_query)+(-2+1)+(-2+8)];
@@ -8006,12 +7963,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        }
 			        case 5:
 			        {
-			            new string[710] = !"{FFFFFF}1. {dfad02}Выносливость{FFFFFF} позволит находиться в хорошей форме длительное\nвремя. Полоска здоровья будет уменьшаться медленее.\n\n";
-			            strcat(string, !"2. {dfad02}Решительность{FFFFFF} позволит вам самостоятельно принять решение об\nувольнении с организации (команда /leave). Без решительности вы не\nсможете покинуть организацию по собственному желанию.\n\n");
-			            strcat(string, !"3. {dfad02}Рюкзак{FFFFFF} даст возможность переносить с собой металл, патроны и\nнаркотики в гораздо большем количестве.\n\n");
-			            strcat(string, !"4. Став {dfad02}мастером вождения{FFFFFF}, двигатель транспорта под Вашим управлением\nбольше не будет глохнуть при различных ударах.\n\n");
-			            strcat(string, !"5. {dfad02}Полная экипировка{FFFFFF} сохраняет всё ваше оружие в полном объёме,\nпри выходе из игры.");
-			            SPD(playerid, 103, DIALOG_STYLE_MSGBOX, "{02a1d5}Информация", string, "Закрыть", "");
+			            g_string = !"{FFFFFF}1. {dfad02}Выносливость{FFFFFF} позволит находиться в хорошей форме длительное\nвремя. Полоска здоровья будет уменьшаться медленее.\n\n";
+			            strcat(g_string, !"2. {dfad02}Решительность{FFFFFF} позволит вам самостоятельно принять решение об\nувольнении с организации (команда /leave). Без решительности вы не\nсможете покинуть организацию по собственному желанию.\n\n");
+			            strcat(g_string, !"3. {dfad02}Рюкзак{FFFFFF} даст возможность переносить с собой металл, патроны и\nнаркотики в гораздо большем количестве.\n\n");
+			            strcat(g_string, !"4. Став {dfad02}мастером вождения{FFFFFF}, двигатель транспорта под Вашим управлением\nбольше не будет глохнуть при различных ударах.\n\n");
+			            strcat(g_string, !"5. {dfad02}Полная экипировка{FFFFFF} сохраняет всё ваше оружие в полном объёме,\nпри выходе из игры.");
+			            SPD(playerid, 103, DIALOG_STYLE_MSGBOX, "{02a1d5}Информация", g_string, "Закрыть", "");
 			        }
 			    }
 			    if(listitem < 5)
@@ -8035,9 +7992,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  			    if(player_info[playerid][UPGRADE] < 2) return SPD(playerid, 106, DIALOG_STYLE_MSGBOX, "{df9900}Увольнение из организации", "{FFFFFF}Чтобы покинуть организацию по собственному желанию, необходимо улучшение \"Решительность\" {02d8d2}(/menu > Улучшения)", "Закрыть", "");
  			    new idfrac = player_info[playerid][FRAC];
 				new idorg = floatround(idfrac/10, floatround_floor);
-				new string[60];
-				format(string, sizeof(string), "Вы покинули организацию \"%s\"", orgname[idorg]);
-				SCM(playerid, COLOR_YELLOW, string);
+				format(g_string, sizeof(g_string), "Вы покинули организацию \"%s\"", orgname[idorg]);
+				SCM(playerid, COLOR_YELLOW, g_string);
 				SetPlayerColor(playerid, 0xFFFFFF25);
 				player_info[playerid][FRAC] = 0;
 				player_info[playerid][RANG] = 0;
@@ -8074,9 +8030,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else sub = "Нет";
                         static const fmt_str[] = "{FFFFFF}Дом:\t\t\t%d (%s)\nОплаченных дней:\t\t%d из 30\nЕжедневная кварплата:\t%d$\nСубсидия:\t\t\t%s\n\nНа сколько дней вы хотите оплатить дом?";
-						new string[sizeof(fmt_str)+(-2+3)+(-2+24)+(-2+2)+(-2+5)+(-2+5)];
-						format(string, sizeof(string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
-						SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", string, "Оплатить", "Назад");
+						format(g_string, sizeof(g_string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
+						SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", g_string, "Оплатить", "Назад");
 			        }
 			        case 1:
 			        {
@@ -8104,9 +8059,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else sub = "Нет";
                     static const fmt_str[] = "{FFFFFF}Дом:\t\t\t%d (%s)\nОплаченных дней:\t\t%d из 30\nЕжедневная кварплата:\t%d$\nСубсидия:\t\t\t%s\n\nНа сколько дней вы хотите оплатить дом?";
-					new string[sizeof(fmt_str)+(-2+3)+(-2+24)+(-2+2)+(-2+5)+(-2+5)];
-					format(string, sizeof(string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
-				 	return SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", string, "Оплатить", "Назад");
+					format(g_string, sizeof(g_string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
+				 	return SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", g_string, "Оплатить", "Назад");
 		        }
 		        if(amount + house_info[h][hpay] > 30) return SCM(playerid, 0xB5B500FF, "Вы не можете оплатить дом больше чем на 30 дней");
 				new str[46];
@@ -8127,9 +8081,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				else sub = "Нет";
                 static const fmt_str[] = "{FFFFFF}Дом:\t\t\t%d (%s)\nОплаченных дней:\t\t%d из 30\nЕжедневная кварплата:\t%d$\nСубсидия:\t\t\t%s\n\nНа сколько дней вы хотите оплатить дом?";
-				new string[sizeof(fmt_str)+(-2+3)+(-2+24)+(-2+2)+(-2+5)+(-2+5)];
-				format(string, sizeof(string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
-			 	SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", string, "Оплатить", "Назад");
+				format(g_string, sizeof(g_string), fmt_str, h, house_info[h][htype], house_info[h][hpay], kvarnum, sub);
+			 	SPD(playerid, 111, DIALOG_STYLE_INPUT, "{66cc00}Оплата дома", g_string, "Оплатить", "Назад");
  			}
  			else
  			{
@@ -8145,9 +8098,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				h = h-1;
  				SCM(playerid, 0x8BCD2FFF, "Вы продали свой дом!");
  				new nalogsale = house_info[h][hcost]/100*25;
- 				new string[82];
- 				format(string, sizeof(string), "Налог на продажу дома составил 25 процентов от его стоимости {5dcd3b}(%d$)", nalogsale);
- 				SCM(playerid, COLOR_LIGHTGREY, string);
+ 				format(g_string, sizeof(g_string), "Налог на продажу дома составил 25 процентов от его стоимости {5dcd3b}(%d$)", nalogsale);
+ 				SCM(playerid, COLOR_LIGHTGREY, g_string);
  				new upgrademoney;
  				switch(house_info[h][hupgrade])
  				{
@@ -8157,11 +8109,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				    case 4: upgrademoney = (8000+14500+20000+55000)/100*60;
  				    case 5: upgrademoney = (8000+14500+20000+55000+60000)/100*60;
  				}
- 				format(string, sizeof(string), "Вам было возвращено 60 процентов от стоимости купленных улучшений: {ccff2e}%d$", upgrademoney);
- 				SCM(playerid, COLOR_LIGHTGREY, string);
+ 				format(g_string, sizeof(g_string), "Вам было возвращено 60 процентов от стоимости купленных улучшений: {ccff2e}%d$", upgrademoney);
+ 				SCM(playerid, COLOR_LIGHTGREY, g_string);
  				new returnmoney = (house_info[h][hcost]-nalogsale)+upgrademoney;
- 				format(string, sizeof(string), "Итого на банковский счёт перечислено {4387b8}%d$", returnmoney);
- 				SCM(playerid, COLOR_WHITE, string);
+ 				format(g_string, sizeof(g_string), "Итого на банковский счёт перечислено {4387b8}%d$", returnmoney);
+ 				SCM(playerid, COLOR_WHITE, g_string);
  				new query[80];
  				format(query, sizeof(query), "UPDATE `accounts` SET `guest` = '9999', `spawn` = '1' WHERE `guest` = '%d'", player_info[playerid][HOUSE]);
  				mysql_query(dbHandle, query);
@@ -8279,9 +8231,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        case 0:
 			        {
 					    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
-						new string[sizeof(fmt_str)+(-2+9)];
-						format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-					    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+						format(g_string, sizeof(g_string), fmt_str, player_info[playerid][BANKMONEY]);
+					    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, g_string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 					}
 					case 1:
 					{
@@ -8290,9 +8241,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 2:
 			        {
 			            static const fmt_str[] = "{FFFFFF}На Вашем банковском счету {00cc00}%d$";
-						new string[sizeof(fmt_str)+(-2+9)];
-						format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-						SPD(playerid, DIALOG_BANK + 12, DIALOG_STYLE_MSGBOX, "{ffcd00}Баланс счёта", string, "Назад", "Выйти");
+						format(g_string, sizeof(g_string), fmt_str, player_info[playerid][BANKMONEY]);
+						SPD(playerid, DIALOG_BANK + 12, DIALOG_STYLE_MSGBOX, "{ffcd00}Баланс счёта", g_string, "Назад", "Выйти");
 			        }
 			        case 6:
 			        {
@@ -8323,9 +8273,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(player_info[playerid][BANKMONEY] < money)
 						{
 						    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
-							new string[sizeof(fmt_str)+(-2+9)];
-							format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-						    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+							format(g_string, sizeof(g_string), fmt_str, player_info[playerid][BANKMONEY]);
+						    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, g_string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 						 	return SCM(playerid, COLOR_LIGHTGREY, "На Вашем банковском счету недостаточно средств");
 						}
 						player_info[playerid][BANKMONEY]-=money;
@@ -8376,9 +8325,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			else
 			{
 			    static const fmt_str[] = "{3cb371}Выберите сумму. Всего %d$";
-				new string[sizeof(fmt_str)+(-2+9)];
-				format(string, sizeof(string), fmt_str, player_info[playerid][BANKMONEY]);
-			    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
+				format(g_string, sizeof(g_string), fmt_str, player_info[playerid][BANKMONEY]);
+			    SPD(playerid, DIALOG_BANK + 8, DIALOG_STYLE_LIST, g_string, "100$\n200$\n500$\n1000$\n2000$\n5000$\n10000$\nДругая сумма...", "Снять", "Назад");
 			}
 		}
 		case DIALOG_BANK + 10:
@@ -8481,9 +8429,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    	{
 		    	    case 0:
 					{
-					    new string[105];
-					    format(string, sizeof(string), "{FFFFFF}Номер счёта:\t\t%d\nНаименование:\t\"%s\"\nБаланс:\t\t{00cc66}%d$", nowschet[playerid][sid], nowschet[playerid][sname], nowschet[playerid][smoney]);
-					    SPD(playerid, DIALOG_BANK + 16, DIALOG_STYLE_MSGBOX, "{ffcd00}Информация", string, "Вернуться", "");
+					    format(g_string, sizeof(g_string), "{FFFFFF}Номер счёта:\t\t%d\nНаименование:\t\"%s\"\nБаланс:\t\t{00cc66}%d$", nowschet[playerid][sid], nowschet[playerid][sname], nowschet[playerid][smoney]);
+					    SPD(playerid, DIALOG_BANK + 16, DIALOG_STYLE_MSGBOX, "{ffcd00}Информация", g_string, "Вернуться", "");
 					}
 					case 2:
 					{
@@ -8520,9 +8467,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				if(nowschet[playerid][smoney] < money)
 			    {
-					new string[72];
-					format(string, sizeof(string), "Недостаточно средств. Текущий баланс счёта №%d: {009966}%d$", nowschet[playerid][sid], nowschet[playerid][smoney]);
-					SCM(playerid, COLOR_WHITE, string);
+					format(g_string, sizeof(g_string), "Недостаточно средств. Текущий баланс счёта №%d: {009966}%d$", nowschet[playerid][sid], nowschet[playerid][smoney]);
+					SCM(playerid, COLOR_WHITE, g_string);
 					return SPD(playerid, DIALOG_BANK + 17, DIALOG_STYLE_INPUT, "{ffcd00}Снять деньги", "{FFFFFF}Укажите сумму:", "Снять", "Отмена");
 			    }
 			    nowschet[playerid][smoney]-=money;
@@ -8606,15 +8552,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    sscanf(inputtext, "d", money);
 			    if(money < 1)
 			    {
-			        new string[63];
-				    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-				    return SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+				    format(g_string, sizeof(g_string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
+				    return SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", g_string, "Перевести", "Отмена");
 			    }
 			    if(money > player_info[playerid][BANKMONEY])
 			    {
-       				new string[63];
-				    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-				    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+				    format(g_string, sizeof(g_string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
+				    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", g_string, "Перевести", "Отмена");
 				    return SCM(playerid, COLOR_ORANGE, "На основном банковском счёте недостаточно денег");
 			    }
 			    player_info[playerid][BANKMONEY]-=money;
@@ -8626,9 +8570,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new query2[sizeof(fmt_query2)+(-2+9)+(-2+8)];
 				format(query2, sizeof(query2), fmt_query2, money, transfer);
 				mysql_query(dbHandle, query2);
-				new string[122];
-				format(string, sizeof(string), "{FFFFFF}Откуда:\t\t\tОсновной счёт\nКуда:\t\t\tСчёт №%d\nСумма:\t\t\t%d$\nОстаток на вашем счету:\t%d$", transfer, money, player_info[playerid][BANKMONEY]);
-				SPD(playerid, DIALOG_BANK + 22, DIALOG_STYLE_MSGBOX, "{99ff00}Перевод завершён", string, "Закрыть", "");
+				
+				format(g_string, sizeof(g_string), "{FFFFFF}Откуда:\t\t\tОсновной счёт\nКуда:\t\t\tСчёт №%d\nСумма:\t\t\t%d$\nОстаток на вашем счету:\t%d$", transfer, money, player_info[playerid][BANKMONEY]);
+				SPD(playerid, DIALOG_BANK + 22, DIALOG_STYLE_MSGBOX, "{99ff00}Перевод завершён", g_string, "Закрыть", "");
 				SetPVarInt(playerid, "defaulttransfer", 0);
 			}
 		}
@@ -8816,9 +8760,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 		Attach3DTextLabelToVehicle(taxitext[playerid], GetPlayerVehicleID(playerid), 0.0,0.0,1.5);
 						SetPVarInt(playerid, "passangers_taxi", 0);
 						SetPVarInt(playerid, "taxi_type", 3);
-						new string[46];
-						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
-						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						
+						format(g_string, sizeof(g_string), "%s начал работу таксиста", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 						ChangeVehicleColor(GetPlayerVehicleID(playerid), 18, 18);
 			        }
 			    }
@@ -8834,9 +8778,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    case 3:
 			    {
-			        new string[39];
-					format(string, sizeof(string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-	                SCM(playerid, COLOR_WHITE, string);
+					format(g_string, sizeof(g_string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
+	                SCM(playerid, COLOR_WHITE, g_string);
 			    }
 				default:
 			    {
@@ -8875,9 +8818,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
   				Attach3DTextLabelToVehicle(taxitext[playerid], GetPlayerVehicleID(playerid), 0.0,0.0,1.5);
 				SetPVarInt(playerid, "passangers_taxi", 0);
 				SetPVarInt(playerid, "taxi_type", 2);
-				new string[46];
-				format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
-				ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+				
+				format(g_string, sizeof(g_string), "%s начал работу таксиста", player_info[playerid][NAME]);
+				ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
             }
 		}
 		case DIALOG_TAXI + 5: //Социиальное
@@ -8894,9 +8837,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         SetPVarInt(playerid, "taxi_route", 1);
 						SetPVarInt(playerid, "taxi_type", 1);
 						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}500$ {5bdd02}за каждую поездку до шахты");
-                        new string[46];
-						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
-						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+
+						format(g_string, sizeof(g_string), "%s начал работу таксиста", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			        case 1:
@@ -8909,9 +8852,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         SetPVarInt(playerid, "taxi_route", 2);
 						SetPVarInt(playerid, "taxi_type", 1);
 						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}475$ {5bdd02}за каждую поездку до завода");
-                        new string[46];
-						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
-						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+
+						format(g_string, sizeof(g_string), "%s начал работу таксиста", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			        case 2:
@@ -8924,9 +8867,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         SetPVarInt(playerid, "taxi_route", 3);
 						SetPVarInt(playerid, "taxi_type", 1);
 						SCM(playerid, COLOR_LIGHTGREEN, "[Таксопарк] Вы будете получать по {FFDF0F}250$ {5bdd02}за каждую поездку до склада");
-                        new string[46];
-						format(string, sizeof(string), "%s начал работу таксиста", player_info[playerid][NAME]);
-						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+
+						format(g_string, sizeof(g_string), "%s начал работу таксиста", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 						ChangeVehicleColor(GetPlayerVehicleID(playerid), 128, 128);
 					}
 			    }
@@ -8959,9 +8902,8 @@ public CheckTransfer(playerid, transfer)
 	cache_get_row_count(rows);
  	if(rows)
 	{
-	    new string[63];
-	    format(string, sizeof(string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
-	    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", string, "Перевести", "Отмена");
+	    format(g_string, sizeof(g_string), "{FFFFFF}Вы выполняете перевод на счёт №%d\nУкажите сумму", transfer);
+	    SPD(playerid, DIALOG_BANK + 21, DIALOG_STYLE_INPUT, "{ffcd00}Безналичный перевод", g_string, "Перевести", "Отмена");
 	    SetPVarInt(playerid, "defaulttransfer", transfer);
 	}
 	else
@@ -9007,8 +8949,7 @@ public ShowBankChets(playerid)
 	cache_get_row_count(rows);
  	if(rows)
 	{
- 		new string[260];
- 		string = "Номер\tНазвание\n_ _ _ _\t{99cc00}Основной счёт\n";
+ 		g_string = "Номер\tНазвание\n_ _ _ _\t{99cc00}Основной счёт\n";
  		new temp[28];
 	    for(new i = 0; i < rows; i++)
 		{
@@ -9017,10 +8958,10 @@ public ShowBankChets(playerid)
 		    cache_get_value_name_int(i, "id", id);
 		    cache_get_value_name_int(i, "money", money);
 		    format(temp, sizeof(temp), "%d\t%s\n", id, name);
-		    strcat(string, temp);
+		    strcat(g_string, temp);
 			mychets[playerid][i] = id;
 		}
-		SPD(playerid, DIALOG_BANK + 6, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", string, "Операции", "Назад");
+		SPD(playerid, DIALOG_BANK + 6, DIALOG_STYLE_TABLIST_HEADERS, "{ffcd00}Ваши счета", g_string, "Операции", "Назад");
  	}
 	else
 	{
@@ -9036,12 +8977,12 @@ public UnBanName(playerid, name[])
 	cache_get_row_count(rows);
 	if(rows)
 	{
-	    new string[114], idacc, ipban[16];
+	    new idacc, ipban[16];
 	    cache_get_value_name(0, "ipban", ipban, 16);
      	cache_get_value_name_int(0, "idacc", idacc);
-	    format(string, sizeof(string), "[A] %s[%d] разбанил игрока %s (аккаунт %d, IP %s)", player_info[playerid][NAME], playerid, name, idacc, ipban);
-	    SCMA(COLOR_GREY, string);
-	    AdmLog("logs/unbanlog.txt",string);
+	    format(g_string, sizeof(g_string), "[A] %s[%d] разбанил игрока %s (аккаунт %d, IP %s)", player_info[playerid][NAME], playerid, name, idacc, ipban);
+	    SCMA(COLOR_GREY, g_string);
+	    AdmLog("logs/unbanlog.txt",g_string);
 		new query[62];
 		format(query, sizeof(query), "DELETE FROM `bans` WHERE `name` = '%s'", name);
 	    mysql_query(dbHandle, query);
@@ -9063,12 +9004,12 @@ public UnBanId(playerid, id)
 	cache_get_row_count(rows);
 	if(rows)
 	{
-	    new string[114], ipban[16], nick[MAX_PLAYER_NAME];
+	    new ipban[16], nick[MAX_PLAYER_NAME];
 	    cache_get_value_name(0, "ipban", ipban, 16);
 		cache_get_value_name(0, "name", nick, MAX_PLAYER_NAME);
-	    format(string, sizeof(string), "[A] %s[%d] разбанил игрока %s (аккаунт %d, IP %s)", player_info[playerid][NAME], playerid, nick, id, ipban);
-	    SCMA(COLOR_GREY, string);
-	    AdmLog("logs/unbanlog.txt",string);
+	    format(g_string, sizeof(g_string), "[A] %s[%d] разбанил игрока %s (аккаунт %d, IP %s)", player_info[playerid][NAME], playerid, nick, id, ipban);
+	    SCMA(COLOR_GREY, g_string);
+	    AdmLog("logs/unbanlog.txt",g_string);
 		new query[62];
 	    format(query, sizeof(query), "DELETE FROM `bans` WHERE `idacc` = '%d'", id);
 	    mysql_query(dbHandle, query);
@@ -9090,7 +9031,7 @@ public BanInfo(playerid)
 	cache_get_row_count(rows);
 	if(rows)
 	{
-		new unban, string[284], name[24], admin[24], reason[27], bandate[13], bantime[11], ipban[16], idacc;
+		new unban, name[24], admin[24], reason[27], bandate[13], bantime[11], ipban[16], idacc;
 		cache_get_value_name_int(0, "unbandate", unban);
 		cache_get_value_name(0, "name", name, MAX_PLAYER_NAME);
 		cache_get_value_name(0, "admin", admin, MAX_PLAYER_NAME);
@@ -9101,8 +9042,8 @@ public BanInfo(playerid)
 		cache_get_value_name_int(0, "idacc", idacc);
 		new how = unban - gettime();
 		how = how/86400;
-		format(string, sizeof(string), "Номер аккаунта:\t%d\nНик забаненного:\t%s\nНик администратора:\t%s\nДней до конца бана:\t%d\nПричина:\t%s\nIP во время бана: %s\nДата бана:\t\t%s %s", idacc, name, admin, how+1, reason, ipban, bandate, bantime);
-        SPD(playerid, 105, DIALOG_STYLE_MSGBOX, name, string, "Закрыть", "");
+		format(g_string, sizeof(g_string), "Номер аккаунта:\t%d\nНик забаненного:\t%s\nНик администратора:\t%s\nДней до конца бана:\t%d\nПричина:\t%s\nIP во время бана: %s\nДата бана:\t\t%s %s", idacc, name, admin, how+1, reason, ipban, bandate, bantime);
+        SPD(playerid, 105, DIALOG_STYLE_MSGBOX, name, g_string, "Закрыть", "");
 	}
 	else
 	{
@@ -9187,15 +9128,15 @@ public OffUninvite(playerid, nick[])
 		    if(player_info[playerid][FRAC] != frac) return SCM(playerid, COLOR_LIGHTGREY, "Игрок не состоит в Вашей организации (в подразделении)");
 		}
 		if(rang == 10) return SCM(playerid, COLOR_LIGHTGREY, "Вы не можете уволить лидера");
-		new string[58];
-		format(string, sizeof(string), "%s был уволен из Вашей организации", nick);
-		SCM(playerid, COLOR_LIGHTBLUE, string);
+
+		format(g_string, sizeof(g_string), "%s был уволен из Вашей организации", nick);
+		SCM(playerid, COLOR_LIGHTBLUE, g_string);
 		static const fmt_query[] = "UPDATE `accounts` SET `frac` = '0', `rang` = '0', `fskin` = '0', `work` = '0' WHERE `id` = '%d'";
 		new query[sizeof(fmt_query)+(-2+8)];
 		format(query, sizeof(query), fmt_query, idplayer);
 		mysql_query(dbHandle, query);
-		format(string, sizeof(string), "%s offuninvite %s\r\n", player_info[playerid][NAME], nick);
-		AdmLog("logs/offuninvitelog.txt",string);
+		format(g_string, sizeof(g_string), "%s offuninvite %s\r\n", player_info[playerid][NAME], nick);
+		AdmLog("logs/offuninvitelog.txt",g_string);
 	}
 	else if(!rows)
 	{
@@ -9343,16 +9284,16 @@ public CheckOffBan(playerid, bannick[], bantime, banreason[])
 			SCM(playerid, COLOR_ORANGE, "Вы собираетесь забанить администратора сервера. Чтобы продолжить введите команду ещё раз");
 			return 1;
 		}*/
-        new string[128];
+
 		if(!strlen(banreason))
 		{
-		    format(string, sizeof(string), "Администратор %s забанил в оффлайне игрока %s на %d дней.", player_info[playerid][NAME], bannick, bantime);
+		    format(g_string, sizeof(g_string), "Администратор %s забанил в оффлайне игрока %s на %d дней.", player_info[playerid][NAME], bannick, bantime);
 		}
 		else
 		{
-		    format(string, sizeof(string), "Администратор %s забанил в оффлайне игрока %s на %d дней. Причина: %s", player_info[playerid][NAME], bannick, bantime, banreason);
+		    format(g_string, sizeof(g_string), "Администратор %s забанил в оффлайне игрока %s на %d дней. Причина: %s", player_info[playerid][NAME], bannick, bantime, banreason);
 		}
-		SCMTA(COLOR_LIGHTRED, string);
+		SCMTA(COLOR_LIGHTRED, g_string);
 		new Year, Month, Day;
 		getdate(Year, Month, Day);
 		new unban = gettime() + 86400*bantime;
@@ -9363,8 +9304,8 @@ public CheckOffBan(playerid, bannick[], bantime, banreason[])
 	    mysql_tquery(dbHandle, query, "GetIDAcc", "s", bannick);
 		format(query, sizeof(query), "INSERT INTO `bans` (`name`, `bandate`, `unbandate`, `bantime`, `admin`, `reason`, `ipban`, `idacc`) VALUES ('%s', '%d-%02d-%02d', '%d', '%02d:%02d:%02d', '%s', '%s', 'offban', '%d')", bannick, Year, Month, Day, unban, Hour, Minute, Second, player_info[playerid][NAME], banreason, idacc);
 		mysql_query(dbHandle, query);
-		format(string, sizeof(string), "%s offban %s on %d days. Reason: %s\r\n", player_info[playerid][NAME], bannick, bantime, banreason);
-		AdmLog("logs/offbanlog.txt",string);
+		format(g_string, sizeof(g_string), "%s offban %s on %d days. Reason: %s\r\n", player_info[playerid][NAME], bannick, bantime, banreason);
+		AdmLog("logs/offbanlog.txt", g_string);
 	}
 	return 1;
 }
@@ -9399,9 +9340,8 @@ public CheckWarn(playerid)
             new how = unwarn - gettime();
 			how = how/86400;
 			how = how + 1;
-			new string[19];
-			format(string, sizeof(string), "Осталось дней: %d", how);
-			SCM(playerid, COLOR_ORANGE, string);
+			format(g_string, sizeof(g_string), "Осталось дней: %d", how);
+			SCM(playerid, COLOR_ORANGE, g_string);
 		}
 	}
 	else
@@ -9427,36 +9367,36 @@ public fail(playerid)
 forward awarninfo(playerid);
 public awarninfo(playerid)
 {
-	new rows, string[295], data[11], time[9], anick[24], reason[34];
+	new rows, data[11], time[9], anick[24], reason[34];
 	cache_get_row_count(rows);
-	format(string, sizeof(string), "{ffcf00}Дата и время\t\t Кем выдан\tПричина{FFFFFF}\n\n");
+	format(g_string, sizeof(g_string), "{ffcf00}Дата и время\t\t Кем выдан\tПричина{FFFFFF}\n\n");
 	for(new i = 0; i < rows; i++)
 	{
         cache_get_value_name(i, "date", data, 11);
         cache_get_value_name(i, "time", time, 9);
         cache_get_value_name(i, "anick", anick, MAX_PLAYER_NAME);
         cache_get_value_name(i, "reason", reason, 34);
-	 	format(string, sizeof(string), "%s%s %s\t%s\t%s\n", string, data, time, anick, reason);
+	 	format(g_string, sizeof(g_string), "%s%s %s\t%s\t%s\n", g_string, data, time, anick, reason);
 	}
-	SPD(GetPVarInt(playerid, "warninfo"), 91, DIALOG_STYLE_MSGBOX, "{ff5500}Действующие предупреждения", string, "Закрыть", "");
+	SPD(GetPVarInt(playerid, "warninfo"), 91, DIALOG_STYLE_MSGBOX, "{ff5500}Действующие предупреждения", g_string, "Закрыть", "");
 	return 1;
 }
 
 forward warninfo(playerid);
 public warninfo(playerid)
 {
-	new rows, string[295], data[11], time[9], anick[24], reason[34];
+	new rows, data[11], time[9], anick[24], reason[34];
 	cache_get_row_count(rows);
-	format(string, sizeof(string), "{ffcf00}Дата и время\t\t Кем выдан\tПричина{FFFFFF}\n\n");
+	format(g_string, sizeof(g_string), "{ffcf00}Дата и время\t\t Кем выдан\tПричина{FFFFFF}\n\n");
 	for(new i = 0; i < rows; i++)
 	{
         cache_get_value_name(i, "date", data, 11);
         cache_get_value_name(i, "time", time, 9);
         cache_get_value_name(i, "anick", anick, MAX_PLAYER_NAME);
         cache_get_value_name(i, "reason", reason, 34);
-	 	format(string, sizeof(string), "%s%s %s\t%s\t%s\n", string, data, time, anick, reason);
+	 	format(g_string, sizeof(g_string), "%s%s %s\t%s\t%s\n", g_string, data, time, anick, reason);
 	}
-	SPD(playerid, 91, DIALOG_STYLE_MSGBOX, "{ff5500}Действующие предупреждения", string, "Закрыть", "");
+	SPD(playerid, 91, DIALOG_STYLE_MSGBOX, "{ff5500}Действующие предупреждения", g_string, "Закрыть", "");
 	return 1;
 }
 
@@ -9484,14 +9424,14 @@ public mutetime(playerid)
 forward guest_list(playerid);
 public guest_list(playerid)
 {
-	new rows, o, string[672];
+	new rows, o;
 	cache_get_row_count(rows);
 	for(new i = 0; i < rows; i++)
 	{
 	    new query[26], name[24];
 	    cache_get_value_name(i, "login", name, MAX_PLAYER_NAME);
 	    format(query, sizeof(query), "%s\n", name);
-	    strcat(string, query);
+	    strcat(g_string, query);
 	    o++;
 	    switch(i)
 	    {
@@ -9531,7 +9471,7 @@ public guest_list(playerid)
 	}
 	else
 	{
-	    SPD(playerid, 82, DIALOG_STYLE_LIST, "{e2d402}Список гостей", string, "Выселить", "Назад");
+	    SPD(playerid, 82, DIALOG_STYLE_LIST, "{e2d402}Список гостей", g_string, "Выселить", "Назад");
 	}
 }
 
@@ -9628,10 +9568,9 @@ public load_houses()
 					}
 					new clothes[13];
 					clothes = (house_info[h][storeclothes] == 0) ? ("{e25802}Нет") : ("{16D406}Есть");
-	 				new string[220];
-					format(string, sizeof(string), ("{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s"),\
+					format(g_string, sizeof(g_string), ("{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s"),\
 						house_info[h][storemetal], house_info[h][storedrugs], gunname, house_info[h][storepatron], clothes);
-	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
+	 			    house_info[h][storetext] = CreateDynamic3DTextLabel(g_string, 0xFFFFFFFF, house_info[h][storex], house_info[h][storey], house_info[h][storez]+1.0, 15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, h+100, -1, -1, 7.0);
 				}
 			}
 		}
@@ -9656,11 +9595,11 @@ public speedupdate(playerid)
     if(carli[GetPlayerVehicleID(playerid)] == 1) li = "~g~L~w~";
     if(caren[GetPlayerVehicleID(playerid)] == 0) en = "~r~M~w~";
     if(carli[GetPlayerVehicleID(playerid)] == 0) li = "~r~L~w~";
-	new string[64];
-	format(string, sizeof(string), "~b~~h~~h~%d km/h~w~  Fuel 121  ~b~%.0f", SpeedVehicle(playerid), vehheal);
-	TextDrawSetString(speed1info[playerid], string);
-	format(string, sizeof(string), "Close   max   E S  %s %s B", en, li);
-	TextDrawSetString(speed2info[playerid], string);
+
+	format(g_string, sizeof(g_string), "~b~~h~~h~%d km/h~w~  Fuel 121  ~b~%.0f", SpeedVehicle(playerid), vehheal);
+	TextDrawSetString(speed1info[playerid], g_string);
+	format(g_string, sizeof(g_string), "Close   max   E S  %s %s B", en, li);
+	TextDrawSetString(speed2info[playerid], g_string);
 }
 
 forward get_fare_money_taxi(playerid, driverid);
@@ -9711,9 +9650,8 @@ public taxiworkend(playerid)
 		{
 		    case 3:
 		    {
-		        new string[39];
-				format(string, sizeof(string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
-                SCM(playerid, COLOR_WHITE, string);
+				format(g_string, sizeof(g_string), "Количество пассажиров: {5EFF36}%d", GetPVarInt(playerid, "passangers_taxi"));
+                SCM(playerid, COLOR_WHITE, g_string);
 		    }
 			default:
 		    {
@@ -9751,9 +9689,8 @@ public factoryworkend(playerid)
         SetPVarInt(playerid, "factoryincarongoing", 0);
         SetPlayerSkin(playerid, player_info[playerid][SKIN]);
 		SCM(playerid, COLOR_YELLOW, "Рабочий день завершён");
-		new string[55];
-		format(string, sizeof(string), "Ваша общая чистая прибыль составляет: {5EFF36}%d$", GetPVarInt(playerid, "prib"));
-		SCM(playerid, COLOR_WHITE, string);
+		format(g_string, sizeof(g_string), "Ваша общая чистая прибыль составляет: {5EFF36}%d$", GetPVarInt(playerid, "prib"));
+		SCM(playerid, COLOR_WHITE, g_string);
 		SetPVarInt(playerid, "prib", 0);
 		RemovePlayerAttachedObject(playerid, 9);
     	Delete3DTextLabel(vehtext[playerid]);
@@ -9802,10 +9739,9 @@ public animfactory(playerid)
 		    case 4:
 			{
 			    SetPVarInt(playerid, "mychanse", GetPVarInt(playerid, "mychanse") + 1);
-			    new string[74];
-			    format(string, sizeof(string), "Рабочий навык увеличен. Теперь шанс создать бракованный продукт 1 из %d", GetPVarInt(playerid, "mychanse"));
+			    format(g_string, sizeof(g_string), "Рабочий навык увеличен. Теперь шанс создать бракованный продукт 1 из %d", GetPVarInt(playerid, "mychanse"));
 				PlayerPlaySound(playerid, 17000, 0.0, 0.0, 0.0);
-			    SCM(playerid, COLOR_GREEN, string);
+			    SCM(playerid, COLOR_GREEN, g_string);
 			}
 		    case 5:{}
 		}
@@ -10078,15 +10014,15 @@ public CheckBan(playerid)
 	    }
 	    else
 	    {
-	        new string[256], admin[24], reason[27], bandate[13], bantime[11];
+	        new admin[24], reason[27], bandate[13], bantime[11];
 	        cache_get_value_name(0, "admin", admin, MAX_PLAYER_NAME);
 	        cache_get_value_name(0, "reason", reason, 27);
 	        cache_get_value_name(0, "bandate", bandate, 13);
 	        cache_get_value_name(0, "bantime", bantime, 11);
 			new how = unban - gettime();
 			how = how/86400;
-	        format(string, sizeof(string), "{FFFFFF}Этот аккаунт заблокирован на {ff4400}%d дней.{FFFFFF}\n\nНик администратора: %s\nПричина блокировки: %s\nДата и время: %s %s\n\nВведите {ffcd00}/q (/quit){FFFFFF} чтобы выйти.", how+1, admin, reason, bandate, bantime);
-	        SPD(playerid, 91, DIALOG_STYLE_MSGBOX, "{3399ff}Advance RolePlay", string, "Закрыть", "");
+	        format(g_string, sizeof(g_string), "{FFFFFF}Этот аккаунт заблокирован на {ff4400}%d дней.{FFFFFF}\n\nНик администратора: %s\nПричина блокировки: %s\nДата и время: %s %s\n\nВведите {ffcd00}/q (/quit){FFFFFF} чтобы выйти.", how+1, admin, reason, bandate, bantime);
+	        SPD(playerid, 91, DIALOG_STYLE_MSGBOX, "{3399ff}Advance RolePlay", g_string, "Закрыть", "");
 	        Kick(playerid);
 	    }
 	}
@@ -10200,20 +10136,19 @@ public minuteupdate()
 forward secondupdate();
 public secondupdate()
 {
-	new string[128];
-	format(string, sizeof(string), "{FFFFFF}Руда\n{5EFF36}На складе:\n%d кг", storages[0][MINEORE]);
-	Update3DTextLabelText(minestorage, -1, string);
-	format(string, sizeof(string), "{FFFFFF}Кузница\n{FFEF0D}%d кг руды\nна переплавке", storages[0][MINERELOAD]);
-	Update3DTextLabelText(minereload, -1, string);
-	format(string, sizeof(string), "{FFFFFF}Металл\n{1C77FF}На складе\n%d кг", storages[0][MINEIRON]);
-	Update3DTextLabelText(metal, -1, string);
-	format(string, sizeof(string), "{FFFFFF}Покупка металла\n(для развозчиков)\n\n{E0FF17}На складе %d кг\nКупить: /buym", storages[0][MINEIRON]);
-	Update3DTextLabelText(transport, -1, string);
-	format(string, sizeof(string), "{FFFFFF}Исходные материалы:\n{FF9924}Топливо: %d / 1000000 л\nМеталл: %d / 1000000 кг\n\n{5EFF36}Продукты: %d шт.", storages[0][FACTORYFUEL], storages[0][FACTORYMETAL], storages[0][FACTORYPRODUCT]);
-	Update3DTextLabelText(factorymaterials, -1, string);
-	Update3DTextLabelText(factorymaterials2, -1, string);
-	format(string, sizeof(string), "{FFFFFF}Топливо для завода\n{E8CB38}На складе:\n%d л топлива\n{5EFF36}Купить: /buyf", storages[0][FUEL]);
-	Update3DTextLabelText(fueltext, -1, string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Руда\n{5EFF36}На складе:\n%d кг", storages[0][MINEORE]);
+	Update3DTextLabelText(minestorage, -1, g_string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Кузница\n{FFEF0D}%d кг руды\nна переплавке", storages[0][MINERELOAD]);
+	Update3DTextLabelText(minereload, -1, g_string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Металл\n{1C77FF}На складе\n%d кг", storages[0][MINEIRON]);
+	Update3DTextLabelText(metal, -1, g_string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Покупка металла\n(для развозчиков)\n\n{E0FF17}На складе %d кг\nКупить: /buym", storages[0][MINEIRON]);
+	Update3DTextLabelText(transport, -1, g_string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Исходные материалы:\n{FF9924}Топливо: %d / 1000000 л\nМеталл: %d / 1000000 кг\n\n{5EFF36}Продукты: %d шт.", storages[0][FACTORYFUEL], storages[0][FACTORYMETAL], storages[0][FACTORYPRODUCT]);
+	Update3DTextLabelText(factorymaterials, -1, g_string);
+	Update3DTextLabelText(factorymaterials2, -1, g_string);
+	format(g_string, sizeof(g_string), "{FFFFFF}Топливо для завода\n{E8CB38}На складе:\n%d л топлива\n{5EFF36}Купить: /buyf", storages[0][FUEL]);
+	Update3DTextLabelText(fueltext, -1, g_string);
 	
 	foreach(new i:Player)
 	{
@@ -10227,18 +10162,18 @@ public secondupdate()
 			PlayerAFK[i]++;
 			if(PlayerAFK[i] > 4)
 			{
-				format(string, sizeof(string), "{FF0000}На паузе ");
-				if(PlayerAFK[i] < 60) format(string, sizeof(string), "%s%d", string, PlayerAFK[i]);
+				format(g_string, sizeof(g_string), "{FF0000}На паузе ");
+				if(PlayerAFK[i] < 60) format(g_string, sizeof(g_string), "%s%d", g_string, PlayerAFK[i]);
 				else if(PlayerAFK[i] >= 60 && PlayerAFK[i] < 1800)
 				{
 				    new minuta;
 				    new second;
 				    minuta = floatround(PlayerAFK[i] / 60, floatround_floor);
 				    second = PlayerAFK[i] % 60;
-				    format(string, sizeof(string), "%s%d:%02d", string, minuta, second);
+				    format(g_string, sizeof(g_string), "%s%d:%02d", g_string, minuta, second);
 				}
-				if(PlayerAFK[i] < 60) { strcat(string," сек."); }
-	    		SetPlayerChatBubble(i, string, -1, 25, 1200);
+				if(PlayerAFK[i] < 60) { strcat(g_string," сек."); }
+	    		SetPlayerChatBubble(i, g_string, -1, 25, 1200);
 	    	}
 		}
 		if(PlayerAFK[i] == 3000)
@@ -10297,7 +10232,7 @@ public payday()
 	{
 	    if(GetPVarInt(a, "logged") == 1)
 	    {
-			new string[66], nextlevel = player_info[a][LEVEL]+1;
+			new nextlevel = player_info[a][LEVEL]+1;
 			expamount = exptonextlevel*nextlevel;
 			if(player_info[a][LEVEL] == 4 && player_info[a][EXP] == 0)
 			{
@@ -10312,13 +10247,13 @@ public payday()
 			{
 			    if(minute < 10)
 			    {
-					format(string, sizeof(string), "Текущее время: {1472FF}%d:0%d", hour, minute);
+					format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:0%d", hour, minute);
 				}
 				else
 				{
-				    format(string, sizeof(string), "Текущее время: {1472FF}%d:%d", hour, minute);
+				    format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:%d", hour, minute);
 				}
-				SCM(a, COLOR_WHITE, string);
+				SCM(a, COLOR_WHITE, g_string);
 				SCM(a, COLOR_WHITE, "\tБАНКОВСКИЙ ЧЕК");
 	   			SCM(a, COLOR_WHITE, "_______________________________");
 	   			SCM(a, COLOR_ORANGEYELLOW, "Вы не должны находиться на паузе для получения зарплаты");
@@ -10330,13 +10265,13 @@ public payday()
 			{
 			    if(minute < 10)
 			    {
-					format(string, sizeof(string), "Текущее время: {1472FF}%d:0%d", hour, minute);
+					format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:0%d", hour, minute);
 				}
 				else
 				{
-				    format(string, sizeof(string), "Текущее время: {1472FF}%d:%d", hour, minute);
+				    format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:%d", hour, minute);
 				}
-				SCM(a, COLOR_WHITE, string);
+				SCM(a, COLOR_WHITE, g_string);
 				SCM(a, COLOR_WHITE, "\tБАНКОВСКИЙ ЧЕК");
 	   			SCM(a, COLOR_WHITE, "_______________________________");
 	   			SCM(a, COLOR_ORANGEYELLOW, "Для получения зарплаты необходимо находиться в игре минимум 20 минут");
@@ -10354,13 +10289,13 @@ public payday()
 				mysql_query(dbHandle, query);
 				if(minute < 10)
 			    {
-					format(string, sizeof(string), "Текущее время: {1472FF}%d:0%d", hour, minute);
+					format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:0%d", hour, minute);
 				}
 				else
 				{
-				    format(string, sizeof(string), "Текущее время: {1472FF}%d:%d", hour, minute);
+				    format(g_string, sizeof(g_string), "Текущее время: {1472FF}%d:%d", hour, minute);
 				}
-				SCM(a, COLOR_WHITE, string);
+				SCM(a, COLOR_WHITE, g_string);
 				SCM(a, COLOR_WHITE, "\tБАНКОВСКИЙ ЧЕК");
 	   			SCM(a, COLOR_WHITE, "_______________________________");
 	   			SCM(a, COLOR_WHITE, "Зарплата: {2FED36}99999$");
@@ -10486,9 +10421,8 @@ public player_login(playerid)
 			}
 			if(player_info[playerid][WARN] > 0)
 			{
-				new string[64];
-				format(string, sizeof(string), "Количество предупреждений: %d из 3. Подробнее: {63cfff}/warninfo", player_info[playerid][WARN]);
-				SCM(playerid, 0xE96C16FF, string);
+				format(g_string, sizeof(g_string), "Количество предупреждений: %d из 3. Подробнее: {63cfff}/warninfo", player_info[playerid][WARN]);
+				SCM(playerid, 0xE96C16FF, g_string);
 				SCM(playerid, 0xE96C16FF, "После 3 предупреждения аккаунт будет заблокирован");
 			}
 		}
@@ -10665,7 +10599,6 @@ stock ProxDetectorChat(Float:radi, playerid, text[],col1,col2,col3,col4,col5)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    new string[128];
 		new Float:posx;new Float:posy;new Float:posz;new Float:oldposx;new Float:oldposy;new Float:oldposz;new Float:tempposx;new Float:tempposy;new Float:tempposz;
 		GetPlayerPos(playerid, oldposx, oldposy, oldposz);
 		foreach(new i: Player)
@@ -10683,16 +10616,16 @@ stock ProxDetectorChat(Float:radi, playerid, text[],col1,col2,col3,col4,col5)
 				            {
 				                case 1:
 				                {
-				                    format(string, sizeof(string), "%s{FFFFFF}(%d): %s", player_info[playerid][NAME], playerid, text);
+				                    format(g_string, sizeof(g_string), "%s{FFFFFF}(%d): %s", player_info[playerid][NAME], playerid, text);
 				                }
 				                case 2:
 				                {
-				                    format(string, sizeof(string), "%s:{FFFFFF} %s", player_info[playerid][NAME], text);
+				                    format(g_string, sizeof(g_string), "%s:{FFFFFF} %s", player_info[playerid][NAME], text);
 				                }
 				            }
 				            if(player_info[i][NICKCS] == 2)
 		                    {
-	                            format(string, sizeof(string), "%s", text);
+	                            format(g_string, sizeof(g_string), "%s", text);
 		                    }
 				        }
 				        case 2:
@@ -10701,16 +10634,16 @@ stock ProxDetectorChat(Float:radi, playerid, text[],col1,col2,col3,col4,col5)
 				            {
 				                case 1:
 				                {
-					             	format(string, sizeof(string), " - %s (%s)[%d]", text, player_info[playerid][NAME], playerid);
+					             	format(g_string, sizeof(g_string), " - %s (%s)[%d]", text, player_info[playerid][NAME], playerid);
 								}
 								case 2:
 								{
-								    format(string, sizeof(string), " - %s (%s)", text, player_info[playerid][NAME]);
+								    format(g_string, sizeof(g_string), " - %s (%s)", text, player_info[playerid][NAME]);
 								}
 							}
 							if(player_info[i][NICKCS] == 2)
 		                    {
-	                            format(string, sizeof(string), "%s", text);
+	                            format(g_string, sizeof(g_string), "%s", text);
 		                    }
 				        }
 				        case 3:
@@ -10722,11 +10655,11 @@ stock ProxDetectorChat(Float:radi, playerid, text[],col1,col2,col3,col4,col5)
 					tempposx = (oldposx -posx);
 					tempposy = (oldposy -posy);
 					tempposz = (oldposz -posz);
-					if(((tempposx < radi/16) && (tempposx > -radi/16)) && ((tempposy < radi/16) && (tempposy > -radi/16)) && ((tempposz < radi/16) && (tempposz > -radi/16))) SCM(i, col1, string);
-					else if(((tempposx < radi/8) && (tempposx > -radi/8)) && ((tempposy < radi/8) && (tempposy > -radi/8)) && ((tempposz < radi/8) && (tempposz > -radi/8))) SCM(i, col2, string);
-					else if(((tempposx < radi/4) && (tempposx > -radi/4)) && ((tempposy < radi/4) && (tempposy > -radi/4)) && ((tempposz < radi/4) && (tempposz > -radi/4))) SCM(i, col3, string);
-					else if(((tempposx < radi/2) && (tempposx > -radi/2)) && ((tempposy < radi/2) && (tempposy > -radi/2)) && ((tempposz < radi/2) && (tempposz > -radi/2))) SCM(i, col4, string);
-					else if(((tempposx < radi) && (tempposx > -radi)) && ((tempposy < radi) && (tempposy > -radi)) && ((tempposz < radi) && (tempposz > -radi))) SCM(i, col5, string);
+					if(((tempposx < radi/16) && (tempposx > -radi/16)) && ((tempposy < radi/16) && (tempposy > -radi/16)) && ((tempposz < radi/16) && (tempposz > -radi/16))) SCM(i, col1, g_string);
+					else if(((tempposx < radi/8) && (tempposx > -radi/8)) && ((tempposy < radi/8) && (tempposy > -radi/8)) && ((tempposz < radi/8) && (tempposz > -radi/8))) SCM(i, col2, g_string);
+					else if(((tempposx < radi/4) && (tempposx > -radi/4)) && ((tempposy < radi/4) && (tempposy > -radi/4)) && ((tempposz < radi/4) && (tempposz > -radi/4))) SCM(i, col3, g_string);
+					else if(((tempposx < radi/2) && (tempposx > -radi/2)) && ((tempposy < radi/2) && (tempposy > -radi/2)) && ((tempposz < radi/2) && (tempposz > -radi/2))) SCM(i, col4, g_string);
+					else if(((tempposx < radi) && (tempposx > -radi)) && ((tempposy < radi) && (tempposy > -radi)) && ((tempposz < radi) && (tempposz > -radi))) SCM(i, col5, g_string);
 				}
 			}
 		}
@@ -10750,9 +10683,8 @@ stock SetStorage(h)
 	}
 	new clothes[13];
 	clothes = (house_info[h][storeclothes] == 0) ? ("{e25802}Нет") : ("{16D406}Есть");
-	new string[220];
-	format(string, sizeof(string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s", house_info[h][storemetal], house_info[h][storedrugs], gunname, house_info[h][storepatron], clothes);
-    UpdateDynamic3DTextLabelText(house_info[h][storetext], 0xFFFFFFFF, string);
+	format(g_string, sizeof(g_string), "{e2df02}Шкаф{FFFFFF}\nМеталл: {3488da}%d из 700 кг{FFFFFF}\nНаркотики: {3488da}%d из 2000 г{FFFFFF}\nОружие: %s\nПатроны: {3488da} %d из 3000 шт.{FFFFFF}\nОдежда: %s", house_info[h][storemetal], house_info[h][storedrugs], gunname, house_info[h][storepatron], clothes);
+    UpdateDynamic3DTextLabelText(house_info[h][storetext], 0xFFFFFFFF, g_string);
     SaveStorage(h);
     return 1;
 }
@@ -10927,7 +10859,7 @@ stock show_stats(playerid)
 {
     if(GetPVarInt(playerid, "logged") == 1)
     {
-        new expamount, nextlevel = player_info[playerid][LEVEL]+1, string[512];
+        new expamount, nextlevel = player_info[playerid][LEVEL]+1;
 		expamount = exptonextlevel*nextlevel;
 		new sex[8];
 		
@@ -10990,7 +10922,7 @@ stock show_stats(playerid)
 		{
 		    format(warnsnumber, sizeof(warnsnumber), "\nПредупреждения:\t\t%d из 3", player_info[playerid][WARN]);
 		}
-		format(string, sizeof(string),
+		format(g_string, sizeof(g_string),
 		"{FFFFFF}Имя:\t\t\t\t{0096ff}%s{FFFFFF}\n\
 		Уровень:\t\t\t%d\n\
 		Очки опыта:\t\t\t%d из %d\n\
@@ -11015,7 +10947,7 @@ stock show_stats(playerid)
 		status,
 		warnsnumber
 		);
-		SPD(playerid, 11, DIALOG_STYLE_MSGBOX, "{de9a08}Статистика игрока", string, "Назад", "Закрыть");
+		SPD(playerid, 11, DIALOG_STYLE_MSGBOX, "{de9a08}Статистика игрока", g_string, "Назад", "Закрыть");
     }
 }
 stock ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5)
@@ -11059,16 +10991,15 @@ stock mysql_connects()
 }
 stock show_login(playerid)
 {
-	new string[160];
 	if(GetPVarInt(playerid, "WrongPassword") == 0)
 	{
-	    format(string, sizeof(string), "{FFFFFF}Добро пожаловать на сервер Advance RolePlay\nВаш ник зарегестрирован\n\nЛогин: {42ae10}%s{FFFFFF}\nВведите пароль:", player_info[playerid][NAME]);
+	    format(g_string, sizeof(g_string), "{FFFFFF}Добро пожаловать на сервер Advance RolePlay\nВаш ник зарегестрирован\n\nЛогин: {42ae10}%s{FFFFFF}\nВведите пароль:", player_info[playerid][NAME]);
  	}
 	else
 	{
-        format(string, sizeof(string), "{FFFFFF}Добро пожаловать на сервер Advance RolePlay\nВаш ник зарегестрирован\n\nЛогин: {42ae10}%s{FFFFFF}\n{FF4621}Неверный пароль! Осталось попыток: %d",player_info[playerid][NAME], 4-GetPVarInt(playerid, "WrongPassword"));
+        format(g_string, sizeof(g_string), "{FFFFFF}Добро пожаловать на сервер Advance RolePlay\nВаш ник зарегестрирован\n\nЛогин: {42ae10}%s{FFFFFF}\n{FF4621}Неверный пароль! Осталось попыток: %d",player_info[playerid][NAME], 4-GetPVarInt(playerid, "WrongPassword"));
 	}
- 	SPD(playerid, 7, DIALOG_STYLE_INPUT, "{4ac7ff}Авторизация", string, "Войти", "Отмена");
+ 	SPD(playerid, 7, DIALOG_STYLE_INPUT, "{4ac7ff}Авторизация", g_string, "Войти", "Отмена");
  	login_timer[playerid] = SetTimerEx("logintime", 30000, false, "d", playerid);
 	SetPVarInt(playerid, "timetologin", 1);
 }
@@ -11127,9 +11058,8 @@ CMD:n(playerid, params[])
 	 	return 1;
 	}
     if(sscanf(params, "s[100]", params[0])) return SCM(playerid, COLOR_GREY, "Вводите /n [Сообщение]");
-	new string[128];
-	format(string, sizeof(string), "(( %s[%d]: %s ))", player_info[playerid][NAME], playerid, params[0]);
-	ProxDetector(30.0, playerid, string, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF);
+	format(g_string, sizeof(g_string), "(( %s[%d]: %s ))", player_info[playerid][NAME], playerid, params[0]);
+	ProxDetector(30.0, playerid, g_string, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF, 0x9c9a9cFF);
 	/*
 	SetPlayerChatBubble(playerid, params[0], 0x9c9a9cFF, 15, 7000);
 	*/
@@ -11143,9 +11073,8 @@ CMD:me(playerid, params[])
 	 	return 1;
 	}
     if(sscanf(params, "s[100]", params[0])) return SCM(playerid, COLOR_GREY, "Вводите /me [Сообщение]");
-    new string[128];
-	format(string, sizeof(string), "%s %s", player_info[playerid][NAME], params[0]);
-	ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+	format(g_string, sizeof(g_string), "%s %s", player_info[playerid][NAME], params[0]);
+	ProxDetector(30.0, playerid, g_string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
 	SetPlayerChatBubble(playerid, params[0], 0xde92ffFF, 15, 7000);
 	return 1;
 }
@@ -11157,37 +11086,36 @@ CMD:do(playerid, params[])
 	 	return 1;
 	}
     if(sscanf(params, "s[100]", params[0])) return SCM(playerid, COLOR_GREY, "Вводите /do [Сообщение]");
-    new string[128];
-	format(string, sizeof(string), "%s (%s)", params[0], player_info[playerid][NAME]);
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+	format(g_string, sizeof(g_string), "%s (%s)", params[0], player_info[playerid][NAME]);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	SetPlayerChatBubble(playerid, params[0], 0xde92ffFF, 15, 7000);
 	return 1;
 }
 CMD:eat(playerid)
 {
 	if(GetPVarInt(playerid, "eat") == 0) return SCM(playerid, COLOR_GREY, "У вас нет с собой еды");
-	new string[33], hour;
+	new hour;
     gettime(hour, _, _);
 	switch(hour)
 	{
 	    case 0..3:
 	    {
-	        format(string, sizeof(string), "%s ужинает", player_info[playerid][NAME]);
+	        format(g_string, sizeof(g_string), "%s ужинает", player_info[playerid][NAME]);
 	    }
 	    case 4..11:
 	    {
-	        format(string, sizeof(string), "%s завтракает", player_info[playerid][NAME]);
+	        format(g_string, sizeof(g_string), "%s завтракает", player_info[playerid][NAME]);
 	    }
 	    case 12..17:
 	    {
-	        format(string, sizeof(string), "%s обедает", player_info[playerid][NAME]);
+	        format(g_string, sizeof(g_string), "%s обедает", player_info[playerid][NAME]);
 	    }
 	    case 18..23:
 	    {
-	        format(string, sizeof(string), "%s ужинает", player_info[playerid][NAME]);
+	        format(g_string, sizeof(g_string), "%s ужинает", player_info[playerid][NAME]);
 	    }
 	}
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	SetPlayerChatBubble(playerid, "+30 hp", 0xD4FF26FF, 25.0, 4000);
 	player_info[playerid][HP] += 30;
 	if(player_info[playerid][HP] > 100.0)
@@ -11307,19 +11235,18 @@ CMD:try(playerid, params[])
 	 	return 1;
 	}
     if(sscanf(params, "s[82]", params[0])) return SCM(playerid, COLOR_GREY, "Вводите /try [Сообщение]");
-    new string[128];
     switch(random(2))
     {
         case 0:
         {
-            format(string, sizeof(string), "%s %s | {FF6600}Неудачно", player_info[playerid][NAME], params[0]);
+            format(g_string, sizeof(g_string), "%s %s | {FF6600}Неудачно", player_info[playerid][NAME], params[0]);
         }
         case 1:
         {
-        	format(string, sizeof(string), "%s %s | {66CC00}Удачно", player_info[playerid][NAME], params[0]);
+        	format(g_string, sizeof(g_string), "%s %s | {66CC00}Удачно", player_info[playerid][NAME], params[0]);
         }
     }
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	SetPlayerChatBubble(playerid, params[0], 0xde92ffFF, 15, 7000);
 	return 1;
 }
@@ -11382,14 +11309,13 @@ CMD:buym(playerid, params[])
 		new moneymetal = params[0]*15;
 		if(moneymetal > player_info[playerid][MONEY]) return SCM(playerid, COLOR_GREY, "Недостаточно денег для покупки такого количества металла");
 		metalincar[playerid] = metalincar[playerid]+params[0];
-		new string[55];
-		format(string, sizeof(string), "Вы загрузили %d кг металла общей стоимостью %d$", params[0], moneymetal);
-		SCM(playerid, COLOR_YELLOW, string);
+		format(g_string, sizeof(g_string), "Вы загрузили %d кг металла общей стоимостью %d$", params[0], moneymetal);
+		SCM(playerid, COLOR_YELLOW, g_string);
 		give_money(playerid, -moneymetal);
-		format(string, sizeof(string), "~r~-%d$", moneymetal);
-		GameTextForPlayer(playerid, string, 1500, 1);
-		format(string, sizeof(string), "{1966FF}Доставка металла\n{FFFFFF}Загрузка %d / 500 кг", metalincar[playerid]);
-		Update3DTextLabelText(vehtext[playerid], -1, string);
+		format(g_string, sizeof(g_string), "~r~-%d$", moneymetal);
+		GameTextForPlayer(playerid, g_string, 1500, 1);
+		format(g_string, sizeof(g_string), "{1966FF}Доставка металла\n{FFFFFF}Загрузка %d / 500 кг", metalincar[playerid]);
+		Update3DTextLabelText(vehtext[playerid], -1, g_string);
 		storages[0][MINEIRON] -= params[0];
     }
     else SCM(playerid, COLOR_GREY, "Вы должны находиться у склада шахты в рабочем транспорте");
@@ -11406,17 +11332,16 @@ CMD:sellm(playerid, params[])
 		metalincar[playerid] = metalincar[playerid]-params[0];
 		new moneymetal = params[0]*18;
 		new moneymetal2 = params[0]*15;
-		new string[55];
-		format(string, sizeof(string), "Вы продали заводу %d кг металла на сумму %d$", params[0], moneymetal);
-		SCM(playerid, COLOR_GREEN, string);
-		format(string, sizeof(string), "Ваша чистая выручка составляет: {FFA319}%d$", moneymetal-moneymetal2);
-		SCM(playerid, COLOR_GREEN, string);
+		format(g_string, sizeof(g_string), "Вы продали заводу %d кг металла на сумму %d$", params[0], moneymetal);
+		SCM(playerid, COLOR_GREEN, g_string);
+		format(g_string, sizeof(g_string), "Ваша чистая выручка составляет: {FFA319}%d$", moneymetal-moneymetal2);
+		SCM(playerid, COLOR_GREEN, g_string);
 		SetPVarInt(playerid, "prib", GetPVarInt(playerid, "prib") + (moneymetal-moneymetal2));
 		give_money(playerid, moneymetal);
-		format(string, sizeof(string), "~g~%d$", moneymetal);
-		GameTextForPlayer(playerid, string, 1500, 1);
-		format(string, sizeof(string), "{1966FF}Доставка металла\n{FFFFFF}Загрузка %d / 500 кг", metalincar[playerid]);
-		Update3DTextLabelText(vehtext[playerid], -1, string);
+		format(g_string, sizeof(g_string), "~g~%d$", moneymetal);
+		GameTextForPlayer(playerid, g_string, 1500, 1);
+		format(g_string, sizeof(g_string), "{1966FF}Доставка металла\n{FFFFFF}Загрузка %d / 500 кг", metalincar[playerid]);
+		Update3DTextLabelText(vehtext[playerid], -1, g_string);
 		storages[0][FACTORYMETAL] += params[0];
     }
     else SCM(playerid, COLOR_GREY, "Вы должны находиться у склада исходных материалов завода");
@@ -11434,14 +11359,13 @@ CMD:buyf(playerid, params[])
  		new moneyfuel = params[0]*10;
 	    if(moneyfuel > player_info[playerid][MONEY]) return SCM(playerid, COLOR_GREY, "Недостаточно денег для покупки такого количества топлива");
 	    fuelincar[playerid] = fuelincar[playerid]+params[0];
-	    new string[56];
-	    format(string, sizeof(string), "Вы загрузили %d л топлива общей стоимостью %d$", params[0], moneyfuel);
-	    SCM(playerid, COLOR_YELLOW, string);
+	    format(g_string, sizeof(g_string), "Вы загрузили %d л топлива общей стоимостью %d$", params[0], moneyfuel);
+	    SCM(playerid, COLOR_YELLOW, g_string);
 		give_money(playerid, -moneyfuel);
-		format(string, sizeof(string), "~g~+%d LITRES~n~~b~TOTAL %d LITRES", params[0], fuelincar[playerid]);
-		GameTextForPlayer(playerid, string, 4000, 6);
-		format(string, sizeof(string), "{FF7A05}Доставка топлива\n{FFFFFF}Загрузка %d / 8000 л", fuelincar[playerid]);
-		Update3DTextLabelText(vehtext[playerid], -1, string);
+		format(g_string, sizeof(g_string), "~g~+%d LITRES~n~~b~TOTAL %d LITRES", params[0], fuelincar[playerid]);
+		GameTextForPlayer(playerid, g_string, 4000, 6);
+		format(g_string, sizeof(g_string), "{FF7A05}Доставка топлива\n{FFFFFF}Загрузка %d / 8000 л", fuelincar[playerid]);
+		Update3DTextLabelText(vehtext[playerid], -1, g_string);
 		storages[0][FUEL] -= params[0];
 	}
 	else SCM(playerid, COLOR_GREY, "Вы должны находиться у склада нефтезавода в рабочем транспорте");
@@ -11458,17 +11382,16 @@ CMD:sellf(playerid, params[])
 		fuelincar[playerid] = fuelincar[playerid]-params[0];
 		new moneyfuel = params[0]*12;
 		new moneyfuel2 = params[0]*10;
-		new string[56];
-		format(string, sizeof(string), "Вы продали заводу %d л топлива на сумму %d$", params[0], moneyfuel);
-		SCM(playerid, COLOR_GREEN, string);
-		format(string, sizeof(string), "Ваша чистая выручка составляет: {FFA319}%d$", moneyfuel-moneyfuel2);
-		SCM(playerid, COLOR_GREEN, string);
+		format(g_string, sizeof(g_string), "Вы продали заводу %d л топлива на сумму %d$", params[0], moneyfuel);
+		SCM(playerid, COLOR_GREEN, g_string);
+		format(g_string, sizeof(g_string), "Ваша чистая выручка составляет: {FFA319}%d$", moneyfuel-moneyfuel2);
+		SCM(playerid, COLOR_GREEN, g_string);
 		SetPVarInt(playerid, "prib", GetPVarInt(playerid, "prib") + (moneyfuel-moneyfuel2));
 		give_money(playerid, moneyfuel);
-		format(string, sizeof(string), "~g~%d$", moneyfuel);
-		GameTextForPlayer(playerid, string, 1500, 1);
-		format(string, sizeof(string), "{FF7A05}Доставка топлива\n{FFFFFF}Загрузка %d / 8000 л", fuelincar[playerid]);
-		Update3DTextLabelText(vehtext[playerid], -1, string);
+		format(g_string, sizeof(g_string), "~g~%d$", moneyfuel);
+		GameTextForPlayer(playerid, g_string, 1500, 1);
+		format(g_string, sizeof(g_string), "{FF7A05}Доставка топлива\n{FFFFFF}Загрузка %d / 8000 л", fuelincar[playerid]);
+		Update3DTextLabelText(vehtext[playerid], -1, g_string);
 		storages[0][FACTORYFUEL] += params[0];
 	}
  	else SCM(playerid, COLOR_GREY, "Вы должны находиться у склада исходных материалов завода");
@@ -11478,9 +11401,8 @@ CMD:lic(playerid, params[])
 {
     if(sscanf(params, "d", params[0])) return SCM(playerid, COLOR_GREY, "Используйте: /lic [id игрока]");
     if(!IsPlayerInRangeOfPlayer(2.0, playerid, params[0])) return SCM(playerid, COLOR_GREY, "Игрок слишком далеко от Вас");
-    new string[64];
-	format(string, sizeof(string), "%s показал свои лицензии", player_info[playerid][NAME]);
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+	format(g_string, sizeof(g_string), "%s показал свои лицензии", player_info[playerid][NAME]);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	new prava[33];
 	switch(player_info[playerid][DLIC])
 	{
@@ -11490,12 +11412,12 @@ CMD:lic(playerid, params[])
 	}
 	new oruzh[20];
 	oruzh = (player_info[playerid][GLIC] == 0) ? ("{e29900}Отсутствует") : ("{02df35}Есть");
-	format(string, sizeof(string), "Лицензии %s", player_info[playerid][NAME]);
-	SCM(params[0], COLOR_YELLOW, string);
-	format(string, sizeof(string), "На транспорт: %s", prava);
-	SCM(params[0], COLOR_WHITE, string);
-	format(string, sizeof(string), "На оружие\t %s", oruzh);
-	SCM(params[0], COLOR_WHITE, string);
+	format(g_string, sizeof(g_string), "Лицензии %s", player_info[playerid][NAME]);
+	SCM(params[0], COLOR_YELLOW, g_string);
+	format(g_string, sizeof(g_string), "На транспорт: %s", prava);
+	SCM(params[0], COLOR_WHITE, g_string);
+	format(g_string, sizeof(g_string), "На оружие\t %s", oruzh);
+	SCM(params[0], COLOR_WHITE, g_string);
 	return 1;
 }
 CMD:s(playerid, params[])
@@ -11507,9 +11429,8 @@ CMD:s(playerid, params[])
 	}
 	if(player_info[playerid][LEVEL] < 2) return SCM(playerid, COLOR_LIGHTGREY, "Этим можно пользоваться со 2 уровня");
     if(sscanf(params, "s[87]", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используйте: /s [текст]");
-    new string[128];
-    format(string, sizeof(string), "%s[%d] крикнул: %s", player_info[playerid][NAME], playerid, params[0]);
-	ProxDetector(30.0, playerid, string, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE);
+    format(g_string, sizeof(g_string), "%s[%d] крикнул: %s", player_info[playerid][NAME], playerid, params[0]);
+	ProxDetector(30.0, playerid, g_string, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE, COLOR_WHITE);
 	if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT)
     {
    		ApplyAnimation(playerid,"ON_LOOKERS","shout_01",4.1,0,0,0,0,0);
@@ -11538,7 +11459,6 @@ CMD:exit(playerid)
 CMD:home(playerid)
 {
 	if(player_info[playerid][HOUSE] == 9999) return SCM(playerid, COLOR_GREY, "У Вас нет дома");
-	new string[512];
 	new h = player_info[playerid][HOUSE];
  	h = h-1;
 	new lock[19];
@@ -11551,7 +11471,7 @@ CMD:home(playerid)
 		default: kvarttype = "Обычная";
  	}
 	new kvarnum = (house_info[h][hupgrade] >= 4) ? house_info[h][hkvar]/2 : house_info[h][hkvar];
-	format(string, sizeof(string),
+	format(g_string, sizeof(g_string),
 	"{FFFFFF}Тип / название:\t\t{dfd302}%s{FFFFFF}\n\
 	Номер дома:\t\t\t%d\n\
 	Город / область:\t\t%s\n\
@@ -11569,7 +11489,7 @@ CMD:home(playerid)
 	{89df02}Для открытия панели управления вашим домом\n\
 	нажмите кнопку \"Изменить\"",
 	house_info[h][htype], h, house_info[h][hpos], house_info[h][hdistrict], house_info[h][hcost], house_info[h][hpay], house_info[h][hkomn], house_info[h][hupgrade], kvarnum, kvarttype, lock);
-	SPD(playerid, 77, DIALOG_STYLE_MSGBOX, "{dba002}Информация о доме", string, "Изменить", "Отмена");
+	SPD(playerid, 77, DIALOG_STYLE_MSGBOX, "{dba002}Информация о доме", g_string, "Изменить", "Отмена");
 	return 1;
 }
 CMD:setspawn(playerid)
@@ -11587,14 +11507,13 @@ CMD:live(playerid, params[])
  	h = h-1;
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, house_info[h][henterx], house_info[h][hentery], house_info[h][henterz])) return SCM(playerid, COLOR_LIGHTGREY, "Вы оба должны находиться у Вашего дома");
     if(!IsPlayerInRangeOfPoint(params[0], 5.0, house_info[h][henterx], house_info[h][hentery], house_info[h][henterz])) return SCM(playerid, COLOR_LIGHTGREY, "Вы оба должны находиться у Вашего дома");
-	new string[70];
-	format(string, sizeof(string), "Вы предложили %s поселиться в своём доме №%d", player_info[params[0]][NAME], h);
-	SCM(playerid, COLOR_LIGHTBLUE, string);
+	format(g_string, sizeof(g_string), "Вы предложили %s поселиться в своём доме №%d", player_info[params[0]][NAME], h);
+	SCM(playerid, COLOR_LIGHTBLUE, g_string);
 	SetPVarInt(params[0], "offer", 1);
 	SetPVarInt(params[0], "offerhouse", h);
 	SetPVarInt(params[0], "offerid", playerid);
-	format(string, sizeof(string), "%s предлагает Вам поселиться в своём доме №%d", player_info[playerid][NAME], h);
-	SCM(params[0], COLOR_LIGHTBLUE, string);
+	format(g_string, sizeof(g_string), "%s предлагает Вам поселиться в своём доме №%d", player_info[playerid][NAME], h);
+	SCM(params[0], COLOR_LIGHTBLUE, g_string);
 	SCM(params[0], COLOR_WHITE, "Нажмите {00cd08}Y{FFFFFF} чтобы согласиться или {ff6f08}N{FFFFFF} для отказа");
 	return 1;
 }
@@ -11603,9 +11522,8 @@ CMD:liveout(playerid)
 	if(player_info[playerid][GUEST] == 9999) return SCM(playerid, COLOR_LIGHTGREY, "Вы не живёте в гостях");
 	new h = player_info[playerid][GUEST];
  	h = h-1;
- 	new string[27];
- 	format(string, sizeof(string), "Вы выселились из дома №%d", h);
- 	SCM(playerid, COLOR_LIGHTBLUE, string);
+ 	format(g_string, sizeof(g_string), "Вы выселились из дома №%d", h);
+ 	SCM(playerid, COLOR_LIGHTBLUE, g_string);
  	player_info[playerid][GUEST] = 9999;
  	
  	static const fmt_query[] = "UPDATE `accounts` SET `guest` = '9999' WHERE `id` = '%d'";
@@ -11643,20 +11561,19 @@ CMD:time(playerid)
 	}
 	else if(player_info[playerid][MUTE] != 0)
 	{
-		new string[36];
 		new time,minute,second;
 		time = player_info[playerid][MUTE];
 		second=time%60;
 		minute=(time-second)/60;
 		if(second < 10)
 		{
-		    format(string, sizeof(string), "Время до разблокировки чата: %d:0%d", minute, second);
+		    format(g_string, sizeof(g_string), "Время до разблокировки чата: %d:0%d", minute, second);
 		}
 		else
 		{
-	    	format(string, sizeof(string), "Время до разблокировки чата: %d:%d", minute, second);
+	    	format(g_string, sizeof(g_string), "Время до разблокировки чата: %d:%d", minute, second);
 	    }
-	    SCM(playerid, 0x5ADF02FF, string);
+	    SCM(playerid, 0x5ADF02FF, g_string);
 	}
 }
 CMD:newleader(playerid, params[])
@@ -11675,11 +11592,11 @@ CMD:newleader(playerid, params[])
 	    new fracname[22];
 	    strcat(fracname, subfracname[floatround(frac / 10,floatround_floor)-1][params[1]]);
 	    if(params[1] == 4 && frac != 20 && frac != 50) return SCM(playerid, COLOR_GREY, "Введите корректный id подразделения");
-		new string[96];
-		format(string, sizeof(string), "Вы предложили %s стать лидером подразделения \"%s\"", player_info[params[0]][NAME], fracname);
-		SCM(playerid, COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "%s предлагает Вам стать лидером подразделения \"%s\"", player_info[playerid][NAME], fracname);
-		SCM(params[0], COLOR_LIGHTBLUE, string);
+
+		format(g_string, sizeof(g_string), "Вы предложили %s стать лидером подразделения \"%s\"", player_info[params[0]][NAME], fracname);
+		SCM(playerid, COLOR_LIGHTBLUE, g_string);
+		format(g_string, sizeof(g_string), "%s предлагает Вам стать лидером подразделения \"%s\"", player_info[playerid][NAME], fracname);
+		SCM(params[0], COLOR_LIGHTBLUE, g_string);
 		SCM(params[0], COLOR_WHITE, "Нажмите {00cd08}Y{FFFFFF} чтобы согласиться или {ff6f08}N{FFFFFF} для отказа");
 	 	SetPVarInt(params[0], "offerid", playerid);
 	}
@@ -11698,14 +11615,14 @@ CMD:invite(playerid, params[])
     if(player_info[params[0]][FRAC] != 0) return SCM(playerid, COLOR_LIGHTGREY, "Игрок уже состоит в организации");
     new frac = floatround(player_info[playerid][FRAC] / 10, floatround_floor);
 	if(player_info[playerid][FRAC] == 24) frac = 14;
-	new string[220];
-	format(string, sizeof(string), "Скин 1 (id %d)", offerskin[frac-1][0]);
+
+	format(g_string, sizeof(g_string), "Скин 1 (id %d)", offerskin[frac-1][0]);
  	for(new i = 1; i < 13; i++)
  	{
  	    if(offerskin[frac-1][i] == 0) continue;
- 	    format(string, sizeof(string), "%s\nСкин %d (id %d)", string, i+1, offerskin[frac-1][i]);
+ 	    format(g_string, sizeof(g_string), "%s\nСкин %d (id %d)", g_string, i+1, offerskin[frac-1][i]);
  	}
- 	SPD(playerid, 97, DIALOG_STYLE_LIST, "Выберите внешность для игрока:", string, "Ок", "Отмена");
+ 	SPD(playerid, 97, DIALOG_STYLE_LIST, "Выберите внешность для игрока:", g_string, "Ок", "Отмена");
 	SetPVarInt(playerid, "invitefracid", player_info[playerid][FRAC]);
 	SetPVarInt(playerid, "inviteid", params[0]);
 	return 1;
@@ -11729,11 +11646,10 @@ CMD:uninvite(playerid, params[])
 	{
 	    if((idfrac / 10) != floatround(player_info[params[0]][FRAC] / 10, floatround_floor)) return SCM(playerid, COLOR_LIGHTGREY, "Игрок не состоит в Вашей организации");
 	}
-	new string[128];
-	format(string, sizeof(string), "%s[%d] уволил Вас из организации \"%s\". Причина: %s", player_info[playerid][NAME], playerid, orgname[idorg], params[1]);
-	SCM(params[0], COLOR_ORANGE, string);
-	format(string, sizeof(string), "Вы уволили %s[%d] из своей организации. Причина: %s", player_info[params[0]][NAME], params[0], params[1]);
-	SCM(playerid, COLOR_LIGHTBLUE, string);
+	format(g_string, sizeof(g_string), "%s[%d] уволил Вас из организации \"%s\". Причина: %s", player_info[playerid][NAME], playerid, orgname[idorg], params[1]);
+	SCM(params[0], COLOR_ORANGE, g_string);
+	format(g_string, sizeof(g_string), "Вы уволили %s[%d] из своей организации. Причина: %s", player_info[params[0]][NAME], params[0], params[1]);
+	SCM(playerid, COLOR_LIGHTBLUE, g_string);
 	SetPlayerColor(params[0], 0xFFFFFF25);
 	player_info[params[0]][FRAC] = 0;
 	player_info[params[0]][RANG] = 0;
@@ -11749,8 +11665,8 @@ CMD:uninvite(playerid, params[])
 	new Year, Month, Day, Hour, Minute, Second;
 	getdate(Year, Month, Day);
 	gettime(Hour, Minute, Second);
-	format(string, sizeof(string), "%s uninvited %s from org %s. Reason: %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME], orgname[idorg], params[1]);
-    AdmLog("logs/uninvitelog.txt",string);
+	format(g_string, sizeof(g_string), "%s uninvited %s from org %s. Reason: %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME], orgname[idorg], params[1]);
+    AdmLog("logs/uninvitelog.txt",g_string);
 	return 1;
 }
 CMD:rang(playerid, params[])
@@ -11761,7 +11677,7 @@ CMD:rang(playerid, params[])
     if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Такого игрока нет");
 	if(params[1] != 43 && params[1] != 45) return SCM(playerid, COLOR_GREY, "Используйте /rang [id игрока] [+ или -]");
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Такого игрока нет");
-	new string[114];
+
 	new idfrac = player_info[playerid][FRAC];
 	if(idfrac == 10 || idfrac == 20 || idfrac == 30 || idfrac == 40 || idfrac == 50)
 	{
@@ -11780,24 +11696,24 @@ CMD:rang(playerid, params[])
         if(player_info[params[0]][RANG] >= 9) return SCM(playerid, COLOR_LIGHTGREY, "Вы не можете повысить игрока более 9 ранга");
 		if(player_info[playerid][RANG] == 9 && player_info[params[0]][RANG] == 8) return SCM(playerid, COLOR_LIGHTGREY, "Вы не можете повысить игрока более 8 ранга");
 		player_info[params[0]][RANG]++;
-		format(string, sizeof(string), "Вы повысили ранг игроку %s[%d] до %d (%s)", player_info[params[0]][NAME], params[0], player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
-		SCM(playerid, COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "Ваш ранг в организации был повышен до %d (%s)", player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
-		SCM(params[0], COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "%s up rang %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME]);
+		format(g_string, sizeof(g_string), "Вы повысили ранг игроку %s[%d] до %d (%s)", player_info[params[0]][NAME], params[0], player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
+		SCM(playerid, COLOR_LIGHTBLUE, g_string);
+		format(g_string, sizeof(g_string), "Ваш ранг в организации был повышен до %d (%s)", player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
+		SCM(params[0], COLOR_LIGHTBLUE, g_string);
+		format(g_string, sizeof(g_string), "%s up rang %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME]);
     }
     else if(params[1] == 45)//знак минус (понижение по должности)
     {
         if(player_info[params[0]][RANG] == 1) return SCM(playerid, COLOR_LIGHTGREY, "У игрока сейчас 1 ранг, понижение невозможно");
         if(player_info[params[0]][RANG] >= 10) return SCM(playerid, COLOR_LIGHTGREY, "Вы не можете понизить лидера");
         player_info[params[0]][RANG]--;
-        format(string, sizeof(string), "Вы понизили ранг игроку %s[%d] до %d (%s)", player_info[params[0]][NAME], params[0], player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
-		SCM(playerid, COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "Ваш ранг в организации был понижен до %d (%s)", player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
-		SCM(params[0], COLOR_ORANGE, string);
-		format(string, sizeof(string), "%s down rang %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME]);
+        format(g_string, sizeof(g_string), "Вы понизили ранг игроку %s[%d] до %d (%s)", player_info[params[0]][NAME], params[0], player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
+		SCM(playerid, COLOR_LIGHTBLUE, g_string);
+		format(g_string, sizeof(g_string), "Ваш ранг в организации был понижен до %d (%s)", player_info[params[0]][RANG], fracrangs[WhatRang(params[0])][player_info[params[0]][RANG]-1]);
+		SCM(params[0], COLOR_ORANGE, g_string);
+		format(g_string, sizeof(g_string), "%s down rang %s\r\n", player_info[playerid][NAME], player_info[params[0]][NAME]);
     }
-    AdmLog("logs/ranglog.txt",string);
+    AdmLog("logs/ranglog.txt",g_string);
     
     static const fmt_query[] = "UPDATE `accounts` SET `rang` = '%d' WHERE `id` = '%d'";
 	new query[sizeof(fmt_query)+(-2+2)+(-2+8)];
@@ -11837,15 +11753,15 @@ CMD:changeskin(playerid, params[])
 	Тут то же самое. Когда все скины заполнишь, условие в цикле "if(offerskin[frac-1][i] == 0) continue;" не нужно будет.
 	*/
 	new frac = floatround(player_info[playerid][FRAC] / 10, floatround_floor);
-	new string[220];
+
 	if(player_info[playerid][FRAC] == 24) frac = 14;
-	format(string, sizeof(string), "Скин 1 (id %d)", offerskin[frac-1][0]);
+	format(g_string, sizeof(g_string), "Скин 1 (id %d)", offerskin[frac-1][0]);
  	for(new i = 1; i < 13; i++)
  	{
  	    if(offerskin[frac-1][i] == 0) continue;
- 	    format(string, sizeof(string), "%s\nСкин %d (id %d)", string, i+1, offerskin[frac-1][i]);
+ 	    format(g_string, sizeof(g_string), "%s\nСкин %d (id %d)", g_string, i+1, offerskin[frac-1][i]);
  	}
-    SPD(playerid, 98, DIALOG_STYLE_LIST, "Выберите внешность для игрока:",string, "Ок", "Отмена");
+    SPD(playerid, 98, DIALOG_STYLE_LIST, "Выберите внешность для игрока:",g_string, "Ок", "Отмена");
 	SetPVarInt(playerid, "changeskinid", params[0]);
 	return 1;
 }
@@ -11876,9 +11792,9 @@ CMD:gnews(playerid, params[])
 	if(player_info[playerid][RANG] != 10) return SCM(playerid, COLOR_GREY, "Вы не можете использовать эту команду");
 	if(player_info[playerid][MUTE] > 0) return SCM(playerid, COLOR_ORANGE, "Доступ в чат заблокирован. Время до разблокировки: {4fdb15}/time");
 	if(sscanf(params, "s[78]", params[0])) return SCM(playerid, COLOR_GREY, "Используйте: /gnews [текст]");
-	new string[128];
-	format(string, sizeof(string), "Гос. новости: %s[%d]: %s", player_info[playerid][NAME], playerid, params[0]);
-	SCMTA(0x1554D0FF, string);
+
+	format(g_string, sizeof(g_string), "Гос. новости: %s[%d]: %s", player_info[playerid][NAME], playerid, params[0]);
+	SCMTA(0x1554D0FF, g_string);
 	return 1;
 }
 CMD:r(playerid, params[])
@@ -11889,9 +11805,9 @@ CMD:r(playerid, params[])
 	}
 	if(sscanf(params, "s[60]", params[0])) return SCM(playerid, COLOR_GREY, "Используйте: /r [текст]");
 	if(player_info[playerid][MUTE] > 0) return SCM(playerid, COLOR_ORANGE, "Вы не можете пользоваться чатом подразделения");
-	new string[128];
-	format(string, sizeof(string), "[R] %s %s[%d]: %s", fracrangs[WhatRang(playerid)][player_info[playerid][RANG]-1], player_info[playerid][NAME], playerid, params[0]);
-	SCMR(player_info[playerid][FRAC], 0x33CC66FF, string);
+
+	format(g_string, sizeof(g_string), "[R] %s %s[%d]: %s", fracrangs[WhatRang(playerid)][player_info[playerid][RANG]-1], player_info[playerid][NAME], playerid, params[0]);
+	SCMR(player_info[playerid][FRAC], 0x33CC66FF, g_string);
 	SetPlayerChatBubble(playerid, "Сообщение по рации", 0xDD90FFFF, 20.0, 2000);
 	return 1;
 }
@@ -11900,9 +11816,9 @@ CMD:f(playerid, params[])
 	if(player_info[playerid][FRAC] == 0) return SCM(playerid, COLOR_LIGHTGREY, "Вам недоступна данная функция");
 	if(sscanf(params, "s[60]", params[0])) return SCM(playerid, COLOR_GREY, "Используйте: /f [текст]");
 	if(player_info[playerid][MUTE] > 0) return SCM(playerid, COLOR_ORANGE, "Вы не можете пользоваться чатом организации");
-	new string[128];
-	format(string, sizeof(string), "[F] %s %s[%d]: %s", fracrangs[WhatRang(playerid)][player_info[playerid][RANG]-1], player_info[playerid][NAME], playerid, params[0]);
-	SCMF(player_info[playerid][FRAC], 0x6699CCFF, string);
+
+	format(g_string, sizeof(g_string), "[F] %s %s[%d]: %s", fracrangs[WhatRang(playerid)][player_info[playerid][RANG]-1], player_info[playerid][NAME], playerid, params[0]);
+	SCMF(player_info[playerid][FRAC], 0x6699CCFF, g_string);
 	SetPlayerChatBubble(playerid, "Сообщение по рации", 0xDD90FFFF, 20.0, 2000);
 	return 1;
 }
@@ -11914,9 +11830,9 @@ CMD:leave(playerid)
 		if(player_info[playerid][UPGRADE] < 2) return SPD(playerid, 106, DIALOG_STYLE_MSGBOX, "{df9900}Увольнение из организации", "{FFFFFF}Чтобы покинуть организацию по собственному желанию, необходимо улучшение \"Решительность\" {02d8d2}(/menu > Улучшения)", "Закрыть", "");
         new idfrac = player_info[playerid][FRAC];
 		new idorg = floatround(idfrac/10, floatround_floor);
-		new string[189];
-		format(string, sizeof(string), "{FFFFFF}Вы состоите в организации \"%s\".\nЕсли вы уволитесь, то потеряете все достижения в ней, такие как ранг.\n\nВы уверены что хотите покинуть организацию?", orgname[idorg]);
-		SPD(playerid, 107, DIALOG_STYLE_MSGBOX, "{e25802}Предупреждение", string, "Да", "Нет");
+
+		format(g_string, sizeof(g_string), "{FFFFFF}Вы состоите в организации \"%s\".\nЕсли вы уволитесь, то потеряете все достижения в ней, такие как ранг.\n\nВы уверены что хотите покинуть организацию?", orgname[idorg]);
+		SPD(playerid, 107, DIALOG_STYLE_MSGBOX, "{e25802}Предупреждение", g_string, "Да", "Нет");
 	}
 	else
 	{
@@ -11970,29 +11886,29 @@ CMD:givemet(playerid,params[])
     if(player_info[playerid][LEVEL] < 3) return SCM(playerid, COLOR_LIGHTGREY, "Передавать металл можно с 3 уровня");
     if(!IsPlayerInRangeOfPlayer(2.0, playerid, params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Игрок слишком далеко от Вас");
 	if(player_info[playerid][MET] < params[1]) return SCM(playerid, COLOR_LIGHTGREY, "У Вас нет с собой такого количества металла");
-	new string[70];
+
 	if(player_info[params[0]][UPGRADE] < 3)
 	{
 	    if(player_info[params[0]][MET] + params[1] > 20)
 		{
-		    format(string, sizeof(string), "%s не унесёт с собой столько металла", player_info[params[0]][NAME]);
-		 	return SCM(playerid, COLOR_LIGHTGREY, string);
+		    format(g_string, sizeof(g_string), "%s не унесёт с собой столько металла", player_info[params[0]][NAME]);
+		 	return SCM(playerid, COLOR_LIGHTGREY, g_string);
 	 	}
 	}
 	else
 	{
 	    if(player_info[params[0]][MET] + params[1] > 50)
 		{
-		    format(string, sizeof(string), "%s не унесёт с собой столько металла", player_info[params[0]][NAME]);
-		 	return SCM(playerid, COLOR_LIGHTGREY, string);
+		    format(g_string, sizeof(g_string), "%s не унесёт с собой столько металла", player_info[params[0]][NAME]);
+		 	return SCM(playerid, COLOR_LIGHTGREY, g_string);
 	 	}
 	}
-	format(string, sizeof(string), "%s достал металлическую заготовку и передал её", player_info[playerid][NAME]);
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
-	format(string, sizeof(string), "Вы передали игроку %s %d кг металла", player_info[params[0]][NAME], params[1]);
-	SCM(playerid, 0x3399FFFF, string);
-    format(string, sizeof(string), "%s[%d] передал Вам %d кг металла", player_info[playerid][NAME], playerid, params[1]);
-	SCM(params[0], 0x3399FFFF, string);
+	format(g_string, sizeof(g_string), "%s достал металлическую заготовку и передал её", player_info[playerid][NAME]);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+	format(g_string, sizeof(g_string), "Вы передали игроку %s %d кг металла", player_info[params[0]][NAME], params[1]);
+	SCM(playerid, 0x3399FFFF, g_string);
+    format(g_string, sizeof(g_string), "%s[%d] передал Вам %d кг металла", player_info[playerid][NAME], playerid, params[1]);
+	SCM(params[0], 0x3399FFFF, g_string);
 	player_info[playerid][MET] -= params[1];
 	player_info[params[0]][MET] += params[1];
 	new query[60];
@@ -12010,24 +11926,24 @@ CMD:pay(playerid,params[])
 	if(!IsPlayerInRangeOfPlayer(2.0, playerid, params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Игрок слишком далеко от Вас");
 	if(player_info[playerid][MONEY] < params[1] || params[1] < 1) return SCM(playerid, COLOR_LIGHTGREY, "У Вас нет с собой столько денег");
 	if(params[1] > 2000) return SCM(playerid, COLOR_LIGHTGREY, "Вы не можете передавать более 2000$");
-	new string[57];
-	format(string, sizeof(string), "%s достал кошелёк и передал деньги", player_info[playerid][NAME]);
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+
+	format(g_string, sizeof(g_string), "%s достал кошелёк и передал деньги", player_info[playerid][NAME]);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	ApplyAnimation(playerid, "DEALER", "shop_pay", 4.0999, 0, 1, 1, 1, 1, 4670);
 	PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-	format(string, sizeof(string), "Вы передали игроку %s %d$", player_info[params[0]][NAME], params[1]);
-	SCM(playerid, 0x3399FFFF, string);
-    format(string, sizeof(string), "%s[%d] передал Вам %d$", player_info[playerid][NAME], playerid, params[1]);
-	SCM(params[0], 0x3399FFFF, string);
+	format(g_string, sizeof(g_string), "Вы передали игроку %s %d$", player_info[params[0]][NAME], params[1]);
+	SCM(playerid, 0x3399FFFF, g_string);
+    format(g_string, sizeof(g_string), "%s[%d] передал Вам %d$", player_info[playerid][NAME], playerid, params[1]);
+	SCM(params[0], 0x3399FFFF, g_string);
 	PlayerPlaySound(params[0], 1052, 0.0, 0.0, 0.0);
-	format(string, sizeof(string), "+%d$", params[1]);
-	SetPlayerChatBubble(params[0], string, 0x00cc00FF, 20.0, 2000);
-	format(string, sizeof(string), "~g~+%d$", params[1]);
-	GameTextForPlayer(params[0], string, 1500, 1);
-	format(string, sizeof(string), "-%d$", params[1]);
-	SetPlayerChatBubble(playerid, string, 0xff6600FF, 20.0, 2000);
-	format(string, sizeof(string), "~r~-%d$", params[1]);
-	GameTextForPlayer(playerid, string, 1500, 1);
+	format(g_string, sizeof(g_string), "+%d$", params[1]);
+	SetPlayerChatBubble(params[0], g_string, 0x00cc00FF, 20.0, 2000);
+	format(g_string, sizeof(g_string), "~g~+%d$", params[1]);
+	GameTextForPlayer(params[0], g_string, 1500, 1);
+	format(g_string, sizeof(g_string), "-%d$", params[1]);
+	SetPlayerChatBubble(playerid, g_string, 0xff6600FF, 20.0, 2000);
+	format(g_string, sizeof(g_string), "~r~-%d$", params[1]);
+	GameTextForPlayer(playerid, g_string, 1500, 1);
 	player_info[playerid][MONEY] -= params[1];
 	player_info[params[0]][MONEY] += params[1];
 	new query[67];
@@ -12042,9 +11958,9 @@ CMD:pass(playerid,params[])
 	if(sscanf(params, "dd", params[0])) return SCM(playerid, COLOR_GREY, "Используйте: /pass [id игрока]");
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Такого игрока нет");
 	if(!IsPlayerInRangeOfPlayer(2.0, playerid, params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Игрок слишком далеко от Вас");
-	new string[128];
-	format(string, sizeof(string), "%s показал свой паспорт", player_info[playerid][NAME]);
-	ProxDetector(30.0, playerid, string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
+
+	format(g_string, sizeof(g_string), "%s показал свой паспорт", player_info[playerid][NAME]);
+	ProxDetector(30.0, playerid, g_string, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF, 0xDD90FFFF);
 	new wherelive[32];
 	if(player_info[playerid][HOUSE] != 9999)
 	{
@@ -12064,8 +11980,8 @@ CMD:pass(playerid,params[])
 	}
 	new sex[8];
     sex = (player_info[playerid][SEX] == 1) ? ("Мужской") : ("Женский");
-	format(string, sizeof(string), "Имя: %s | В стране (лет): %d | Пол: %s | Не женат | Проживание: %s", player_info[playerid][NAME], player_info[playerid][LEVEL], sex, wherelive);
-	SCM(params[0], COLOR_WHITE, string);
+	format(g_string, sizeof(g_string), "Имя: %s | В стране (лет): %d | Пол: %s | Не женат | Проживание: %s", player_info[playerid][NAME], player_info[playerid][LEVEL], sex, wherelive);
+	SCM(params[0], COLOR_WHITE, g_string);
 	new work[35], fractioninfo[62];
     if(player_info[playerid][FRAC] != 0)
 	{
@@ -12080,10 +11996,10 @@ CMD:pass(playerid,params[])
 	    strmid(work, playerwork[player_info[playerid][WORK]], 0, 29, 29);
 	    fractioninfo = "Нет / Нет";
 	}
-	format(string, sizeof(string), "Работа: %s | Организация и подразделение: %s", work, fractioninfo);
-	SCM(params[0], COLOR_WHITE, string);
-	format(string, sizeof(string), "Телефон: 106010 | Уровень розыска: 0 | Законопослушность: %d", player_info[playerid][LAW]);
-	SCM(params[0], COLOR_WHITE, string);
+	format(g_string, sizeof(g_string), "Работа: %s | Организация и подразделение: %s", work, fractioninfo);
+	SCM(params[0], COLOR_WHITE, g_string);
+	format(g_string, sizeof(g_string), "Телефон: 106010 | Уровень розыска: 0 | Законопослушность: %d", player_info[playerid][LAW]);
+	SCM(params[0], COLOR_WHITE, g_string);
 	return 1;
 }
 CMD:sellhome(playerid)
@@ -12098,9 +12014,8 @@ CMD:sellhome(playerid)
 CMD:w(playerid,params[])
 {
     if(sscanf(params, "s[95]", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используйте: /w [текст]");
-    new string[128];
-	format(string, sizeof(string), "%s шепчет: %s", player_info[playerid][NAME], params[0]);
-	ProxDetector(2.0, playerid, string, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF);
+	format(g_string, sizeof(g_string), "%s шепчет: %s", player_info[playerid][NAME], params[0]);
+	ProxDetector(2.0, playerid, g_string, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF, 0x9cd76bFF);
 	SetPlayerChatBubble(playerid, params[0], 0xace090FF, 15, 2000);
 	return 1;
 }
@@ -12147,11 +12062,10 @@ CMD:unwarn(playerid,params[])
 		player_info[params[0]][WARN]--;
 		format(query, sizeof(query), "UPDATE `accounts` SET `warn` = '%d' WHERE `id` = '%d' LIMIT 1", player_info[params[0]][WARN], player_info[params[0]][ID]);
 		mysql_query(dbHandle, query);
-		new string[92];
-		format(string, sizeof(string), "[A] %s[%d] снял 1 предупреждение игроку %s[%d]", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
-		SCMA(COLOR_GREY, string);
+		format(g_string, sizeof(g_string), "[A] %s[%d] снял 1 предупреждение игроку %s[%d]", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
+		SCMA(COLOR_GREY, g_string);
 		SCM(params[0], 0x69CC19FF, "Ваш уровень предупреждений уменьшен на 1");
-		AdmLog("logs/unwarnlog.txt",string);
+		AdmLog("logs/unwarnlog.txt",g_string);
 	}
 	else if(player_info[playerid][ADMIN] == 0)
 	{
@@ -12200,7 +12114,6 @@ CMD:payday(playerid) {
 CMD:veh(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 3) return 1;
-    new string[92];
     new Float:pX,Float:pY,Float:pZ;
     if(sscanf(params, "ddd", params[0],params[1],params[2])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /veh [id машины] [цвет 1] [цвет 2]");
     {
@@ -12208,8 +12121,8 @@ CMD:veh(playerid, params[])
         GetPlayerPos(playerid,pX,pY,pZ);
 		new Veh;
 		Veh = CreateVehicle(params[0],pX+2,pY,pZ,0.0,1,1,0,0);
-		format(string, sizeof(string), "[A] %s[%d] создал автомобиль [ID: %d]", player_info[playerid][NAME], playerid, params[0]);
-    	SCMA(COLOR_GREY, string);
+		format(g_string, sizeof(g_string), "[A] %s[%d] создал автомобиль [ID: %d]", player_info[playerid][NAME], playerid, params[0]);
+    	SCMA(COLOR_GREY, g_string);
         ChangeVehicleColor(Veh, params[1], params[2]);
     }
     return 1;
@@ -12231,16 +12144,15 @@ CMD:a(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 1) return 1;
     if(sscanf(params, "s[95]", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /a [сообщение]");
-    new string[128];
-    format(string, sizeof(string), "[A] %s[%d]: %s", player_info[playerid][NAME], playerid, params[0]);
-	SCMA(0x99CC00FF, string);
-	AdmLog("logs/achatlog.txt",string);
+
+    format(g_string, sizeof(g_string), "[A] %s[%d]: %s", player_info[playerid][NAME], playerid, params[0]);
+	SCMA(0x99CC00FF, g_string);
+	AdmLog("logs/achatlog.txt",g_string);
 	return 1;
 }
 CMD:kick(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 2) return SCM(playerid, COLOR_LIGHTGREY, "Эта команда недоступна на вашем уровне администратора");
-	new string[128];
 	if(sscanf(params, "dS()[38]", params[0], params[1])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /kick [id игрока] [причина(не обязательно)]");
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
 	if(player_info[params[0]][ADMIN] > 0 && GetPVarInt(playerid, "nokick") == 0)
@@ -12251,14 +12163,14 @@ CMD:kick(playerid, params[])
 	}
 	if(!strlen(params[1]))
 	{
-	    format(string, sizeof(string), "Администратор %s кикнул игрока %s.", player_info[playerid][NAME], player_info[params[0]][NAME]);
+	    format(g_string, sizeof(g_string), "Администратор %s кикнул игрока %s.", player_info[playerid][NAME], player_info[params[0]][NAME]);
 	}
 	else
 	{
-	    format(string, sizeof(string), "Администратор %s кикнул игрока %s. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
+	    format(g_string, sizeof(g_string), "Администратор %s кикнул игрока %s. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
 	}
-	SCMTA(COLOR_LIGHTRED, string);
-    AdmLog("logs/kicklog.txt",string);
+	SCMTA(COLOR_LIGHTRED, g_string);
+    AdmLog("logs/kicklog.txt",g_string);
  	Kick(params[0]);
 	return 1;
 }
@@ -12274,7 +12186,6 @@ CMD:skick(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 2) return SCM(playerid, COLOR_LIGHTGREY, "Эта команда недоступна на вашем уровне администратора");
 	if(sscanf(params, "d", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /skick [id игрока]");
-	new string[128];
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
 	if(player_info[params[0]][ADMIN] > 0 && GetPVarInt(playerid, "noskick") == 0)
 	{
@@ -12282,11 +12193,11 @@ CMD:skick(playerid, params[])
 		SCM(playerid, COLOR_ORANGE, "Вы собираетесь тихо кикнуть администратора сервера. Чтобы продолжить введите команду ещё раз");
 		return 1;
 	}
-    format(string, sizeof(string), "[A] %s[%d] кикнул игрока %s[%d] без лишнего шума", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
-	SCMA(COLOR_GREY, string);
-	format(string, sizeof(string), "Вы были кикнуты администратором %s[%d] за нарушение правил сервера", player_info[playerid][NAME], playerid);
-	SCM(params[0], COLOR_GREY, string);
-	AdmLog("logs/skicklog.txt",string);
+    format(g_string, sizeof(g_string), "[A] %s[%d] кикнул игрока %s[%d] без лишнего шума", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
+	SCMA(COLOR_GREY, g_string);
+	format(g_string, sizeof(g_string), "Вы были кикнуты администратором %s[%d] за нарушение правил сервера", player_info[playerid][NAME], playerid);
+	SCM(params[0], COLOR_GREY, g_string);
+	AdmLog("logs/skicklog.txt",g_string);
 	Kick(params[0]);
 	return 1;
 }
@@ -12294,10 +12205,10 @@ CMD:msg(playerid, params[])
 {
     if(player_info[playerid][ADMIN] < 4) return SCM(playerid, COLOR_LIGHTGREY, "Эта команда недоступна на вашем уровне администратора");
 	if(sscanf(params, "s[88]", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /msg [сообщение]");
-	new string[128];
-	format(string, sizeof(string), "Администратор %s: %s", player_info[playerid][NAME], params[0]);
-	SCMTA(0xFFCD00AA, string);
-	AdmLog("logs/msglog.txt",string);
+
+	format(g_string, sizeof(g_string), "Администратор %s: %s", player_info[playerid][NAME], params[0]);
+	SCMTA(0xFFCD00AA, g_string);
+	AdmLog("logs/msglog.txt",g_string);
 	return 1;
 }
 CMD:setweather(playerid, params[])
@@ -12305,9 +12216,8 @@ CMD:setweather(playerid, params[])
     if(player_info[playerid][ADMIN] < 4) return SCM(playerid, COLOR_LIGHTGREY, "Эта команда недоступна на вашем уровне администратора");
     if(sscanf(params, "d", params[0])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /setweather [id]");
 	SetWeather(params[0]);
-	new string[24];
-	format(string, sizeof(string), "Установлена погода № %d", params[0]);
-	SCM(playerid, 0x009966FF, string);
+	format(g_string, sizeof(g_string), "Установлена погода № %d", params[0]);
+	SCM(playerid, 0x009966FF, g_string);
 	return 1;
 }
 CMD:settime(playerid, params[])
@@ -12315,9 +12225,8 @@ CMD:settime(playerid, params[])
     if(player_info[playerid][ADMIN] < 4) return SCM(playerid, COLOR_LIGHTGREY, "Эта команда недоступна на вашем уровне администратора");
     if(sscanf(params, "d", params[0])) return SCM(playerid, COLOR_GREY, "Используй /settime [час]");
     SetWorldTime(params[0]);
-    new string[25];
-	format(string, sizeof(string), "Время изменено на: %d:00", params[0]);
-	SCM(playerid, 0x6598CBFF, string);
+	format(g_string, sizeof(g_string), "Время изменено на: %d:00", params[0]);
+	SCM(playerid, 0x6598CBFF, g_string);
 	return 1;
 }
 CMD:setpvw(playerid, params[])
@@ -12325,9 +12234,8 @@ CMD:setpvw(playerid, params[])
     if(player_info[playerid][ADMIN] < 3) return 1;
     if(sscanf(params, "dd", params[0], params[1])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /setpvw [id] [id вирт. мира]");
 	SetPlayerVirtualWorld(params[0], params[1]);
-	new string[87];
-	format(string, sizeof(string), "Вы телепортировали игрока %s [%d] в виртуальный мир с ID %d", player_info[params[0]][NAME], params[0], params[1]);
-	SCM(playerid, COLOR_YELLOW, string);
+	format(g_string, sizeof(g_string), "Вы телепортировали игрока %s [%d] в виртуальный мир с ID %d", player_info[params[0]][NAME], params[0], params[1]);
+	SCM(playerid, COLOR_YELLOW, g_string);
 	return 1;
 }
 CMD:setpi(playerid, params[])
@@ -12335,9 +12243,8 @@ CMD:setpi(playerid, params[])
     if(player_info[playerid][ADMIN] < 3) return 1;
     if(sscanf(params, "dd", params[0], params[1])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /setpvw [id] [id интерьера]");
 	SetPlayerInterior(params[0], params[1]);
-    new string[80];
-	format(string, sizeof(string), "Вы телепортировали игрока %s [%d] в интерьер с ID %d", player_info[params[0]][NAME], params[0], params[1]);
-	SCM(playerid, COLOR_YELLOW, string);
+	format(g_string, sizeof(g_string), "Вы телепортировали игрока %s [%d] в интерьер с ID %d", player_info[params[0]][NAME], params[0], params[1]);
+	SCM(playerid, COLOR_YELLOW, g_string);
 	return 1;
 }
 CMD:gethere(playerid, params[])
@@ -12352,11 +12259,10 @@ CMD:gethere(playerid, params[])
     SetPlayerPos(params[0], tpx+1.0, tpy+1.0, tpz);
     SetPlayerVirtualWorld(params[0], vw);
     SetPlayerInterior(params[0], pi);
-    new string[92];
-    format(string, sizeof(string), "[A] %s[%d] телепортировал к себе игрока %s[%d]", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
-    SCMA(COLOR_GREY, string);
-    format(string, sizeof(string), "Администратор %s[%d] телепортировал Вас к себе", player_info[playerid][NAME], playerid);
-    SCM(params[0], COLOR_WHITE, string);
+    format(g_string, sizeof(g_string), "[A] %s[%d] телепортировал к себе игрока %s[%d]", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0]);
+    SCMA(COLOR_GREY, g_string);
+    format(g_string, sizeof(g_string), "Администратор %s[%d] телепортировал Вас к себе", player_info[playerid][NAME], playerid);
+    SCM(params[0], COLOR_WHITE, g_string);
     return 1;
 }
 CMD:ans(playerid, params[])
@@ -12364,12 +12270,12 @@ CMD:ans(playerid, params[])
 	if(player_info[playerid][ADMIN] < 1) return 1;
 	if(sscanf(params, "ds[49]", params[0], params[1])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /ans [id игрока] [сообщение]");
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
-	new string[128];
-	format(string, sizeof(string), "Администратор %s[%d] для %s[%d]: %s", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0], params[1]);
-	SCM(params[0], 0xff9945FF, string);
-	SCMA(0xff9945FF, string);
+
+	format(g_string, sizeof(g_string), "Администратор %s[%d] для %s[%d]: %s", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0], params[1]);
+	SCM(params[0], 0xff9945FF, g_string);
+	SCMA(0xff9945FF, g_string);
 	PlayerPlaySound(params[0], 1085, 0.0, 0.0, 0.0);
-	AdmLog("logs/answerlog.txt",string);
+	AdmLog("logs/answerlog.txt",g_string);
 	return 1;
 }
 CMD:tpcor(playerid,params[])
@@ -12387,11 +12293,11 @@ CMD:skin(playerid,params[])
 	if(sscanf(params, "dd", params[0], params[1])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /skin [id игрока] [id внешности]");
 	if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
 	if(params[1] < 1 || params[1] > 311) return SCM(playerid, COLOR_LIGHTGREY, "ID внешности от 1 до 311");
-	new string[64];
-	format(string, sizeof(string), "Администратор %s выдал Вам временный скин", player_info[playerid][NAME]);
-	SCM(params[0], COLOR_WHITE, string);
-	format(string, sizeof(string), "Вы выдали временный скин [%d] игроку %s", params[1], player_info[params[0]][NAME]);
-	SCM(playerid, COLOR_WHITE, string);
+
+	format(g_string, sizeof(g_string), "Администратор %s выдал Вам временный скин", player_info[playerid][NAME]);
+	SCM(params[0], COLOR_WHITE, g_string);
+	format(g_string, sizeof(g_string), "Вы выдали временный скин [%d] игроку %s", params[1], player_info[params[0]][NAME]);
+	SCM(playerid, COLOR_WHITE, g_string);
 	SetPlayerSkin(params[0], params[1]);
 	return 1;
 }
@@ -12420,16 +12326,16 @@ CMD:mute(playerid,params[])
     if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
     if(params[1] < 10 || params[1] > 300) return SCM(playerid, COLOR_LIGHTGREY, "Время от 10 до 300 минут");
     if(player_info[params[0]][MUTE] != 0) return SCM(playerid, COLOR_LIGHTGREY, "У игрока уже есть мут");
-    new string[144];
+
     if(!strlen(params[2]))
 	{
-	    format(string, sizeof(string), "Администратор %s поставил затычку игроку %s на %d мин.", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
+	    format(g_string, sizeof(g_string), "Администратор %s поставил затычку игроку %s на %d мин.", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
 	}
 	else
 	{
-	    format(string, sizeof(string), "Администратор %s поставил затычку игроку %s на %d мин. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1], params[2]);
+	    format(g_string, sizeof(g_string), "Администратор %s поставил затычку игроку %s на %d мин. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1], params[2]);
 	}
-	SCMTA(COLOR_LIGHTRED, string);
+	SCMTA(COLOR_LIGHTRED, g_string);
 	SCM(params[0], COLOR_LIGHTGREY, "Время до окончания бана чата: {dada01}/time");
 	player_info[params[0]][MUTE] = params[1]*60;
 	static const fmt_query[] = "UPDATE `accounts` SET `mute` = '%d' WHERE `id` = '%d'";
@@ -12437,7 +12343,7 @@ CMD:mute(playerid,params[])
 	format(query, sizeof(query), fmt_query, player_info[params[0]][MUTE], player_info[params[0]][ID]);
 	mysql_query(dbHandle, query);
 	mute[params[0]] = SetTimerEx("mutetime", 1000, false, "i", params[0]);
-	AdmLog("logs/mutelog.txt",string);
+	AdmLog("logs/mutelog.txt",g_string);
     return 1;
 }
 CMD:unmute(playerid,params[])
@@ -12452,11 +12358,11 @@ CMD:unmute(playerid,params[])
 	new query[sizeof(fmt_query)+(-2+8)];
 	format(query, sizeof(query), fmt_query, player_info[params[0]][ID]);
 	mysql_query(dbHandle, query);
-	new string[85];
-    format(string, sizeof(string), "Администратор %s снял затычку с игрока %s", player_info[playerid][NAME], player_info[params[0]][NAME]);
-    SCMTA(COLOR_LIGHTRED, string);
+
+    format(g_string, sizeof(g_string), "Администратор %s снял затычку с игрока %s", player_info[playerid][NAME], player_info[params[0]][NAME]);
+    SCMTA(COLOR_LIGHTRED, g_string);
 	SCM(params[0], 0x66cc00AA, "Доступ в чат восстановлен.");
-	AdmLog("logs/unmutelog.txt",string);
+	AdmLog("logs/unmutelog.txt",g_string);
 	return 1;
 }
 CMD:warn(playerid,params[])
@@ -12470,20 +12376,20 @@ CMD:warn(playerid,params[])
 		SCM(playerid, COLOR_ORANGE, "Вы собираетесь выдать предупреждение администратору сервера. Чтобы продолжить введите команду ещё раз");
 		return 1;
 	}
-    new string[290];
+
     player_info[params[0]][WARN]++;
     if(player_info[params[0]][WARN] == 3)
     {
         if(!strlen(params[1]))
 		{
-		    format(string, sizeof(string), "Администратор %s выдал предупреждение игроку %s [3/3]. Акк. заблок. на 10 дней", player_info[playerid][NAME], player_info[params[0]][NAME]);
+		    format(g_string, sizeof(g_string), "Администратор %s выдал предупреждение игроку %s [3/3]. Акк. заблок. на 10 дней", player_info[playerid][NAME], player_info[params[0]][NAME]);
 		}
 		else
 		{
-		    format(string, sizeof(string), "Администратор %s выдал предупреждение игроку %s [3/3]. Причина: %s. Акк. заблок. на 10 дней", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
+		    format(g_string, sizeof(g_string), "Администратор %s выдал предупреждение игроку %s [3/3]. Причина: %s. Акк. заблок. на 10 дней", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
 		}
-		AdmLog("logs/warnlog.txt",string);
-	    SCMTA(COLOR_LIGHTRED, string);
+		AdmLog("logs/warnlog.txt",g_string);
+	    SCMTA(COLOR_LIGHTRED, g_string);
         new query[262];
         format(query, sizeof(query), "DELETE FROM `unwarn` WHERE `name` = '%s'", player_info[playerid][NAME]);
         mysql_query(dbHandle, query);
@@ -12552,21 +12458,21 @@ CMD:warn(playerid,params[])
 	    case 11: monthname = "ноября";
 	    case 12: monthname = "декабря";
 	}
-    format(string, sizeof(string), "{FFFFFF}Дата: %02d %s %d г.\nВаш ник: %s\nНик администратора: %s.\nПричина: %s\n\n{b0ef71}Если вы не согласны с наказанием, сделайте скриншот (F8)\nи оставьте жалобу на форуме forum.advance-rp.ru", Day, monthname, Year, player_info[params[0]][NAME], player_info[playerid][NAME], params[1]);
-    SPD(params[0], 89, DIALOG_STYLE_MSGBOX, "{dd605f}Предупреждение (варн)", string, "Закрыть", "");
+    format(g_string, sizeof(g_string), "{FFFFFF}Дата: %02d %s %d г.\nВаш ник: %s\nНик администратора: %s.\nПричина: %s\n\n{b0ef71}Если вы не согласны с наказанием, сделайте скриншот (F8)\nи оставьте жалобу на форуме forum.advance-rp.ru", Day, monthname, Year, player_info[params[0]][NAME], player_info[playerid][NAME], params[1]);
+    SPD(params[0], 89, DIALOG_STYLE_MSGBOX, "{dd605f}Предупреждение (варн)", g_string, "Закрыть", "");
     new Hour, Minute, Second;
 	gettime(Hour, Minute, Second);
-    format(string, sizeof(string), "INSERT INTO `warns` (`nick`, `warn`, `date`, `time`, `anick`, `reason`) VALUES ('%s', '%d', '%02d-%02d-%02d', '%02d:%02d:%02d', '%s', '%s')", player_info[params[0]][NAME], player_info[params[0]][WARN], Year, Month, Day, Hour, Minute, Second, player_info[playerid][NAME], params[1]);
+    format(g_string, sizeof(g_string), "INSERT INTO `warns` (`nick`, `warn`, `date`, `time`, `anick`, `reason`) VALUES ('%s', '%d', '%02d-%02d-%02d', '%02d:%02d:%02d', '%s', '%s')", player_info[params[0]][NAME], player_info[params[0]][WARN], Year, Month, Day, Hour, Minute, Second, player_info[playerid][NAME], params[1]);
 	mysql_query(dbHandle, query);
 	if(!strlen(params[1]))
 	{
-	    format(string, sizeof(string), "Администратор %s выдал предупреждение игроку %s[%d|3].", player_info[playerid][NAME], player_info[params[0]][NAME], player_info[params[0]][WARN]);
+	    format(g_string, sizeof(g_string), "Администратор %s выдал предупреждение игроку %s[%d|3].", player_info[playerid][NAME], player_info[params[0]][NAME], player_info[params[0]][WARN]);
 	}
 	else
 	{
-	    format(string, sizeof(string), "Администратор %s выдал предупреждение игроку %s[%d|3]. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], player_info[params[0]][WARN], params[1]);
+	    format(g_string, sizeof(g_string), "Администратор %s выдал предупреждение игроку %s[%d|3]. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], player_info[params[0]][WARN], params[1]);
 	}
-    SCMTA(COLOR_LIGHTRED, string);
+    SCMTA(COLOR_LIGHTRED, g_string);
     if(player_info[params[0]][ADMIN] != 0)
     {
         player_info[playerid][ADMIN] = 0;
@@ -12582,7 +12488,7 @@ CMD:warn(playerid,params[])
     }
     SCM(params[0], 0xE96C16FF, "Чтобы снять предупреждения с Вашего аккаунта используйте {25b625}/unwarn");
     SCM(params[0], 0xE96C16FF, "До снятия всех предупреждений Вам запрещено вступать в любые организации");
-	AdmLog("logs/warnlog.txt",string);
+	AdmLog("logs/warnlog.txt",g_string);
     Kick(params[0]);
     return 1;
 }
@@ -12622,9 +12528,8 @@ CMD:sp(playerid, params[])
 	}
     new spip[16];
     GetPlayerIp(SpID[playerid], spip, 16);
-	new string[78];
-	format(string, sizeof(string), "[SP] %s[%d]  |  PING %d  |  IP  %s", player_info[SpID[playerid]][NAME], SpID[playerid], GetPlayerPing(SpID[playerid]), spip);
-	SCM(playerid, 0x69D490FF, string);
+	format(g_string, sizeof(g_string), "[SP] %s[%d]  |  PING %d  |  IP  %s", player_info[SpID[playerid]][NAME], SpID[playerid], GetPlayerPing(SpID[playerid]), spip);
+	SCM(playerid, 0x69D490FF, g_string);
 	SetPVarInt(playerid, "spec", params[0]);
 	return 1;
 }
@@ -12639,27 +12544,27 @@ CMD:admins(playerid)
 {
     if(player_info[playerid][ADMIN] < 1) return 1;
 	SCM(playerid, 0x5ac310FF, "Админы онлайн:");
-	new string[73], afk[13], spec[20];
+	new afk[13], spec[20];
 	foreach(new i:Player)
 	{
 	    if(player_info[i][ADMIN] > 0)
 	    {
-	        format(string, sizeof(string), "%s[%d] (%d lvl)", player_info[i][NAME], i, player_info[i][ADMIN]);
+	        format(g_string, sizeof(g_string), "%s[%d] (%d lvl)", player_info[i][NAME], i, player_info[i][ADMIN]);
 	        if(player_info[i][ADMIN] == 5)
 	        {
-	            format(string, sizeof(string), "Гл. администратор");
+	            format(g_string, sizeof(g_string), "Гл. администратор");
 	        }
 	        if(PlayerAFK[i] > 0)
 	        {
 	            afk = " {FF0000}AFK";
-	            strcat(string, afk);
+	            strcat(g_string, afk);
 	        }
 	        if(GetPlayerState(i) == PLAYER_STATE_SPECTATING)
 	        {
 	            format(spec, sizeof(spec), "{148f3d} > /sp %d", SpID[i]);
-	            strcat(string, spec);
+	            strcat(g_string, spec);
 			}
-			SCM(playerid, COLOR_YELLOW, string);
+			SCM(playerid, COLOR_YELLOW, g_string);
 	    }
 	}
 	return 1;
@@ -12686,11 +12591,10 @@ CMD:hp(playerid, params[])
     if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
 	if(params[1] < 1 || params[1] > 100) return SCM(playerid, COLOR_GREY, "Используйте: /hp [id] [уровень hp (1-100)]");
     set_health(params[0], params[1]);
-    new string[59];
-    format(string, sizeof(string), "Администратор %s изменил Вам здоровье", player_info[playerid][NAME]);
-    SCM(params[0], COLOR_WHITE, string);
-    format(string, sizeof(string), "Вы изменили здоровье игроку %s[%d]", player_info[params[0]][NAME], params[0]);
-    SCM(playerid, COLOR_WHITE, string);
+    format(g_string, sizeof(g_string), "Администратор %s изменил Вам здоровье", player_info[playerid][NAME]);
+    SCM(params[0], COLOR_WHITE, g_string);
+    format(g_string, sizeof(g_string), "Вы изменили здоровье игроку %s[%d]", player_info[params[0]][NAME], params[0]);
+    SCM(playerid, COLOR_WHITE, g_string);
 	return 1;
 }
 CMD:ban(playerid, params[])
@@ -12705,16 +12609,16 @@ CMD:ban(playerid, params[])
 		SCM(playerid, COLOR_ORANGE, "Вы собираетесь забанить администратора сервера. Чтобы продолжить введите команду ещё раз");
 		return 1;
 	}
-	new string[128];
+	
 	if(!strlen(params[2]))
 	{
-	    format(string, sizeof(string), "Администратор %s забанил игрока %s на %d дней.", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
+	    format(g_string, sizeof(g_string), "Администратор %s забанил игрока %s на %d дней.", player_info[playerid][NAME], player_info[params[0]][NAME], params[1]);
 	}
 	else
 	{
-	    format(string, sizeof(string), "Администратор %s забанил игрока %s на %d дней. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1], params[2]);
+	    format(g_string, sizeof(g_string), "Администратор %s забанил игрока %s на %d дней. Причина: %s", player_info[playerid][NAME], player_info[params[0]][NAME], params[1], params[2]);
 	}
-	SCMTA(COLOR_LIGHTRED, string);
+	SCMTA(COLOR_LIGHTRED, g_string);
 	new dialog[310];
 	new Year, Month, Day;
 	getdate(Year, Month, Day);
@@ -12751,7 +12655,7 @@ CMD:ban(playerid, params[])
 	mysql_query(dbHandle, query);
     format(dialog, sizeof(dialog), "{FFFFFF}Дата: %02d %s %d г.\nВаш ник: %s\nНик администратора: %s.\nКоличество дней: %d\nПричина: %s\n\n{b0ef71}Если вы не согласны с наказанием, сделайте скриншот (F8)\nи оставьте жалобу на форуме forum.advance-rp.ru", Day, monthname, Year, player_info[params[0]][NAME], player_info[playerid][NAME], params[1], params[2]);
     SPD(params[0], 89, DIALOG_STYLE_MSGBOX, "{dd605f}Бан аккаунта", dialog, "Закрыть", "");
-	AdmLog("logs/banlog.txt",string);
+	AdmLog("logs/banlog.txt",g_string);
 	Kick(params[0]);
 	return 1;
 }
@@ -12762,11 +12666,10 @@ CMD:sskin(playerid, params[])
     if(GetPVarInt(params[0], "logged") != 1) return SCM(playerid, COLOR_LIGHTGREY, "Игрока с таким айди нет");
     if(params[1] < 1 || params[1] > 311) return SCM(playerid, COLOR_LIGHTGREY, "ID скина от 1 до 311");
     if(params[1] == 74) return SCM(playerid, COLOR_LIGHTGREY, "ID скина от 1 до 311");
-    new string[190];
-    format(string, sizeof(string), "Администратор %s[%d] выдал Вам постоянный скин", player_info[playerid][NAME], playerid);
-    SCM(params[0], 0x09E34EFF, string);
-   	format(string, sizeof(string), "Вы выдали постоянный скин [%d] игроку %s", params[1], player_info[params[0]][NAME]);
-	SCM(playerid, 0x09E34EFF, string);
+    format(g_string, sizeof(g_string), "Администратор %s[%d] выдал Вам постоянный скин", player_info[playerid][NAME], playerid);
+    SCM(params[0], 0x09E34EFF, g_string);
+   	format(g_string, sizeof(g_string), "Вы выдали постоянный скин [%d] игроку %s", params[1], player_info[params[0]][NAME]);
+	SCM(playerid, 0x09E34EFF, g_string);
     player_info[params[0]][SKIN] = params[1];
     new query[71];
 	format(query, sizeof(query), "UPDATE `accounts` SET `skin` = '%d' WHERE `id` = '%d' LIMIT 1", player_info[params[0]][SKIN], player_info[params[0]][ID]);
@@ -12813,12 +12716,12 @@ CMD:setleader(playerid, params[])
 	if(params[1] < 1 || params[1] > 13) return SCM(playerid, COLOR_LIGHTGREY, "Введите корректный id организации");
 	if(player_info[params[0]][WARN] > 0) return SCM(playerid, COLOR_ORANGE, "У игрока имеются действующие предупреждения");
 	if((params[2] < 1 || params[2] > 311) || params[2] == 74) return SCM(playerid, COLOR_LIGHTGREY, "Введите корректный id скина");
-	new fracname[30], string[128];
+	new fracname[30];
 	strcat(fracname,orgname[params[1]]);
-	format(string, sizeof(string), "%s[%d] назначил Вас лидером организации \"%s\"", player_info[playerid][NAME], playerid, fracname);
-	SCM(params[0], COLOR_YELLOW, string);
-	format(string, sizeof(string), "[Внимание] %s[%d] назначил %s[%d] лидером организации \"%s\"", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0], fracname);
- 	SCMA(COLOR_RED, string);
+	format(g_string, sizeof(g_string), "%s[%d] назначил Вас лидером организации \"%s\"", player_info[playerid][NAME], playerid, fracname);
+	SCM(params[0], COLOR_YELLOW, g_string);
+	format(g_string, sizeof(g_string), "[Внимание] %s[%d] назначил %s[%d] лидером организации \"%s\"", player_info[playerid][NAME], playerid, player_info[params[0]][NAME], params[0], fracname);
+ 	SCMA(COLOR_RED, g_string);
 	player_info[params[0]][FRAC] = params[1]*10;
 	player_info[params[0]][RANG] = 10;
 	player_info[params[0]][FSKIN] = params[2];
@@ -12827,7 +12730,7 @@ CMD:setleader(playerid, params[])
 	new query[sizeof(fmt_query)+(-2+3)+(-2+2)+(-2+3)+(-2+8)];
 	format(query, sizeof(query), fmt_query, player_info[params[0]][FRAC], player_info[params[0]][RANG], player_info[params[0]][FSKIN], player_info[params[0]][ID]);
 	mysql_query(dbHandle, query);
-	AdmLog("logs/setleaderlog.txt",string);
+	AdmLog("logs/setleaderlog.txt",g_string);
 	return 1;
 }
 CMD:templeader(playerid, params[])
@@ -12839,7 +12742,7 @@ CMD:templeader(playerid, params[])
 	if(params[0] > 5 && params[1] > 0) return SCM(playerid, COLOR_LIGHTGREY, "Неверный id подразделения для этой организации");
 	if(params[1] > 3 && (params[0] == 3 || params[0] == 4)) return SCM(playerid, COLOR_LIGHTGREY, "Неверный id подразделения для этой организации");
 	if(params[0] == 0 && params[1] != 0) return SCM(playerid, COLOR_LIGHTGREY, "Неверный id подразделения для этой организации");
-	new string[120];
+
 	if(params[0] == 0 && params[1] == 0)
 	{
 	    player_info[playerid][FRAC] = 0;
@@ -12850,8 +12753,8 @@ CMD:templeader(playerid, params[])
 	}
 	new fracname[30];
 	strcat(fracname,orgname[params[0]]);
-	format(string, sizeof(string), "[A] %s[%d] назначил(а) себя врем. лидером \"%s\" (подразделение %d)", player_info[playerid][NAME], playerid, fracname, params[1]);
-	SCMA(COLOR_GREY, string);
+	format(g_string, sizeof(g_string), "[A] %s[%d] назначил(а) себя врем. лидером \"%s\" (подразделение %d)", player_info[playerid][NAME], playerid, fracname, params[1]);
+	SCMA(COLOR_GREY, g_string);
 	switch(player_info[playerid][FRAC])
 	{
 		case 10..13: SetPlayerColor(playerid, 0xCCFF00FF);
