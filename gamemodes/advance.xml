@@ -361,6 +361,7 @@
 			<referrer name="OnPlayerKeyStateChange"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="mutetime"/>
+			<referrer name="busstop"/>
 			<referrer name="animfactory"/>
 			<referrer name="mineopendoors2"/>
 			<referrer name="liftup"/>
@@ -493,6 +494,9 @@
 		<member name="F:Streamer_IncludeFileVersion">
 			<attribute name="public"/>
 		</member>
+		<member name="F:VehicleNames">
+			<referrer name="cmd_veh"/>
+		</member>
 		<member name="F:YSI_g_sCallbacks">
 			<referrer name="SSCANF_OnPlayerConnect"/>
 			<referrer name="SSCANF_OnFilterScriptInit"/>
@@ -600,6 +604,32 @@
 			<referrer name="OnPlayerKeyStateChange"/>
 			<referrer name="thirtysecondupdate"/>
 			<referrer name="cmd_take"/>
+		</member>
+		<member name="F:buscars">
+			<referrer name="Itter_OnGameModeInit"/>
+			<referrer name="OnVehicleSpawn"/>
+			<referrer name="OnPlayerExitVehicle"/>
+			<referrer name="OnPlayerStateChange"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="OnPlayerKeyStateChange"/>
+		</member>
+		<member name="F:buscheckOne">
+			<tagname value="Float"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="nextcheckbus"/>
+		</member>
+		<member name="F:bustext">
+			<tagname value="Text3D"/>
+			<referrer name="OnVehicleSpawn"/>
+			<referrer name="OnDialogResponse"/>
+		</member>
+		<member name="F:bustimer">
+			<referrer name="OnPlayerExitVehicle"/>
+			<referrer name="OnPlayerStateChange"/>
+		</member>
+		<member name="F:busveh">
+			<referrer name="OnPlayerKeyStateChange"/>
 		</member>
 		<member name="F:buymetal">
 			<referrer name="Itter_OnGameModeInit"/>
@@ -784,94 +814,6 @@
 			<referrer name="factoryworkend"/>
 			<referrer name="clear_player"/>
 		</member>
-		<member name="F:g_string">
-			<referrer name="OnPlayerText"/>
-			<referrer name="OnPlayerStateChange"/>
-			<referrer name="OnPlayerEnterCheckpoint"/>
-			<referrer name="OnPlayerEnterRaceCheckpoint"/>
-			<referrer name="OnPlayerEditAttachedObject"/>
-			<referrer name="OnPlayerPickUpDynamicPickup"/>
-			<referrer name="OnPlayerPickUpPickup"/>
-			<referrer name="OnPlayerSelectedMenuRow"/>
-			<referrer name="OnPlayerKeyStateChange"/>
-			<referrer name="OnPlayerUpdate"/>
-			<referrer name="OnDialogResponse"/>
-			<referrer name="CheckTransfer"/>
-			<referrer name="ShowBankChets"/>
-			<referrer name="UnBanName"/>
-			<referrer name="UnBanId"/>
-			<referrer name="BanInfo"/>
-			<referrer name="OffUninvite"/>
-			<referrer name="CheckOffBan"/>
-			<referrer name="CheckWarn"/>
-			<referrer name="awarninfo"/>
-			<referrer name="warninfo"/>
-			<referrer name="guest_list"/>
-			<referrer name="load_houses"/>
-			<referrer name="speedupdate"/>
-			<referrer name="taxiworkend"/>
-			<referrer name="factoryworkend"/>
-			<referrer name="animfactory"/>
-			<referrer name="CheckBan"/>
-			<referrer name="secondupdate"/>
-			<referrer name="payday"/>
-			<referrer name="player_login"/>
-			<referrer name="ProxDetectorChat"/>
-			<referrer name="SetStorage"/>
-			<referrer name="show_stats"/>
-			<referrer name="show_login"/>
-			<referrer name="cmd_n"/>
-			<referrer name="cmd_me"/>
-			<referrer name="cmd_do"/>
-			<referrer name="cmd_eat"/>
-			<referrer name="cmd_try"/>
-			<referrer name="cmd_buym"/>
-			<referrer name="cmd_sellm"/>
-			<referrer name="cmd_buyf"/>
-			<referrer name="cmd_sellf"/>
-			<referrer name="cmd_lic"/>
-			<referrer name="cmd_s"/>
-			<referrer name="cmd_home"/>
-			<referrer name="cmd_live"/>
-			<referrer name="cmd_liveout"/>
-			<referrer name="cmd_time"/>
-			<referrer name="cmd_newleader"/>
-			<referrer name="cmd_invite"/>
-			<referrer name="cmd_uninvite"/>
-			<referrer name="cmd_rang"/>
-			<referrer name="cmd_changeskin"/>
-			<referrer name="cmd_gnews"/>
-			<referrer name="cmd_r"/>
-			<referrer name="cmd_f"/>
-			<referrer name="cmd_leave"/>
-			<referrer name="cmd_givemet"/>
-			<referrer name="cmd_pay"/>
-			<referrer name="cmd_pass"/>
-			<referrer name="cmd_w"/>
-			<referrer name="cmd_unwarn"/>
-			<referrer name="cmd_veh"/>
-			<referrer name="cmd_a"/>
-			<referrer name="cmd_kick"/>
-			<referrer name="cmd_skick"/>
-			<referrer name="cmd_msg"/>
-			<referrer name="cmd_setweather"/>
-			<referrer name="cmd_settime"/>
-			<referrer name="cmd_setpvw"/>
-			<referrer name="cmd_setpi"/>
-			<referrer name="cmd_gethere"/>
-			<referrer name="cmd_ans"/>
-			<referrer name="cmd_skin"/>
-			<referrer name="cmd_mute"/>
-			<referrer name="cmd_unmute"/>
-			<referrer name="cmd_warn"/>
-			<referrer name="cmd_sp"/>
-			<referrer name="cmd_admins"/>
-			<referrer name="cmd_hp"/>
-			<referrer name="cmd_ban"/>
-			<referrer name="cmd_sskin"/>
-			<referrer name="cmd_setleader"/>
-			<referrer name="cmd_templeader"/>
-		</member>
 		<member name="F:gruzcar">
 			<referrer name="Itter_OnGameModeInit"/>
 			<referrer name="OnPlayerExitVehicle"/>
@@ -1050,9 +992,13 @@
 			<referrer name="Itter_OnGameModeInit"/>
 			<referrer name="OnPlayerPickUpPickup"/>
 		</member>
+		<member name="F:nextcheckbustimer">
+			<referrer name="busstop"/>
+		</member>
 		<member name="F:nowcheck">
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnDialogResponse"/>
+			<referrer name="nextcheckbus"/>
 			<referrer name="clear_player"/>
 		</member>
 		<member name="F:nowschet">
@@ -2070,14 +2016,13 @@
 		</member>
 		<member name="M:BanInfo" syntax="BanInfo(playerid)">
 			<attribute name="public"/>
-			<stacksize value="133"/>
+			<stacksize value="417"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="cache_get_value_name"/>
 			<dependency name="cache_get_value_name_int"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<param name="playerid">
 			</param>
@@ -2141,7 +2086,7 @@
 		</member>
 		<member name="M:CheckBan" syntax="CheckBan(playerid)">
 			<attribute name="public"/>
-			<stacksize value="89"/>
+			<stacksize value="345"/>
 			<dependency name="NAME"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="SpawnPlayer"/>
@@ -2151,7 +2096,6 @@
 			<dependency name="dbHandle"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
@@ -2179,7 +2123,7 @@
 		</member>
 		<member name="M:CheckOffBan" syntax="CheckOffBan(playerid, bannick[], bantime, banreason[])">
 			<attribute name="public"/>
-			<stacksize value="291"/>
+			<stacksize value="419"/>
 			<dependency name="AdmLog"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
@@ -2187,7 +2131,6 @@
 			<dependency name="cache_get_row_count"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
@@ -2289,13 +2232,12 @@
 		</member>
 		<member name="M:CheckTransfer" syntax="CheckTransfer(playerid, transfer)">
 			<attribute name="public"/>
-			<stacksize value="10"/>
+			<stacksize value="73"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPVarInt"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<param name="playerid">
 			</param>
 			<param name="transfer">
@@ -2313,7 +2255,6 @@
 			<dependency name="cache_get_value_name_int"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
@@ -2741,6 +2682,7 @@
 			<referrer name="OnPlayerExitVehicle"/>
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="busstop"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -2852,6 +2794,8 @@
 			<referrer name="awarninfo"/>
 			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="nextcheckbus"/>
+			<referrer name="busstop"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="animeat"/>
@@ -3430,6 +3374,7 @@
 			<dependency name="bankpickup"/>
 			<dependency name="box_info"/>
 			<dependency name="boxnumber"/>
+			<dependency name="buscars"/>
 			<dependency name="buymetal"/>
 			<dependency name="caren"/>
 			<dependency name="carli"/>
@@ -3683,7 +3628,7 @@
 		</member>
 		<member name="M:OffUninvite" syntax="OffUninvite(playerid, nick[])">
 			<attribute name="public"/>
-			<stacksize value="114"/>
+			<stacksize value="172"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="AdmLog"/>
 			<dependency name="FRAC"/>
@@ -3695,7 +3640,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -3721,7 +3665,7 @@
 		</member>
 		<member name="M:OnDialogResponse" syntax="OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])">
 			<attribute name="public"/>
-			<stacksize value="261"/>
+			<stacksize value="1295"/>
 			<dependency name="operator-(Float:,Float:)"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="Float:operator=(_:)"/>
@@ -3795,6 +3739,7 @@
 			<dependency name="SetPlayerFacingAngle"/>
 			<dependency name="SetPlayerInterior"/>
 			<dependency name="SetPlayerPos"/>
+			<dependency name="SetPlayerRaceCheckpoint"/>
 			<dependency name="SetPlayerSkin"/>
 			<dependency name="SetPlayerSpecialAction"/>
 			<dependency name="SetPlayerVirtualWorld"/>
@@ -3807,6 +3752,8 @@
 			<dependency name="UPGRADE"/>
 			<dependency name="VEHS"/>
 			<dependency name="WORK"/>
+			<dependency name="buscheckOne"/>
+			<dependency name="bustext"/>
 			<dependency name="cmd_mn"/>
 			<dependency name="date"/>
 			<dependency name="date"/>
@@ -3819,7 +3766,6 @@
 			<dependency name="format"/>
 			<dependency name="fuelveh"/>
 			<dependency name="fuelvehtrailer"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="give_money"/>
 			<dependency name="gruzobject"/>
@@ -4107,11 +4053,10 @@
 		</member>
 		<member name="M:OnPlayerEditAttachedObject" syntax="OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, fOffsetX, fOffsetY, fOffsetZ, fRotX, fRotY, fRotZ, fScaleX, fScaleY, fScaleZ)">
 			<attribute name="public"/>
-			<stacksize value="17"/>
+			<stacksize value="161"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<param name="playerid">
 			</param>
 			<param name="response">
@@ -4208,7 +4153,7 @@
 		</member>
 		<member name="M:OnPlayerEnterCheckpoint" syntax="OnPlayerEnterCheckpoint(playerid)">
 			<attribute name="public"/>
-			<stacksize value="19"/>
+			<stacksize value="440"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ApplyAnimation"/>
 			<dependency name="CreateDynamicCP"/>
@@ -4243,7 +4188,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="help_cp"/>
 			<dependency name="help_cp2"/>
 			<dependency name="orgname"/>
@@ -4297,7 +4241,7 @@
 		</member>
 		<member name="M:OnPlayerEnterRaceCheckpoint" syntax="OnPlayerEnterRaceCheckpoint(playerid)">
 			<attribute name="public"/>
-			<stacksize value="75"/>
+			<stacksize value="491"/>
 			<dependency name="operator&gt;(Float:,_:)"/>
 			<dependency name="operator&lt;(Float:,Float:)"/>
 			<dependency name="operator&lt;(Float:,_:)"/>
@@ -4317,9 +4261,11 @@
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="ascar"/>
 			<dependency name="ascheck"/>
+			<dependency name="buscars"/>
+			<dependency name="buscheckOne"/>
+			<dependency name="busstop"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gruzobject"/>
 			<dependency name="mysql_query"/>
 			<dependency name="nowcheck"/>
@@ -4349,6 +4295,8 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerCheckpoint"/>
 			<dependency name="SetTimerEx"/>
+			<dependency name="buscars"/>
+			<dependency name="bustimer"/>
 			<dependency name="factorytimer"/>
 			<dependency name="false"/>
 			<dependency name="fuelcar"/>
@@ -4407,7 +4355,7 @@
 		</member>
 		<member name="M:OnPlayerKeyStateChange" syntax="OnPlayerKeyStateChange(playerid, newkeys, oldkeys)">
 			<attribute name="public"/>
-			<stacksize value="122"/>
+			<stacksize value="241"/>
 			<dependency name="AdmLog"/>
 			<dependency name="AttachDynamicObjectToVehicle"/>
 			<dependency name="ClearAnimations"/>
@@ -4451,12 +4399,13 @@
 			<dependency name="asgate"/>
 			<dependency name="box_info"/>
 			<dependency name="boxnumber"/>
+			<dependency name="buscars"/>
+			<dependency name="busveh"/>
 			<dependency name="caren"/>
 			<dependency name="carli"/>
 			<dependency name="dbHandle"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="gruzobject"/>
@@ -4537,14 +4486,13 @@
 		</member>
 		<member name="M:OnPlayerPickUpDynamicPickup" syntax="OnPlayerPickUpDynamicPickup(playerid, pickupid)">
 			<attribute name="public"/>
-			<stacksize value="30"/>
+			<stacksize value="259"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPVarInt"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="hcost"/>
 			<dependency name="hhealth"/>
@@ -4567,7 +4515,7 @@
 		</member>
 		<member name="M:OnPlayerPickUpPickup" syntax="OnPlayerPickUpPickup(playerid, pickupid)">
 			<attribute name="public"/>
-			<stacksize value="17"/>
+			<stacksize value="581"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FACTORYFUEL"/>
 			<dependency name="FACTORYMETAL"/>
@@ -4615,7 +4563,6 @@
 			<dependency name="factoryinvite"/>
 			<dependency name="factoryinvitein"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="loaderinvite"/>
 			<dependency name="lspd_enter"/>
@@ -4695,7 +4642,7 @@
 		</member>
 		<member name="M:OnPlayerSelectedMenuRow" syntax="OnPlayerSelectedMenuRow(playerid, row)">
 			<attribute name="public"/>
-			<stacksize value="26"/>
+			<stacksize value="104"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="GetPlayerIp"/>
 			<dependency name="GetPlayerMenu"/>
@@ -4711,7 +4658,6 @@
 			<dependency name="cmd_sp"/>
 			<dependency name="cmd_spoff"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="spmenu"/>
@@ -4805,7 +4751,7 @@
 		</member>
 		<member name="M:OnPlayerStateChange" syntax="OnPlayerStateChange(playerid, newstate, oldstate)">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="152"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="Attach3DTextLabelToVehicle"/>
 			<dependency name="Create3DTextLabel"/>
@@ -4831,12 +4777,13 @@
 			<dependency name="WORK"/>
 			<dependency name="ascar"/>
 			<dependency name="ascheck"/>
+			<dependency name="buscars"/>
+			<dependency name="bustimer"/>
 			<dependency name="factorytimer"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
 			<dependency name="fuelcar"/>
 			<dependency name="fuelveh"/>
-			<dependency name="g_string"/>
 			<dependency name="get_fare_money_taxi"/>
 			<dependency name="gruzcar"/>
 			<dependency name="jobdriver"/>
@@ -4894,7 +4841,7 @@
 		</member>
 		<member name="M:OnPlayerText" syntax="OnPlayerText(playerid, text[])">
 			<attribute name="public"/>
-			<stacksize value="12"/>
+			<stacksize value="140"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ApplyAnimation"/>
 			<dependency name="GetPVarInt"/>
@@ -4907,7 +4854,6 @@
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="SetTimerEx"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="strcmp"/>
@@ -4921,7 +4867,7 @@
 		</member>
 		<member name="M:OnPlayerUpdate" syntax="OnPlayerUpdate(playerid)">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="59"/>
 			<dependency name="DestroyDynamicObject"/>
 			<dependency name="DisablePlayerCheckpoint"/>
 			<dependency name="GameTextForPlayer"/>
@@ -4951,7 +4897,6 @@
 			<dependency name="format"/>
 			<dependency name="fuelveh"/>
 			<dependency name="fuelvehtrailer"/>
-			<dependency name="g_string"/>
 			<dependency name="give_money"/>
 			<dependency name="gruzcar"/>
 			<dependency name="gruzobject"/>
@@ -5114,6 +5059,8 @@
 			<stacksize value="3"/>
 			<dependency name="Delete3DTextLabel"/>
 			<dependency name="ascar"/>
+			<dependency name="buscars"/>
+			<dependency name="bustext"/>
 			<dependency name="taxicars"/>
 			<dependency name="taxitext"/>
 			<dependency name="vehtext"/>
@@ -5203,6 +5150,7 @@
 			<referrer name="OnPlayerText"/>
 			<referrer name="OnPlayerPickUpPickup"/>
 			<referrer name="OnDialogResponse"/>
+			<referrer name="busstop"/>
 			<referrer name="cmd_n"/>
 			<referrer name="cmd_me"/>
 			<referrer name="cmd_do"/>
@@ -5244,7 +5192,7 @@
 			</param>
 		</member>
 		<member name="M:ProxDetectorChat" syntax="ProxDetectorChat(radi, playerid, text[], col1, col2, col3, col4, col5)">
-			<stacksize value="18"/>
+			<stacksize value="146"/>
 			<referrer name="OnPlayerText"/>
 			<dependency name="operator/(Float:,_:)"/>
 			<dependency name="operator-(Float:)"/>
@@ -5261,7 +5209,6 @@
 			<dependency name="Player@YSII_Ag"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<param name="radi">
@@ -5599,6 +5546,7 @@
 			<referrer name="mutetime"/>
 			<referrer name="get_fare_money_taxi"/>
 			<referrer name="taxiworkend"/>
+			<referrer name="busstop"/>
 			<referrer name="factoryworkend"/>
 			<referrer name="animfactory"/>
 			<referrer name="check_adm"/>
@@ -6138,6 +6086,8 @@
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnPlayerKeyStateChange"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="nextcheckbus"/>
 			<referrer name="cmd_take"/>
 			<param name="playerid">
 			</param>
@@ -6266,12 +6216,11 @@
 			</param>
 		</member>
 		<member name="M:SetStorage" syntax="SetStorage(h)">
-			<stacksize value="55"/>
+			<stacksize value="275"/>
 			<referrer name="OnDialogResponse"/>
 			<dependency name="SaveStorage"/>
 			<dependency name="UpdateDynamic3DTextLabelText"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="house_info"/>
 			<dependency name="house_info"/>
 			<dependency name="storeclothes"/>
@@ -6311,6 +6260,7 @@
 			<referrer name="OnPlayerStateChange"/>
 			<referrer name="OnPlayerEnterCheckpoint"/>
 			<referrer name="mutetime"/>
+			<referrer name="busstop"/>
 			<referrer name="animfactory"/>
 			<referrer name="pickmine"/>
 			<referrer name="mining"/>
@@ -6389,13 +6339,12 @@
 		</member>
 		<member name="M:ShowBankChets" syntax="ShowBankChets(playerid)">
 			<attribute name="public"/>
-			<stacksize value="60"/>
+			<stacksize value="320"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="cache_get_value_name"/>
 			<dependency name="cache_get_value_name_int"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mychets"/>
 			<dependency name="mychets"/>
 			<dependency name="strcat"/>
@@ -6743,7 +6692,7 @@
 		</member>
 		<member name="M:UnBanId" syntax="UnBanId(playerid, id)">
 			<attribute name="public"/>
-			<stacksize value="109"/>
+			<stacksize value="223"/>
 			<dependency name="AdmLog"/>
 			<dependency name="NAME"/>
 			<dependency name="SCMA"/>
@@ -6752,7 +6701,6 @@
 			<dependency name="cache_get_value_name"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -6763,7 +6711,7 @@
 		</member>
 		<member name="M:UnBanName" syntax="UnBanName(playerid, name[])">
 			<attribute name="public"/>
-			<stacksize value="86"/>
+			<stacksize value="200"/>
 			<dependency name="AdmLog"/>
 			<dependency name="NAME"/>
 			<dependency name="SCMA"/>
@@ -6773,7 +6721,6 @@
 			<dependency name="cache_get_value_name_int"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -6866,7 +6813,7 @@
 		</member>
 		<member name="M:animfactory" syntax="animfactory(playerid)">
 			<attribute name="public"/>
-			<stacksize value="17"/>
+			<stacksize value="81"/>
 			<dependency name="ApplyAnimation"/>
 			<dependency name="ClearAnimations"/>
 			<dependency name="CreateDynamicCP"/>
@@ -6885,7 +6832,6 @@
 			<dependency name="factoryobject"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="random"/>
 			<dependency name="table1"/>
 			<dependency name="table10"/>
@@ -6908,13 +6854,32 @@
 		</member>
 		<member name="M:awarninfo" syntax="awarninfo(playerid)">
 			<attribute name="public"/>
-			<stacksize value="90"/>
+			<stacksize value="385"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="cache_get_value_name"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:busstop" syntax="busstop(playerid)">
+			<attribute name="public"/>
+			<stacksize value="11"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<dependency name="DisablePlayerRaceCheckpoint"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="ProxDetector"/>
+			<dependency name="SendClientMessage"/>
+			<dependency name="SetTimerEx"/>
+			<dependency name="false"/>
+			<dependency name="nextcheckbustimer"/>
+			<param name="playerid">
+			</param>
+		</member>
+		<member name="M:busworkend" syntax="busworkend(playerid)">
+			<attribute name="public"/>
+			<stacksize value="1"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -7161,14 +7126,13 @@
 		</member>
 		<member name="M:cmd_a" syntax="cmd_a(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="136"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="NAME"/>
 			<dependency name="SCMA"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7192,7 +7156,7 @@
 		</member>
 		<member name="M:cmd_admins" syntax="cmd_admins(playerid)">
 			<attribute name="public"/>
-			<stacksize value="42"/>
+			<stacksize value="115"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPlayerState"/>
 			<dependency name="NAME"/>
@@ -7201,7 +7165,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SpID"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="strcat"/>
@@ -7219,7 +7182,7 @@
 		</member>
 		<member name="M:cmd_ans" syntax="cmd_ans(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="10"/>
+			<stacksize value="138"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -7228,7 +7191,6 @@
 			<dependency name="SCMA"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7240,7 +7202,7 @@
 		</member>
 		<member name="M:cmd_ban" syntax="cmd_ban(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="637"/>
+			<stacksize value="765"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -7254,7 +7216,6 @@
 			<dependency name="dbHandle"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
@@ -7301,7 +7262,7 @@
 		</member>
 		<member name="M:cmd_buyf" syntax="cmd_buyf(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="64"/>
 			<dependency name="FUEL"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPlayerVehicleID"/>
@@ -7313,7 +7274,6 @@
 			<dependency name="format"/>
 			<dependency name="fuelcar"/>
 			<dependency name="fuelincar"/>
-			<dependency name="g_string"/>
 			<dependency name="give_money"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7328,7 +7288,7 @@
 		</member>
 		<member name="M:cmd_buym" syntax="cmd_buym(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="63"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="IsPlayerInRangeOfPoint"/>
@@ -7337,7 +7297,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="Update3DTextLabelText"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="give_money"/>
 			<dependency name="metalcar"/>
 			<dependency name="metalincar"/>
@@ -7354,7 +7313,7 @@
 		</member>
 		<member name="M:cmd_changeskin" syntax="cmd_changeskin(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="12"/>
+			<stacksize value="232"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FRAC"/>
 			<dependency name="GetPVarInt"/>
@@ -7365,7 +7324,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="offerskin"/>
 			<dependency name="offerskin"/>
 			<dependency name="player_info"/>
@@ -7378,7 +7336,7 @@
 		</member>
 		<member name="M:cmd_do" syntax="cmd_do(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -7386,7 +7344,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7398,7 +7355,7 @@
 		</member>
 		<member name="M:cmd_eat" syntax="cmd_eat(playerid)">
 			<attribute name="public"/>
-			<stacksize value="13"/>
+			<stacksize value="46"/>
 			<dependency name="operator+(Float:,_:)"/>
 			<dependency name="operator&gt;(Float:,Float:)"/>
 			<dependency name="ApplyAnimation"/>
@@ -7414,7 +7371,6 @@
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="SetPlayerSpecialAction"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -7461,7 +7417,7 @@
 		</member>
 		<member name="M:cmd_f" syntax="cmd_f(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="9"/>
+			<stacksize value="137"/>
 			<dependency name="FRAC"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -7473,7 +7429,6 @@
 			<dependency name="format"/>
 			<dependency name="fracrangs"/>
 			<dependency name="fracrangs"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7497,7 +7452,7 @@
 		</member>
 		<member name="M:cmd_gethere" syntax="cmd_gethere(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="14"/>
+			<stacksize value="106"/>
 			<dependency name="operator+(Float:,Float:)"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPVarInt"/>
@@ -7511,7 +7466,6 @@
 			<dependency name="SetPlayerPos"/>
 			<dependency name="SetPlayerVirtualWorld"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7523,7 +7477,7 @@
 		</member>
 		<member name="M:cmd_givemet" syntax="cmd_givemet(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="67"/>
+			<stacksize value="137"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="ID"/>
 			<dependency name="IsPlayerInRangeOfPlayer"/>
@@ -7535,7 +7489,6 @@
 			<dependency name="UPGRADE"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -7548,7 +7501,7 @@
 		</member>
 		<member name="M:cmd_gnews" syntax="cmd_gnews(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="136"/>
 			<dependency name="FRAC"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -7556,7 +7509,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SendClientMessageToAll"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7598,12 +7550,11 @@
 		</member>
 		<member name="M:cmd_home" syntax="cmd_home(playerid)">
 			<attribute name="public"/>
-			<stacksize value="48"/>
+			<stacksize value="560"/>
 			<dependency name="HOUSE"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="hcost"/>
 			<dependency name="hdistrict"/>
 			<dependency name="hkomn"/>
@@ -7621,14 +7572,13 @@
 		</member>
 		<member name="M:cmd_hp" syntax="cmd_hp(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="7"/>
+			<stacksize value="66"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="set_health"/>
@@ -7659,7 +7609,7 @@
 		</member>
 		<member name="M:cmd_invite" syntax="cmd_invite(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="231"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FRAC"/>
 			<dependency name="GetPVarInt"/>
@@ -7673,7 +7623,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="offerskin"/>
 			<dependency name="offerskin"/>
 			<dependency name="player_info"/>
@@ -7686,7 +7635,7 @@
 		</member>
 		<member name="M:cmd_kick" syntax="cmd_kick(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="136"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -7696,7 +7645,6 @@
 			<dependency name="SetPVarInt"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7736,7 +7684,7 @@
 		</member>
 		<member name="M:cmd_leave" syntax="cmd_leave(playerid)">
 			<attribute name="public"/>
-			<stacksize value="66"/>
+			<stacksize value="200"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FRAC"/>
 			<dependency name="ID"/>
@@ -7748,7 +7696,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="orgname"/>
 			<dependency name="orgname"/>
@@ -7760,7 +7707,7 @@
 		</member>
 		<member name="M:cmd_lic" syntax="cmd_lic(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="59"/>
+			<stacksize value="123"/>
 			<dependency name="DLIC"/>
 			<dependency name="GLIC"/>
 			<dependency name="IsPlayerInRangeOfPlayer"/>
@@ -7768,7 +7715,6 @@
 			<dependency name="ProxDetector"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7806,14 +7752,13 @@
 		</member>
 		<member name="M:cmd_live" syntax="cmd_live(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="78"/>
 			<dependency name="HOUSE"/>
 			<dependency name="IsPlayerInRangeOfPoint"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPVarInt"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="henterx"/>
 			<dependency name="hentery"/>
 			<dependency name="henterz"/>
@@ -7829,13 +7774,12 @@
 		</member>
 		<member name="M:cmd_liveout" syntax="cmd_liveout(playerid)">
 			<attribute name="public"/>
-			<stacksize value="71"/>
+			<stacksize value="98"/>
 			<dependency name="GUEST"/>
 			<dependency name="ID"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -7857,7 +7801,7 @@
 		</member>
 		<member name="M:cmd_me" syntax="cmd_me(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -7865,7 +7809,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7885,14 +7828,13 @@
 		</member>
 		<member name="M:cmd_msg" syntax="cmd_msg(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="7"/>
+			<stacksize value="135"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SendClientMessageToAll"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7904,7 +7846,7 @@
 		</member>
 		<member name="M:cmd_mute" syntax="cmd_mute(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="70"/>
+			<stacksize value="214"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -7917,7 +7859,6 @@
 			<dependency name="dbHandle"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mute"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
@@ -7932,13 +7873,12 @@
 		</member>
 		<member name="M:cmd_n" syntax="cmd_n(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
 			<dependency name="ProxDetector"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -7950,7 +7890,7 @@
 		</member>
 		<member name="M:cmd_newleader" syntax="cmd_newleader(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="31"/>
+			<stacksize value="127"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FRAC"/>
 			<dependency name="GetPVarInt"/>
@@ -7960,7 +7900,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8033,7 +7972,7 @@
 		</member>
 		<member name="M:cmd_pass" syntax="cmd_pass(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="146"/>
+			<stacksize value="274"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FRAC"/>
 			<dependency name="GUEST"/>
@@ -8053,7 +7992,6 @@
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
 			<dependency name="fracrangs"/>
-			<dependency name="g_string"/>
 			<dependency name="house_info"/>
 			<dependency name="house_info"/>
 			<dependency name="htype"/>
@@ -8074,7 +8012,7 @@
 		</member>
 		<member name="M:cmd_pay" syntax="cmd_pay(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="74"/>
+			<stacksize value="131"/>
 			<dependency name="ApplyAnimation"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPVarInt"/>
@@ -8088,7 +8026,6 @@
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -8159,7 +8096,7 @@
 		</member>
 		<member name="M:cmd_r" syntax="cmd_r(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="9"/>
+			<stacksize value="137"/>
 			<dependency name="FRAC"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -8171,7 +8108,6 @@
 			<dependency name="format"/>
 			<dependency name="fracrangs"/>
 			<dependency name="fracrangs"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8183,7 +8119,7 @@
 		</member>
 		<member name="M:cmd_rang" syntax="cmd_rang(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="74"/>
+			<stacksize value="188"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="AdmLog"/>
 			<dependency name="FRAC"/>
@@ -8199,7 +8135,6 @@
 			<dependency name="format"/>
 			<dependency name="fracrangs"/>
 			<dependency name="fracrangs"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
@@ -8214,7 +8149,7 @@
 		</member>
 		<member name="M:cmd_s" syntax="cmd_s(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="12"/>
+			<stacksize value="140"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ApplyAnimation"/>
 			<dependency name="GetPlayerState"/>
@@ -8225,7 +8160,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8237,7 +8171,7 @@
 		</member>
 		<member name="M:cmd_sellf" syntax="cmd_sellf(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="9"/>
+			<stacksize value="65"/>
 			<dependency name="FACTORYFUEL"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPVarInt"/>
@@ -8250,7 +8184,6 @@
 			<dependency name="format"/>
 			<dependency name="fuelcar"/>
 			<dependency name="fuelincar"/>
-			<dependency name="g_string"/>
 			<dependency name="give_money"/>
 			<dependency name="sscanf"/>
 			<dependency name="storages"/>
@@ -8276,7 +8209,7 @@
 		</member>
 		<member name="M:cmd_sellm" syntax="cmd_sellm(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="9"/>
+			<stacksize value="64"/>
 			<dependency name="FACTORYMETAL"/>
 			<dependency name="GameTextForPlayer"/>
 			<dependency name="GetPVarInt"/>
@@ -8286,7 +8219,6 @@
 			<dependency name="SetPVarInt"/>
 			<dependency name="Update3DTextLabelText"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="give_money"/>
 			<dependency name="metalcar"/>
 			<dependency name="metalincar"/>
@@ -8302,7 +8234,7 @@
 		</member>
 		<member name="M:cmd_setleader" syntax="cmd_setleader(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="132"/>
+			<stacksize value="260"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="FRAC"/>
@@ -8317,7 +8249,6 @@
 			<dependency name="WARN"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="orgname"/>
 			<dependency name="player_info"/>
@@ -8332,13 +8263,12 @@
 		</member>
 		<member name="M:cmd_setpi" syntax="cmd_setpi(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="88"/>
 			<dependency name="ADMIN"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerInterior"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8350,13 +8280,12 @@
 		</member>
 		<member name="M:cmd_setpvw" syntax="cmd_setpvw(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="8"/>
+			<stacksize value="95"/>
 			<dependency name="ADMIN"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerVirtualWorld"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8375,12 +8304,11 @@
 		</member>
 		<member name="M:cmd_settime" syntax="cmd_settime(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="6"/>
+			<stacksize value="31"/>
 			<dependency name="ADMIN"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetWorldTime"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
 			<param name="playerid">
@@ -8391,12 +8319,11 @@
 		</member>
 		<member name="M:cmd_setweather" syntax="cmd_setweather(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="6"/>
+			<stacksize value="30"/>
 			<dependency name="ADMIN"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetWeather"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
 			<param name="playerid">
@@ -8421,7 +8348,7 @@
 		</member>
 		<member name="M:cmd_skick" syntax="cmd_skick(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="9"/>
+			<stacksize value="137"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -8431,7 +8358,6 @@
 			<dependency name="SetPVarInt"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8443,14 +8369,13 @@
 		</member>
 		<member name="M:cmd_skin" syntax="cmd_skin(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="7"/>
+			<stacksize value="71"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="NAME"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerSkin"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8477,7 +8402,7 @@
 		</member>
 		<member name="M:cmd_sp" syntax="cmd_sp(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="26"/>
+			<stacksize value="104"/>
 			<referrer name="OnPlayerSelectedMenuRow"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPVarInt"/>
@@ -8501,7 +8426,6 @@
 			<dependency name="SpType"/>
 			<dependency name="TogglePlayerSpectating"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="spmenu"/>
@@ -8531,7 +8455,7 @@
 		</member>
 		<member name="M:cmd_sskin" syntax="cmd_sskin(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="78"/>
+			<stacksize value="268"/>
 			<dependency name="ADMIN"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="ID"/>
@@ -8541,7 +8465,6 @@
 			<dependency name="SetPlayerSkin"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -8574,7 +8497,7 @@
 		</member>
 		<member name="M:cmd_templeader" syntax="cmd_templeader(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="39"/>
+			<stacksize value="159"/>
 			<dependency name="ADMIN"/>
 			<dependency name="FRAC"/>
 			<dependency name="NAME"/>
@@ -8583,7 +8506,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerColor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="orgname"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -8597,11 +8519,10 @@
 		</member>
 		<member name="M:cmd_time" syntax="cmd_time(playerid)">
 			<attribute name="public"/>
-			<stacksize value="10"/>
+			<stacksize value="46"/>
 			<dependency name="MUTE"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<param name="playerid">
 			</param>
@@ -8623,7 +8544,7 @@
 		</member>
 		<member name="M:cmd_try" syntax="cmd_try(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="MUTE"/>
 			<dependency name="NAME"/>
@@ -8631,7 +8552,6 @@
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="random"/>
@@ -8664,7 +8584,7 @@
 		</member>
 		<member name="M:cmd_uninvite" syntax="cmd_uninvite(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="134"/>
+			<stacksize value="262"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="AdmLog"/>
 			<dependency name="FRAC"/>
@@ -8683,7 +8603,6 @@
 			<dependency name="floatround"/>
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
@@ -8700,7 +8619,7 @@
 		</member>
 		<member name="M:cmd_unmute" syntax="cmd_unmute(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="66"/>
+			<stacksize value="151"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -8712,7 +8631,6 @@
 			<dependency name="SendClientMessageToAll"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mute"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
@@ -8726,7 +8644,7 @@
 		</member>
 		<member name="M:cmd_unwarn" syntax="cmd_unwarn(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="99"/>
+			<stacksize value="191"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="GetPVarInt"/>
@@ -8737,7 +8655,6 @@
 			<dependency name="WARN"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="mysql_query"/>
 			<dependency name="mysql_tquery"/>
 			<dependency name="player_info"/>
@@ -8762,7 +8679,7 @@
 		</member>
 		<member name="M:cmd_veh" syntax="cmd_veh(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="15"/>
+			<stacksize value="107"/>
 			<dependency name="operator+(Float:,_:)"/>
 			<dependency name="ADMIN"/>
 			<dependency name="ChangeVehicleColor"/>
@@ -8771,8 +8688,9 @@
 			<dependency name="NAME"/>
 			<dependency name="SCMA"/>
 			<dependency name="SendClientMessage"/>
+			<dependency name="VehicleNames"/>
+			<dependency name="VehicleNames"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8784,14 +8702,13 @@
 		</member>
 		<member name="M:cmd_w" syntax="cmd_w(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="NAME"/>
 			<dependency name="ProxDetector"/>
 			<dependency name="SendClientMessage"/>
 			<dependency name="SetPlayerChatBubble"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
 			<dependency name="sscanf"/>
@@ -8803,7 +8720,7 @@
 		</member>
 		<member name="M:cmd_warn" syntax="cmd_warn(playerid, params[])">
 			<attribute name="public"/>
-			<stacksize value="620"/>
+			<stacksize value="910"/>
 			<dependency name="ADMIN"/>
 			<dependency name="AdmLog"/>
 			<dependency name="FRAC"/>
@@ -8820,7 +8737,6 @@
 			<dependency name="dbHandle"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="getdate"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
@@ -8921,7 +8837,7 @@
 		</member>
 		<member name="M:factoryworkend" syntax="factoryworkend(playerid)">
 			<attribute name="public"/>
-			<stacksize value="7"/>
+			<stacksize value="62"/>
 			<dependency name="Delete3DTextLabel"/>
 			<dependency name="GetPVarInt"/>
 			<dependency name="RemovePlayerAttachedObject"/>
@@ -8933,7 +8849,6 @@
 			<dependency name="format"/>
 			<dependency name="fuelveh"/>
 			<dependency name="fuelvehtrailer"/>
-			<dependency name="g_string"/>
 			<dependency name="metalveh"/>
 			<dependency name="player_info"/>
 			<dependency name="vehtext"/>
@@ -9406,13 +9321,12 @@
 		</member>
 		<member name="M:guest_list" syntax="guest_list(playerid)">
 			<attribute name="public"/>
-			<stacksize value="60"/>
+			<stacksize value="732"/>
 			<dependency name="HOUSE"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="cache_get_value_name"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="guest1"/>
 			<dependency name="guest10"/>
 			<dependency name="guest11"/>
@@ -9468,7 +9382,7 @@
 		</member>
 		<member name="M:load_houses" syntax="load_houses()">
 			<attribute name="public"/>
-			<stacksize value="61"/>
+			<stacksize value="281"/>
 			<dependency name="operator!=(Float:,_:)"/>
 			<dependency name="operator-(Float:,Float:)"/>
 			<dependency name="operator+(Float:,Float:)"/>
@@ -9487,7 +9401,6 @@
 			<dependency name="carmodel"/>
 			<dependency name="carscolor"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="haenterrot"/>
 			<dependency name="haenterx"/>
 			<dependency name="haentery"/>
@@ -9824,6 +9737,16 @@
 				<paraminfo> {Float,_} </paraminfo>
 			</param>
 		</member>
+		<member name="M:nextcheckbus" syntax="nextcheckbus(playerid)">
+			<attribute name="public"/>
+			<stacksize value="11"/>
+			<dependency name="GetPVarInt"/>
+			<dependency name="SetPlayerRaceCheckpoint"/>
+			<dependency name="buscheckOne"/>
+			<dependency name="nowcheck"/>
+			<param name="playerid">
+			</param>
+		</member>
 		<member name="M:onKicked" syntax="onKicked(playerid)">
 			<attribute name="public"/>
 			<stacksize value="4"/>
@@ -9838,7 +9761,7 @@
 		</member>
 		<member name="M:payday" syntax="payday()">
 			<attribute name="public"/>
-			<stacksize value="97"/>
+			<stacksize value="163"/>
 			<referrer name="minuteupdate"/>
 			<referrer name="cmd_payday"/>
 			<dependency name="EXP"/>
@@ -9855,7 +9778,6 @@
 			<dependency name="dbHandle"/>
 			<dependency name="exptonextlevel"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="gettime"/>
 			<dependency name="mysql_query"/>
 			<dependency name="player_info"/>
@@ -9899,7 +9821,7 @@
 		</member>
 		<member name="M:player_login" syntax="player_login(playerid)">
 			<attribute name="public"/>
-			<stacksize value="173"/>
+			<stacksize value="231"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="ADMIN"/>
 			<dependency name="BANKMONEY"/>
@@ -9963,7 +9885,6 @@
 			<dependency name="false"/>
 			<dependency name="fix_Kick"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="house_info"/>
 			<dependency name="house_info"/>
 			<dependency name="mute"/>
@@ -10036,7 +9957,7 @@
 		</member>
 		<member name="M:secondupdate" syntax="secondupdate()">
 			<attribute name="public"/>
-			<stacksize value="11"/>
+			<stacksize value="139"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="FACTORYFUEL"/>
 			<dependency name="FACTORYMETAL"/>
@@ -10057,7 +9978,6 @@
 			<dependency name="floatround_floor"/>
 			<dependency name="format"/>
 			<dependency name="fueltext"/>
-			<dependency name="g_string"/>
 			<dependency name="metal"/>
 			<dependency name="minereload"/>
 			<dependency name="minestorage"/>
@@ -10088,7 +10008,7 @@
 			</param>
 		</member>
 		<member name="M:show_login" syntax="show_login(playerid)">
-			<stacksize value="9"/>
+			<stacksize value="169"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="player_check"/>
 			<referrer name="player_login"/>
@@ -10099,7 +10019,6 @@
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="false"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="login_timer"/>
 			<dependency name="player_info"/>
 			<dependency name="player_info"/>
@@ -10115,7 +10034,7 @@
 			</param>
 		</member>
 		<member name="M:show_stats" syntax="show_stats(playerid)">
-			<stacksize value="239"/>
+			<stacksize value="751"/>
 			<referrer name="OnDialogResponse"/>
 			<dependency name="Float:operator=(_:)"/>
 			<dependency name="DRUGS"/>
@@ -10139,7 +10058,6 @@
 			<dependency name="format"/>
 			<dependency name="fracrangs"/>
 			<dependency name="fracrangs"/>
-			<dependency name="g_string"/>
 			<dependency name="house_info"/>
 			<dependency name="house_info"/>
 			<dependency name="htype"/>
@@ -10156,7 +10074,7 @@
 		</member>
 		<member name="M:speedupdate" syntax="speedupdate(playerid)">
 			<attribute name="public"/>
-			<stacksize value="29"/>
+			<stacksize value="93"/>
 			<referrer name="OnPlayerStateChange"/>
 			<dependency name="GetPlayerVehicleID"/>
 			<dependency name="GetVehicleHealth"/>
@@ -10165,7 +10083,6 @@
 			<dependency name="caren"/>
 			<dependency name="carli"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="speed1info"/>
 			<dependency name="speed2info"/>
 			<param name="playerid">
@@ -10402,7 +10319,6 @@
 			<dependency name="SetPVarInt"/>
 			<dependency name="SetVehicleToRespawn"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<dependency name="taxipickup"/>
 			<dependency name="taxitext"/>
 			<dependency name="taxiveh"/>
@@ -10491,12 +10407,11 @@
 		</member>
 		<member name="M:warninfo" syntax="warninfo(playerid)">
 			<attribute name="public"/>
-			<stacksize value="90"/>
+			<stacksize value="385"/>
 			<dependency name="ShowPlayerDialog"/>
 			<dependency name="cache_get_row_count"/>
 			<dependency name="cache_get_value_name"/>
 			<dependency name="format"/>
-			<dependency name="g_string"/>
 			<param name="playerid">
 			</param>
 		</member>
