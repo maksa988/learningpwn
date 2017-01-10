@@ -619,6 +619,18 @@
 			<referrer name="OnDialogResponse"/>
 			<referrer name="nextcheckbus"/>
 		</member>
+		<member name="F:buscheckThree">
+			<tagname value="Float"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="nextcheckbus"/>
+		</member>
+		<member name="F:buscheckTwo">
+			<tagname value="Float"/>
+			<referrer name="OnPlayerEnterRaceCheckpoint"/>
+			<referrer name="OnDialogResponse"/>
+			<referrer name="nextcheckbus"/>
+		</member>
 		<member name="F:bustext">
 			<tagname value="Text3D"/>
 			<referrer name="Itter_OnPlayerDisconnect"/>
@@ -989,6 +1001,9 @@
 			<referrer name="cmd_mute"/>
 			<referrer name="cmd_unmute"/>
 		</member>
+		<member name="F:mvdcars">
+			<referrer name="Itter_OnGameModeInit"/>
+		</member>
 		<member name="F:mychets">
 			<referrer name="OnDialogResponse"/>
 			<referrer name="ShowBankChets"/>
@@ -1001,9 +1016,11 @@
 			<referrer name="busstop"/>
 		</member>
 		<member name="F:nowcheck">
+			<referrer name="Itter_OnPlayerDisconnect"/>
 			<referrer name="OnPlayerEnterRaceCheckpoint"/>
 			<referrer name="OnDialogResponse"/>
 			<referrer name="nextcheckbus"/>
+			<referrer name="busworkend"/>
 			<referrer name="clear_player"/>
 		</member>
 		<member name="F:nowschet">
@@ -1189,6 +1206,12 @@
 			<referrer name="Itter_OnGameModeInit"/>
 			<referrer name="OnPlayerSpawn"/>
 			<referrer name="OnPlayerClickTextDraw"/>
+		</member>
+		<member name="F:sffmcars">
+			<referrer name="Itter_OnGameModeInit"/>
+		</member>
+		<member name="F:sfpdcars">
+			<referrer name="Itter_OnGameModeInit"/>
 		</member>
 		<member name="F:speed1info">
 			<tagname value="Text"/>
@@ -3431,6 +3454,7 @@
 			<dependency name="minelift"/>
 			<dependency name="minereload"/>
 			<dependency name="minestorage"/>
+			<dependency name="mvdcars"/>
 			<dependency name="mysql_connects"/>
 			<dependency name="mysql_tquery"/>
 			<dependency name="neftpickup"/>
@@ -3442,6 +3466,8 @@
 			<dependency name="ruda5"/>
 			<dependency name="ruda6"/>
 			<dependency name="selectskin_td"/>
+			<dependency name="sffmcars"/>
+			<dependency name="sfpdcars"/>
 			<dependency name="speedbox"/>
 			<dependency name="spmenu"/>
 			<dependency name="stuckon"/>
@@ -3517,6 +3543,7 @@
 			<dependency name="login_timer"/>
 			<dependency name="metalveh"/>
 			<dependency name="mute"/>
+			<dependency name="nowcheck"/>
 			<dependency name="player_info"/>
 			<dependency name="speed1info"/>
 			<dependency name="speed2info"/>
@@ -3768,6 +3795,8 @@
 			<dependency name="VEHS"/>
 			<dependency name="WORK"/>
 			<dependency name="buscheckOne"/>
+			<dependency name="buscheckThree"/>
+			<dependency name="buscheckTwo"/>
 			<dependency name="bustext"/>
 			<dependency name="busveh"/>
 			<dependency name="cmd_mn"/>
@@ -4280,6 +4309,8 @@
 			<dependency name="ascheck"/>
 			<dependency name="buscars"/>
 			<dependency name="buscheckOne"/>
+			<dependency name="buscheckThree"/>
+			<dependency name="buscheckTwo"/>
 			<dependency name="busstop"/>
 			<dependency name="dbHandle"/>
 			<dependency name="format"/>
@@ -6918,6 +6949,7 @@
 			<dependency name="bustext"/>
 			<dependency name="busveh"/>
 			<dependency name="format"/>
+			<dependency name="nowcheck"/>
 			<param name="playerid">
 			</param>
 		</member>
@@ -9783,6 +9815,8 @@
 			<dependency name="GetPVarInt"/>
 			<dependency name="SetPlayerRaceCheckpoint"/>
 			<dependency name="buscheckOne"/>
+			<dependency name="buscheckThree"/>
+			<dependency name="buscheckTwo"/>
 			<dependency name="nowcheck"/>
 			<param name="playerid">
 			</param>

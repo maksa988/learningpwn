@@ -66,7 +66,7 @@
 
 //---------Дефайны каров----------------
 #define MAX_TAXI_CARS       17
-#define MAX_BUS_CARS  		2
+#define MAX_BUS_CARS  		6
 
 //---------Дефайны диалогов-------------
 #define DIALOG_GPS          700
@@ -77,6 +77,7 @@
 
 //---------Цена за чекпоинт-------------
 #define BUS_PRICE_ONE       23          //Городской ЛС №1
+#define BUS_PRICE_TWO       22          //Городской ЛС №2
 
 //======================================
 
@@ -247,7 +248,11 @@ new gruzcar[5], //машинки погрузчиков
 	fuelcar[2], //фура с завода для перевозки топлива
 	ascar[8], //учебные машины для автошколы
 	taxicars[18], //Такси
-	buscars[3]; //Автобусы
+	buscars[7], //Автобусы
+	//------Фракционные------
+	sfpdcars[1],
+	mvdcars[6],
+	sffmcars[5];
 //--------------------------------------------------------
 
 new mychets[MAX_PLAYERS][8];
@@ -596,6 +601,89 @@ new Float:buscheckOne[46][3] = //координаты чекпоинтов Маршрута (Городской Лос-С
     {1295.2385,-1692.3026,13.4783},
  	{1183.3582,-1709.4923,13.5682}
 };
+new Float:buscheckTwo[71][3] = //координаты чекпоинтов Маршрута (Городской Лос-Сантос №2)
+{
+	{1183.5452,-1761.6067,13.5316}, // STOP
+	{1182.9023,-1727.1525,13.5603},
+	{1135.8546,-1710.1844,13.7840},
+	{1055.7871,-1710.2991,13.5162},
+	{1039.4525,-1591.0493,13.5162},
+	{1065.0562,-1417.5416,13.5481},
+	{1105.3391,-1409.1844,13.5840}, // STOP
+	{1123.5558,-1408.8453,13.5581},
+	{1347.4763,-1401.3130,13.4481},
+	{1360.3643,-1264.0374,13.5164}, // STOP
+    {1360.3065,-1246.1033,13.5230},
+    {1379.6798,-955.1105,34.2602},
+    {1330.5726,-924.5435,36.5632},
+    {1007.9986,-955.0112,41.9716}, // STOP
+    {986.9570,-957.9248,40.6685},
+    {767.9948,-1046.8180,24.2119},
+    {536.4573,-1241.7981,16.7026},
+    {518.1714,-1256.6012,16.2163}, // STOP
+    {487.0170,-1312.2173,15.7146},
+    {529.5172,-1460.1372,15.0491},
+    {531.6752,-1567.5449,15.9499},
+    {614.3784,-1590.9470,16.0932},
+    {624.1232,-1698.0847,15.2481},
+    {621.4576,-1718.5331,14.2060}, // STOP
+    {412.7337,-1701.8435,9.3646},
+    {163.0949,-1572.2161,12.4059},
+    {127.3309,-1587.4631,10.7821},
+    {137.8010,-1733.3965,6.7309}, // STOP
+    {154.8710,-1738.0710,5.0943},
+    {329.6549,-1741.9498,4.5766},
+    {345.1174,-1769.9288,5.2327}, // STOp
+    {407.1818,-1775.2079,5.4271},
+    {423.4687,-1775.0275,5.4168},
+    {459.9329,-1736.5026,9.4884},
+    {543.7390,-1735.9487,12.5249}, // STOP
+    {806.1711,-1787.4261,13.5377},
+    {834.1202,-1786.5316,13.8798},
+    {1030.7136,-1821.8752,13.8625},
+    {1033.9785,-2060.7480,13.0862}, // STOP
+    {1088.7102,-2361.4504,12.2861},
+    {1311.2295,-2466.8943,7.7926},
+    {1322.9708,-2525.4670,13.5327}, // STOP
+    {1347.0615,-2626.6536,13.5084},
+    {1561.7467,-2686.2891,6.8480},
+    {2146.3276,-2646.2590,13.5124},
+ 	{2178.6257,-2519.7046,13.5136},
+ 	{2178.3831,-2499.9834,13.5080},
+ 	{2297.0540,-2266.7419,13.5097},
+ 	{2233.5347,-2195.6887,13.4455},
+ 	{2215.1455,-2177.7175,13.4770},
+ 	{1980.8544,-2107.7732,13.4848},
+ 	{1964.1151,-2045.8152,13.5366},
+ 	{1964.1357,-1948.4525,13.7532},
+ 	{1862.1876,-1930.4590,13.5164},
+ 	{1824.4318,-1885.2238,13.4679},
+ 	{1824.1180,-1868.4457,13.5159},
+ 	{1824.3229,-1746.9283,13.5162},
+ 	{1649.7695,-1730.5165,13.5179},
+ 	{1511.7766,-1729.7952,13.5170},
+ 	{1497.4242,-1729.7616,13.5541},
+ 	{1325.9670,-1730.0016,13.5161},
+ 	{1315.7800,-1547.4502,13.5222},
+ 	{1356.1400,-1416.3900,13.5088},
+ 	{1225.7433,-1392.6788,13.3513},
+ 	{1212.5293,-1392.7523,13.4112},
+ 	{1060.9005,-1419.8342,13.5092},
+ 	{1035.7351,-1561.9750,13.5011},
+ 	{1279.5352,-1574.1447,13.5162},
+ 	{1295.4976,-1732.8969,13.5160},
+ 	{1295.5883,-1839.3572,13.5161},
+ 	{1192.3286,-1849.9060,13.5345}
+};
+new Float:buscheckThree[6][3] = //координаты чекпоинтов Маршрута (Тестовый)
+{
+	{1183.5452,-1761.6067,13.5316}, // STOP
+	{1182.9023,-1727.1525,13.5603},
+	{1135.8546,-1710.1844,13.7840},
+	{1055.7871,-1710.2991,13.5162},
+	{1039.4525,-1591.0493,13.5162},
+	{1065.0562,-1417.5416,13.5481}
+};
 //----------------------------------------------------
 
 new nowcheck[MAX_PLAYERS];//переменная для чекпоинтов 
@@ -819,7 +907,31 @@ public OnGameModeInit()
 	buscars[0] = AddStaticVehicleEx(431, 1276.4894,-1798.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
 	buscars[1] = AddStaticVehicleEx(431, 1276.4894,-1802.0654,13.1461, 90, 229, 108, 60); // Автостанция ЛС
 	buscars[2] = AddStaticVehicleEx(431, 1276.4894,-1806.0654,13.0300, 90, 229, 108, 60); // Автостанция ЛС
+	
+	buscars[3] = AddStaticVehicleEx(437, 437,1080.8384,-1766.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+	
+	buscars[4] = AddStaticVehicleEx(431, -1968.9800,86.3440,27.7740, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[5] = AddStaticVehicleEx(431, -1968.9314,94.5007,27.7667, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[6] = AddStaticVehicleEx(431, 1968.9125,105.1026,27.8531, 90.8095, 6, 108, 60); //ЖД СФ
 	//-----------------------------------------------
+
+	//-------------------SFPD------------------------
+	sfpdcars[0] = AddStaticVehicleEx(497, -1679.8484, 705.8030,30.7759, 90.0026, 125, 1, 600); //Helicopter
+	
+	//-------------------МВД-------------------------
+	mvdcars[0] = AddStaticVehicleEx(599, -2019.1239,472.2065, 35.4568, 179.8874, 223, 223, 600, 1); // машина МВД 1
+	mvdcars[1] = AddStaticVehicleEx(445, -2023.1218,472.1999, 35.0381, 179.9443, 223, 223, 600, 1); // машина МВД 2
+	mvdcars[2] = AddStaticVehicleEx(445, -2027.1544,472.1637, 35.0444, 179.1252, 223, 223, 600, 1); // машина МВД 3
+	mvdcars[3] = AddStaticVehicleEx(400, -2031.1310,472.1812, 35.2451, 179.8436, 223, 223, 600, 1); // машина МВД 4
+	mvdcars[4] = AddStaticVehicleEx(409, -2038.0430,479.9610, 34.9388, 0.6153, 223, 223, 600, 1); // машина МВД 5
+	mvdcars[5] = AddStaticVehicleEx(523, -2037.3201,486.9664, 34.7339, 358.8025, 223, 223, 600, 1); // машина МВД 6
+
+	//-------------------СФФМ------------------------
+	sffmcars[0] = AddStaticVehicleEx(488, -1827.2747,537.3687,35.3515, 0.0070, 175, 86, 600); // sffm car
+	sffmcars[1] = AddStaticVehicleEx(582, -1787.1393,535.4869,35.1447, 58.3570, 175, 86, 600); // sffm car
+	sffmcars[2] = AddStaticVehicleEx(582, -1778.5853,549.1126,35.1371, 55.5523, 175, 86, 600); // sffm car
+	sffmcars[3] = AddStaticVehicleEx(582, -1775.8088,553.2644,35.1261, 56.8209, 175, 86, 600); // sffm car
+	sffmcars[4] = AddStaticVehicleEx(582, -1773.1265,557.2590,35.1196, 57.6320, 175, 86, 600); // sffm car
 
     //---------------------------------------------------------
     
@@ -2590,6 +2702,7 @@ public OnPlayerDisconnect(playerid, reason)
  	DeletePVar(playerid, "bus_fare");
 	DeletePVar(playerid, "bus_salary");
 	DeletePVar(playerid, "bus_passengers");
+	nowcheck[playerid] = 0;
 	DisablePlayerRaceCheckpoint(playerid);
 	Delete3DTextLabel(bustext[playerid]);
 	return 1;
@@ -3722,32 +3835,102 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	              		case 0, 6, 9, 13, 17, 23, 27, 30, 34, 38, 41:
 	              		{
 	                        busstop(playerid);
-	                        SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
-	                        add_to_salary(playerid, 23);
+	                        SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+	                        add_to_salary(playerid, BUS_PRICE_ONE);
 						}
 						case 1..4, 7, 10..11, 14..15, 18..21, 24..25, 28, 31..32, 35..36, 39, 42..44:
 	  					{
                             DisablePlayerRaceCheckpoint(playerid);
                             nowcheck[playerid]++;
 						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
-	                        add_to_salary(playerid, 23);
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+	                        add_to_salary(playerid, BUS_PRICE_ONE);
 						}
 				  		case 5, 8, 12, 16, 22, 26, 29, 33, 37, 40:
 				  		{
                             DisablePlayerRaceCheckpoint(playerid);
 							nowcheck[playerid]++;
 						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
-	                        add_to_salary(playerid, 23);
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+	                        add_to_salary(playerid, BUS_PRICE_ONE);
 			  			}
 			  			case 45:
 				  		{
 				  		    DisablePlayerRaceCheckpoint(playerid);
-				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[45][0], buscheckOne[45][1], buscheckOne[45][2], buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], 4.0);
+				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], buscheckOne[1][0], buscheckOne[1][1], buscheckOne[1][2], 4.0);
                             nowcheck[playerid] = 0;
-							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + 23);
-	                        add_to_salary(playerid, 23);
+							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+	                        add_to_salary(playerid, BUS_PRICE_ONE);
+					  	}
+					}
+				}
+				if(GetPVarInt(playerid, "bus_route") == 2) { //Городской Лос-Сантос №2
+					switch(nowcheck[playerid])
+					{
+     					case 0, 6, 9, 13, 16, 22, 27, 31, 35, 45, 48, 54, 58, 63:
+	              		{
+	                        busstop(playerid);
+	                        SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+						}
+						case 1..4, 7, 10..11, 14, 17..20, 23..25, 28..29, 32..33, 36..43, 46, 49..52, 55..56, 59..61, 64..69:
+	  					{
+                            DisablePlayerRaceCheckpoint(playerid);
+                            nowcheck[playerid]++;
+						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+						}
+				  		case 5, 8, 12, 15, 21, 26, 30, 34, 44, 47, 53, 57, 62:
+				  		{
+                            DisablePlayerRaceCheckpoint(playerid);
+							nowcheck[playerid]++;
+						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
+                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+			  			}
+			  			case 70:
+				  		{
+				  		    DisablePlayerRaceCheckpoint(playerid);
+				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckTwo[0][0], buscheckTwo[0][1], buscheckTwo[0][2], buscheckTwo[1][0], buscheckTwo[1][1], buscheckTwo[1][2], 4.0);
+                            nowcheck[playerid] = 0;
+							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+					  	}
+					}
+				}
+                if(GetPVarInt(playerid, "bus_route") == 3) { //Городской Лос-Сантос №2
+					switch(nowcheck[playerid])
+					{
+            			case 0:
+	              		{
+	                        busstop(playerid);
+	                        SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+						}
+						case 1..3:
+	  					{
+                            DisablePlayerRaceCheckpoint(playerid);
+						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckThree[nowcheck[playerid]][0], buscheckThree[nowcheck[playerid]][1], buscheckThree[nowcheck[playerid]][2], buscheckThree[nowcheck[playerid]+1][0], buscheckThree[nowcheck[playerid]+1][1], buscheckThree[nowcheck[playerid]+1][2], 4.0);
+                            nowcheck[playerid]++;
+							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+						}
+				  		case 4:
+				  		{
+                            DisablePlayerRaceCheckpoint(playerid);
+						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckThree[nowcheck[playerid]][0], buscheckThree[nowcheck[playerid]][1], buscheckThree[nowcheck[playerid]][2], buscheckThree[nowcheck[playerid]+1][0], buscheckThree[nowcheck[playerid]+1][1], buscheckThree[nowcheck[playerid]+1][2], 4.0);
+                            nowcheck[playerid]++;
+						  	SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
+			  			}
+			  			case 5:
+				  		{
+				  		    DisablePlayerRaceCheckpoint(playerid);
+				  		    SetPlayerRaceCheckpoint(playerid, 1, buscheckThree[0][0], buscheckThree[0][1], buscheckThree[0][2], buscheckThree[1][0], buscheckThree[1][1], buscheckThree[1][2], 4.0);
+                            nowcheck[playerid] = 0;
+							SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+	                        add_to_salary(playerid, BUS_PRICE_TWO);
 					  	}
 					}
 				}
@@ -8919,6 +9102,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(response) {
                 switch(listitem) {
 					case 1: turnOnGPS(playerid, 11, -1930.9183,-1785.0211,31.3723); //Шахта
+					case 2: turnOnGPS(playerid, 11, -95.0868,-319.5067,1.4297); //Завод
 					default: SCM(playerid, COLOR_RED, "Недоступно");
 				}
 			} else {
@@ -9192,6 +9376,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPVarInt(playerid, "bus_salary", 0);
                         SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[0][0], buscheckOne[0][1], buscheckOne[0][2], buscheckOne[1][0], buscheckOne[1][1], buscheckOne[1][2], 4.0);
 					}
+					case 1:
+				    {
+				        SetPVarInt(playerid, "bus_route", 2);
+				        new bname[71];
+						format(bname, sizeof(bname), "{5bdd02}Городской Лос-Сантос №2\n{ffffff}Стомость проезда: {FFDF0F}%d$", GetPVarInt(playerid, "bus_fare"));
+						bustext[playerid] = Create3DTextLabel(bname, -1, 0.0,0.0,0.0, 20.0, 0, 1);
+  						Attach3DTextLabelToVehicle(bustext[playerid], GetPlayerVehicleID(playerid), 0.0,0.0,2);
+				        new string[81];
+						format(string, sizeof(string), "%s начал работу водителя автобуса на маршруте Городской Лос-Сантос №2", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						SetPVarInt(playerid, "bus_salary", 0);
+                        SetPlayerRaceCheckpoint(playerid, 1, buscheckTwo[0][0], buscheckTwo[0][1], buscheckTwo[0][2], buscheckTwo[1][0], buscheckTwo[1][1], buscheckTwo[1][2], 4.0);
+					}
+        			case 2:
+				    {
+				        SetPVarInt(playerid, "bus_route", 3);
+				        new bname[71];
+						format(bname, sizeof(bname), "{5bdd02}Городской Лос-Сантос №3\n{ffffff}Стомость проезда: {FFDF0F}%d$", GetPVarInt(playerid, "bus_fare"));
+						bustext[playerid] = Create3DTextLabel(bname, -1, 0.0,0.0,0.0, 20.0, 0, 1);
+  						Attach3DTextLabelToVehicle(bustext[playerid], GetPlayerVehicleID(playerid), 0.0,0.0,2);
+				        new string[81];
+						format(string, sizeof(string), "%s начал работу водителя автобуса на маршруте Городской Лос-Сантос №3", player_info[playerid][NAME]);
+						ProxDetector(30.0, playerid, string, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF, 0xde92ffFF);
+						SetPVarInt(playerid, "bus_salary", 0);
+                        SetPlayerRaceCheckpoint(playerid, 1, buscheckThree[0][0], buscheckThree[0][1], buscheckThree[0][2], buscheckThree[1][0], buscheckThree[1][1], buscheckThree[1][2], 4.0);
+					}
 				}
 		    } else {
 				DeletePVar(playerid, "bus_fare");
@@ -9218,6 +9428,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				DeletePVar(playerid, "bus_salary");
 				DeletePVar(playerid, "bus_passengers");
 				DisablePlayerRaceCheckpoint(playerid);
+				nowcheck[playerid] = 0;
 		 		Delete3DTextLabel(bustext[playerid]);
 		 		if(busveh[playerid] != -1)
 				{
@@ -10042,6 +10253,8 @@ public nextcheckbus(playerid)
     nowcheck[playerid]++;
 	switch(GetPVarInt(playerid, "bus_route")) {
 	    case 1: SetPlayerRaceCheckpoint(playerid, 0, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
+		case 2: SetPlayerRaceCheckpoint(playerid, 0, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
+        case 3: SetPlayerRaceCheckpoint(playerid, 0, buscheckThree[nowcheck[playerid]][0], buscheckThree[nowcheck[playerid]][1], buscheckThree[nowcheck[playerid]][2], buscheckThree[nowcheck[playerid]+1][0], buscheckThree[nowcheck[playerid]+1][1], buscheckThree[nowcheck[playerid]+1][2], 4.0);
 	}
 }
 
@@ -10052,6 +10265,8 @@ public busstop(playerid)
 	SCM(playerid, COLOR_LIGHTGREEN, "Остановка. Ждите пассажиров");
 	switch(GetPVarInt(playerid, "bus_route")) {
 		case 1: ProxDetector(30.0, playerid, "Автобус по маршруту Городской Лос-Сантос №1 отправляется через 10 секунд", 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF);
+		case 2: ProxDetector(30.0, playerid, "Автобус по маршруту Городской Лос-Сантос №2 отправляется через 10 секунд", 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF);
+        default: ProxDetector(30.0, playerid, "Автобус отправляется через 10 секунд", 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF, 0x669999FF);
 	}
  	nextcheckbustimer[playerid] = SetTimerEx("nextcheckbus", 10000, false, "i", playerid);
 }
@@ -10077,6 +10292,7 @@ public busworkend(playerid)
      	DeletePVar(playerid, "bus_fare");
 		DeletePVar(playerid, "bus_salary");
 		DeletePVar(playerid, "bus_passengers");
+		nowcheck[playerid] = 0;
 		DisablePlayerRaceCheckpoint(playerid);
  		Delete3DTextLabel(bustext[playerid]);
  		if(busveh[playerid] != -1)
