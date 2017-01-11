@@ -5305,3 +5305,1056 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 [00:08:13] [connection] 127.0.0.1:49520 requests connection cookie.
 [00:08:14] [connection] incoming connection: 127.0.0.1:49520 id: 0
 [00:08:14] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:33:51] filterscripts = ""  (string)
+[00:33:51] 
+[00:33:51] Server Plugins
+[00:33:51] --------------
+[00:33:51]  Loading plugin: mysql
+[00:33:51]  >> plugin.mysql: R41-2 successfully loaded.
+[00:33:51]   Loaded.
+[00:33:51]  Loading plugin: sscanf
+[00:33:51] 
+
+[00:33:51]  ===============================
+
+[00:33:51]       sscanf plugin loaded.     
+
+[00:33:51]          Version:  2.8.1        
+
+[00:33:51]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:33:51]  ===============================
+
+[00:33:51]   Loaded.
+[00:33:51]  Loading plugin: dc_cmd
+[00:33:51]   Daniel's CMD plugin v2.8
+[00:33:51]     (c) 2014 Daniel_Cortez
+[00:33:51] 	www.pro-pawn.ru
+[00:33:51]   Loaded.
+[00:33:51]  Loading plugin: streamer
+[00:33:51] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:33:51]   Loaded.
+[00:33:51]  Loaded 4 plugins.
+
+[00:33:51] 
+[00:33:51] Ban list
+[00:33:51] --------
+[00:33:51]  Loaded: samp.ban
+[00:33:51] 
+[00:33:51] 
+[00:33:51] Filterscripts
+[00:33:51] ---------------
+[00:33:51]   Loaded 0 filterscripts.
+
+[00:33:51] Подключение к базе данных MYSQL успешно
+[00:33:51] 
+----------------------------------
+[00:33:51] --------Advance RP by Leon--------
+[00:33:51] ----------------------------------
+
+[00:33:51] Number of vehicle models: 16
+[00:33:51] Склады загружены успешно
+[00:33:51] Дома (15 шт) загружены успешно
+[00:34:03] [connection] 127.0.0.1:50073 requests connection cookie.
+[00:34:04] [connection] incoming connection: 127.0.0.1:50073 id: 0
+[00:34:04] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:38:23] filterscripts = ""  (string)
+[00:38:23] 
+[00:38:23] Server Plugins
+[00:38:23] --------------
+[00:38:23]  Loading plugin: mysql
+[00:38:23]  >> plugin.mysql: R41-2 successfully loaded.
+[00:38:23]   Loaded.
+[00:38:23]  Loading plugin: sscanf
+[00:38:23] 
+
+[00:38:23]  ===============================
+
+[00:38:23]       sscanf plugin loaded.     
+
+[00:38:23]          Version:  2.8.1        
+
+[00:38:23]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:38:23]  ===============================
+
+[00:38:23]   Loaded.
+[00:38:23]  Loading plugin: dc_cmd
+[00:38:23]   Daniel's CMD plugin v2.8
+[00:38:23]     (c) 2014 Daniel_Cortez
+[00:38:23] 	www.pro-pawn.ru
+[00:38:23]   Loaded.
+[00:38:23]  Loading plugin: streamer
+[00:38:23] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:38:23]   Loaded.
+[00:38:23]  Loaded 4 plugins.
+
+[00:38:23] 
+[00:38:23] Ban list
+[00:38:23] --------
+[00:38:23]  Loaded: samp.ban
+[00:38:23] 
+[00:38:23] 
+[00:38:23] Filterscripts
+[00:38:23] ---------------
+[00:38:23]   Loaded 0 filterscripts.
+
+[00:38:23] Подключение к базе данных MYSQL успешно
+[00:38:24] 
+----------------------------------
+[00:38:24] --------Advance RP by Leon--------
+[00:38:24] ----------------------------------
+
+[00:38:24] Number of vehicle models: 16
+[00:38:24] Склады загружены успешно
+[00:38:24] Дома (15 шт) загружены успешно
+[00:38:41] [connection] 127.0.0.1:52292 requests connection cookie.
+[00:38:42] [connection] incoming connection: 127.0.0.1:52292 id: 0
+[00:38:42] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:45:22] filterscripts = ""  (string)
+[00:45:22] 
+[00:45:22] Server Plugins
+[00:45:22] --------------
+[00:45:22]  Loading plugin: mysql
+[00:45:23]  >> plugin.mysql: R41-2 successfully loaded.
+[00:45:23]   Loaded.
+[00:45:23]  Loading plugin: sscanf
+[00:45:23] 
+
+[00:45:23]  ===============================
+
+[00:45:23]       sscanf plugin loaded.     
+
+[00:45:23]          Version:  2.8.1        
+
+[00:45:23]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:45:23]  ===============================
+
+[00:45:23]   Loaded.
+[00:45:23]  Loading plugin: dc_cmd
+[00:45:23]   Daniel's CMD plugin v2.8
+[00:45:23]     (c) 2014 Daniel_Cortez
+[00:45:23] 	www.pro-pawn.ru
+[00:45:23]   Loaded.
+[00:45:23]  Loading plugin: streamer
+[00:45:23] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:45:23]   Loaded.
+[00:45:23]  Loaded 4 plugins.
+
+[00:45:23] 
+[00:45:23] Ban list
+[00:45:23] --------
+[00:45:23]  Loaded: samp.ban
+[00:45:23] 
+[00:45:23] 
+[00:45:23] Filterscripts
+[00:45:23] ---------------
+[00:45:23]   Loaded 0 filterscripts.
+
+[00:45:23] Подключение к базе данных MYSQL успешно
+[00:45:23] 
+----------------------------------
+[00:45:23] --------Advance RP by Leon--------
+[00:45:23] ----------------------------------
+
+[00:45:23] Number of vehicle models: 16
+[00:45:23] Склады загружены успешно
+[00:45:23] Дома (15 шт) загружены успешно
+[00:45:23] [connection] 127.0.0.1:60657 requests connection cookie.
+[00:45:25] [connection] incoming connection: 127.0.0.1:60659 id: 0
+[00:45:35] [connection] incoming connection: 127.0.0.1:60660 id: 0
+[00:45:45] [connection] incoming connection: 127.0.0.1:60661 id: 0
+[00:45:55] [connection] incoming connection: 127.0.0.1:60663 id: 0
+[00:46:12] [connection] 127.0.0.1:60664 requests connection cookie.
+[00:46:13] [connection] incoming connection: 127.0.0.1:60664 id: 0
+[00:46:13] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:47:36] filterscripts = ""  (string)
+[00:47:36] 
+[00:47:36] Server Plugins
+[00:47:36] --------------
+[00:47:36]  Loading plugin: mysql
+[00:47:36]  >> plugin.mysql: R41-2 successfully loaded.
+[00:47:36]   Loaded.
+[00:47:36]  Loading plugin: sscanf
+[00:47:36] 
+
+[00:47:36]  ===============================
+
+[00:47:36]       sscanf plugin loaded.     
+
+[00:47:36]          Version:  2.8.1        
+
+[00:47:36]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:47:36]  ===============================
+
+[00:47:36]   Loaded.
+[00:47:36]  Loading plugin: dc_cmd
+[00:47:36]   Daniel's CMD plugin v2.8
+[00:47:36]     (c) 2014 Daniel_Cortez
+[00:47:36] 	www.pro-pawn.ru
+[00:47:36]   Loaded.
+[00:47:36]  Loading plugin: streamer
+[00:47:36] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:47:36]   Loaded.
+[00:47:36]  Loaded 4 plugins.
+
+[00:47:36] 
+[00:47:36] Ban list
+[00:47:36] --------
+[00:47:36]  Loaded: samp.ban
+[00:47:36] 
+[00:47:36] 
+[00:47:36] Filterscripts
+[00:47:36] ---------------
+[00:47:36]   Loaded 0 filterscripts.
+
+[00:47:36] Подключение к базе данных MYSQL успешно
+[00:47:36] 
+----------------------------------
+[00:47:36] --------Advance RP by Leon--------
+[00:47:36] ----------------------------------
+
+[00:47:36] Number of vehicle models: 16
+[00:47:36] Склады загружены успешно
+[00:47:36] Дома (15 шт) загружены успешно
+[00:47:40] [connection] 127.0.0.1:60669 requests connection cookie.
+[00:47:41] [connection] incoming connection: 127.0.0.1:60669 id: 0
+[00:47:41] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:49:35] filterscripts = ""  (string)
+[00:49:35] 
+[00:49:35] Server Plugins
+[00:49:35] --------------
+[00:49:35]  Loading plugin: mysql
+[00:49:35]  >> plugin.mysql: R41-2 successfully loaded.
+[00:49:35]   Loaded.
+[00:49:35]  Loading plugin: sscanf
+[00:49:35] 
+
+[00:49:35]  ===============================
+
+[00:49:35]       sscanf plugin loaded.     
+
+[00:49:35]          Version:  2.8.1        
+
+[00:49:35]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:49:35]  ===============================
+
+[00:49:35]   Loaded.
+[00:49:35]  Loading plugin: dc_cmd
+[00:49:35]   Daniel's CMD plugin v2.8
+[00:49:35]     (c) 2014 Daniel_Cortez
+[00:49:35] 	www.pro-pawn.ru
+[00:49:35]   Loaded.
+[00:49:35]  Loading plugin: streamer
+[00:49:35] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:49:35]   Loaded.
+[00:49:35]  Loaded 4 plugins.
+
+[00:49:35] 
+[00:49:35] Ban list
+[00:49:35] --------
+[00:49:35]  Loaded: samp.ban
+[00:49:35] 
+[00:49:35] 
+[00:49:35] Filterscripts
+[00:49:35] ---------------
+[00:49:35]   Loaded 0 filterscripts.
+
+[00:49:35] Подключение к базе данных MYSQL успешно
+[00:49:36] 
+----------------------------------
+[00:49:36] --------Advance RP by Leon--------
+[00:49:36] ----------------------------------
+
+[00:49:36] Number of vehicle models: 16
+[00:49:36] Склады загружены успешно
+[00:49:36] Дома (15 шт) загружены успешно
+[00:49:51] [connection] 127.0.0.1:57455 requests connection cookie.
+[00:49:52] [connection] incoming connection: 127.0.0.1:57455 id: 0
+[00:49:52] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[00:50:58] filterscripts = ""  (string)
+[00:50:58] 
+[00:50:58] Server Plugins
+[00:50:58] --------------
+[00:50:58]  Loading plugin: mysql
+[00:50:58]  >> plugin.mysql: R41-2 successfully loaded.
+[00:50:58]   Loaded.
+[00:50:58]  Loading plugin: sscanf
+[00:50:58] 
+
+[00:50:58]  ===============================
+
+[00:50:58]       sscanf plugin loaded.     
+
+[00:50:58]          Version:  2.8.1        
+
+[00:50:58]    (c) 2012 Alex "Y_Less" Cole  
+
+[00:50:58]  ===============================
+
+[00:50:58]   Loaded.
+[00:50:58]  Loading plugin: dc_cmd
+[00:50:58]   Daniel's CMD plugin v2.8
+[00:50:58]     (c) 2014 Daniel_Cortez
+[00:50:58] 	www.pro-pawn.ru
+[00:50:58]   Loaded.
+[00:50:58]  Loading plugin: streamer
+[00:50:58] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[00:50:58]   Loaded.
+[00:50:58]  Loaded 4 plugins.
+
+[00:50:58] 
+[00:50:58] Ban list
+[00:50:58] --------
+[00:50:58]  Loaded: samp.ban
+[00:50:58] 
+[00:50:58] 
+[00:50:58] Filterscripts
+[00:50:58] ---------------
+[00:50:58]   Loaded 0 filterscripts.
+
+[00:50:58] Подключение к базе данных MYSQL успешно
+[00:50:58] 
+----------------------------------
+[00:50:58] --------Advance RP by Leon--------
+[00:50:58] ----------------------------------
+
+[00:50:58] Number of vehicle models: 16
+[00:50:58] Склады загружены успешно
+[00:50:58] Дома (15 шт) загружены успешно
+[00:51:14] [connection] 127.0.0.1:64169 requests connection cookie.
+[00:51:15] [connection] incoming connection: 127.0.0.1:64169 id: 0
+[00:51:16] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:25:53] filterscripts = ""  (string)
+[01:25:53] 
+[01:25:53] Server Plugins
+[01:25:53] --------------
+[01:25:53]  Loading plugin: mysql
+[01:25:53]  >> plugin.mysql: R41-2 successfully loaded.
+[01:25:53]   Loaded.
+[01:25:53]  Loading plugin: sscanf
+[01:25:53] 
+
+[01:25:53]  ===============================
+
+[01:25:53]       sscanf plugin loaded.     
+
+[01:25:53]          Version:  2.8.1        
+
+[01:25:53]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:25:53]  ===============================
+
+[01:25:53]   Loaded.
+[01:25:53]  Loading plugin: dc_cmd
+[01:25:53]   Daniel's CMD plugin v2.8
+[01:25:53]     (c) 2014 Daniel_Cortez
+[01:25:53] 	www.pro-pawn.ru
+[01:25:53]   Loaded.
+[01:25:53]  Loading plugin: streamer
+[01:25:53] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:25:53]   Loaded.
+[01:25:53]  Loaded 4 plugins.
+
+[01:25:53] 
+[01:25:53] Ban list
+[01:25:53] --------
+[01:25:53]  Loaded: samp.ban
+[01:25:53] 
+[01:25:53] 
+[01:25:53] Filterscripts
+[01:25:53] ---------------
+[01:25:53]   Loaded 0 filterscripts.
+
+[01:25:53] Подключение к базе данных MYSQL успешно
+[01:25:53] 
+----------------------------------
+[01:25:53] --------Advance RP by Leon--------
+[01:25:53] ----------------------------------
+
+[01:25:53] Number of vehicle models: 18
+[01:25:53] Склады загружены успешно
+[01:25:53] Дома (15 шт) загружены успешно
+[01:25:53] [connection] 127.0.0.1:51962 requests connection cookie.
+[01:25:54] [connection] incoming connection: 127.0.0.1:49313 id: 0
+[01:26:04] [connection] incoming connection: 127.0.0.1:49316 id: 0
+[01:26:36] [connection] 127.0.0.1:64469 requests connection cookie.
+[01:26:37] [connection] incoming connection: 127.0.0.1:64469 id: 0
+[01:26:37] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:34:03] filterscripts = ""  (string)
+[01:34:03] 
+[01:34:03] Server Plugins
+[01:34:03] --------------
+[01:34:03]  Loading plugin: mysql
+[01:34:03]  >> plugin.mysql: R41-2 successfully loaded.
+[01:34:03]   Loaded.
+[01:34:03]  Loading plugin: sscanf
+[01:34:03] 
+
+[01:34:03]  ===============================
+
+[01:34:03]       sscanf plugin loaded.     
+
+[01:34:03]          Version:  2.8.1        
+
+[01:34:03]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:34:03]  ===============================
+
+[01:34:03]   Loaded.
+[01:34:03]  Loading plugin: dc_cmd
+[01:34:03]   Daniel's CMD plugin v2.8
+[01:34:03]     (c) 2014 Daniel_Cortez
+[01:34:03] 	www.pro-pawn.ru
+[01:34:03]   Loaded.
+[01:34:03]  Loading plugin: streamer
+[01:34:03] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:34:03]   Loaded.
+[01:34:03]  Loaded 4 plugins.
+
+[01:34:03] 
+[01:34:03] Ban list
+[01:34:03] --------
+[01:34:03]  Loaded: samp.ban
+[01:34:03] 
+[01:34:03] 
+[01:34:03] Filterscripts
+[01:34:03] ---------------
+[01:34:03]   Loaded 0 filterscripts.
+
+[01:34:03] Подключение к базе данных MYSQL успешно
+[01:34:04] 
+----------------------------------
+[01:34:04] --------Advance RP by Leon--------
+[01:34:04] ----------------------------------
+
+[01:34:04] Number of vehicle models: 20
+[01:34:04] Склады загружены успешно
+[01:34:04] Дома (15 шт) загружены успешно
+[01:34:22] [connection] 127.0.0.1:59720 requests connection cookie.
+[01:34:23] [connection] incoming connection: 127.0.0.1:59720 id: 0
+[01:34:23] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:42:41] filterscripts = ""  (string)
+[01:42:41] 
+[01:42:41] Server Plugins
+[01:42:41] --------------
+[01:42:41]  Loading plugin: mysql
+[01:42:41]  >> plugin.mysql: R41-2 successfully loaded.
+[01:42:41]   Loaded.
+[01:42:41]  Loading plugin: sscanf
+[01:42:41] 
+
+[01:42:41]  ===============================
+
+[01:42:41]       sscanf plugin loaded.     
+
+[01:42:41]          Version:  2.8.1        
+
+[01:42:41]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:42:41]  ===============================
+
+[01:42:41]   Loaded.
+[01:42:41]  Loading plugin: dc_cmd
+[01:42:41]   Daniel's CMD plugin v2.8
+[01:42:41]     (c) 2014 Daniel_Cortez
+[01:42:41] 	www.pro-pawn.ru
+[01:42:41]   Loaded.
+[01:42:41]  Loading plugin: streamer
+[01:42:41] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:42:41]   Loaded.
+[01:42:41]  Loaded 4 plugins.
+
+[01:42:41] 
+[01:42:41] Ban list
+[01:42:41] --------
+[01:42:41]  Loaded: samp.ban
+[01:42:41] 
+[01:42:41] 
+[01:42:41] Filterscripts
+[01:42:41] ---------------
+[01:42:41]   Loaded 0 filterscripts.
+
+[01:42:41] Подключение к базе данных MYSQL успешно
+[01:42:41] 
+----------------------------------
+[01:42:41] --------Advance RP by Leon--------
+[01:42:41] ----------------------------------
+
+[01:42:41] Number of vehicle models: 20
+[01:42:42] Склады загружены успешно
+[01:42:42] Дома (15 шт) загружены успешно
+[01:42:54] [connection] 127.0.0.1:65372 requests connection cookie.
+[01:42:55] [connection] incoming connection: 127.0.0.1:65372 id: 0
+[01:42:55] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:44:18] filterscripts = ""  (string)
+[01:44:18] 
+[01:44:18] Server Plugins
+[01:44:18] --------------
+[01:44:18]  Loading plugin: mysql
+[01:44:18]  >> plugin.mysql: R41-2 successfully loaded.
+[01:44:18]   Loaded.
+[01:44:18]  Loading plugin: sscanf
+[01:44:18] 
+
+[01:44:18]  ===============================
+
+[01:44:18]       sscanf plugin loaded.     
+
+[01:44:18]          Version:  2.8.1        
+
+[01:44:18]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:44:18]  ===============================
+
+[01:44:18]   Loaded.
+[01:44:18]  Loading plugin: dc_cmd
+[01:44:18]   Daniel's CMD plugin v2.8
+[01:44:18]     (c) 2014 Daniel_Cortez
+[01:44:18] 	www.pro-pawn.ru
+[01:44:18]   Loaded.
+[01:44:18]  Loading plugin: streamer
+[01:44:18] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:44:18]   Loaded.
+[01:44:18]  Loaded 4 plugins.
+
+[01:44:18] 
+[01:44:18] Ban list
+[01:44:18] --------
+[01:44:18]  Loaded: samp.ban
+[01:44:18] 
+[01:44:18] 
+[01:44:18] Filterscripts
+[01:44:18] ---------------
+[01:44:18]   Loaded 0 filterscripts.
+
+[01:44:18] Подключение к базе данных MYSQL успешно
+[01:44:19] 
+----------------------------------
+[01:44:19] --------Advance RP by Leon--------
+[01:44:19] ----------------------------------
+
+[01:44:19] Number of vehicle models: 20
+[01:44:19] Склады загружены успешно
+[01:44:19] Дома (15 шт) загружены успешно
+[01:44:29] [connection] 127.0.0.1:53663 requests connection cookie.
+[01:44:30] [connection] incoming connection: 127.0.0.1:53663 id: 0
+[01:44:30] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:45:20] filterscripts = ""  (string)
+[01:45:20] 
+[01:45:20] Server Plugins
+[01:45:20] --------------
+[01:45:20]  Loading plugin: mysql
+[01:45:20]  >> plugin.mysql: R41-2 successfully loaded.
+[01:45:20]   Loaded.
+[01:45:20]  Loading plugin: sscanf
+[01:45:20] 
+
+[01:45:20]  ===============================
+
+[01:45:20]       sscanf plugin loaded.     
+
+[01:45:20]          Version:  2.8.1        
+
+[01:45:20]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:45:20]  ===============================
+
+[01:45:20]   Loaded.
+[01:45:20]  Loading plugin: dc_cmd
+[01:45:20]   Daniel's CMD plugin v2.8
+[01:45:20]     (c) 2014 Daniel_Cortez
+[01:45:20] 	www.pro-pawn.ru
+[01:45:20]   Loaded.
+[01:45:20]  Loading plugin: streamer
+[01:45:20] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:45:20]   Loaded.
+[01:45:20]  Loaded 4 plugins.
+
+[01:45:20] 
+[01:45:20] Ban list
+[01:45:20] --------
+[01:45:20]  Loaded: samp.ban
+[01:45:20] 
+[01:45:20] 
+[01:45:20] Filterscripts
+[01:45:20] ---------------
+[01:45:20]   Loaded 0 filterscripts.
+
+[01:45:20] Подключение к базе данных MYSQL успешно
+[01:45:20] 
+----------------------------------
+[01:45:20] --------Advance RP by Leon--------
+[01:45:20] ----------------------------------
+
+[01:45:20] Number of vehicle models: 20
+[01:45:20] Склады загружены успешно
+[01:45:20] Дома (15 шт) загружены успешно
+[01:45:32] [connection] 127.0.0.1:53669 requests connection cookie.
+[01:45:33] [connection] incoming connection: 127.0.0.1:53669 id: 0
+[01:45:33] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[01:46:07] [part] Axel_Foli has left the server (0:2)
+[01:46:43] [connection] 127.0.0.1:59955 requests connection cookie.
+[01:46:44] [connection] incoming connection: 127.0.0.1:59955 id: 0
+[01:46:44] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:47:51] filterscripts = ""  (string)
+[01:47:51] 
+[01:47:51] Server Plugins
+[01:47:51] --------------
+[01:47:51]  Loading plugin: mysql
+[01:47:51]  >> plugin.mysql: R41-2 successfully loaded.
+[01:47:51]   Loaded.
+[01:47:51]  Loading plugin: sscanf
+[01:47:51] 
+
+[01:47:51]  ===============================
+
+[01:47:51]       sscanf plugin loaded.     
+
+[01:47:51]          Version:  2.8.1        
+
+[01:47:51]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:47:51]  ===============================
+
+[01:47:51]   Loaded.
+[01:47:51]  Loading plugin: dc_cmd
+[01:47:51]   Daniel's CMD plugin v2.8
+[01:47:51]     (c) 2014 Daniel_Cortez
+[01:47:51] 	www.pro-pawn.ru
+[01:47:51]   Loaded.
+[01:47:51]  Loading plugin: streamer
+[01:47:51] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:47:51]   Loaded.
+[01:47:51]  Loaded 4 plugins.
+
+[01:47:51] 
+[01:47:51] Ban list
+[01:47:51] --------
+[01:47:51]  Loaded: samp.ban
+[01:47:51] 
+[01:47:51] 
+[01:47:51] Filterscripts
+[01:47:51] ---------------
+[01:47:51]   Loaded 0 filterscripts.
+
+[01:47:51] Подключение к базе данных MYSQL успешно
+[01:47:51] 
+----------------------------------
+[01:47:51] --------Advance RP by Leon--------
+[01:47:51] ----------------------------------
+
+[01:47:51] Number of vehicle models: 20
+[01:47:51] Склады загружены успешно
+[01:47:51] Дома (15 шт) загружены успешно
+[01:48:07] [connection] 127.0.0.1:52867 requests connection cookie.
+[01:48:08] [connection] incoming connection: 127.0.0.1:52867 id: 0
+[01:48:08] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[01:56:56] filterscripts = ""  (string)
+[01:56:56] 
+[01:56:56] Server Plugins
+[01:56:56] --------------
+[01:56:56]  Loading plugin: mysql
+[01:56:56]  >> plugin.mysql: R41-2 successfully loaded.
+[01:56:56]   Loaded.
+[01:56:56]  Loading plugin: sscanf
+[01:56:56] 
+
+[01:56:56]  ===============================
+
+[01:56:56]       sscanf plugin loaded.     
+
+[01:56:56]          Version:  2.8.1        
+
+[01:56:56]    (c) 2012 Alex "Y_Less" Cole  
+
+[01:56:56]  ===============================
+
+[01:56:56]   Loaded.
+[01:56:56]  Loading plugin: dc_cmd
+[01:56:56]   Daniel's CMD plugin v2.8
+[01:56:56]     (c) 2014 Daniel_Cortez
+[01:56:56] 	www.pro-pawn.ru
+[01:56:56]   Loaded.
+[01:56:56]  Loading plugin: streamer
+[01:56:56] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[01:56:56]   Loaded.
+[01:56:56]  Loaded 4 plugins.
+
+[01:56:56] 
+[01:56:56] Ban list
+[01:56:56] --------
+[01:56:56]  Loaded: samp.ban
+[01:56:56] 
+[01:56:56] 
+[01:56:56] Filterscripts
+[01:56:56] ---------------
+[01:56:56]   Loaded 0 filterscripts.
+
+[01:56:56] Подключение к базе данных MYSQL успешно
+[01:56:56] 
+----------------------------------
+[01:56:56] --------Advance RP by Leon--------
+[01:56:56] ----------------------------------
+
+[01:56:56] Number of vehicle models: 20
+[01:56:57] Склады загружены успешно
+[01:56:57] Дома (15 шт) загружены успешно
+[01:57:12] [connection] 127.0.0.1:62283 requests connection cookie.
+[01:57:13] [connection] incoming connection: 127.0.0.1:62283 id: 0
+[01:57:13] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[02:06:36] filterscripts = ""  (string)
+[02:06:36] 
+[02:06:36] Server Plugins
+[02:06:36] --------------
+[02:06:36]  Loading plugin: mysql
+[02:06:36]  >> plugin.mysql: R41-2 successfully loaded.
+[02:06:36]   Loaded.
+[02:06:36]  Loading plugin: sscanf
+[02:06:36] 
+
+[02:06:36]  ===============================
+
+[02:06:36]       sscanf plugin loaded.     
+
+[02:06:36]          Version:  2.8.1        
+
+[02:06:36]    (c) 2012 Alex "Y_Less" Cole  
+
+[02:06:36]  ===============================
+
+[02:06:36]   Loaded.
+[02:06:36]  Loading plugin: dc_cmd
+[02:06:36]   Daniel's CMD plugin v2.8
+[02:06:36]     (c) 2014 Daniel_Cortez
+[02:06:36] 	www.pro-pawn.ru
+[02:06:36]   Loaded.
+[02:06:36]  Loading plugin: streamer
+[02:06:36] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[02:06:36]   Loaded.
+[02:06:36]  Loaded 4 plugins.
+
+[02:06:36] 
+[02:06:36] Ban list
+[02:06:36] --------
+[02:06:36]  Loaded: samp.ban
+[02:06:36] 
+[02:06:36] 
+[02:06:36] Filterscripts
+[02:06:36] ---------------
+[02:06:36]   Loaded 0 filterscripts.
+
+[02:06:36] Подключение к базе данных MYSQL успешно
+[02:06:36] 
+----------------------------------
+[02:06:36] --------Advance RP by Leon--------
+[02:06:36] ----------------------------------
+
+[02:06:36] Number of vehicle models: 20
+[02:06:36] Склады загружены успешно
+[02:06:36] Дома (15 шт) загружены успешно
+[02:06:55] [connection] 127.0.0.1:64797 requests connection cookie.
+[02:06:56] [connection] incoming connection: 127.0.0.1:64797 id: 0
+[02:06:56] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[02:08:51] filterscripts = ""  (string)
+[02:08:51] 
+[02:08:51] Server Plugins
+[02:08:51] --------------
+[02:08:51]  Loading plugin: mysql
+[02:08:51]  >> plugin.mysql: R41-2 successfully loaded.
+[02:08:51]   Loaded.
+[02:08:51]  Loading plugin: sscanf
+[02:08:51] 
+
+[02:08:51]  ===============================
+
+[02:08:51]       sscanf plugin loaded.     
+
+[02:08:51]          Version:  2.8.1        
+
+[02:08:51]    (c) 2012 Alex "Y_Less" Cole  
+
+[02:08:51]  ===============================
+
+[02:08:51]   Loaded.
+[02:08:51]  Loading plugin: dc_cmd
+[02:08:51]   Daniel's CMD plugin v2.8
+[02:08:51]     (c) 2014 Daniel_Cortez
+[02:08:51] 	www.pro-pawn.ru
+[02:08:51]   Loaded.
+[02:08:51]  Loading plugin: streamer
+[02:08:51] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[02:08:51]   Loaded.
+[02:08:51]  Loaded 4 plugins.
+
+[02:08:51] 
+[02:08:51] Ban list
+[02:08:51] --------
+[02:08:51]  Loaded: samp.ban
+[02:08:51] 
+[02:08:51] 
+[02:08:51] Filterscripts
+[02:08:51] ---------------
+[02:08:51]   Loaded 0 filterscripts.
+
+[02:08:51] Подключение к базе данных MYSQL успешно
+[02:08:51] 
+----------------------------------
+[02:08:51] --------Advance RP by Leon--------
+[02:08:51] ----------------------------------
+
+[02:08:51] Number of vehicle models: 20
+[02:08:52] Склады загружены успешно
+[02:08:52] Дома (15 шт) загружены успешно
+[02:09:03] [connection] 127.0.0.1:51368 requests connection cookie.
+[02:09:04] [connection] incoming connection: 127.0.0.1:51368 id: 0
+[02:09:04] [join] Axel_Foli has joined the server (0:127.0.0.1)
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[02:33:48] filterscripts = ""  (string)
+[02:33:48] 
+[02:33:48] Server Plugins
+[02:33:48] --------------
+[02:33:48]  Loading plugin: mysql
+[02:33:48]  >> plugin.mysql: R41-2 successfully loaded.
+[02:33:48]   Loaded.
+[02:33:48]  Loading plugin: sscanf
+[02:33:48] 
+
+[02:33:48]  ===============================
+
+[02:33:48]       sscanf plugin loaded.     
+
+[02:33:48]          Version:  2.8.1        
+
+[02:33:48]    (c) 2012 Alex "Y_Less" Cole  
+
+[02:33:48]  ===============================
+
+[02:33:48]   Loaded.
+[02:33:48]  Loading plugin: dc_cmd
+[02:33:48]   Daniel's CMD plugin v2.8
+[02:33:48]     (c) 2014 Daniel_Cortez
+[02:33:48] 	www.pro-pawn.ru
+[02:33:48]   Loaded.
+[02:33:48]  Loading plugin: streamer
+[02:33:48] 
+
+*** Streamer Plugin v2.7.9 by Incognito loaded ***
+
+[02:33:48]   Loaded.
+[02:33:48]  Loaded 4 plugins.
+
+[02:33:48] 
+[02:33:48] Ban list
+[02:33:48] --------
+[02:33:48]  Loaded: samp.ban
+[02:33:48] 
+[02:33:48] 
+[02:33:48] Filterscripts
+[02:33:48] ---------------
+[02:33:48]   Loaded 0 filterscripts.
+
+[02:33:48] Подключение к базе данных MYSQL успешно
+[02:33:48] 
+----------------------------------
+[02:33:48] --------Advance RP by Leon--------
+[02:33:48] ----------------------------------
+
+[02:33:48] Number of vehicle models: 20
+[02:33:49] Склады загружены успешно
+[02:33:49] Дома (15 шт) загружены успешно
+[02:34:00] [connection] 127.0.0.1:58900 requests connection cookie.
+[02:34:01] [connection] incoming connection: 127.0.0.1:58900 id: 0
+[02:34:02] [join] Axel_Foli has joined the server (0:127.0.0.1)
+[02:37:17] [part] Axel_Foli has left the server (0:1)

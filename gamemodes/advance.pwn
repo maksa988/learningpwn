@@ -66,7 +66,9 @@
 
 //---------Дефайны каров----------------
 #define MAX_TAXI_CARS       17
-#define MAX_BUS_CARS  		6
+#define MAX_BUS_CARS  		32
+
+#define MAX_LSPD_CARS  		22
 
 //---------Дефайны диалогов-------------
 #define DIALOG_GPS          700
@@ -74,6 +76,7 @@
 #define DIALOG_LSPD         900
 #define DIALOG_TAXI         1000
 #define DIALOG_BUS          1100
+#define DIALOG_ANIMATION	600
 
 //---------Цена за чекпоинт-------------
 #define BUS_PRICE_ONE       23          //Городской ЛС №1
@@ -124,6 +127,9 @@ new taxiname[MAX_PLAYERS][15];
 new jobdriver[MAX_VEHICLES]; //ID водителя такси или автобуса
 new taxipickup[MAX_PLAYERS];
 
+new bool:animlist[MAX_PLAYERS]; //Загружен ли список анимаций
+new bool:anim[MAX_PLAYERS];
+
 //------------------Переменные текстдравов----------------
 new Text:logo_td, //логотип сервера
 	Text:selectskin_td[5]; //выбор скина
@@ -134,6 +140,7 @@ new Text:logo_td, //логотип сервера
 	new Text:speed2info[MAX_PLAYERS];
 	
 new Text:GPSON[MAX_PLAYERS]; //GPS
+new Text:enable_animation_TD[MAX_PLAYERS]; //Anim
 
 //--------------------------------------------------------
 
@@ -247,11 +254,13 @@ new gruzcar[5], //машинки погрузчиков
 	metalcar[4], //машина с завода для перевозки металла
 	fuelcar[2], //фура с завода для перевозки топлива
 	ascar[8], //учебные машины для автошколы
-	taxicars[18], //Такси
-	buscars[7], //Автобусы
+	taxicars[24], //Такси
+	buscars[33], //Автобусы
 	//------Фракционные------
+	lspdcars[23],
 	sfpdcars[1],
 	mvdcars[6],
+	lsfmcars[7],
 	sffmcars[5];
 //--------------------------------------------------------
 
@@ -882,39 +891,98 @@ public OnGameModeInit()
 	//-----------------------------------------------
 	
 	//-------------Такси--------------
-	taxicars[0] = AddStaticVehicleEx(420, 1062.5939,-1775.5205,13.1235, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[1] = AddStaticVehicleEx(420, 1062.5713,-1769.6698,13.1461, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[2] = AddStaticVehicleEx(420, 1062.5374,-1763.7229,13.1707, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[3] = AddStaticVehicleEx(420, 1062.7289,-1757.9626,13.1939, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[4] = AddStaticVehicleEx(420, 1062.5624,-1752.0594,13.2223, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[5] = AddStaticVehicleEx(420, 1062.8391,-1746.1250,13.2358, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[6] = AddStaticVehicleEx(420, 1062.6093,-1743.2552,13.2422, 270, 6, 6, 60); // ЖД ЛС
-	taxicars[7] = AddStaticVehicleEx(420, 1062.6842,-1737.3685,13.2585, 270, 6, 6, 60); // ЖД ЛС
+	taxicars[0] = AddStaticVehicleEx(420, 1062.5939,-1775.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[1] = AddStaticVehicleEx(420, 1062.5713,-1769.6698,13.1461, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[2] = AddStaticVehicleEx(420, 1062.5374,-1763.7229,13.1707, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[3] = AddStaticVehicleEx(420, 1062.7289,-1757.9626,13.1939, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[4] = AddStaticVehicleEx(420, 1062.5624,-1752.0594,13.2223, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[5] = AddStaticVehicleEx(420, 1062.8391,-1746.1250,13.2358, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[6] = AddStaticVehicleEx(420, 1062.6093,-1743.2552,13.2422, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[7] = AddStaticVehicleEx(420, 1062.6842,-1737.3685,13.2585, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[8] = AddStaticVehicleEx(420, 1062.5939,-1772.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[9] = AddStaticVehicleEx(420, 1062.5939,-1766.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[10] = AddStaticVehicleEx(420, 1062.5939,-1760.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[11] = AddStaticVehicleEx(420, 1062.5939,-1754.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[12] = AddStaticVehicleEx(420, 1062.5939,-1749.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
+	taxicars[13] = AddStaticVehicleEx(420, 1062.5939,-1740.5205,13.1235, 270, 6, 6, 60); // Автостанция ЛС
 	
-	taxicars[8] = AddStaticVehicleEx(420, -1974.1971,172.9414,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[9] = AddStaticVehicleEx(420, -1974.1971,176.1955,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[10] = AddStaticVehicleEx(420, -1974.1971,179.5598,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[11] = AddStaticVehicleEx(420, -1974.1971,182.7020,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[12] = AddStaticVehicleEx(420, -1974.1971,186.0820,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[13] = AddStaticVehicleEx(420, -1974.1971,189.1378,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[14] = AddStaticVehicleEx(420, -1974.1971,192.1193,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[15] = AddStaticVehicleEx(420, -1974.1971,195.1391,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[16] = AddStaticVehicleEx(420, -1974.1971,198.0934,27.4671, 90, 6, 6, 60); // ЖД СФ
-	taxicars[17] = AddStaticVehicleEx(420, -1974.1971,201.1647,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[14] = AddStaticVehicleEx(420, -1974.1971,172.9414,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[15] = AddStaticVehicleEx(420, -1974.1971,176.1955,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[16] = AddStaticVehicleEx(420, -1974.1971,179.5598,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[17] = AddStaticVehicleEx(420, -1974.1971,182.7020,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[18] = AddStaticVehicleEx(420, -1974.1971,186.0820,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[19] = AddStaticVehicleEx(420, -1974.1971,189.1378,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[20] = AddStaticVehicleEx(420, -1974.1971,192.1193,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[21] = AddStaticVehicleEx(420, -1974.1971,195.1391,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[22] = AddStaticVehicleEx(420, -1974.1971,198.0934,27.4671, 90, 6, 6, 60); // ЖД СФ
+	taxicars[23] = AddStaticVehicleEx(420, -1974.1971,201.1647,27.4671, 90, 6, 6, 60); // ЖД СФ
 	//-----------------------------------------------
 
     //-------------Автобусы--------------
 	buscars[0] = AddStaticVehicleEx(431, 1276.4894,-1798.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
 	buscars[1] = AddStaticVehicleEx(431, 1276.4894,-1802.0654,13.1461, 90, 229, 108, 60); // Автостанция ЛС
 	buscars[2] = AddStaticVehicleEx(431, 1276.4894,-1806.0654,13.0300, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[3] = AddStaticVehicleEx(431, 1276.4894,-1810.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[4] = AddStaticVehicleEx(431, 1276.4894,-1814.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[5] = AddStaticVehicleEx(431, 1276.4894,-1818.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[6] = AddStaticVehicleEx(431, 1276.4894,-1822.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[7] = AddStaticVehicleEx(431, 1276.4894,-1826.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[8] = AddStaticVehicleEx(431, 1276.4894,-1830.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[9] = AddStaticVehicleEx(431, 1276.4894,-1834.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[10] = AddStaticVehicleEx(431, 1276.4894,-1795.5660,13.4613, 90, 229, 108, 60); // Автостанция ЛС
+	buscars[11] = AddStaticVehicleEx(431, 1201.3986,-1827.4928,13.4747, 269.2521, 229, 108, 60); // Автостанция ЛС
+	buscars[12] = AddStaticVehicleEx(431, 1201.3986,-1830.4928,13.4747, 269.2521, 229, 108, 60); // Автостанция ЛС
+	buscars[13] = AddStaticVehicleEx(431, 1201.3951,-1833.9744,13.5692, 270.0021, 229, 108, 60); // Автостанция ЛС
+    buscars[14] = AddStaticVehicleEx(431, 1242.4873,-1823.4380,13.4830, 270.7469, 229, 108, 60); // Автостанция ЛС
+    buscars[15] = AddStaticVehicleEx(431, 1242.4873,-1819.950,13.4830, 270.7469, 229, 108, 60); // Автостанция ЛС
+    buscars[16] = AddStaticVehicleEx(431, 1242.4873,-1816.4380,13.4830, 270.7469, 229, 108, 60); // Автостанция ЛС
+    buscars[17] = AddStaticVehicleEx(431, 1242.5029,-1812.9497,13.4958, 269.9993, 229, 108, 60); // Автостанция ЛС
+    
+    buscars[18] = AddStaticVehicleEx(437, 1080.8384,-1754.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+    buscars[19] = AddStaticVehicleEx(437, 1080.8384,-1757.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+    buscars[20] = AddStaticVehicleEx(437, 1080.8384,-1760.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+    buscars[21] = AddStaticVehicleEx(437, 1080.8384,-1763.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+	buscars[22] = AddStaticVehicleEx(437, 1080.8384,-1766.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+	buscars[23] = AddStaticVehicleEx(437, 1080.8384,-1769.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+	buscars[24] = AddStaticVehicleEx(437, 1080.8384,-1772.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
+	buscars[25] = AddStaticVehicleEx(437, 1080.8384,-1775.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
 	
-	buscars[3] = AddStaticVehicleEx(437, 437,1080.8384,-1766.9221,13.4716, 270, 86, 6, 60); //Автостанция ЛС
-	
-	buscars[4] = AddStaticVehicleEx(431, -1968.9800,86.3440,27.7740, 90.8095, 6, 108, 60); //ЖД СФ
-	buscars[5] = AddStaticVehicleEx(431, -1968.9314,94.5007,27.7667, 90.8095, 6, 108, 60); //ЖД СФ
-	buscars[6] = AddStaticVehicleEx(431, 1968.9125,105.1026,27.8531, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[26] = AddStaticVehicleEx(431, -1968.9800,86.3440,27.7740, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[27] = AddStaticVehicleEx(431, -1968.9314,94.5007,27.7667, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[28] = AddStaticVehicleEx(431, -1968.9125,105.1026,27.8531, 90.8095, 6, 108, 60); //ЖД СФ
+	buscars[29] = AddStaticVehicleEx(431, -1969.0127,90.3621,27.7892, 91.4090, 6, 108, 60); //ЖД СФ
+	buscars[30] = AddStaticVehicleEx(431, -1969.0024,82.4371,27.7871, 90.1846, 6, 108, 60); //ЖД СФ
+	buscars[31] = AddStaticVehicleEx(431, -1969.0057,98.1188,27.7868, 89.5675, 6, 108, 60); //ЖД СФ
+	buscars[32] = AddStaticVehicleEx(431, -1969.0234,102.1874,27.7869, 88.6158, 6, 108, 60); //ЖД СФ
 	//-----------------------------------------------
 
+	//-------------------LSPD------------------------
+	lspdcars[0] = AddStaticVehicleEx(415, 1570.2156,-1710.4420,5.6231, 0.1941, 1, 1, 600, 1); // LSPD Cheetah
+	new object = CreateObject(19419, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0); // 19420 (мигалки)
+    AttachObjectToVehicle(object, lspdcars[0], 0, -0.2, 0.6, 0, 0, 0);
+	
+    lspdcars[1] = AddStaticVehicleEx(497, 1551.4512,-1609.3685,13.5545, 90.0038, 125, 1, 600); //Helicopter
+    lspdcars[2] = AddStaticVehicleEx(596, 1601.8835,-1683.8650,5.6059, 89.6774, 125, 1, 600); //LSPD
+    lspdcars[3] = AddStaticVehicleEx(596, 1601.8777,-1691.8241,5.5649, 91.6070, 125, 1, 600); //LSPD
+    lspdcars[4] = AddStaticVehicleEx(596, 1601.8892,-1695.9871,5.5639, 89.8834, 125, 1, 600); //LSPD
+    lspdcars[5] = AddStaticVehicleEx(596, 1601.8839,-1700.1663,5.5627, 89.9949, 125, 1, 600); //LSPD
+    lspdcars[6] = AddStaticVehicleEx(596, 1595.5155,-1710.4760,5.5525, 359.7761, 125, 1, 600); //LSPD
+    lspdcars[7] = AddStaticVehicleEx(596, 1591.4076,-1710.4301,5.5600, 359.7810, 125, 1, 600); //LSPD
+    lspdcars[8] = AddStaticVehicleEx(596, 1587.3951,-1710.5283,5.5578, 359.4827, 125, 1, 600); //LSPD
+    lspdcars[9] = AddStaticVehicleEx(596, 1583.4335,-1710.4291,5.5671, 359.2010, 125, 1, 600); //LSPD
+    lspdcars[10] = AddStaticVehicleEx(523, 1544.9471,-1684.5096,5.4546, 90.0000, 125, 1, 600); //LSPD
+    lspdcars[11] = AddStaticVehicleEx(523, 1545.0087,-1680.2720,5.4354, 89.4858, 125, 1, 600); //LSPD
+    lspdcars[12] = AddStaticVehicleEx(523, 1544.9471,-1675.8723,5.4518, 90.0000, 125, 1, 600); //LSPD
+    lspdcars[13] = AddStaticVehicleEx(523, 1544.9471,-1668.0129,5.4560, 90.0000, 125, 1, 600); //LSPD
+    lspdcars[14] = AddStaticVehicleEx(528, 1544.9508,-1659.0918,5.9415, 89.9993, 125, 1, 600); //LSPD
+    lspdcars[15] = AddStaticVehicleEx(427, 1534.7817,-1645.9390,6.0418, 180.1748, 125, 1, 600); //LSPD
+    lspdcars[16] = AddStaticVehicleEx(427, 1538.4760,-1645.9220,6.0412, 180.0003, 125, 1, 600); //LSPD
+    lspdcars[17] = AddStaticVehicleEx(596, 1585.4253,-1667.5878,5.6158, 270.9783, 125, 1, 600); //LSPD
+    lspdcars[18] = AddStaticVehicleEx(523, 1544.7830,-1672.0885,5.4615, 88.0313, 125, 1, 600); //LSPD
+    lspdcars[19] = AddStaticVehicleEx(596, 1578.4784,-1710.4417,5.6116, 359.5960, 125, 1, 600); //LSPD
+    lspdcars[20] = AddStaticVehicleEx(596, 1601.8097,-1704.3711,5.6109, 88.9767, 125, 1, 600); //LSPD
+    lspdcars[21] = AddStaticVehicleEx(596, 1601.8136,-1688.0555,5.6124, 90.7912, 125, 1, 600); //LSPD
+    lspdcars[22] = AddStaticVehicleEx(596, 1585.5317,-1671.7469,5.6149, 269.7548, 125, 1, 600); //LSPD
 	//-------------------SFPD------------------------
 	sfpdcars[0] = AddStaticVehicleEx(497, -1679.8484, 705.8030,30.7759, 90.0026, 125, 1, 600); //Helicopter
 	
@@ -926,8 +994,17 @@ public OnGameModeInit()
 	mvdcars[4] = AddStaticVehicleEx(409, -2038.0430,479.9610, 34.9388, 0.6153, 223, 223, 600, 1); // машина МВД 5
 	mvdcars[5] = AddStaticVehicleEx(523, -2037.3201,486.9664, 34.7339, 358.8025, 223, 223, 600, 1); // машина МВД 6
 
+    //-------------------ЛСФМ------------------------
+	lsfmcars[0] = AddStaticVehicleEx(488, 1649.4042,-1682.0835,21.6243, 181.0751, 7, 6, 600); // lsffm heli
+	lsfmcars[1] = AddStaticVehicleEx(582, 1668.0083,-1692.9984,15.7125, 90.0028, 7, 6, 600); // lsfm car
+	lsfmcars[2] = AddStaticVehicleEx(582, 1667.9919,-1697.5251,15.6526, 89.3407, 7, 6, 600); // lsfm car
+	lsfmcars[3] = AddStaticVehicleEx(582, 1667.9897,-1701.9540,15.6536, 89.7652, 7, 6, 600); // lsfm car
+	lsfmcars[4] = AddStaticVehicleEx(582, 1668.0063,-1706.4762,15.6526, 89.0535, 7, 6, 600); // lsfm car
+	lsfmcars[5] = AddStaticVehicleEx(582, 1668.0166,-1710.9897,15.6473, 89.4046, 7, 6, 600); // lsfm car
+	lsfmcars[6] = AddStaticVehicleEx(582, 1668.0050,-1715.4991,15.6539, 90.0029, 7, 6, 600); // lsfm car
+
 	//-------------------СФФМ------------------------
-	sffmcars[0] = AddStaticVehicleEx(488, -1827.2747,537.3687,35.3515, 0.0070, 175, 86, 600); // sffm car
+	sffmcars[0] = AddStaticVehicleEx(488, -1827.2747,537.3687,35.3515, 0.0070, 175, 86, 600); // sffm heli
 	sffmcars[1] = AddStaticVehicleEx(582, -1787.1393,535.4869,35.1447, 58.3570, 175, 86, 600); // sffm car
 	sffmcars[2] = AddStaticVehicleEx(582, -1778.5853,549.1126,35.1371, 55.5523, 175, 86, 600); // sffm car
 	sffmcars[3] = AddStaticVehicleEx(582, -1775.8088,553.2644,35.1261, 56.8209, 175, 86, 600); // sffm car
@@ -2631,7 +2708,6 @@ public OnPlayerConnect(playerid)
 	TextDrawBackgroundColor(speed2info[playerid], 51);
 	TextDrawFont(speed2info[playerid], 1);
 	TextDrawSetProportional(speed2info[playerid], 1);
-	//--------------------------------------------------------------------
 	//----------------------------GPS-------------------------------------
 	GPSON[playerid] = TextDrawCreate(68.0, 315, "GPS On");
 	TextDrawAlignment(GPSON[playerid],0);
@@ -2641,7 +2717,14 @@ public OnPlayerConnect(playerid)
 	TextDrawLetterSize(GPSON[playerid],0.3100,1.300);
 	TextDrawColor(GPSON[playerid],0x66C900FF);
 	TextDrawSetProportional(GPSON[playerid],1);
- 	//--------------------------------------------------------------------
+ 	//---------------------------Анимация---------------------------------
+ 	enable_animation_TD[playerid] = TextDrawCreate(401.00, 419.00, !"~w~ ~g~SPACE~w~ TO STOP THE ANIMATION");
+	TextDrawBackgroundColor(enable_animation_TD[playerid], 0x000000FF);
+	TextDrawFont(enable_animation_TD[playerid], 2);
+	TextDrawSetOutline(enable_animation_TD[playerid], 1);
+	TextDrawLetterSize(enable_animation_TD[playerid], 0.300000, 1.250000);
+	TextDrawColor(enable_animation_TD[playerid], 0xFFFF00FF);
+	TextDrawSetProportional(enable_animation_TD[playerid], 1);
 	return 1;
 }
 
@@ -3319,6 +3402,14 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	            SCM(playerid, COLOR_LIGHTGREY, "Вы не водитель автобуса");
 	        }
 	    }
+     	if(GetPlayerVehicleID(playerid) >= lspdcars[0] && GetPlayerVehicleID(playerid) <= lspdcars[MAX_LSPD_CARS])
+	    {
+	        if(player_info[playerid][FRAC] < 20 || player_info[playerid][FRAC] > 21)
+	        {
+				RemovePlayerFromVehicle(playerid);
+	            SCM(playerid, COLOR_LIGHTGREY, "Транспорт принадлежит управлению полиции Лос-Сантоса");
+			}
+	    }
 	}
 	if(newstate == PLAYER_STATE_ONFOOT)
 	{
@@ -3841,17 +3932,17 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 						case 1..4, 7, 10..11, 14..15, 18..21, 24..25, 28, 31..32, 35..36, 39, 42..44:
 	  					{
                             DisablePlayerRaceCheckpoint(playerid);
+                            SetPlayerRaceCheckpoint(playerid, 0, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
                             nowcheck[playerid]++;
-						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+						  	SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
 	                        add_to_salary(playerid, BUS_PRICE_ONE);
 						}
 				  		case 5, 8, 12, 16, 22, 26, 29, 33, 37, 40:
 				  		{
                             DisablePlayerRaceCheckpoint(playerid);
-							nowcheck[playerid]++;
-						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
+							SetPlayerRaceCheckpoint(playerid, 1, buscheckOne[nowcheck[playerid]][0], buscheckOne[nowcheck[playerid]][1], buscheckOne[nowcheck[playerid]][2], buscheckOne[nowcheck[playerid]+1][0], buscheckOne[nowcheck[playerid]+1][1], buscheckOne[nowcheck[playerid]+1][2], 4.0);
+                            nowcheck[playerid]++;
+						  	SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_ONE);
 	                        add_to_salary(playerid, BUS_PRICE_ONE);
 			  			}
 			  			case 45:
@@ -3876,17 +3967,17 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 						case 1..4, 7, 10..11, 14, 17..20, 23..25, 28..29, 32..33, 36..43, 46, 49..52, 55..56, 59..61, 64..69:
 	  					{
                             DisablePlayerRaceCheckpoint(playerid);
+                            SetPlayerRaceCheckpoint(playerid, 0, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
                             nowcheck[playerid]++;
-						  	SetPlayerRaceCheckpoint(playerid, 0, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+						  	SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
 	                        add_to_salary(playerid, BUS_PRICE_TWO);
 						}
 				  		case 5, 8, 12, 15, 21, 26, 30, 34, 44, 47, 53, 57, 62:
 				  		{
                             DisablePlayerRaceCheckpoint(playerid);
-							nowcheck[playerid]++;
-						  	SetPlayerRaceCheckpoint(playerid, 1, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
-                            SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
+							SetPlayerRaceCheckpoint(playerid, 1, buscheckTwo[nowcheck[playerid]][0], buscheckTwo[nowcheck[playerid]][1], buscheckTwo[nowcheck[playerid]][2], buscheckTwo[nowcheck[playerid]+1][0], buscheckTwo[nowcheck[playerid]+1][1], buscheckTwo[nowcheck[playerid]+1][2], 4.0);
+                            nowcheck[playerid]++;
+						  	SetPVarInt(playerid, "bus_salary", GetPVarInt(playerid, "bus_salary") + BUS_PRICE_TWO);
 	                        add_to_salary(playerid, BUS_PRICE_TWO);
 			  			}
 			  			case 70:
@@ -5093,7 +5184,11 @@ public OnPlayerInteriorChange(playerid, newinteriorid, oldinteriorid)
 
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
-    if(newkeys == KEY_SPRINT || newkeys == KEY_JUMP || ((newkeys & KEY_SPRINT) && (newkeys & KEY_JUMP)) || newkeys == KEY_FIRE || newkeys & KEY_SPRINT || newkeys & KEY_JUMP)
+	if(newkeys == KEY_JUMP && anim[playerid]) {
+	    ClearAnimations(playerid, 1);
+	}
+
+	if(newkeys == KEY_SPRINT || newkeys == KEY_JUMP || ((newkeys & KEY_SPRINT) && (newkeys & KEY_JUMP)) || newkeys == KEY_FIRE || newkeys & KEY_SPRINT || newkeys & KEY_JUMP)
     {
         if(GetPVarInt(playerid, "mineongoind") == 1 && GetPVarInt(playerid, "minesuccess") == 1)
         {
@@ -8589,6 +8684,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SellGovHouse(h);
  			}
 		}
+		//===================Анимации=============
+		case DIALOG_ANIMATION:
+		{
+		    if(response) return SelectAnimation(playerid, listitem);
+		}
 		//===================Банк=================
 		case DIALOG_BANK: // 113
 		{
@@ -11094,6 +11194,89 @@ public player_login(playerid)
 //================================================================================================
 
 //================================================СТОКИ===========================================
+stock SelectAnimation(const playerid, const animation)
+{
+    switch(animation)
+    {
+        case 0: SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE1);
+        case 1: SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE2);
+        case 2: SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE3);
+        case 3: SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE4);
+        case 4: ApplyAnimation(playerid, !"DANCING", !"DAN_Left_A" ,4.1,1,0,0,0,0,0);
+        case 5: ApplyAnimation(playerid, !"DANCING", !"dnce_M_a" ,4.1,1,0,0,0,0,0);
+        case 6: ApplyAnimation(playerid, !"ON_LOOKERS", !"wave_loop" ,4.1,1,0,0,0,0,0);
+        case 7: ApplyAnimation(playerid, !"BEACH", !"bather" ,4.1,1,0,0,0,0,0);
+        case 8: ApplyAnimation(playerid, !"ped", !"WALK_drunk" ,4.1,1,1,1,0,0,0);
+        case 9: ApplyAnimation(playerid, !"ped", !"Crouch_Roll_L" , 4.1,1,1,1,0,0,0);
+        case 10: ApplyAnimation(playerid, !"ped", !"endchat_03" ,4.1,1,0,0,0,0,0);
+        case 11: ApplyAnimation(playerid, !"benchpress", !"gym_bp_celebrate" ,4.1,1,0,0,0,0,0);
+        case 12: ApplyAnimation(playerid, !"ped", !"cower" ,4.1,1,0,0,0,0,0);
+        case 13: ApplyAnimation(playerid, !"BOMBER", !"BOM_Plant" ,4.1,0,0,0,0,0,0);
+        case 14: ApplyAnimation(playerid, !"SHOP", !"ROB_Shifty" ,4.1,0,0,0,0,0,0);
+        case 15: ApplyAnimation(playerid, !"SHOP", !"ROB_Loop_Threat" ,4.1,1,0,0,0,0,0);
+        case 16: ApplyAnimation(playerid, !"COP_AMBIENT", !"Coplook_loop" ,4.1,1,0,0,0,0,0);
+        case 17: ApplyAnimation(playerid, !"FOOD", !"EAT_Vomit_P" ,4.1,0,0,0,0,0,0);
+        case 18: ApplyAnimation(playerid, !"FOOD", !"EAT_Burger" ,4.1,0,0,0,0,0,0);
+        case 19: ApplyAnimation(playerid, !"SWEET", !"sweet_ass_slap" ,4.1,0,0,0,0,0,0);
+        case 20: ApplyAnimation(playerid, !"DEALER", !"DEALER_DEAL" ,4.1,0,0,0,0,0,0);
+        case 21: ApplyAnimation(playerid, !"CRACK", !"crckdeth2" ,4.1,1,0,0,0,0,0);
+        case 22: ApplyAnimation(playerid, !"LOWRIDER", !"M_smklean_loop" ,4.1,1,0,0,0,0,0);
+        case 23: ApplyAnimation(playerid, !"LOWRIDER", !"F_smklean_loop" ,4.1,1,0,0,0,0,0);
+        case 24: ApplyAnimation(playerid, !"BEACH", !"ParkSit_M_loop" ,4.1,1,0,0,0,0,0);
+        case 25: ApplyAnimation(playerid, !"PARK", !"Tai_Chi_Loop" ,4.1,1,0,0,0,0,0);
+        case 26: ApplyAnimation(playerid, !"BAR", !"dnk_stndF_loop" ,4.1,1,0,0,0,0,0);
+        case 27: ApplyAnimation(playerid, !"DANCING", !"DAN_Right_A" ,4.1,1,0,0,0,0,0);
+        case 28: ApplyAnimation(playerid, !"BSKTBALL", !"BBALL_def_loop" ,4.1,1,0,0,0,0,0);
+        case 29: ApplyAnimation(playerid, !"MISC", !"plyr_shkhead" ,4.1,0,0,0,0,0,0);
+        case 30: ApplyAnimation(playerid, !"BSKTBALL", !"BBALL_idle" ,4.1,0,0,0,0,0,0);
+        case 31: ApplyAnimation(playerid, !"CAMERA", !"camstnd_cmon" ,4.1,1,0,0,0,0,0);
+        case 32: ApplyAnimation(playerid, !"SHOP", !"SHP_Rob_HandsUP" ,4.1,1,0,0,0,0,0);
+        case 33: ApplyAnimation(playerid, !"CRACK", !"crckidle2" ,4.1,1,0,0,0,0,0);
+        case 34: ApplyAnimation(playerid, !"CRACK", !"crckidle4" ,4.1,1,0,0,0,0,0);
+        case 35: ApplyAnimation(playerid, !"DEALER", !"DEALER_IDLE" ,4.1,1,0,0,0,0,0);
+        case 36: ApplyAnimation(playerid, !"GANGS", !"leanIDLE" ,4.1,1,0,0,0,0,0);
+        case 37: ApplyAnimation(playerid, !"GANGS", !"shake_carSH" ,4.1,0,0,0,0,0,0);
+        case 38: ApplyAnimation(playerid, !"GANGS", !"smkcig_prtl" ,4.1,0,0,0,0,0,0);
+        case 39: ApplyAnimation(playerid, !"BEACH", !"ParkSit_W_loop" ,4.1,1,0,0,0,0,0);
+        case 40: ApplyAnimation(playerid, !"INT_HOUSE", !"LOU_Loop" ,4.1,1,0,0,0,0,0);
+        case 41: ApplyAnimation(playerid, !"INT_OFFICE", !"OFF_Sit_Bored_Loop" ,4.1,1,0,0,0,0,0);
+        case 42: ApplyAnimation(playerid, !"INT_OFFICE", !"OFF_Sit_Idle_Loop" ,4.1,1,0,0,0,0,0);
+        case 43: ApplyAnimation(playerid, !"INT_OFFICE", !"OFF_Sit_Type_Loop" ,4.1,1,0,0,0,0,0);
+        case 44: ApplyAnimation(playerid, !"INT_SHOP", !"shop_shelf" ,4.1,1,0,0,0,0,0);
+        case 45: ApplyAnimation(playerid, !"JST_BUISNESS", !"girl_02" ,4.1,1,0,0,0,0,0);
+        case 46: ApplyAnimation(playerid, !"KISSING", !"GF_StreetArgue_02" ,4.1,0,0,0,0,0,0);
+        case 47: ApplyAnimation(playerid, !"KISSING", !"Grlfrd_Kiss_01" ,4.1,0,0,0,0,0,0);
+        case 48: ApplyAnimation(playerid, !"KISSING", !"Grlfrd_Kiss_02" ,4.1,0,0,0,0,0,0);
+        case 49: ApplyAnimation(playerid, !"KISSING", !"Grlfrd_Kiss_03" ,4.1,0,0,0,0,0,0);
+        case 50: ApplyAnimation(playerid, !"LOWRIDER", !"RAP_B_Loop" ,4.1,1,0,0,0,0,0);
+        case 51: ApplyAnimation(playerid, !"MEDIC", !"CPR" ,4.1,1,0,0,0,0,0);
+        case 52: ApplyAnimation(playerid, !"MISC", !"bitchslap" ,4.1,1,0,0,0,0,0);
+        case 53: ApplyAnimation(playerid, !"MISC", !"bng_wndw" ,4.1,1,0,0,0,0,0);
+        case 54: ApplyAnimation(playerid, !"MISC", !"KAT_Throw_K" ,4.1,0,0,0,0,0,0);
+        case 55: ApplyAnimation(playerid, !"MISC", !"SEAT_LR" ,4.1,1,0,0,0,0,0);
+        case 56: ApplyAnimation(playerid, !"ped", !"SEAT_idle" ,4.1,1,0,0,0,0,0);
+        case 57: ApplyAnimation(playerid, !"ON_LOOKERS", !"lkup_loop" ,4.1,1,0,0,0,0,0);
+        case 58: ApplyAnimation(playerid, !"ON_LOOKERS", !"Pointup_loop" ,4.1,1,0,0,0,0,0);
+        case 59: ApplyAnimation(playerid, !"ON_LOOKERS", !"panic_loop" ,4.1,1,0,0,0,0,0);
+        case 60: ApplyAnimation(playerid, !"ON_LOOKERS", !"shout_02" ,4.1,1,0,0,0,0,0);
+        case 61: ApplyAnimation(playerid, !"PAULNMAC", !"Piss_loop" ,4.1,1,0,0,0,0,0);
+        case 62: ApplyAnimation(playerid, !"GHANDS", !"gsign1LH" ,4.1,1,0,0,0,0,0);
+        case 63: ApplyAnimation(playerid, !"ped", !"IDLE_taxi" ,4.1,1,0,0,0,0,0);
+        case 64: ApplyAnimation(playerid, !"POLICE", !"Door_Kick" ,4.1,0,0,0,0,0,0);
+        case 65: ApplyAnimation(playerid, !"POLICE", !"CopTraf_Stop" ,4.1,1,0,0,0,0,0);
+        case 66: ApplyAnimation(playerid, !"RIOT", !"RIOT_ANGRY_B" ,4.1,1,0,0,0,0,0);
+        case 67: ApplyAnimation(playerid, !"LOWRIDER", !"RAP_C_Loop" ,4.1,1,0,0,0,0,0);
+        case 68: ApplyAnimation(playerid, !"SWAT", !"gnstwall_injurd" ,4.1,1,0,0,0,0,0);
+        case 69: ApplyAnimation(playerid, !"SWEET", !"Sweet_injuredloop" ,4.1,1,0,0,0,0,0);
+        case 70: ApplyAnimation(playerid, !"RIOT", !"RIOT_ANGRY" ,4.1,1,0,0,0,0,0);
+        case 71: ApplyAnimation(playerid, !"GHANDS", !"gsign2" ,4.1,1,0,0,0,0,0);
+        case 72: ApplyAnimation(playerid, !"GHANDS", !"gsign4" ,4.1,1,0,0,0,0,0);
+        case 73: ApplyAnimation(playerid, !"GHANDS", !"gsign5" ,4.1,1,0,0,0,0,0);
+        default: ShowPlayerDialog(playerid, 000, DIALOG_STYLE_MSGBOX, !"{FFCD00}Информация", !"{FFFFFF}Для быстрого запуска нужной анимации используйте {66CC33}/anim(list) [номер анимации из списка]", !"Закрыть", "");
+    }
+    if(3 < animation < 74) TextDrawShowForPlayer(playerid, enable_animation_TD[playerid]);
+    return true;
+}
 stock turnOnGPS(playerid, iconid, Float:x, Float:y, Float:z)
 {
 	if(GetPVarInt(playerid, "gpson") == 1) RemovePlayerMapIcon(playerid, 1);
@@ -11674,6 +11857,50 @@ stock show_register(playerid)
 //================================================================================================
 
 //===========================================Команды==============================================
+//--------------------------------------Команды организаций---------------------------------------
+//-----------------------------LSPD-------------------------
+
+//------------------------------------------------------------------------------------------------
+ALTX:animlist("/anim");
+CMD:animlist(playerid, params[])
+{
+	if(animlist[playerid] == true) {
+	    if(IsPlayerInAnyVehicle(playerid))
+	    return SendClientMessage(playerid, COLOR_GREY, !"Вы не можете использовать это в машине");
+
+	    if(sscanf(params, "d", params[0])) return SPD(playerid, DIALOG_ANIMATION, DIALOG_STYLE_LIST, !"{9966ff}Анимации", "1. Танец 1\n2. Танец 2\n3. Танец 3\n4. Танец 4\n5. Танец 5\n6. Танец 6\n\
+	            7. Махать рукой\n8. Лечь на землю\n9. Походка пьяного\n10. Кувыркаться\n\
+	            11. Попрощаться\n12. Читать рэп\n13. Укрыться\n14. Подложить бомбу\n\
+	            15. Надеть маску\n16. Вытянуть руку перед собой\n17. Сложить руки вместе\n\
+	            18. Съел что-то не то...\n19. Перекусить\n20. Шлёпнуть кому-то по заднице\n\
+	            21. Предложить наркотики\n22. Эффект электрошокера\n23. Мужское курение\n\
+	            24. Женское курение\n25. Присесть\n26. Восточное единоборство\n27. Выпить напиток\n\
+	            28. Танец на одной ноге\n29. Поза вратаря\n30. Facepalm\n\
+	            31. Элемент восточного танца\n32. Позвать кого-то\n33. Руки вверх!\n\
+	            34. Спать на боку\n35. Спать на спине\n36. Смотреть по сторонам\n\
+	            37. Облокотиться на бок\n38. Толкнуть боком\n39. Раздумье\n\
+	            40. Лечь, оперевшись на ладонь\n41. Сесть на стул\n\
+	            42. Сидеть уставшим за компьютером\n43. Сидеть за столом\n\
+	            44. Сидеть и печатать\n45. Взять что-то и рассмотреть\n\
+	            46. Сесть, закинув ногу на ногу\n\47. Отказаться от чего-либо\n\
+	            48. Поцелуй 1\n49. Поцелуй 2\n50. Поцелуй 3\n\
+	            51. Размахивать руками на месте\n52. Искуственное дыхание\n\
+	            53. Пощёчины для лежачего\n54. Подглядывать через что-то\n\
+	            55. Движение тореодора\n56. Сесть на стул (2)\n57. Сесть на стул (3)\n\
+	            58. Смотреть наверх\n59. Указать рукой наверх\n60. Быть в страхе\n\
+	            61. Призывать к чему-либо\n62. Сходить по-маленькому\n63. Гангстерский жест\n\
+	            64. Голосовать на остановке\n65. Удар ногой\n66. Стучаться в дверь\n\
+	            67. Устроить бунт\n68. Пританцовывать\n69. Лечь на землю (2)\n\
+	            70. Плохое самочувствие\n71. Приветствие 1\n72. Приветствие 2\n\
+	            73. Приветствие 3\n74. Приветствие 4\n{33cc00}Информация", !"Выбрать", !"Закрыть");
+	    return SelectAnimation(playerid, params[0]);
+	} else {
+	    SCM(playerid, 0xFFFF00AA, "Список анимаций загружен. Введите команду ещё раз");
+		animlist[playerid] = true;
+	}
+	return 1;
+}
+
 ALTX:mn("/menu");
 CMD:mn(playerid)
 {
@@ -12765,7 +12992,7 @@ CMD:veh(playerid, params[])
     new Float:pX,Float:pY,Float:pZ;
     if(sscanf(params, "ddd", params[0],params[1],params[2])) return SCM(playerid, COLOR_LIGHTGREY, "Используй /veh [id машины] [цвет 1] [цвет 2]");
     {
-        if(params[1] > 126 || params[1] < 0 || params[2] > 255 || params[2] < 0) return SCM(playerid, COLOR_LIGHTGREY, "ID цвета должен быть от 0 до 255");
+        if(params[1] > 255 || params[1] < 0 || params[2] > 255 || params[2] < 0) return SCM(playerid, COLOR_LIGHTGREY, "ID цвета должен быть от 0 до 255");
         GetPlayerPos(playerid,pX,pY,pZ);
 		new Veh;
 		Veh = CreateVehicle(params[0],pX+2,pY,pZ,0.0,1,1,0,0);
